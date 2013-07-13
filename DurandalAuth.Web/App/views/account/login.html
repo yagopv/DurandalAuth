@@ -1,0 +1,60 @@
+<div class="row-fluid" data-bind="visible: !appsecurity.user().IsAuthenticated">
+    <div class="offset1 span5">
+        <div class="well">                
+           <!-- Login form  -->
+           <form>
+               <!-- Username -->
+               <div class="control-group" data-bind="validationElement: username">
+                 <label class="control-label" for="username">Username</label>
+                 <div class="controls">
+                    <input type="text"  data-bind="value: username" placeholder="Email">                       
+                 </div>
+               </div>
+               <!-- Password -->
+               <div class="control-group" data-bind="validationElement: password">
+                 <label class="control-label" for="email">Password</label>
+                 <div class="controls">
+                    <input type="password"  data-bind="value: password" placeholder="Password">                        
+                 </div>
+               </div>  
+              <div class="control-group">
+                <div class="controls">
+                  <label class="checkbox">
+                    <input type="checkbox" data-bind="value: rememberMe"> Remember me
+                  </label>                      
+                </div>     
+                </div>                                                                                      
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" data-bind="click: login">Sign in</button>
+                    <button type="reset" class="btn">Reset</button>
+                    <p class="mart5">Don't have Account? <a href="/#/register">Register</a></p>
+                </div>                   
+           </form>                      
+        </div> 
+    </div>
+    
+    <div class="span5">
+        <div class="well">
+            <h3>Login using another service</h3>
+            <ul class="unstyled" data-bind="foreach : appsecurity.externalLogins">
+                    <li>
+                        <a class="lead" href="#"  data-bind="click: function (data, event) { $parent.externalLogin($parent, data, event) }, attr: { 'data-provider': Provider }">
+                        <i data-bind="css: $parent.socialIcon($data)"></i>
+                        <span data-bind="text: ProviderDisplayName"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>    
+</div>
+  
+<div class="row-fluid" data-bind="visible: appsecurity.user().IsAuthenticated && !isRedirect()">
+    <h2>You are actually logged in</h2>
+    <a class="btn btn-primary" data-bind="click : logout">Logout</a>
+</div>
+
+<div class="row-fluid" data-bind="visible: appsecurity.user().IsAuthenticated && isRedirect()">
+    <h2>You are actually logged in but cannot access this route with your current permissions</h2>
+    <p class="lead">Sign out and enter again the credentials with the correct permissions</p>
+    <a class="btn btn-primary" data-bind="click: logout">Logout</a>
+</div>

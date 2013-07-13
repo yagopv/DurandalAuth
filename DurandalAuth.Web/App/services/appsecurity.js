@@ -1,0 +1,261 @@
+/** 
+	* @module Authentication module for the entire application 
+	* @requires system
+	* @requires app
+	* @requires router
+*/
+
+define(function (require) {
+
+	var system = require('durandal/system'),
+		app = require('durandal/app'),
+		router = require('durandal/plugins/router');
+		
+	var self = this;
+	
+	/** @property {string} baseAdress - Base address for the api calls */
+	var baseAdress = "api/account";
+
+	/**         
+	 * @class
+	 * @classdesc Helper class for building credentials 
+	*/    
+	var credential = function (username, password, rememberme) {
+		this.userName = username;
+		this.password = password;
+		this.rememberMe = rememberme;
+	},
+	
+	/** @property {observable} user - Remember always to check again in server because this info can be tampered easily */
+	user = ko.observable({IsAuthenticated : false, UserName : "", Roles : [], AntiforgeryToken : null}),
+
+	/** @property {observable} externalLogins - External Logins container */
+	externalLogins = ko.observable(),    
+
+	/** 
+	 * Handle unauthorized requests
+	 * @method
+	 * @param {callback} callback - Callback to handle response
+	*/
+	handleUnauthorizedAjaxRequest = function (callback) {
+		 if (!callback) {
+			 return;
+		 }
+
+		 $(document).ajaxError(function (event, request, options) {
+			 if (request.status === 401) {
+				 callback();
+			 }
+		 });
+	},
+
+	/**
+	 * Add antiforgery to ajax requests with content 
+	 * @method
+	*/
+	addAntiForgeryTokenToAjaxRequests = function () {
+		$.get(baseAdress + "/getantiforgerytokens").then(function (token) {
+			user().AntiforgeryToken = token;
+			$(document).ajaxSend(function (event, request, options) {
+				if (options.hasContent) {	                
+					request.setRequestHeader("__RequestVerificationToken", token);
+				}
+			});
+		});
+	}
+
+	return {
+		credential: credential,
+		user: user,
+		externalLogins: externalLogins,
+		handleUnauthorizedAjaxRequest : handleUnauthorizedAjaxRequest,
+		
+		/**
+		 * Check if an user is in a role
+		 * @method
+		 * @param {array} roles - Array of roles
+		 * @return {bool}
+		*/
+		isUserInRole: function (roles) {
+			var self = this,
+				  isuserinrole = false;
+			$.each(roles, function (key, value) {
+				if (self.user().Roles.indexOf(value) != -1) {
+					isuserinrole = true;
+				}
+			});
+			return isuserinrole;
+		},
+		
+		/**
+		 * Sign in a user
+		 * @method
+		 * @param {Credential} credential - An object with the user credential
+		 * @param {string} navigateToUrl - If informed and the login is correct
+		 *                                 a navigation to the url will be performed
+		 * @return {promise}
+		*/
+		login:  function (credential, navigateToUrl) {
+			var self = this;
+			var jqxhr = $.post(baseAdress + "/login", credential)
+				.done(function (data) {
+					self.user(data);
+					self.addAntiForgeryTokenToAjaxRequests();
+					if (data.IsAuthenticated == true) {				        
+						if (navigateToUrl) {
+							router.navigateTo(navigateToUrl);
+						} else {
+							router.navigateTo("/#/account");
+						}
+					} else {						
+						return false;
+					}
+				})
+				.fail(function (data) {
+					self.user({ IsAuthenticated: false, UserName: "", Roles: [] });
+					return data;
+				});
+
+			return jqxhr;
+		},
+		
+		/**
+		 * Sign out an user
+		 * @method
+		 * @return {promise}
+		*/        
+		logout: function () {
+			var self = this;
+			var jqxhr = $.post(baseAdress + "/logout", credential)
+				.done(function (data) {
+					self.user(data);
+					self.addAntiForgeryTokenToAjaxRequests();
+					if (router.activeRoute().settings.authorize != null) {
+						router.navigateTo("/#/home");
+					}
+				})
+				.fail(function (data) {
+					return data;
+				});
+			return jqxhr;
+		},
+		
+		/**
+		 * Register a new user
+		 * @method
+		 * @param {username} username
+		 * @param {string} email
+		 * @param {string} password
+		 * @param {string} confirmpassword
+		 * @return {promise}
+		*/        
+		register: function (username, email, password, confirmpassword) {
+			var self = this;
+			var jqxhr = $.post(baseAdress + "/register", { username: username, email: email, password: password, confirmpassword: confirmpassword })
+				.done(function (data) {
+					self.user(data);
+					self.addAntiForgeryTokenToAjaxRequests();
+					router.navigateTo("/#/account");
+				});
+			return jqxhr;
+		},
+
+		/**
+		 * Get the state of the authentication
+		 * @method
+		 * @return {promise}
+		*/    
+		getAuthInfo: function () {
+			var self = this;
+			var jqxhr = $.get(baseAdress + "/userinfo");
+			return jqxhr;
+		},
+		
+		/**
+		 * Get all the external logins permitted
+		 * Configured under App_Start
+		 * @method
+		 * @return {promise}
+		*/           
+		getExternalLogins : function () {
+			var self = this;
+			var jqxhr = $.get(baseAdress + "/externalloginslist");
+			return jqxhr;
+		},        
+		addAntiForgeryTokenToAjaxRequests: addAntiForgeryTokenToAjaxRequests,
+
+		/**
+		 * Performs an external Login
+		 * @method
+		 * @param {string} provider - The provider
+		 * @param {string} returnurl - Url to go when the oAuth request come back
+		 * @return {promise}
+		*/  
+		externalLogin: function (provider, returnurl) {
+			var jqxhr = location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;
+			return jqxhr;
+		},
+		
+		/**
+		 * Get the confirmation data from the procider
+		 * @method
+		 * @param {string} returnurl - Url to go when the oAuth request come back
+		 * @param {string} username
+		 * @param {string} provideruserid - User id with the provider
+		 * @param {string} provider - The oAuth provider
+		 * @return {promise}
+		*/          
+		getExternalLoginConfirmationData : function(returnurl, username, provideruserid, provider) {
+			var jqxhr = $.get(baseAdress + "/externalloginconfirmation?returnurl=" + returnurl + "&username=" + username + "&provideruserid=" + provideruserid + "&provider=" + provider);
+			return jqxhr;
+		},
+		
+		/**
+		 * Confirm an external account
+		 * @method
+		 * @param {string} displayname - The provider display name
+		 * @param {string} username
+		 * @param {string} externallogindata - External Login data returned by provider
+		 * @return {promise}
+		*/        
+		confirmExternalAccount: function (displayname, username, externallogindata) {
+			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, externallogindata: externallogindata });
+			return jqxhr;
+		},
+		
+		/**
+		 * Check if the authenticated user has a local account
+		 * @method
+		 * @return {promise}
+		*/          
+		hasLocalAccount: function () {
+			var jqxhr = $.get(baseAdress + "/haslocalaccount");
+			return jqxhr;
+		},
+		
+		/**
+		 * Change the password of the authenticated user
+		 * @method
+		 * @param {string} oldpassword
+		 * @param {string} newpassword
+		 * @param {string} confirmnewpassword
+		 * @return {promise}
+		*/
+		changePassword: function (oldpassword, newpassword, confirmnewpassword) {
+			var jqxhr = $.post(baseAdress + "/changepassword", { oldpassword: oldpassword, newpassword: newpassword, confirmpassword: confirmnewpassword });
+			return jqxhr;
+		},
+		
+		/**
+		 * Creates a local account for an oAuth authenticated user
+		 * @method
+		 * @param {string} password
+		 * @param {string} confirmnewpassword
+		 * @return {promise}
+		*/
+		createLocalAccount: function (password, confirmnewpassword) {
+			var jqxhr = $.post(baseAdress + "/createlocalaccount", { newpassword: password, confirmpassword: confirmnewpassword });
+			return jqxhr;
+		}
+	};
+});

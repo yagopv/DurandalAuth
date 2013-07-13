@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DurandalAuth.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultRole" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">User</Value>
+    </Setting>
+    <Setting Name="AdminRole" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Administrator</Value>
+    </Setting>
+    <Setting Name="PremiumRole" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Premium</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

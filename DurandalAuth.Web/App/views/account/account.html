@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span12 well">        
+        <form class="form-horizontal" data-bind="if :  hasAccount, submit : changePassword">
+            <h2> Change Password </h2>
+            <div class="control-group" data-bind="validationElement: oldPassword">
+                <label class="control-label" for="username">Old Password</label>
+                    <div class="controls">
+                        <input type="password"  data-bind="value: oldPassword" placeholder="Old Password">                       
+                    </div>
+             </div>                   
+             <div class="control-group" data-bind="validationElement: newPassword">
+                   <label class="control-label" for="newPassword">New Password</label>
+                   <div class="controls">
+                        <input type="password"  data-bind="value: newPassword" placeholder="New Password">                        
+                    </div>
+              </div>  
+             <div class="control-group" data-bind="validationElement: confirmNewPassword">
+                   <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
+                   <div class="controls">
+                        <input type="password"  data-bind="value: confirmNewPassword" placeholder="Confirm New Password">                        
+                    </div>
+              </div>                                                      
+              <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Change password</button>
+                    <button type="reset" class="btn">Reset</button>                     
+               </div>                               
+       </form>  
+       <form class="form-horizontal" data-bind="if: !hasAccount(), submit: createLocalAccount">
+            <h2> Create Local Account </h2>
+             <div class="control-group" data-bind="validationElement: newPassword">
+                   <label class="control-label" for="newPassword">New Password</label>
+                   <div class="controls">
+                        <input type="password"  data-bind="value: newPassword" placeholder="New Password">                        
+                    </div>
+              </div>  
+             <div class="control-group" data-bind="validationElement: confirmNewPassword">
+                   <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
+                   <div class="controls">
+                        <input type="password"  data-bind="value: confirmNewPassword" placeholder="Confirm New Password">                        
+                    </div>
+              </div>                                                      
+              <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create local account</button>
+                    <button type="reset" class="btn">Reset</button>                     
+               </div>                               
+       </form>  
+    </div>
+
+    <div class="span6">
+
+    </div>
+
+</div>

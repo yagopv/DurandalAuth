@@ -1,0 +1,15 @@
+<h2>Associate your <span data-bind="text: DisplayName"></span></h2>
+<p>
+    You've successfully authenticated with <span data-bind="text: DisplayName"></span>.
+    Please enter a user name for this site below and click the Confirm button to finish
+    logging in.
+</p>
+<form class="form-horizontal" data-bind="submit: confirmexternalaccount">
+  <div class="control-group" data-bind="validationElement: UserName">
+    <label class="control-label" for="userName">Email</label>
+    <div class="controls">
+      <input type="text" data-bind="value: UserName" placeholder="User name">
+    </div>
+  </div>
+    <button type="submit" class="btn btn-primary" >Register</button>
+</form>
