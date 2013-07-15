@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
 using DurandalAuth.Web.Models;
+using System.Configuration;
 
 namespace DurandalAuth.Web
 {
@@ -17,14 +18,14 @@ namespace DurandalAuth.Web
             //OAuthWebSecurity.RegisterMicrosoftClient(
             //    clientId: "",
             //    clientSecret: "");
-
+            
             OAuthWebSecurity.RegisterTwitterClient(
-                consumerKey: "ZWYoKJVentMOzeIoLC1ejg",
-                consumerSecret: "ZQBghHVvEEV2jF4iLrXIzwithi9BnecAmQJgMucFFA");
+                consumerKey:  ConfigurationManager.AppSettings["TwitterKey"],
+                consumerSecret: ConfigurationManager.AppSettings["TwitterSecret"]);
 
             OAuthWebSecurity.RegisterFacebookClient(
-                appId: "596697613695140",
-                appSecret: "c74456ec7614d0aa550123d2c00450a2");
+                appId: ConfigurationManager.AppSettings["FacebookKey"],
+                appSecret: ConfigurationManager.AppSettings["FacebookSecret"]);
 
             OAuthWebSecurity.RegisterGoogleClient();
         }

@@ -61,7 +61,8 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
              * @param {object} event
             */
             externalLogin: function (parent, data, event) {
-                appsecurity.externalLogin(data.Provider, this.returnUrl());
+                appsecurity.externalLogin(data.Provider, this.returnUrl())
+                    .fail(self.log(data,true));
             },
 
             /**

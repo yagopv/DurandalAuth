@@ -44,12 +44,10 @@ namespace DurandalAuth.Web.Controllers.Api
                     Roles = Roles.GetRolesForUser(credential.UserName)
                 };
             }
-            return new UserInfo
-            {
-                IsAuthenticated = false,
-                UserName = "",
-                Roles = new string[] { }
-            };            
+
+            var errors = new Dictionary<string, IEnumerable<string>>();
+            errors.Add("Authorization", new string[] { "The supplied credentials are not valid" });
+            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, errors));
         }
 
         [HttpPost]
@@ -138,8 +136,16 @@ namespace DurandalAuth.Web.Controllers.Api
         [AllowAnonymous]
         public HttpResponseMessage ExternalLogin(string provider, string returnUrl)
         {
-            OAuthWebSecurity.RequestAuthentication(provider, "/api/account/ExternalLoginCallback?returnurl=" +  returnUrl);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                OAuthWebSecurity.RequestAuthentication(provider, "/api/account/ExternalLoginCallback?returnurl=" + returnUrl);
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.Message));
+            }
+
         }
 
         [HttpGet]

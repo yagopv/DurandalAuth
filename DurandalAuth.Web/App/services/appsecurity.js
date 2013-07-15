@@ -101,19 +101,16 @@ define(function (require) {
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					if (data.IsAuthenticated == true) {				        
-						if (navigateToUrl) {
-							router.navigateTo(navigateToUrl);
-						} else {
-							router.navigateTo("/#/account");
-						}
-					} else {						
-						return false;
+					if (data.IsAuthenticated == true) {
+					    if (navigateToUrl) {
+					        router.navigateTo(navigateToUrl);
+					    } else {
+					        router.navigateTo("/#/account");
+					    }
 					}
 				})
 				.fail(function (data) {
 					self.user({ IsAuthenticated: false, UserName: "", Roles: [] });
-					return data;
 				});
 
 			return jqxhr;
