@@ -39,6 +39,16 @@ namespace DurandalAuth.Data
             get { return userProfileRepository; }
         }
 
+        public bool DatabaseExists()
+        {
+            return this.Database.Exists();
+        }
+
+        public void DatabaseInitialize()
+        {
+            this.Database.Initialize(true);
+        }
+
         public void Commit()
         {
             this.SaveChanges();                

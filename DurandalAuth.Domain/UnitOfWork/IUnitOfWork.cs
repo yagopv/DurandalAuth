@@ -13,6 +13,9 @@ namespace DurandalAuth.Domain.UnitOfWork
         IRepository<Article> ArticleRepository { get; }
         IRepository<UserProfile> UserProfileRepository { get; }
 
+        bool DatabaseExists();
+        void DatabaseInitialize();
+
         void Commit();
     }
 }

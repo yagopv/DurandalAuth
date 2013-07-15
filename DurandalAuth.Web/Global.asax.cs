@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DurandalAuth.Domain.UnitOfWork;
+using StructureMap;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Services;
 using System.Linq;
@@ -27,11 +29,19 @@ namespace DurandalAuth.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             DurandalBundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
+            AuthConfig.RegisterAuth();            
 
             if (!WebSecurity.Initialized)
-            {
-                 WebSecurity.InitializeDatabaseConnection("DurandalAuthConnection", "DurandalAuth_UserProfiles", "UserProfileId", "UserName", autoCreateTables: true);
+            {                
+                IUnitOfWork uow = ObjectFactory.GetInstance<IUnitOfWork>();
+                if (!uow.DatabaseExists())
+                {
+                    uow.DatabaseInitialize();
+                }
+                else
+                {
+                    WebSecurity.InitializeDatabaseConnection("DurandalAuthConnection", "DurandalAuth_UserProfiles", "UserProfileId", "UserName", autoCreateTables: true);
+                }
             }
         }
     }

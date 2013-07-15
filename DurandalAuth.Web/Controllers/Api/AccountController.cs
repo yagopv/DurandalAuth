@@ -31,7 +31,7 @@ namespace DurandalAuth.Web.Controllers.Api
         /// <param name="uow">Unit of work</param>
         public AccountController(IUnitOfWork uow)
         {
-            this.UnitOfWork = uow;
+            this.UnitOfWork = uow;            
         }
 
         /// <summary>
