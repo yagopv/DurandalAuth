@@ -1,8 +1,3 @@
-using DurandalAuth.Domain.Model;
-using DurandalAuth.Domain.UnitOfWork;
-using DurandalAuth.Web.Filters;
-using DurandalAuth.Web.Models;
-using DurandalAuth.Web.Properties;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using System;
@@ -16,6 +11,12 @@ using System.Web.Http;
 using System.Web.Security;
 using WebMatrix.WebData;
 
+using DurandalAuth.Domain.Model;
+using DurandalAuth.Domain.UnitOfWork;
+using DurandalAuth.Web.Filters;
+using DurandalAuth.Web.Models;
+using DurandalAuth.Web.Properties;
+
 namespace DurandalAuth.Web.Controllers.Api
 {
     [ModelValidation]
@@ -24,11 +25,20 @@ namespace DurandalAuth.Web.Controllers.Api
 
         IUnitOfWork UnitOfWork;
 
+        /// <summary>
+        /// This controller provide the authentication api for the entire application
+        /// </summary>
+        /// <param name="uow">Unit of work</param>
         public AccountController(IUnitOfWork uow)
         {
             this.UnitOfWork = uow;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="credential"></param>
+        /// <returns></returns>
         [HttpPost]
         [HttpOptions]
         [AllowAnonymous]
@@ -47,9 +57,13 @@ namespace DurandalAuth.Web.Controllers.Api
 
             var errors = new Dictionary<string, IEnumerable<string>>();
             errors.Add("Authorization", new string[] { "The supplied credentials are not valid" });
-            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, errors));
+            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized, errors));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [AntiForgeryToken]
         [HttpOptions]
@@ -71,6 +85,11 @@ namespace DurandalAuth.Web.Controllers.Api
             };    
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [AntiForgeryToken]
@@ -94,6 +113,10 @@ namespace DurandalAuth.Web.Controllers.Api
             }            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public UserInfo UserInfo()
@@ -116,6 +139,10 @@ namespace DurandalAuth.Web.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]        
         public IEnumerable<ExternalLogin> ExternalLoginsList()
@@ -132,6 +159,12 @@ namespace DurandalAuth.Web.Controllers.Api
             return externalLogins;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage ExternalLogin(string provider, string returnUrl)
@@ -148,6 +181,11 @@ namespace DurandalAuth.Web.Controllers.Api
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage ExternalLoginCallback(string returnUrl)
@@ -187,6 +225,14 @@ namespace DurandalAuth.Web.Controllers.Api
             } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <param name="username"></param>
+        /// <param name="provideruserid"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public RegisterExternalLoginModel ExternalLoginConfirmation(string returnUrl, string username, string provideruserid, string provider)
@@ -204,6 +250,11 @@ namespace DurandalAuth.Web.Controllers.Api
             return model;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AntiForgeryToken]
         [AllowAnonymous]
@@ -244,12 +295,21 @@ namespace DurandalAuth.Web.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public bool HasLocalAccount()
         {
             return OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AntiForgeryToken]
         public HttpResponseMessage ChangePassword(ChangePasswordModel model)
@@ -276,6 +336,11 @@ namespace DurandalAuth.Web.Controllers.Api
             throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Password and confirmation should match"));
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AntiForgeryToken]
         public HttpResponseMessage CreateLocalAccount(CreateLocalAccountModel model)
@@ -292,6 +357,10 @@ namespace DurandalAuth.Web.Controllers.Api
             throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Password and confirmation should match"));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public string GetAntiForgeryTokens()

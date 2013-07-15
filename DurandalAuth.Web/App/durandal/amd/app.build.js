@@ -7,8 +7,8 @@
   "paths": {
     "text": "durandal/amd/text"
   },
-  "baseUrl": "D:\\Proyectos\\BgStrap\\BgStrap.Web\\App",
-  "mainConfigFile": "D:\\Proyectos\\BgStrap\\BgStrap.Web\\App\\main.js",
+  "baseUrl": "D:\\Proyectos\\DurandalAuth\\DurandalAuth.Web\\App",
+  "mainConfigFile": "D:\\Proyectos\\DurandalAuth\\DurandalAuth.Web\\App\\main.js",
   "include": [
     "main-built",
     "main",
@@ -53,7 +53,7 @@
   "exclude": [],
   "keepBuildDir": true,
   "optimize": "uglify2",
-  "out": "D:\\Proyectos\\BgStrap\\BgStrap.Web\\App\\main-built.js",
+  "out": "D:\\Proyectos\\DurandalAuth\\DurandalAuth.Web\\App\\main-built.js",
   "pragmas": {
     "build": true
   },

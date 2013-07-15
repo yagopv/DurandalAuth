@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using Thinktecture.IdentityModel.Http.Cors.WebApi;
 using Thinktecture.IdentityModel.Tokens.Http;
@@ -27,22 +28,22 @@ namespace DurandalAuth.Web
 
             config.EnableQuerySupport();
 
-            config.Filters.Add(new AuthorizeAttribute());                        
+            config.Filters.Add(new AuthorizeAttribute());
 
-            ConfigureAuth(config);
+            // Basic Authentication and Cors support with Thinktecture Identity model
+            ConfigureBasicAuth(config);
 
-            ConfigureCors(config);
-
-
+            ConfigureCors(config);            
         }
 
-        private static void ConfigureAuth(HttpConfiguration config)
+        private static void ConfigureBasicAuth(HttpConfiguration config)
         {
             var authConfig = new AuthenticationConfiguration
             {
-                InheritHostClientIdentity = true,
-                EnableSessionToken = true,
-                RequireSsl = false
+                InheritHostClientIdentity = true, // Inherit authentication from Forms
+                EnableSessionToken = true, // Enable Session Tokens
+                RequireSsl = false, // Remember to change in Production
+                SendWwwAuthenticateResponseHeaders = false // Prevent browser window to show
             };
 
             // setup authentication against membership

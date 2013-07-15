@@ -39,18 +39,15 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                 };
 
                 /**
-                 * Handle validation errors without Breeze
+                 * Handle validation errors without Breeze. It´s neccesary to return a ModelState object from server
+                 * Default validation errors provided by Filters/ModelValidationAttribute.cs
                  * @method
                  * @param {object} errors
                 */
                 this.handlevalidationerrors = function (errors) {
-                    if (errors.status == 403) {
-                        logger.logError(errors.statusText, null, errors, true);
-                    } else {
-                        $.each($.parseJSON(errors.responseText), function (key, value) {
-                            logger.logError(value, null, errors, true);
-                        });
-                    }
+                    $.each($.parseJSON(errors.responseText), function (key, value) {
+                        logger.logError(value, null, errors, true);
+                    });
                 };
             };
 

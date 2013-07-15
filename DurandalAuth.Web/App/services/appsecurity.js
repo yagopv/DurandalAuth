@@ -32,25 +32,9 @@ define(function (require) {
 	/** @property {observable} externalLogins - External Logins container */
 	externalLogins = ko.observable(),    
 
-	/** 
-	 * Handle unauthorized requests
-	 * @method
-	 * @param {callback} callback - Callback to handle response
-	*/
-	handleUnauthorizedAjaxRequest = function (callback) {
-		 if (!callback) {
-			 return;
-		 }
-
-		 $(document).ajaxError(function (event, request, options) {
-			 if (request.status === 401) {
-				 callback();
-			 }
-		 });
-	},
-
 	/**
 	 * Add antiforgery to ajax requests with content 
+	 * The server filter processing the requests with content is Filters/AntiForgeryTokenAttribute.cs
 	 * @method
 	*/
 	addAntiForgeryTokenToAjaxRequests = function () {
@@ -68,7 +52,6 @@ define(function (require) {
 		credential: credential,
 		user: user,
 		externalLogins: externalLogins,
-		handleUnauthorizedAjaxRequest : handleUnauthorizedAjaxRequest,
 		
 		/**
 		 * Check if an user is in a role
@@ -102,11 +85,11 @@ define(function (require) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
 					if (data.IsAuthenticated == true) {
-					    if (navigateToUrl) {
-					        router.navigateTo(navigateToUrl);
-					    } else {
-					        router.navigateTo("/#/account");
-					    }
+						if (navigateToUrl) {
+							router.navigateTo(navigateToUrl);
+						} else {
+							router.navigateTo("/#/account");
+						}
 					}
 				})
 				.fail(function (data) {
