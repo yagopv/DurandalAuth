@@ -35,18 +35,22 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Sign in user
         /// </summary>
-        /// <param name="credential"></param>
-        /// <returns></returns>
+        /// <param name="credential">User credentials</param>
+        /// <returns>Authenticathion object containing the result of this operation</returns>
         [HttpPost]
         [HttpOptions]
         [AllowAnonymous]
         public UserInfo Login(Credential credential)
         {
+            // try to sign in
             if (WebSecurity.Login(credential.UserName, credential.Password, persistCookie: credential.RememberMe))
             {
-                HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(credential.UserName), null);
+                // Create a new Principal and return authenticated                
+                IPrincipal principal = new GenericPrincipal(new GenericIdentity(credential.UserName), Roles.GetRolesForUser(credential.UserName));
+                Thread.CurrentPrincipal = principal;
+                HttpContext.Current.User = principal;                
                 return new UserInfo
                 {
                     IsAuthenticated = true,
@@ -54,29 +58,33 @@ namespace DurandalAuth.Web.Controllers.Api
                     Roles = Roles.GetRolesForUser(credential.UserName)
                 };
             }
-
+            // if you get here => return 401 Unauthorized
             var errors = new Dictionary<string, IEnumerable<string>>();
             errors.Add("Authorization", new string[] { "The supplied credentials are not valid" });
             throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.Unauthorized, errors));
         }
 
         /// <summary>
-        /// 
+        /// Sign out the authenticated user
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Authenticathion object containing the result of the sign out operation</returns>
         [HttpPost]
         [AntiForgeryToken]
         [HttpOptions]
         public UserInfo Logout()
         {
+            // Try to sign out
             try
             {
                 WebSecurity.Logout();
+                Thread.CurrentPrincipal = null;
+                HttpContext.Current.User = null;
             }
             catch (MembershipCreateUserException e)
             {
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message));
-            }            
+            }  
+            // return user not already authenticated
             return new UserInfo
             {
                 IsAuthenticated = false,
@@ -86,10 +94,10 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Register a new account using the Membership system
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Register model</param>
+        /// <returns>Authenticathion object containing the result of the register operation</returns>
         [HttpPost]
         [AllowAnonymous]
         [AntiForgeryToken]
@@ -99,8 +107,10 @@ namespace DurandalAuth.Web.Controllers.Api
             {
                 WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email = model.Email });
                 WebSecurity.Login(model.UserName, model.Password);
-                HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(model.UserName), null);
                 Roles.AddUsersToRole(new string[] { model.UserName } , Settings.Default.DefaultRole);
+                IPrincipal principal = new GenericPrincipal(new GenericIdentity(model.UserName), Roles.GetRolesForUser(model.UserName));
+                Thread.CurrentPrincipal = principal;
+                HttpContext.Current.User = principal;                                
                 return new UserInfo() {
                     IsAuthenticated = true,
                     UserName  = model.UserName,
@@ -114,9 +124,9 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Get the actual authentication status
         /// </summary>
-        /// <returns></returns>
+        /// <returns>User authentication object</returns>
         [HttpGet]
         [AllowAnonymous]
         public UserInfo UserInfo()
@@ -140,9 +150,10 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Get the list of external logins
+        /// Configured in App_Start
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list with the admitted providers</returns>
         [HttpGet]
         [AllowAnonymous]        
         public IEnumerable<ExternalLogin> ExternalLoginsList()
@@ -160,17 +171,18 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Start a external login operation with the configured oAuth providers
         /// </summary>
-        /// <param name="provider"></param>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <param name="provider">User selected provider</param>
+        /// <param name="returnUrl">The return url to this domain</param>
+        /// <returns>http response code</returns>
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage ExternalLogin(string provider, string returnUrl)
         {
             try
             {
+                // Start oAuth authentication and call the ExternalLoginCallback when returning to this domain
                 OAuthWebSecurity.RequestAuthentication(provider, "/api/account/ExternalLoginCallback?returnurl=" + returnUrl);
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
@@ -182,10 +194,11 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// This method will be called when returning from the provider oAuth 
+        /// system to get the authentication result data
         /// </summary>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <param name="returnUrl">The return url (Set up in ExternalLogin start method)</param>
+        /// <returns>http response</returns>
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage ExternalLoginCallback(string returnUrl)
@@ -199,7 +212,10 @@ namespace DurandalAuth.Web.Controllers.Api
             }
 
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            {                
+            {               
+                IPrincipal principal = new GenericPrincipal(new GenericIdentity(result.ProviderUserId), null);
+                Thread.CurrentPrincipal = principal;
+                HttpContext.Current.User = principal;                                
                 var response = Request.CreateResponse(HttpStatusCode.Redirect);
                 response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + returnUrl);
                 return response;
@@ -226,13 +242,13 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Get data to confirm the external login account
         /// </summary>
-        /// <param name="returnUrl"></param>
-        /// <param name="username"></param>
-        /// <param name="provideruserid"></param>
-        /// <param name="provider"></param>
-        /// <returns></returns>
+        /// <param name="returnUrl">url to return</param>
+        /// <param name="username">username</param>
+        /// <param name="provideruserid">the provider user id</param>
+        /// <param name="provider">The oAuth provider</param>
+        /// <returns>Data to register the external account</returns>
         [HttpGet]
         [AllowAnonymous]
         public RegisterExternalLoginModel ExternalLoginConfirmation(string returnUrl, string username, string provideruserid, string provider)
@@ -251,10 +267,10 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// End external registration
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">External model object</param>
+        /// <returns>Authentication object with the result</returns>
         [HttpPost]
         [AntiForgeryToken]
         [AllowAnonymous]
@@ -269,8 +285,8 @@ namespace DurandalAuth.Web.Controllers.Api
             }
 
             // Insert a new user into the database
-
             UserProfile user = UnitOfWork.UserProfileRepository.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+            
             // Check if user already exists
             if (user == null)
             {
@@ -296,9 +312,9 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Check if the oAuth user has already a local account
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         [HttpGet]
         public bool HasLocalAccount()
         {
@@ -306,10 +322,10 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Change the password of the authenticated user
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">The change password model</param>
+        /// <returns>http response</returns>
         [HttpPost]
         [AntiForgeryToken]
         public HttpResponseMessage ChangePassword(ChangePasswordModel model)
@@ -337,10 +353,10 @@ namespace DurandalAuth.Web.Controllers.Api
         }
         
         /// <summary>
-        /// 
+        /// Creates a new local account for a user authenticated with any external provider
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">The model</param>
+        /// <returns>http response</returns>
         [HttpPost]
         [AntiForgeryToken]
         public HttpResponseMessage CreateLocalAccount(CreateLocalAccountModel model)
@@ -358,9 +374,9 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// 
+        /// Get antiforgery tokens
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the anti forgery token</returns>
         [HttpGet]
         [AllowAnonymous]
         public string GetAntiForgeryTokens()
