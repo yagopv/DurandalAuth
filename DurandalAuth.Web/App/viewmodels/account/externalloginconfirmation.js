@@ -10,7 +10,8 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
 function (appsecurity,router,utils,errorhandler) {
 
     var DisplayName = ko.observable(),
-        UserName = ko.observable().extend({ required : true }),
+        UserName = ko.observable().extend({ required: true }),
+        Email = ko.observable().extend({ required: true, email:true }),
         ExternalLoginData = ko.observable(),
         ReturnUrl = ko.observable()
     
@@ -21,6 +22,9 @@ function (appsecurity,router,utils,errorhandler) {
         /** @property {observable} UserName */         
         UserName: UserName,
         
+        /** @property {observable} Email - Email for the new user */
+        Email: Email,
+
         /** @property {observable} ExternalLoginData - External login data from the provider */
         ExternalLoginData: ExternalLoginData,
         
@@ -33,14 +37,15 @@ function (appsecurity,router,utils,errorhandler) {
         */  
         activate: function () {
             var self = this;
-            appsecurity.getExternalLoginConfirmationData
+            return appsecurity.getExternalLoginConfirmationData
                 (utils.getURLParameter("returnurl"),
                  utils.getURLParameter("username"),
                  utils.getURLParameter("provideruserid"),
                  utils.getURLParameter("provider"))
                     .then(function (data) {
                         self.DisplayName(data.DisplayName);
-                        self.UserName(data.UserName);
+                        self.UserName(data.UserName.split("@")[0]);
+                        self.Email(data.UserName);
                         self.ExternalLoginData(data.ExternalLoginData);
                         self.ReturnUrl(data.ReturnUrl);
                }).fail(self.handlevalidationerrors);
@@ -56,7 +61,7 @@ function (appsecurity,router,utils,errorhandler) {
                 this.errors.showAllMessages();
                 return;
             }
-            appsecurity.confirmExternalAccount(self.DisplayName(), self.UserName(), self.ExternalLoginData())
+            appsecurity.confirmExternalAccount(self.DisplayName(), self.UserName(), self.Email(), self.ExternalLoginData())
                 .then(function (data) {                    
                     router.navigateTo("/#/" + self.ReturnUrl());
                 }).fail(self.handlevalidationerrors);

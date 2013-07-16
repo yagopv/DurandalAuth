@@ -109,6 +109,9 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                     case "google":
                         icon = "icon-google-plus-sign"
                         break;
+                    case "microsoft":
+                        icon = "icon-envelope"
+                        break;
                     default:
                         icon = "icon-check-sign"
                 }

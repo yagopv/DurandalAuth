@@ -7,7 +7,7 @@
 
 define(function (require) {
 
-	var system = require('durandal/system'),
+    var system = require('durandal/system'),
 		app = require('durandal/app'),
 		router = require('durandal/plugins/router');
 		
@@ -198,12 +198,12 @@ define(function (require) {
 		 * @param {string} externallogindata - External Login data returned by provider
 		 * @return {promise}
 		*/        
-		confirmExternalAccount: function (displayname, username, externallogindata) {
+		confirmExternalAccount: function (displayname, username, email, externallogindata) {
 		    var self = this;
-			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, externallogindata: externallogindata })
+			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, email : email, externallogindata: externallogindata })
 				.done(function (data) {
 					self.user(data);
-					//self.addAntiForgeryTokenToAjaxRequests();
+					self.addAntiForgeryTokenToAjaxRequests();
 				});
 			return jqxhr;
 		},

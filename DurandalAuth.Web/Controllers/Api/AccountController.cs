@@ -260,6 +260,7 @@ namespace DurandalAuth.Web.Controllers.Api
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(provider, provideruserid);
                 model.UserName = username;
+                model.Email = username;
                 model.DisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
                 model.ReturnUrl = returnUrl;
                 model.ExternalLoginData = loginData;
@@ -292,12 +293,15 @@ namespace DurandalAuth.Web.Controllers.Api
             if (user == null)
             {
                 // Insert name into the profile table
-                UnitOfWork.UserProfileRepository.Add(new UserProfile { UserName = model.UserName, Email = model.UserName });                    
+                UnitOfWork.UserProfileRepository.Add(new UserProfile { UserName = model.UserName, Email = model.Email });                    
                 UnitOfWork.Commit();
                 OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                 OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-                HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(model.UserName), null);
                 Roles.AddUsersToRole(new string[] { model.UserName }, Settings.Default.DefaultRole);
+
+                IPrincipal principal = new GenericPrincipal(new GenericIdentity(model.UserName), null);
+                Thread.CurrentPrincipal = principal;
+                HttpContext.Current.User = principal;                                                
 
                 return new UserInfo()
                 {

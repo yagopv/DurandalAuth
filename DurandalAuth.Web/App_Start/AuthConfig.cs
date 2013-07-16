@@ -27,6 +27,10 @@ namespace DurandalAuth.Web
                 appId: ConfigurationManager.AppSettings["FacebookKey"],
                 appSecret: ConfigurationManager.AppSettings["FacebookSecret"]);
 
+            OAuthWebSecurity.RegisterMicrosoftClient(
+                clientId : ConfigurationManager.AppSettings["MicrosoftKey"],
+                clientSecret : ConfigurationManager.AppSettings["MicrosoftSecret"]);
+
             OAuthWebSecurity.RegisterGoogleClient();
         }
     }

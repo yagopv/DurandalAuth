@@ -6,10 +6,16 @@
 </p>
 <form class="form-horizontal" data-bind="submit: confirmexternalaccount">
   <div class="control-group" data-bind="validationElement: UserName">
-    <label class="control-label" for="UserName">Email</label>
+    <label class="control-label" for="UserName">User name</label>
     <div class="controls">
       <input type="text" data-bind="value: UserName" placeholder="User name">
     </div>
   </div>
-    <button type="submit" class="btn btn-primary" >Register</button>
+  <div class="control-group" data-bind="validationElement: Email">
+    <label class="control-label" for="Email">User name</label>
+    <div class="controls">
+      <input type="text" data-bind="value: Email" placeholder="Email">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" >Register</button>
 </form>

@@ -45,9 +45,13 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                  * @param {object} errors
                 */
                 this.handlevalidationerrors = function (errors) {
-                    $.each($.parseJSON(errors.responseText), function (key, value) {
-                        logger.logError(value, null, errors, true);
-                    });
+                    if (errors.responseText != "") {
+                        $.each($.parseJSON(errors.responseText), function (key, value) {
+                            logger.logError(value, null, errors, true);
+                        });
+                    } else {
+                        logger.logError(errors.statusText, null, errors, true);
+                    }
                 };
             };
 
