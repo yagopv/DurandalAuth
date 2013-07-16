@@ -204,42 +204,49 @@ namespace DurandalAuth.Web.Controllers.Api
         [AllowAnonymous]
         public HttpResponseMessage ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication();
-            if (!result.IsSuccessful)
+            try
             {
-                var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/externalloginfailure");
-                return response;
-            }
+                AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication();
+                if (!result.IsSuccessful)
+                {
+                    var response = Request.CreateResponse(HttpStatusCode.Redirect);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/externalloginfailure");
+                    return response;
+                }
 
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            {               
-                IPrincipal principal = new GenericPrincipal(new GenericIdentity(result.ProviderUserId), null);
-                Thread.CurrentPrincipal = principal;
-                HttpContext.Current.User = principal;                                
-                var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + returnUrl);
-                return response;
-            }
+                if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+                {
+                    IPrincipal principal = new GenericPrincipal(new GenericIdentity(result.ProviderUserId), null);
+                    Thread.CurrentPrincipal = principal;
+                    HttpContext.Current.User = principal;
+                    var response = Request.CreateResponse(HttpStatusCode.Redirect);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + returnUrl);
+                    return response;
+                }
 
-            if (User.Identity.IsAuthenticated)
-            {
-                // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + returnUrl);
-                return response;
+                if (User.Identity.IsAuthenticated)
+                {
+                    // If the current user is logged in add the new account
+                    OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                    var response = Request.CreateResponse(HttpStatusCode.Redirect);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + returnUrl);
+                    return response;
+                }
+                else
+                {
+                    // User is new, ask for their desired membership name
+                    string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                    //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                    //ViewBag.ReturnUrl = returnUrl;
+                    var response = Request.CreateResponse(HttpStatusCode.Redirect);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/externalloginconfirmation?returnurl=" + returnUrl + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
+                    return response;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-                //ViewBag.ReturnUrl = returnUrl;
-                var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/externalloginconfirmation?returnurl=" + returnUrl + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
-                return response;
-            } 
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex));
+            }
         }
 
         /// <summary>
