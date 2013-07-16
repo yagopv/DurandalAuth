@@ -199,7 +199,12 @@ define(function (require) {
 		 * @return {promise}
 		*/        
 		confirmExternalAccount: function (displayname, username, externallogindata) {
-			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, externallogindata: externallogindata });
+		    var self = this;
+			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, externallogindata: externallogindata })
+				.done(function (data) {
+					self.user(data);
+					self.addAntiForgeryTokenToAjaxRequests();
+				});
 			return jqxhr;
 		},
 		

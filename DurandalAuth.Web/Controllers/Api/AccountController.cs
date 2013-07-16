@@ -16,6 +16,7 @@ using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Filters;
 using DurandalAuth.Web.Models;
 using DurandalAuth.Web.Properties;
+using System.Threading;
 
 namespace DurandalAuth.Web.Controllers.Api
 {

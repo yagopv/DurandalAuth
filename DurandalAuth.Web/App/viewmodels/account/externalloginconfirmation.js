@@ -57,8 +57,7 @@ function (appsecurity,router,utils,errorhandler) {
                 return;
             }
             appsecurity.confirmExternalAccount(self.DisplayName(), self.UserName(), self.ExternalLoginData())
-                .then(function (data) {
-                    appsecurity.user(data);
+                .then(function (data) {                    
                     router.navigateTo("/#/" + self.ReturnUrl());
                 }).fail(self.handlevalidationerrors);
             }
