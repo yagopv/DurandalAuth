@@ -203,7 +203,7 @@ define(function (require) {
 			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, externallogindata: externallogindata })
 				.done(function (data) {
 					self.user(data);
-					self.addAntiForgeryTokenToAjaxRequests();
+					//self.addAntiForgeryTokenToAjaxRequests();
 				});
 			return jqxhr;
 		},
