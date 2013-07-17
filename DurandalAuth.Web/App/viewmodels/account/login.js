@@ -99,7 +99,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
             */
             socialIcon : function(data) {
                 var icon = "";
-                switch (data.Provider) {
+                switch (data.Provider.toLowerCase()) {
                     case "facebook":
                         icon = "icon-facebook-sign"
                         break;
