@@ -1,14 +1,13 @@
 ﻿define(function () {
+
     return {
         articles: ko.observable(),
-        viewAttached : function() {
-            Stashy.Table("#articles", { idprefix : "art-", menuClass: "btn btn-primary" }).on();
-        },
-        activate: function () {
+        viewAttached: function () {
             var self = this;
-            return $.get("api/article").then(function (data) {
+            $.get("api/article").then(function (data) {
                 self.articles(data);
-            });
+                Stashy.Table("#articles", { idprefix: "art-", menuClass: "btn btn-primary" }).on();
+            });            
         }
     }
 });
