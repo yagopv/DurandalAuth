@@ -245,7 +245,9 @@ namespace DurandalAuth.Web.Controllers.Api
             }
             catch (Exception ex)
             {
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex));
+                var response = Request.CreateResponse(HttpStatusCode.Redirect);
+                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/externalloginfailure");
+                return response;                
             }
         }
 
