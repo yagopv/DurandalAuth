@@ -57,6 +57,16 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 				appsecurity.user(data);
 			});
 
+		    //Loading indicator
+
+			var loader = new Stashy.Loader("body");
+
+		    $(document).ajaxStart(function () {
+		        loader.on("fixed", "4em", "#000", "prepend");
+			}).ajaxComplete(function () {
+			    loader.off();
+			});
+
 		    // Configure ko validation
 			ko.validation.init({
 			    decorateElement: true,
