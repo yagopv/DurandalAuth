@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Web.WebPages.OAuth;
 using DurandalAuth.Web.Models;
 using System.Configuration;
+using DurandalAuth.Web.Helpers;
 
 namespace DurandalAuth.Web
 {
@@ -27,11 +28,13 @@ namespace DurandalAuth.Web
                 appId: ConfigurationManager.AppSettings["FacebookKey"],
                 appSecret: ConfigurationManager.AppSettings["FacebookSecret"]);
 
-            OAuthWebSecurity.RegisterMicrosoftClient(
-                clientId : ConfigurationManager.AppSettings["MicrosoftKey"],
-                clientSecret : ConfigurationManager.AppSettings["MicrosoftSecret"]);
-
             OAuthWebSecurity.RegisterGoogleClient();
+
+            Dictionary<string, object> MicrosoftsocialData = new Dictionary<string, object>();
+            MicrosoftsocialData.Add("Icon", "../Content/icons/microsoft.png");
+            OAuthWebSecurity.RegisterClient(new MicrosoftScopedClient(ConfigurationManager.AppSettings["MicrosoftKey"], 
+                                                                      ConfigurationManager.AppSettings["MicrosoftSecret"],
+                                                                      "wl.basic wl.emails"), "Microsoft", MicrosoftsocialData);
         }
     }
 }
