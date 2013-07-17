@@ -7,7 +7,7 @@
 
 define(function (require) {
 
-    var system = require('durandal/system'),
+	var system = require('durandal/system'),
 		app = require('durandal/app'),
 		router = require('durandal/plugins/router');
 		
@@ -199,7 +199,7 @@ define(function (require) {
 		 * @return {promise}
 		*/        
 		confirmExternalAccount: function (displayname, username, email, externallogindata) {
-		    var self = this;
+			var self = this;
 			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, email : email, externallogindata: externallogindata })
 				.done(function (data) {
 					self.user(data);

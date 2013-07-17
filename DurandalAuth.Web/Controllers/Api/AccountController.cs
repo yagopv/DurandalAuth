@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Security;
+using System.Threading;
 using WebMatrix.WebData;
 
 using DurandalAuth.Domain.Model;
@@ -16,7 +17,6 @@ using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Filters;
 using DurandalAuth.Web.Models;
 using DurandalAuth.Web.Properties;
-using System.Threading;
 
 namespace DurandalAuth.Web.Controllers.Api
 {

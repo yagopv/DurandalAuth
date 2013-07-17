@@ -1,6 +1,11 @@
 ﻿define(function () {
     return {
-        displayName : 'admin',
-        description : 'admin'
+        userProfiles: ko.observable(),
+        activate: function () {
+            var self = this;
+            return $.get("api/userprofile").then(function (data) {
+                self.userProfiles(data);
+            });
+        }
     }
 });
