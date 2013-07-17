@@ -280,8 +280,11 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\ie10mobile.css" />
+    <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\spinner.png" />
+    <Content Include="Content\Stashy.min.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -301,6 +304,7 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\jquery.hammer.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
@@ -310,6 +314,7 @@
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
+    <Content Include="Scripts\Stashy.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

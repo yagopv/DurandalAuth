@@ -15,6 +15,8 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/sammy-{version}.js")
 		  .Include("~/Scripts/bootstrap.js")
 		  .Include("~/Scripts/toastr.js")
+		  .Include("~/Scripts/jquery.hammer.min.js")
+		  .Include("~/Scripts/Stashy.min.js")
 		);
 
 	  bundles.Add(
@@ -24,14 +26,14 @@ namespace DurandalAuth.Web {
 		  .Include("~/Content/bootstrap-responsive.css")
 		  .Include("~/Content/font-awesome.css")
 		  .Include("~/Content/durandal.css")
-		  .Include("~/Content/toastr.css")          
+		  .Include("~/Content/toastr.css")
+		  .Include("~/Content/Stashy.min.css")
 		);
 
 	  bundles.Add(
 		new StyleBundle("~/Content/custom")
 		  .Include("~/Content/app.css")
 		);
-
 	}
 
 	public static void AddDefaultIgnorePatterns(IgnoreList ignoreList) {
