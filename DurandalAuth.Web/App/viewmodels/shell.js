@@ -13,7 +13,7 @@
             appsecurity.getAuthInfo().then(function (data) {
                 appsecurity.user(data);
                 return router.activate('home');
-            });
+            }).fail(self.handlevalidationerrors);
         }
     };
 
