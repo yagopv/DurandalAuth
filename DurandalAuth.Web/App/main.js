@@ -52,11 +52,6 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 				return true;
 			}
 
-            // Get current auth info
-			appsecurity.getAuthInfo().then(function (data) {
-				appsecurity.user(data);
-			});
-
 		    //Loading indicator
 
 			var loader = new Stashy.Loader("body");
