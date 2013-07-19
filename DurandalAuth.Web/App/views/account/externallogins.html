@@ -1,0 +1,9 @@
+﻿<h3>Login using another service</h3>
+<ul class="unstyled" data-bind="foreach : appsecurity.externalLogins">
+    <li>
+        <a class="lead" href="#"  data-bind="click: function (data, event) { $parent.externalLogin($parent, data, event) }, attr: { 'data-provider': Provider }">
+            <i data-bind="css: $parent.socialIcon($data)"></i>
+            <span data-bind="text: ProviderDisplayName"></span>
+        </a>
+    </li>
+</ul>

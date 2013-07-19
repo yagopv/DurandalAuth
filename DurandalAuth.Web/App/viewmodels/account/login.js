@@ -47,22 +47,6 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                     this.isRedirect(true);
                 }
                 this.returnUrl(redirect != "null" ? redirect : "account");
-
-                return appsecurity.getExternalLogins().then(function (data) {
-                    appsecurity.externalLogins(data);
-                });                
-            },
-
-            /**
-             * Start external Login
-             * @method
-             * @param {object} parent
-             * @param {object} data
-             * @param {object} event
-            */
-            externalLogin: function (parent, data, event) {
-                appsecurity.externalLogin(data.Provider, this.returnUrl())
-                    .fail(self.log(data,true));
             },
 
             /**
@@ -89,33 +73,6 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
             */
             logout: function () {
                 appsecurity.logout();
-            },
-
-            /**
-             * Get the social icon class (Font-Awesome) for the social logins
-             * @method
-             * @param {object} data
-             * @return {string} - Icon class
-            */
-            socialIcon : function(data) {
-                var icon = "";
-                switch (data.Provider.toLowerCase()) {
-                    case "facebook":
-                        icon = "icon-facebook-sign"
-                        break;
-                    case "twitter":
-                        icon = "icon-twitter-sign"
-                        break;
-                    case "google":
-                        icon = "icon-google-plus-sign"
-                        break;
-                    case "microsoft":
-                        icon = "icon-envelope"
-                        break;
-                    default:
-                        icon = "icon-check-sign"
-                }
-                return icon;
             }
 
         }

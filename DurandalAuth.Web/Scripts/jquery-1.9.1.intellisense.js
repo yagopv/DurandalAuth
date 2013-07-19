@@ -4,19 +4,19 @@
     ///   <summary>Perform an asynchronous HTTP (Ajax) request.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
     ///   <param name="settings" type="PlainObject">A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup(). See jQuery.ajax( settings ) below for a complete list of all settings.</param>
-    ///   <returns type="jqXHR" />
+    ///   <returns type="promise" />
     /// </signature>
     /// <signature>
     ///   <summary>Perform an asynchronous HTTP (Ajax) request.</summary>
     ///   <param name="settings" type="PlainObject">A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup().</param>
-    ///   <returns type="jqXHR" />
+    ///   <returns type="promise" />
     /// </signature>
   },
   'ajaxPrefilter': function() {
     /// <signature>
     ///   <summary>Handle custom Ajax options or modify existing options before each request is sent and before they are processed by $.ajax().</summary>
     ///   <param name="dataTypes" type="String">An optional string containing one or more space-separated dataTypes</param>
-    ///   <param name="handler(options, originalOptions, jqXHR)" type="Function">A handler to set default values for future Ajax requests.</param>
+    ///   <param name="handler(options, originalOptions, promise)" type="Function">A handler to set default values for future Ajax requests.</param>
     /// </signature>
   },
   'ajaxSetup': function() {
@@ -29,7 +29,7 @@
     /// <signature>
     ///   <summary>Creates an object that handles the actual transmission of Ajax data.</summary>
     ///   <param name="dataType" type="String">A string identifying the data type to use</param>
-    ///   <param name="handler(options, originalOptions, jqXHR)" type="Function">A handler to return the new transport object to use with the data type provided in the first argument.</param>
+    ///   <param name="handler(options, originalOptions, promise)" type="Function">A handler to return the new transport object to use with the data type provided in the first argument.</param>
     /// </signature>
   },
   'boxModel': function() {
@@ -126,9 +126,9 @@
     ///   <summary>Load data from the server using a HTTP GET request.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
     ///   <param name="data" type="String">A plain object or string that is sent to the server with the request.</param>
-    ///   <param name="success(data, textStatus, jqXHR)" type="Function">A callback function that is executed if the request succeeds.</param>
+    ///   <param name="success(data, textStatus, promise)" type="Function">A callback function that is executed if the request succeeds.</param>
     ///   <param name="dataType" type="String">The type of data expected from the server. Default: Intelligent Guess (xml, json, script, or html).</param>
-    ///   <returns type="jqXHR" />
+    ///   <returns type="promise" />
     /// </signature>
   },
   'getJSON': function() {
@@ -136,16 +136,16 @@
     ///   <summary>Load JSON-encoded data from the server using a GET HTTP request.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
     ///   <param name="data" type="PlainObject">A plain object or string that is sent to the server with the request.</param>
-    ///   <param name="success(data, textStatus, jqXHR)" type="Function">A callback function that is executed if the request succeeds.</param>
-    ///   <returns type="jqXHR" />
+    ///   <param name="success(data, textStatus, promise)" type="Function">A callback function that is executed if the request succeeds.</param>
+    ///   <returns type="promise" />
     /// </signature>
   },
   'getScript': function() {
     /// <signature>
     ///   <summary>Load a JavaScript file from the server using a GET HTTP request, then execute it.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
-    ///   <param name="success(script, textStatus, jqXHR)" type="Function">A callback function that is executed if the request succeeds.</param>
-    ///   <returns type="jqXHR" />
+    ///   <param name="success(script, textStatus, promise)" type="Function">A callback function that is executed if the request succeeds.</param>
+    ///   <returns type="promise" />
     /// </signature>
   },
   'globalEval': function() {
@@ -318,9 +318,9 @@
     ///   <summary>Load data from the server using a HTTP POST request.</summary>
     ///   <param name="url" type="String">A string containing the URL to which the request is sent.</param>
     ///   <param name="data" type="String">A plain object or string that is sent to the server with the request.</param>
-    ///   <param name="success(data, textStatus, jqXHR)" type="Function">A callback function that is executed if the request succeeds.</param>
+    ///   <param name="success(data, textStatus, promise)" type="Function">A callback function that is executed if the request succeeds.</param>
     ///   <param name="dataType" type="String">The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).</param>
-    ///   <returns type="jqXHR" />
+    ///   <returns type="promise" />
     /// </signature>
   },
   'proxy': function() {
@@ -772,14 +772,14 @@ intellisense.annotate(jQuery.fn, {
   'ajaxError': function() {
     /// <signature>
     ///   <summary>Register a handler to be called when Ajax requests complete with an error. This is an Ajax Event.</summary>
-    ///   <param name="handler(event, jqXHR, ajaxSettings, thrownError)" type="Function">The function to be invoked.</param>
+    ///   <param name="handler(event, promise, ajaxSettings, thrownError)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxSend': function() {
     /// <signature>
     ///   <summary>Attach a function to be executed before an Ajax request is sent. This is an Ajax Event.</summary>
-    ///   <param name="handler(event, jqXHR, ajaxOptions)" type="Function">The function to be invoked.</param>
+    ///   <param name="handler(event, promise, ajaxOptions)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },

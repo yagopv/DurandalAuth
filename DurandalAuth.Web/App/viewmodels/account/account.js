@@ -10,7 +10,9 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
     var hasAccount = ko.observable(),
         newPassword = ko.observable().extend({ required: true, minLength: 6 }),
         oldPassword = ko.observable().extend({ required: true, minLength: 6 }),
-        confirmNewPassword = ko.observable().extend({ required: true, minLength: 6, equal : newPassword });
+        confirmNewPassword = ko.observable().extend({ required: true, minLength: 6, equal: newPassword }),
+        externalAccounts = ko.observableArray(),
+        showRemoveButton = ko.observable();
     
     var viewmodel = {
         
@@ -25,7 +27,16 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         
         /** @property {observable} confirmNewPassword */
         confirmNewPassword: confirmNewPassword,
-        
+
+        /** @property {observable} externalAccounts - Collection of external account for the authenticated user */
+        externalAccounts: externalAccounts,
+
+        /** @property {observable} showRemoveButton */
+        showRemoveButton: showRemoveButton,
+
+        /** @property {appsecurity} appsecurity */
+        appsecurity: appsecurity,
+
         /**
          * Change the password of the current authenticated user
          * @method
@@ -40,7 +51,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
             .then(function () {
                     appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
-                    logger.logSuccess("Password changed succesfully", null, null, true, 'success');
+                    logger.logSuccess("Password changed succesfully", null, null, true);
                 });
             }).fail(self.handlevalidationerrors);
         },
@@ -66,16 +77,41 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         },
         
         /**
+         * Remove a external associated account 
+         * @method
+         * @param {object} parent
+         * @param {object} data
+         * @param {object} event
+        */
+        removeExternalAccount: function (parent, data, event) {
+            var self = this;
+            appsecurity.dissasociate(data.Provider, data.ProviderUserId)
+                   .then(function (message) {
+                       logger.logSuccess(message, null, null, true);                       
+                       appsecurity.externalAccounts()
+                           .then(function (accounts) {
+                                self.externalAccounts(accounts.ExternalLogins);
+                                self.showRemoveButton(accounts.ShowRemoveButton);
+                           })
+                           .fail(self.handlevalidationerrors);
+                   })
+                   .fail(self.handlevalidationerrors);
+        },
+
+        /**
          * Activate view
          * @method
          * @return {promise} - Promise of user having an account
         */          
         activate: function () {            
             var self = this;
-            return appsecurity.hasLocalAccount()
-                .then(function (data) {
-                    self.hasAccount(data);
-                }).fail(self.handlevalidationerrors);
+            return $.when(appsecurity.hasLocalAccount(), appsecurity.externalAccounts())
+                .then(function (haslocal, accounts) {
+                    self.hasAccount(haslocal[0]);
+                    self.externalAccounts(accounts[0].ExternalLogins);
+                    self.showRemoveButton(accounts[0].ShowRemoveButton);
+                })
+                .fail(self.handlevalidationerrors);
         }
     }
     

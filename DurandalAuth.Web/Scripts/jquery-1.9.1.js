@@ -7495,7 +7495,7 @@ function addToPrefiltersOrTransports( structure ) {
 }
 
 // Base inspection function for prefilters and transports
-function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {
+function inspectPrefiltersOrTransports( structure, options, originalOptions, promise ) {
 
 	var inspected = {},
 		seekingTransport = ( structure === transports );
@@ -7504,7 +7504,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 		var selected;
 		inspected[ dataType ] = true;
 		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
-			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
+			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, promise );
 			if( typeof dataTypeOrTransport === "string" && !seekingTransport && !inspected[ dataTypeOrTransport ] ) {
 				options.dataTypes.unshift( dataTypeOrTransport );
 				inspect( dataTypeOrTransport );
@@ -7587,8 +7587,8 @@ jQuery.fn.load = function( url, params, callback ) {
 				// Otherwise use the full result
 				responseText );
 
-		}).complete( callback && function( jqXHR, status ) {
-			self.each( callback, response || [ jqXHR.responseText, status, jqXHR ] );
+		}).complete( callback && function( promise, status ) {
+			self.each( callback, response || [ promise.responseText, status, promise ] );
 		});
 	}
 
@@ -7757,12 +7757,12 @@ jQuery.extend({
 			// Headers (they are sent all at once)
 			requestHeaders = {},
 			requestHeadersNames = {},
-			// The jqXHR state
+			// The promise state
 			state = 0,
 			// Default abort message
 			strAbort = "canceled",
 			// Fake xhr
-			jqXHR = {
+			promise = {
 				readyState: 0,
 
 				// Builds headers hashtable if needed
@@ -7814,7 +7814,7 @@ jQuery.extend({
 							}
 						} else {
 							// Execute the appropriate callbacks
-							jqXHR.always( map[ jqXHR.status ] );
+							promise.always( map[ promise.status ] );
 						}
 					}
 					return this;
@@ -7832,9 +7832,9 @@ jQuery.extend({
 			};
 
 		// Attach deferreds
-		deferred.promise( jqXHR ).complete = completeDeferred.add;
-		jqXHR.success = jqXHR.done;
-		jqXHR.error = jqXHR.fail;
+		deferred.promise( promise ).complete = completeDeferred.add;
+		promise.success = promise.done;
+		promise.error = promise.fail;
 
 		// Remove hash character (#7531: and string promotion)
 		// Add protocol if not provided (#5866: IE7 issue with protocol-less urls)
@@ -7864,11 +7864,11 @@ jQuery.extend({
 		}
 
 		// Apply prefilters
-		inspectPrefiltersOrTransports( prefilters, s, options, jqXHR );
+		inspectPrefiltersOrTransports( prefilters, s, options, promise );
 
 		// If request was aborted inside a prefilter, stop there
 		if ( state === 2 ) {
-			return jqXHR;
+			return promise;
 		}
 
 		// We can fire global events as of now if asked to
@@ -7914,20 +7914,20 @@ jQuery.extend({
 		// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
 		if ( s.ifModified ) {
 			if ( jQuery.lastModified[ cacheURL ] ) {
-				jqXHR.setRequestHeader( "If-Modified-Since", jQuery.lastModified[ cacheURL ] );
+				promise.setRequestHeader( "If-Modified-Since", jQuery.lastModified[ cacheURL ] );
 			}
 			if ( jQuery.etag[ cacheURL ] ) {
-				jqXHR.setRequestHeader( "If-None-Match", jQuery.etag[ cacheURL ] );
+				promise.setRequestHeader( "If-None-Match", jQuery.etag[ cacheURL ] );
 			}
 		}
 
 		// Set the correct header, if data is being sent
 		if ( s.data && s.hasContent && s.contentType !== false || options.contentType ) {
-			jqXHR.setRequestHeader( "Content-Type", s.contentType );
+			promise.setRequestHeader( "Content-Type", s.contentType );
 		}
 
 		// Set the Accepts header for the server, depending on the dataType
-		jqXHR.setRequestHeader(
+		promise.setRequestHeader(
 			"Accept",
 			s.dataTypes[ 0 ] && s.accepts[ s.dataTypes[0] ] ?
 				s.accepts[ s.dataTypes[0] ] + ( s.dataTypes[ 0 ] !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
@@ -7936,13 +7936,13 @@ jQuery.extend({
 
 		// Check for headers option
 		for ( i in s.headers ) {
-			jqXHR.setRequestHeader( i, s.headers[ i ] );
+			promise.setRequestHeader( i, s.headers[ i ] );
 		}
 
 		// Allow custom headers/mimetypes and early abort
-		if ( s.beforeSend && ( s.beforeSend.call( callbackContext, jqXHR, s ) === false || state === 2 ) ) {
+		if ( s.beforeSend && ( s.beforeSend.call( callbackContext, promise, s ) === false || state === 2 ) ) {
 			// Abort if not done already and return
-			return jqXHR.abort();
+			return promise.abort();
 		}
 
 		// aborting is no longer a cancellation
@@ -7950,26 +7950,26 @@ jQuery.extend({
 
 		// Install callbacks on deferreds
 		for ( i in { success: 1, error: 1, complete: 1 } ) {
-			jqXHR[ i ]( s[ i ] );
+			promise[ i ]( s[ i ] );
 		}
 
 		// Get transport
-		transport = inspectPrefiltersOrTransports( transports, s, options, jqXHR );
+		transport = inspectPrefiltersOrTransports( transports, s, options, promise );
 
 		// If no transport, we auto-abort
 		if ( !transport ) {
 			done( -1, "No Transport" );
 		} else {
-			jqXHR.readyState = 1;
+			promise.readyState = 1;
 
 			// Send global event
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxSend", [ jqXHR, s ] );
+				globalEventContext.trigger( "ajaxSend", [ promise, s ] );
 			}
 			// Timeout
 			if ( s.async && s.timeout > 0 ) {
 				timeoutTimer = setTimeout(function() {
-					jqXHR.abort("timeout");
+					promise.abort("timeout");
 				}, s.timeout );
 			}
 
@@ -8006,18 +8006,18 @@ jQuery.extend({
 			}
 
 			// Dereference transport for early garbage collection
-			// (no matter how long the jqXHR object will be used)
+			// (no matter how long the promise object will be used)
 			transport = undefined;
 
 			// Cache response headers
 			responseHeadersString = headers || "";
 
 			// Set readyState
-			jqXHR.readyState = status > 0 ? 4 : 0;
+			promise.readyState = status > 0 ? 4 : 0;
 
 			// Get response data
 			if ( responses ) {
-				response = ajaxHandleResponses( s, jqXHR, responses );
+				response = ajaxHandleResponses( s, promise, responses );
 			}
 
 			// If successful, handle type chaining
@@ -8025,11 +8025,11 @@ jQuery.extend({
 
 				// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
 				if ( s.ifModified ) {
-					modified = jqXHR.getResponseHeader("Last-Modified");
+					modified = promise.getResponseHeader("Last-Modified");
 					if ( modified ) {
 						jQuery.lastModified[ cacheURL ] = modified;
 					}
-					modified = jqXHR.getResponseHeader("etag");
+					modified = promise.getResponseHeader("etag");
 					if ( modified ) {
 						jQuery.etag[ cacheURL ] = modified;
 					}
@@ -8066,30 +8066,30 @@ jQuery.extend({
 			}
 
 			// Set data for the fake xhr object
-			jqXHR.status = status;
-			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
+			promise.status = status;
+			promise.statusText = ( nativeStatusText || statusText ) + "";
 
 			// Success/Error
 			if ( isSuccess ) {
-				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
+				deferred.resolveWith( callbackContext, [ success, statusText, promise ] );
 			} else {
-				deferred.rejectWith( callbackContext, [ jqXHR, statusText, error ] );
+				deferred.rejectWith( callbackContext, [ promise, statusText, error ] );
 			}
 
 			// Status-dependent callbacks
-			jqXHR.statusCode( statusCode );
+			promise.statusCode( statusCode );
 			statusCode = undefined;
 
 			if ( fireGlobals ) {
 				globalEventContext.trigger( isSuccess ? "ajaxSuccess" : "ajaxError",
-					[ jqXHR, s, isSuccess ? success : error ] );
+					[ promise, s, isSuccess ? success : error ] );
 			}
 
 			// Complete
-			completeDeferred.fireWith( callbackContext, [ jqXHR, statusText ] );
+			completeDeferred.fireWith( callbackContext, [ promise, statusText ] );
 
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxComplete", [ jqXHR, s ] );
+				globalEventContext.trigger( "ajaxComplete", [ promise, s ] );
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
 					jQuery.event.trigger("ajaxStop");
@@ -8097,7 +8097,7 @@ jQuery.extend({
 			}
 		}
 
-		return jqXHR;
+		return promise;
 	},
 
 	getScript: function( url, callback ) {
@@ -8114,7 +8114,7 @@ jQuery.extend({
  * - finds the right dataType (mediates between content-type and expected dataType)
  * - returns the corresponding response
  */
-function ajaxHandleResponses( s, jqXHR, responses ) {
+function ajaxHandleResponses( s, promise, responses ) {
 	var firstDataType, ct, finalDataType, type,
 		contents = s.contents,
 		dataTypes = s.dataTypes,
@@ -8123,7 +8123,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	// Fill responseXXX fields
 	for ( type in responseFields ) {
 		if ( type in responses ) {
-			jqXHR[ responseFields[type] ] = responses[ type ];
+			promise[ responseFields[type] ] = responses[ type ];
 		}
 	}
 
@@ -8131,7 +8131,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	while( dataTypes[ 0 ] === "*" ) {
 		dataTypes.shift();
 		if ( ct === undefined ) {
-			ct = s.mimeType || jqXHR.getResponseHeader("Content-Type");
+			ct = s.mimeType || promise.getResponseHeader("Content-Type");
 		}
 	}
 
@@ -8358,7 +8358,7 @@ jQuery.ajaxSetup({
 });
 
 // Detect, normalize options and install callbacks for jsonp requests
-jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
+jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, promise ) {
 
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false && ( rjsonp.test( s.url ) ?
@@ -8399,7 +8399,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 		};
 
 		// Clean-up function (fires after converters)
-		jqXHR.always(function() {
+		promise.always(function() {
 			// Restore preexisting value
 			window[ callbackName ] = overwritten;
 

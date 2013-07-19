@@ -112,12 +112,26 @@ namespace DurandalAuth.Web.Models
         public string Provider { get; set; }
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
+        public bool ShowRemoveButton { get; set; }
     }
+
+    public class ExternalAccounts
+    {
+        public IEnumerable<ExternalLogin> ExternalLogins { get; set; }
+        public bool ShowRemoveButton { get; set; }
+    }
+
 
     public class UserInfo
     {
         public bool IsAuthenticated { get; set; }
         public string UserName { get; set; }
         public IEnumerable<string> Roles { get; set; }
+    }
+
+    public class DissasociateModel
+    {
+        public string Provider { get; set; }
+        public string ProviderUserId { get; set; }
     }
 }

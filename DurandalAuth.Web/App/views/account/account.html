@@ -1,9 +1,9 @@
 <div class="row-fluid">
-    <div class="span12 well">        
-        <form class="form-horizontal" data-bind="if :  hasAccount, submit : changePassword">
+    <div class="span6 well">        
+        <form class="form-horizontal" data-bind="if : hasAccount, submit : changePassword">
             <h2> Change Password </h2>
             <div class="control-group" data-bind="validationElement: oldPassword">
-                <label class="control-label" for="username">Old Password</label>
+                <label class="control-label" for="oldpassword">Old Password</label>
                     <div class="controls">
                         <input type="password"  data-bind="value: oldPassword" placeholder="Old Password">                       
                     </div>
@@ -46,8 +46,19 @@
        </form>  
     </div>
 
-    <div class="span6">
-
+    <div class="span6 well">
+        <h3>Registered external accounts</h3>
+        <table>
+            <tbody data-bind="foreach : externalAccounts">
+                <tr>
+                    <td class="well" data-bind="text : ProviderDisplayName"></td>
+                    <td class="well" data-bind="if : $parent.showRemoveButton">
+                        <a class="btn btn-primary" href="#" data-bind="click : function(data,event) { $parent.removeExternalAccount($parent,data,event); }, text : 'Remove'"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div data-bind="compose : { model :'viewmodels/account/externallogins' , activate : true}"></div>
     </div>
-
 </div>

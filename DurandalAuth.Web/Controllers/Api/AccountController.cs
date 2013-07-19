@@ -17,6 +17,7 @@ using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Filters;
 using DurandalAuth.Web.Models;
 using DurandalAuth.Web.Properties;
+using System.Transactions;
 
 namespace DurandalAuth.Web.Controllers.Api
 {
@@ -399,6 +400,63 @@ namespace DurandalAuth.Web.Controllers.Api
             AntiForgery.GetTokens(null, out cookieToken, out formToken);
             HttpContext.Current.Response.Cookies[AntiForgeryConfig.CookieName].Value = cookieToken;
             return formToken;
+        }
+
+        /// <summary>
+        /// Get the registered external logins list
+        /// </summary>
+        /// <returns>External Login List</returns>
+        [HttpGet]
+        public ExternalAccounts ExternalAccounts()
+        {
+            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
+            foreach (OAuthAccount account in accounts)
+            {
+                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+
+                externalLogins.Add(new ExternalLogin
+                {
+                    Provider = account.Provider,
+                    ProviderDisplayName = clientData.DisplayName,
+                    ProviderUserId = account.ProviderUserId,
+                });
+            }
+            ExternalAccounts externalLoginList = new ExternalAccounts();
+            externalLoginList.ExternalLogins = externalLogins;
+            externalLoginList.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            return externalLoginList;
+        }
+
+        /// <summary>
+        /// Dissasociate an external account
+        /// </summary>
+        /// <param name="provider">The registered provider</param>
+        /// <param name="providerUserId">The Id in the provider</param>
+        /// <returns>http response</returns>
+        [HttpPost]
+        [AntiForgeryToken]
+        public HttpResponseMessage Disassociate(DissasociateModel model)
+        {
+            string ownerAccount = OAuthWebSecurity.GetUserName(model.Provider, model.ProviderUserId);
+
+            // Dissasociate account if authenticated user is the owner
+            if (ownerAccount == User.Identity.Name)
+            {
+                // Using transaction to avoid dissasociation of the last linked account
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                {
+                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
+                    {
+                        OAuthWebSecurity.DeleteAccount(model.Provider, model.ProviderUserId);
+                        scope.Complete();                                                
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, "Account succesfully dissasociated");
+            }
+
+            throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "You are not the account owner"));
         }
     }
 }

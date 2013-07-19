@@ -80,7 +80,7 @@ define(function (require) {
 		*/
 		login:  function (credential, navigateToUrl) {
 			var self = this;
-			var jqxhr = $.post(baseAdress + "/login", credential)
+			var promise = $.post(baseAdress + "/login", credential)
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
@@ -96,7 +96,7 @@ define(function (require) {
 					self.user({ IsAuthenticated: false, UserName: "", Roles: [] });
 				});
 
-			return jqxhr;
+			return promise;
 		},
 		
 		/**
@@ -106,7 +106,7 @@ define(function (require) {
 		*/        
 		logout: function () {
 			var self = this;
-			var jqxhr = $.post(baseAdress + "/logout", credential)
+			var promise = $.post(baseAdress + "/logout", credential)
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
@@ -117,7 +117,7 @@ define(function (require) {
 				.fail(function (data) {
 					return data;
 				});
-			return jqxhr;
+			return promise;
 		},
 		
 		/**
@@ -131,13 +131,13 @@ define(function (require) {
 		*/        
 		register: function (username, email, password, confirmpassword) {
 			var self = this;
-			var jqxhr = $.post(baseAdress + "/register", { username: username, email: email, password: password, confirmpassword: confirmpassword })
+			var promise = $.post(baseAdress + "/register", { username: username, email: email, password: password, confirmpassword: confirmpassword })
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
 					router.navigateTo("/#/account");
 				});
-			return jqxhr;
+			return promise;
 		},
 
 		/**
@@ -147,8 +147,8 @@ define(function (require) {
 		*/    
 		getAuthInfo: function () {
 			var self = this;
-			var jqxhr = $.get(baseAdress + "/userinfo");
-			return jqxhr;
+			var promise = $.get(baseAdress + "/userinfo");
+			return promise;
 		},
 		
 		/**
@@ -159,8 +159,8 @@ define(function (require) {
 		*/           
 		getExternalLogins : function () {
 			var self = this;
-			var jqxhr = $.get(baseAdress + "/externalloginslist");
-			return jqxhr;
+			var promise = $.get(baseAdress + "/externalloginslist");
+			return promise;
 		},        
 		addAntiForgeryTokenToAjaxRequests: addAntiForgeryTokenToAjaxRequests,
 
@@ -172,8 +172,8 @@ define(function (require) {
 		 * @return {promise}
 		*/  
 		externalLogin: function (provider, returnurl) {
-			var jqxhr = location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;
-			return jqxhr;
+			var promise = location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;
+			return promise;
 		},
 		
 		/**
@@ -186,8 +186,8 @@ define(function (require) {
 		 * @return {promise}
 		*/          
 		getExternalLoginConfirmationData : function(returnurl, username, provideruserid, provider) {
-			var jqxhr = $.get(baseAdress + "/externalloginconfirmation?returnurl=" + returnurl + "&username=" + username + "&provideruserid=" + provideruserid + "&provider=" + provider);
-			return jqxhr;
+			var promise = $.get(baseAdress + "/externalloginconfirmation?returnurl=" + returnurl + "&username=" + username + "&provideruserid=" + provideruserid + "&provider=" + provider);
+			return promise;
 		},
 		
 		/**
@@ -200,12 +200,12 @@ define(function (require) {
 		*/        
 		confirmExternalAccount: function (displayname, username, email, externallogindata) {
 			var self = this;
-			var jqxhr = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, email : email, externallogindata: externallogindata })
+			var promise = $.post(baseAdress + "/registerexternallogin", { displayname: displayname, username: username, email : email, externallogindata: externallogindata })
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
 				});
-			return jqxhr;
+			return promise;
 		},
 		
 		/**
@@ -214,8 +214,8 @@ define(function (require) {
 		 * @return {promise}
 		*/          
 		hasLocalAccount: function () {
-			var jqxhr = $.get(baseAdress + "/haslocalaccount");
-			return jqxhr;
+			var promise = $.get(baseAdress + "/haslocalaccount");
+			return promise;
 		},
 		
 		/**
@@ -227,8 +227,8 @@ define(function (require) {
 		 * @return {promise}
 		*/
 		changePassword: function (oldpassword, newpassword, confirmnewpassword) {
-			var jqxhr = $.post(baseAdress + "/changepassword", { oldpassword: oldpassword, newpassword: newpassword, confirmpassword: confirmnewpassword });
-			return jqxhr;
+			var promise = $.post(baseAdress + "/changepassword", { oldpassword: oldpassword, newpassword: newpassword, confirmpassword: confirmnewpassword });
+			return promise;
 		},
 		
 		/**
@@ -239,8 +239,31 @@ define(function (require) {
 		 * @return {promise}
 		*/
 		createLocalAccount: function (password, confirmnewpassword) {
-			var jqxhr = $.post(baseAdress + "/createlocalaccount", { newpassword: password, confirmpassword: confirmnewpassword });
-			return jqxhr;
+			var promise = $.post(baseAdress + "/createlocalaccount", { newpassword: password, confirmpassword: confirmnewpassword });
+			return promise;
+		},
+
+		/**
+		 * Get the external logins list
+		 * @method
+		 * @return {promise}
+		*/
+		externalAccounts: function () {
+			var promise = $.get(baseAdress + "/externalaccounts");
+			return promise;
+		},
+
+		/**
+		 * Dissasociate an external account
+		 * @method
+		 * @param {string} provider
+		 * @param {string} provideruserid
+		 * @return {promise}
+		*/
+		dissasociate: function (provider, provideruserid) {
+			var promise = $.post(baseAdress + "/disassociate", { provider: provider, provideruserid: provideruserid });
+			return promise;
 		}
+
 	};
 });
