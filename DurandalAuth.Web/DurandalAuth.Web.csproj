@@ -16,7 +16,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -218,6 +219,7 @@
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="Filters\ModelValidationAttribute.cs" />
     <Compile Include="Filters\AntiForgeryTokenAttribute.cs" />
+    <Compile Include="Filters\RequireHttpsAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,7 +260,6 @@
     <Content Include="App\services\errorhandler.js" />
     <Content Include="App\services\logger.js" />
     <Content Include="App\services\utils.js" />
-    <Content Include="App\viewmodels\account\externallogins.js" />
     <Content Include="App\viewmodels\account\register.js" />
     <Content Include="App\viewmodels\admin\admin.js" />
     <Content Include="App\viewmodels\account\account.js" />
@@ -268,7 +269,6 @@
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\viewmodels\home\home.js" />
     <Content Include="App\viewmodels\user\user.js" />
-    <Content Include="App\views\account\externallogins.html" />
     <Content Include="App\views\account\register.html" />
     <Content Include="App\views\admin\admin.html" />
     <Content Include="App\views\account\account.html" />

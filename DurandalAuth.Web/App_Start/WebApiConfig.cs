@@ -29,6 +29,10 @@ namespace DurandalAuth.Web
             config.EnableQuerySupport();
 
             config.Filters.Add(new AuthorizeAttribute());
+            if (!HttpContext.Current.IsDebuggingEnabled)
+            {
+                config.Filters.Add(new RequireHttpsAttribute());
+            }            
 
             // Basic Authentication and Cors support with Thinktecture Identity model
             ConfigureBasicAuth(config);

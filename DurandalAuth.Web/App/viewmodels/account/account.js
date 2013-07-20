@@ -108,13 +108,53 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         */          
         activate: function () {            
             var self = this;
-            return $.when(appsecurity.hasLocalAccount(), appsecurity.externalAccounts())
-                .then(function (haslocal, accounts) {
+            return $.when(appsecurity.hasLocalAccount(), appsecurity.externalAccounts(),appsecurity.getExternalLogins())
+                .then(function (haslocal, accounts, logins) {
                     self.hasAccount(haslocal[0]);
                     self.externalAccounts(accounts[0].ExternalLogins);
                     self.showRemoveButton(accounts[0].ShowRemoveButton);
+                    appsecurity.externalLogins(logins[0]);
                 })
                 .fail(self.handlevalidationerrors);
+        },
+
+        /**
+         * Start external Login
+         * @method
+         * @param {object} parent
+         * @param {object} data
+         * @param {object} event
+        */
+        externalLogin: function (parent, data, event) {
+            appsecurity.externalLogin(data.Provider, this.returnUrl())
+                .fail(self.log(data, true));
+        },
+
+        /**
+         * Get the social icon class (Font-Awesome) for the social logins
+         * @method
+         * @param {object} data
+         * @return {string} - Icon class
+        */
+        socialIcon: function (data) {
+            var icon = "";
+            switch (data.Provider.toLowerCase()) {
+                case "facebook":
+                    icon = "icon-facebook-sign"
+                    break;
+                case "twitter":
+                    icon = "icon-twitter-sign"
+                    break;
+                case "google":
+                    icon = "icon-google-plus-sign"
+                    break;
+                case "microsoft":
+                    icon = "icon-envelope"
+                    break;
+                default:
+                    icon = "icon-check-sign"
+            }
+            return icon;
         }
     }
     
