@@ -2,22 +2,22 @@
     <div class="span6 well">        
         <form class="form-horizontal" data-bind="if : hasAccount, submit : changePassword">
             <h2> Change Password </h2>
-            <div class="control-group" data-bind="validationElement: oldPassword">
+            <div class="control-group" data-bind="validationElement: withLocalForm.oldPassword">
                 <label class="control-label" for="oldpassword">Old Password</label>
                     <div class="controls">
-                        <input type="password"  data-bind="value: oldPassword" placeholder="Old Password">                       
+                        <input type="password"  data-bind="value: withLocalForm.oldPassword" placeholder="Old Password">                       
                     </div>
              </div>                   
-             <div class="control-group" data-bind="validationElement: newPassword">
+             <div class="control-group" data-bind="validationElement: withLocalForm.newPassword">
                    <label class="control-label" for="newPassword">New Password</label>
                    <div class="controls">
-                        <input type="password"  data-bind="value: newPassword" placeholder="New Password">                        
+                        <input type="password"  data-bind="value: withLocalForm.newPassword" placeholder="New Password">                        
                     </div>
               </div>  
-             <div class="control-group" data-bind="validationElement: confirmNewPassword">
+             <div class="control-group" data-bind="validationElement: withLocalForm.confirmNewPassword">
                    <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
                    <div class="controls">
-                        <input type="password"  data-bind="value: confirmNewPassword" placeholder="Confirm New Password">                        
+                        <input type="password"  data-bind="value: withLocalForm.confirmNewPassword" placeholder="Confirm New Password">                        
                     </div>
               </div>                                                      
               <div class="form-actions">
@@ -27,16 +27,16 @@
        </form>  
        <form class="form-horizontal" data-bind="if: !hasAccount(), submit: createLocalAccount">
             <h2> Create Local Account </h2>
-             <div class="control-group" data-bind="validationElement: newPassword">
+             <div class="control-group" data-bind="validationElement: withoutLocalForm.newPassword">
                    <label class="control-label" for="newPassword">New Password</label>
                    <div class="controls">
-                        <input type="password"  data-bind="value: newPassword" placeholder="New Password">                        
+                        <input type="password"  data-bind="value: withoutLocalForm.newPassword" placeholder="New Password">                        
                     </div>
               </div>  
-             <div class="control-group" data-bind="validationElement: confirmNewPassword">
+             <div class="control-group" data-bind="validationElement: withoutLocalForm.confirmNewPassword">
                    <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
                    <div class="controls">
-                        <input type="password"  data-bind="value: confirmNewPassword" placeholder="Confirm New Password">                        
+                        <input type="password"  data-bind="value: withoutLocalForm.confirmNewPassword" placeholder="Confirm New Password">                        
                     </div>
               </div>                                                      
               <div class="form-actions">

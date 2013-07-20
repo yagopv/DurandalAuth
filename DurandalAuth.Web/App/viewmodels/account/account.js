@@ -7,10 +7,16 @@
 
 define(['services/appsecurity', 'services/errorhandler', 'services/logger'], function (appsecurity, errorhandler, logger) {
 
-    var hasAccount = ko.observable(),
-        newPassword = ko.observable().extend({ required: true, minLength: 6 }),
-        oldPassword = ko.observable().extend({ required: true, minLength: 6 }),
-        confirmNewPassword = ko.observable().extend({ required: true, minLength: 6, equal: newPassword }),
+    var withLocalForm = {
+            oldPassword: ko.observable().extend({ required: true, minLength: 6 }),
+            newPassword : ko.observable().extend({ required: true, minLength: 6 }),
+            confirmNewPassword: ko.observable().extend({ required: true, minLength: 6, equal: function () { return this.oldPassword; } })
+        },
+        withoutLocalForm = {
+            newPassword: ko.observable().extend({ required: true, minLength: 6 }),
+            confirmNewPassword: ko.observable().extend({ required: true, minLength: 6, equal: function () { return this.newPassword; } })
+        },
+        hasAccount = ko.observable(),
         externalAccounts = ko.observableArray(),
         showRemoveButton = ko.observable();
     
@@ -19,14 +25,11 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         /** @property {observable} hasAccount - Has the authenticated user any account */         
         hasAccount: hasAccount,
         
-        /** @property {observable} newPassword */
-        newPassword: newPassword,
+        /** @property {object} withLocalForm */
+        withLocalForm: withLocalForm,
         
-        /** @property {observable} oldPassword */
-        oldPassword: oldPassword,
-        
-        /** @property {observable} confirmNewPassword */
-        confirmNewPassword: confirmNewPassword,
+        /** @property {object} withoutLocalForm */
+        withoutLocalForm: withoutLocalForm,
 
         /** @property {observable} externalAccounts - Collection of external account for the authenticated user */
         externalAccounts: externalAccounts,
@@ -43,11 +46,11 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         */
         changePassword: function () {
             var self = this;
-            if (this.errors().length != 0) {
-                this.errors.showAllMessages();
+            if (!this.withLocalFormErrors.isValid()) {
+                this.withLocalFormErrors.errors.showAllMessages();
                 return;
             }
-            appsecurity.changePassword(this.oldPassword(), this.newPassword(), this.confirmNewPassword())
+            appsecurity.changePassword(this.withLocalForm.oldPassword(), this.withLocalForm.newPassword(), this.withLocalForm.confirmNewPassword())
             .then(function () {
                     appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
@@ -62,11 +65,11 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         */        
         createLocalAccount: function () {
             var self = this;
-            if (this.errors().length != 0) {
-                this.errors.showAllMessages();
+            if (!this.withoutLocalFormErrors.isValid()) {
+                this.withoutLocalFormErrors.errors.showAllMessages();
                 return;
             }
-            appsecurity.createLocalAccount(this.newPassword(), this.confirmNewPassword())
+            appsecurity.createLocalAccount(this.withoutLocalForm.newPassword(), this.withoutLocalForm.confirmNewPassword())
             .then(function () {
                 appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
@@ -117,8 +120,9 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
     
     errorhandler.includeIn(viewmodel);
 
-    viewmodel["errors"] = ko.validation.group(viewmodel);
-    
+    viewmodel["withLocalFormErrors"] = ko.validatedObservable(viewmodel.withLocalForm);
+    viewmodel["withoutLocalFormErrors"] = ko.validatedObservable(viewmodel.withoutLocalForm);
+
     return viewmodel;
         
 });
