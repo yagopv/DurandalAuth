@@ -1,36 +1,31 @@
 <div class="row-fluid" data-bind="visible: !appsecurity.user().IsAuthenticated">
-    <div class="offset1 span5">
-        <div class="well">                
-           <!-- Login form  -->
-           <form>
-               <!-- Username -->
-               <div class="control-group" data-bind="validationElement: username">
-                 <label class="control-label" for="username">Username</label>
-                 <div class="controls">
-                    <input type="text"  data-bind="value: username" placeholder="User name">                       
-                 </div>
-               </div>
-               <!-- Password -->
-               <div class="control-group" data-bind="validationElement: password">
-                 <label class="control-label" for="email">Password</label>
-                 <div class="controls">
-                    <input type="password"  data-bind="value: password" placeholder="Password">                        
-                 </div>
-               </div>  
-              <div class="control-group">
-                <div class="controls">
-                  <label class="checkbox">
-                    <input type="checkbox" data-bind="value: rememberMe"> Remember me
-                  </label>                      
-                </div>     
-                </div>                                                                                      
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" data-bind="click: login">Sign in</button>
-                    <button type="reset" class="btn">Reset</button>
-                    <p class="mart5">Don't have Account? <a href="/#/register">Register</a></p>
-                </div>                   
-           </form>                      
-        </div> 
+    <div class="offset1 span5 well">
+        <form>
+            <div class="control-group" data-bind="validationElement: username">
+              <label class="control-label" for="username">Username</label>
+              <div class="controls">
+                 <input type="text"  data-bind="value: username" placeholder="User name">                       
+              </div>
+            </div>
+            <div class="control-group" data-bind="validationElement: password">
+              <label class="control-label" for="email">Password</label>
+              <div class="controls">
+                 <input type="password"  data-bind="value: password" placeholder="Password">                        
+              </div>
+            </div>  
+           <div class="control-group">
+             <div class="controls">
+               <label class="checkbox">
+                 <input type="checkbox" data-bind="value: rememberMe"> Remember me
+               </label>                      
+             </div>     
+             </div>                                                                                      
+             <div class="form-actions">
+                 <button type="submit" class="btn btn-primary" data-bind="click: login">Sign in</button>
+                 <button type="reset" class="btn">Reset</button>
+                 <p class="mart5">Don't have Account? <a href="/#/register">Register</a></p>
+             </div>                   
+        </form>                      
     </div>
     
     <div class="span5">

@@ -11,7 +11,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 		system.debug(true);
 		//>>excludeEnd("build");
 
-		app.title = 'Durandal Starter Kit';
+		app.title = 'Durandal Auth';
 
 		app.start().then(function () {
 
@@ -30,7 +30,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 				{ url: 'home', moduleId: 'viewmodels/home/home',  name: 'Home', visible: true  },
 				{ url: 'login', moduleId: 'viewmodels/account/login', name: 'Login', visible: false },
 				{ url: 'admin', moduleId: 'viewmodels/admin/admin', name: 'Admin', settings: { authorize: ["Administrator"] }, visible: true },
-                { url: 'user', moduleId: 'viewmodels/user/user', name: 'User', settings: { authorize: ["User"] }, visible: true },
+				{ url: 'user', moduleId: 'viewmodels/user/user', name: 'User', settings: { authorize: ["User"] }, visible: true },
 				{ url: 'externalloginconfirmation', moduleId: 'viewmodels/account/externalloginconfirmation', name: 'External login confirmation', visible: false },
 				{ url: 'externalloginfailure', moduleId: 'viewmodels/account/externalloginfailure', name: 'External login failure', visible: false },
 				{ url: 'register', moduleId: 'viewmodels/account/register', name: 'Register', visible: false },
@@ -52,25 +52,25 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 				return true;
 			}
 
-		    //Loading indicator
+			//Loading indicator
 
 			var loader = new Stashy.Loader("body");
 
-		    $(document).ajaxStart(function () {
-		        loader.on("fixed", "4em", "#000", "prepend");
+			$(document).ajaxStart(function () {
+				loader.on("fixed", "4em", "#000", "prepend");
 			}).ajaxComplete(function () {
-			    loader.off();
+				loader.off();
 			});
 
-		    // Configure ko validation
+			// Configure ko validation
 			ko.validation.init({
-			    decorateElement: true,
-			    errorElementClass: "error",
-			    registerExtenders: true,
-			    messagesOnModified: true,
-			    insertMessages: true,
-			    parseInputAttributes: true,
-			    messageTemplate: null
+				decorateElement: true,
+				errorElementClass: "error",
+				registerExtenders: true,
+				messagesOnModified: true,
+				insertMessages: true,
+				parseInputAttributes: true,
+				messageTemplate: null
 			});
 
 			//Show the app by setting the root view model for our application with a transition.

@@ -50,6 +50,32 @@
 	visibility: visible;
 }
 
+footer {
+    background-color:#000;
+    color : #999;    
+}
+
+.footer-content {
+    padding : 3%;
+    color : #FFF;
+}
+      
+footer li {
+    line-height : 2em
+}
+
+footer li a {
+    font-size : 1.5em;    
+}
+
+footer a {
+    color : #ccc;    
+}
+
+footer a:hover {
+    color : #FFF;        
+}
+
 @media (max-width: 979px) {
 	.page-host {
 		padding-top: 40px;

@@ -1,44 +1,13 @@
-﻿ <div class="navbar navbar-fixed-top">
-       <div class="navbar-inner">
-             <div>
-              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </a>
-                 <a class="brand" href="/#/">DurandalAuth</a>                   
-                   <div class="nav-collapse collapse">
-                        <ul class="nav" data-bind="foreach: router.visibleRoutes">
-                            <li data-bind="css: { active: isActive }">
-                                <a data-bind="attr: { href: hash }, html: name"></a>
-                            </li>
-                        </ul>
-                        <ul class="nav pull-right" data-bind="with: appsecurity.user">
-                           <li data-bind="if: !IsAuthenticated">
-                                    <a href="/#/login">Login</a>
-                           </li>
-                            <li class="dropdown" data-bind="if: IsAuthenticated">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        Hi <span data-bind="    text: UserName"></span>
-                                      <b class="caret"></b>
-                                </a>                                
-                                <ul class="dropdown-menu">
-                                  <li><a href="/#/account">Manage Profile</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#" data-bind="click: $parent.logout">Logout</a></li>
-                                </ul>
-                          </li>
-                        </ul>
-                   </div>
-          </div>
-       </div>
- </div>
-   
-<div class="container-fluid page-host">
-        <!--ko compose: { 
-            model: router.activeItem, //wiring the router
-            afterCompose: router.afterCompose, //wiring the router
-            transition:'entrance', //use the 'entrance' transition when switching views
-            cacheViews:true //telling composition to keep views in the dom, and reuse them (only a good idea with singleton view models)
-        }--><!--/ko-->
+﻿<div>
+    <header data-bind="compose : 'header.html'"></header>
+    <div class="container-fluid page-host">
+            <!--ko compose: { 
+                model: router.activeItem, //wiring the router
+                afterCompose: router.afterCompose, //wiring the router
+                transition:'entrance', //use the 'entrance' transition when switching views
+                cacheViews:true //telling composition to keep views in the dom, and reuse them (only a good idea with singleton view models)
+            }--><!--/ko-->
+    </div>
 </div>
+
+<div class="st-sticky-push"></div>

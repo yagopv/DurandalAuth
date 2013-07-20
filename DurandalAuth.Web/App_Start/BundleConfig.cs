@@ -2,7 +2,7 @@ using System;
 using System.Web.Optimization;
 
 namespace DurandalAuth.Web {
-  public class DurandalBundleConfig {
+  public class BundleConfig {
 	public static void RegisterBundles(BundleCollection bundles) {
 	  bundles.IgnoreList.Clear();
 	  AddDefaultIgnorePatterns(bundles.IgnoreList);
@@ -16,7 +16,7 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/bootstrap.js")
 		  .Include("~/Scripts/toastr.js")
 		  .Include("~/Scripts/jquery.hammer.min.js")
-		  .Include("~/Scripts/Stashy.min.js")
+		  .Include("~/Scripts/Stashy.js")
 		);
 
 	  bundles.Add(
@@ -27,7 +27,7 @@ namespace DurandalAuth.Web {
 		  .Include("~/Content/font-awesome.css")
 		  .Include("~/Content/durandal.css")
 		  .Include("~/Content/toastr.css")
-		  .Include("~/Content/Stashy.min.css")
+		  .Include("~/Content/Stashy.css")
 		);
 
 	  bundles.Add(
