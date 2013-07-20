@@ -40,6 +40,7 @@
     "viewmodels/admin/admin",
     "viewmodels/home/home",
     "viewmodels/user/user",
+    "text!views/header.html",
     "text!views/shell.html",
     "text!views/account/account.html",
     "text!views/account/externalloginconfirmation.html",
