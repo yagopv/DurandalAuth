@@ -48,6 +48,9 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
             .then(function () {
                     appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
+                    self.withLocalForm.oldPassword("");
+                    self.withLocalForm.newPassword("");
+                    self.withLocalForm.confirmNewPassword("");
                     logger.logSuccess("Password changed succesfully", null, null, true);
                 });
             }).fail(self.handlevalidationerrors);
@@ -67,8 +70,8 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
             .then(function () {
                 appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
-                    self.oldPassword("");
-                    self.confirmNewPassword("");
+                    self.withoutLocalForm.newPassword("");
+                    self.withoutLocalForm.confirmNewPassword("");
                     logger.logSuccess("Local account created succesfully", null, null, true);
                 });
             }).fail(self.handlevalidationerrors);
