@@ -6,36 +6,30 @@
 */
 
 define(['services/appsecurity', 'services/errorhandler', 'services/logger'], function (appsecurity, errorhandler, logger) {
-
-    var withLocalForm = {
-            oldPassword: ko.observable().extend({ required: true, minLength: 6 }),
-            newPassword : ko.observable().extend({ required: true, minLength: 6 }),
-            confirmNewPassword: ko.observable().extend({ required: true, minLength: 6, equal: function () { return this.oldPassword; } })
-        },
-        withoutLocalForm = {
-            newPassword: ko.observable().extend({ required: true, minLength: 6 }),
-            confirmNewPassword: ko.observable().extend({ required: true, minLength: 6, equal: function () { return this.newPassword; } })
-        },
-        hasAccount = ko.observable(),
-        externalAccounts = ko.observableArray(),
-        showRemoveButton = ko.observable();
     
     var viewmodel = {
         
         /** @property {observable} hasAccount - Has the authenticated user any account */         
-        hasAccount: hasAccount,
+        hasAccount: ko.observable(),
         
         /** @property {object} withLocalForm */
-        withLocalForm: withLocalForm,
+        withLocalForm: {
+            oldPassword: ko.observable().extend({ required: true, minLength: 6 }),
+            newPassword: ko.observable().extend({ required: true, minLength: 6 }),
+            confirmNewPassword: ko.observable().extend({ required: true, minLength: 6 })
+        },
         
         /** @property {object} withoutLocalForm */
-        withoutLocalForm: withoutLocalForm,
+        withoutLocalForm: {
+            newPassword: ko.observable().extend({ required: true, minLength: 6 }),
+            confirmNewPassword: ko.observable().extend({required: true, minLength: 6 })
+        },
 
         /** @property {observable} externalAccounts - Collection of external account for the authenticated user */
-        externalAccounts: externalAccounts,
+        externalAccounts: ko.observableArray(),
 
         /** @property {observable} showRemoveButton */
-        showRemoveButton: showRemoveButton,
+        showRemoveButton: ko.observable(),
 
         /** @property {appsecurity} appsecurity */
         appsecurity: appsecurity,
@@ -75,6 +69,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
                     self.hasAccount(data);
                     self.oldPassword("");
                     self.confirmNewPassword("");
+                    logger.logSuccess("Local account created succesfully", null, null, true);
                 });
             }).fail(self.handlevalidationerrors);
         },
