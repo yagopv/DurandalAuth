@@ -12,6 +12,9 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         /** @property {observable} hasAccount - Has the authenticated user any account */         
         hasAccount: ko.observable(),
         
+        /** @property {observable} returnUrl */
+        returnUrl: ko.observable("account"),
+
         /** @property {object} withLocalForm */
         withLocalForm: {
             oldPassword: ko.observable().extend({ required: true, minLength: 6 }),
