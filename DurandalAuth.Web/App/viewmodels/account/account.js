@@ -109,6 +109,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         */          
         activate: function () {            
             var self = this;
+            ga('send', 'pageview');
             return $.when(appsecurity.hasLocalAccount(), appsecurity.externalAccounts(),appsecurity.getExternalLogins())
                 .then(function (haslocal, accounts, logins) {
                     self.hasAccount(haslocal[0]);

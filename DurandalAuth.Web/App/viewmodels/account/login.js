@@ -41,7 +41,8 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
               * @method
               * @return {promise} - Promise of getting external logins and showing them in the view
             */   
-            activate : function () {
+            activate: function () {
+                ga('send', 'pageview');
                 var redirect = utils.getURLParameter("redirectto");
                 if (redirect != "null") {
                     this.isRedirect(true);

@@ -31,14 +31,15 @@
 		<div class="st-sticky-wrap" id="applicationHost">
 			@Html.Partial("_splash")
 		</div>
-        @Html.Partial("Footer")
+		@Html.Partial("Footer")
 		
 		@Scripts.Render("~/scripts/vendor")
 		
 		@if(HttpContext.Current.IsDebuggingEnabled) {
 			<script type="text/javascript" src="~/App/durandal/amd/require.js" data-main="@Url.Content("~/App/main")"></script>
 		} else {
-			<script type="text/javascript" src="~/App/main-built.js"></script>
+			<script type="text/javascript" src="~/App/main-built.js"></script>			
 		}
+		@Html.Partial("Analytics")
 	</body>
 </html>

@@ -8,6 +8,9 @@
                 self.articles(data);
                 Stashy.Table("#articles", { idprefix: "art-", menuClass: "btn btn-primary" }).on();
             });            
+        },
+        activate: function () {
+            ga('send', 'pageview');
         }
     }
 });

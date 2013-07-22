@@ -33,7 +33,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/errorhandle
             */
             register : function () {
                 var self = this;
-
+                ga('send', 'pageview');
                 if (this.errors().length != 0) {                    
                     this.errors.showAllMessages();
                     return;

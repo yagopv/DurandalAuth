@@ -335,6 +335,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_splash.cshtml" />
     <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Home\Analytics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
