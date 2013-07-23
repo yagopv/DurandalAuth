@@ -1,4 +1,4 @@
-﻿@using System.Web.Optimization
+@using System.Web.Optimization
 <!DOCTYPE html>
 <html>
 	<head>
@@ -26,6 +26,7 @@
 				document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
 			}
 		</script>
+        @Html.Partial("Analytics")
 	</head>
 	<body>
 		<div class="st-sticky-wrap" id="applicationHost">
@@ -39,7 +40,6 @@
 			<script type="text/javascript" src="~/App/durandal/amd/require.js" data-main="@Url.Content("~/App/main")"></script>
 		} else {
 			<script type="text/javascript" src="~/App/main-built.js"></script>			
-		}
-		@Html.Partial("Analytics")
+		}		
 	</body>
 </html>
