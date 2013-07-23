@@ -87,6 +87,19 @@ footer a:hover {
 }
 
 
+@media (max-width: 768px) {
+	.page-host {
+        padding-left : 10px;
+        padding-right : 10px;
+        padding-top : 20px;
+	}
+
+    .brand {
+        margin-left : 10px !important;
+    }
+}
+
+
 /* helpers */
 
 .mart5 {
