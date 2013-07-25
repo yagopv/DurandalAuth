@@ -3,6 +3,7 @@ using System.Web.Http;
 
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
+using System.Linq;
 
 namespace DurandalAuth.Web.Controllers.Api
 {
@@ -16,9 +17,9 @@ namespace DurandalAuth.Web.Controllers.Api
             this.UnitOfWork = uow;
         }
 
-        public IEnumerable<UserProfile> Get()
+        public IQueryable<UserProfile> Get()
         {
-            return UnitOfWork.UserProfileRepository.GetAll();
+            return UnitOfWork.UserProfileRepository.All();
         }
     }
 }

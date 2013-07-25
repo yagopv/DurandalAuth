@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,13 +13,15 @@ namespace DurandalAuth.Domain.Model
     /// Represents a Post for a given Blog
     /// </summary>
     [Table("DurandalAuth_Articles")]
-    public class Article : AuditInfo
+    [DataContract(IsReference = true)]
+    public class Article : AuditInfoComplete
     {
         /// <summary>
         /// Post identity
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DataMember]
         public int ArticleId { get; set; }
 
         /// <summary>
@@ -26,6 +29,7 @@ namespace DurandalAuth.Domain.Model
         /// </summary>
         [Required]
         [StringLength(200)]
+        [DataMember]
         public string Title { get; set; }
 
         /// <summary>
@@ -33,12 +37,14 @@ namespace DurandalAuth.Domain.Model
         /// </summary>
         [Required]
         [StringLength(500)]
+        [DataMember]
         public string Description { get; set; }
 
         /// <summary>
         /// HTML Text for the given post
         /// </summary>
         [DataType(DataType.Html)]
+        [DataMember]
         public string Text { get; set; }
 
     }

@@ -7,21 +7,19 @@ using System.Threading.Tasks;
 
 namespace DurandalAuth.Domain.Contracts
 {
-        /// <summary>
-        /// Contract with the  generic methods for all the Entities
-        /// </summary>
-        public interface IRepository<T> where T : class
-        {
-            IQueryable<T> AsQueryable();
+    /// <summary>
+    /// Contract with the  generic methods for all the Entities
+    /// </summary>
+     public interface IRepository<TEntity> where TEntity : class
+    {
+        IQueryable<TEntity> All();
+        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+        TEntity First(Expression<Func<TEntity, bool>> predicate);
+        TEntity GetById(int id);
 
-            IEnumerable<T> GetAll();
-            IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
-            T FirstOrDefault(Expression<Func<T, bool>> predicate);
-            T First(Expression<Func<T, bool>> predicate);
-            T GetById(int id);
-
-            void Add(T entity);
-            void Delete(T entity);
-            void Attach(T entity);                    
-        }
+        void Add(TEntity entity);
+        void Delete(TEntity entity);
+        void Attach(TEntity entity);                    
+    }
 }

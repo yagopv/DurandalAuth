@@ -26,6 +26,17 @@ namespace DurandalAuth.Web
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                name: "BreezeDefault",
+                routeTemplate: "breeze/{action}",
+                defaults: new { Controller = "Metadata" }
+            );
+
+            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                name: "BreezeModule",
+                routeTemplate: "breeze/{controller}/{action}"
+            );
+
             config.EnableQuerySupport();
 
             config.Filters.Add(new AuthorizeAttribute());

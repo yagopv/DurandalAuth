@@ -213,6 +213,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\ArticleController.cs" />
+    <Compile Include="Controllers\Api\MetadataController.cs" />
+    <Compile Include="Controllers\Api\DurandalAuthController.cs" />
+    <Compile Include="Helpers\LookupBundle.cs" />
     <Compile Include="Controllers\Api\UserProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
@@ -253,6 +256,9 @@
     <Content Include="App\durandal\viewModel.js" />
     <Content Include="App\durandal\viewModelBinder.js" />
     <Content Include="App\durandal\widget.js" />
+    <Content Include="App\services\entitymanagerprovider.js" />
+    <Content Include="App\services\repository.js" />
+    <Content Include="App\services\unitofwork.js" />
     <Content Include="App\views\header.html" />
     <Content Include="App\main-built.js" />
     <Content Include="App\main.js" />

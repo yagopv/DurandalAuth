@@ -9,59 +9,97 @@ using DurandalAuth.Domain.Contracts;
 
 namespace DurandalAuth.Data.Repositories
 {
+    /// <summary>
+    /// Generic Repository
+    /// </summary>
+    /// <typeparam name="TEntity">The generic entity type</typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        protected DbContext Context { get; private set; }
 
-        private readonly DbSet<TEntity> dbSet;
-
-        public Repository(DbSet<TEntity> dbSet)
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="context">Context</param>
+        public Repository(DbContext context)
         {
-            this.dbSet = dbSet;
+            Context = context;
         }
 
-        public IQueryable<TEntity> AsQueryable()
+        /// <summary>
+        /// Get all Entities for the concrete type
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<TEntity> All()
         {
-            return this.dbSet.AsQueryable();
+            return Context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        /// <summary>
+        /// Find Entities based on the required predicate
+        /// </summary>
+        /// <param name="predicate">The predicate</param>
+        /// <returns></returns>
+        public IQueryable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
-            return this.dbSet;
+            return Context.Set<TEntity>().Where(predicate);
         }
 
-        public IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
-        {
-            return this.dbSet.Where(predicate);
-        }
-
+        /// <summary>
+        /// Find first or default Entity
+        /// </summary>
+        /// <param name="predicate">The search predicate</param>
+        /// <returns>The Entity</returns>
         public TEntity FirstOrDefault(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
-            return this.dbSet.Where(predicate).FirstOrDefault();
+            return Context.Set<TEntity>().Where(predicate).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Find first Entity matching predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns>The Entity</returns>
         public TEntity First(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
-            return this.dbSet.Where(predicate).First();
+            return Context.Set<TEntity>().Where(predicate).First();
         }
 
+        /// <summary>
+        /// Get Entity by identity
+        /// </summary>
+        /// <param name="id">The identity</param>
+        /// <returns>The Entity</returns>
         public TEntity GetById(int id)
         {
-            return this.dbSet.Find(id);
+            return Context.Set<TEntity>().Find(id);
         }
 
+        /// <summary>
+        /// Add Entity to the working Context
+        /// </summary>
+        /// <param name="entity">The Entity</param>
         public void Add(TEntity entity)
         {
-            this.dbSet.Add(entity);
+            Context.Set<TEntity>().Add(entity);
         }
 
+        /// <summary>
+        /// Remove Entity to the working Context
+        /// </summary>
+        /// <param name="entity">The Entity</param>
         public void Delete(TEntity entity)
         {
-            this.dbSet.Remove(entity);
+            Context.Set<TEntity>().Remove(entity);
         }
 
+        /// <summary>
+        /// Attach Entity to the working Context
+        /// </summary>
+        /// <param name="entity">The Entity</param>
         public void Attach(TEntity entity)
         {
-            this.dbSet.Attach(entity);
+            Context.Set<TEntity>().Attach(entity);
         }
     }
 }

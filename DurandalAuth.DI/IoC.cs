@@ -15,10 +15,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-using DurandalAuth.Data;
+using DurandalAuth.Data.UnitOfWork;
 using DurandalAuth.Domain.UnitOfWork;
 using StructureMap;
+
 namespace DurandalAuth.DI {
     public static class IoC {
         public static IContainer Initialize() {
@@ -29,7 +29,7 @@ namespace DurandalAuth.DI {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-                            x.For<IUnitOfWork>().Use<DurandalAuthUnitOfWork>();
+                            x.For<IUnitOfWork>().Use<UnitOfWork>();
                         });
             return ObjectFactory.Container;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace DurandalAuth.Domain.Model
 {
@@ -12,6 +13,7 @@ namespace DurandalAuth.Domain.Model
         ///  User Profile entity
         /// </summary>
         [Table("DurandalAuth_UserProfiles")]
+        [DataContract(IsReference = true)]
         public class UserProfile
         {
             /// <summary>
@@ -19,6 +21,7 @@ namespace DurandalAuth.Domain.Model
             /// </summary>
             [Key]
             [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+            [DataMember]
             public int UserProfileId { get; set; }
 
             /// <summary>
@@ -26,6 +29,7 @@ namespace DurandalAuth.Domain.Model
             /// </summary>
             [Required]
             [StringLength(50)]
+            [DataMember]
             public string UserName { get; set; }
 
             /// <summary>
@@ -35,6 +39,7 @@ namespace DurandalAuth.Domain.Model
             [DataType(DataType.EmailAddress)]
             [StringLength(200)]
             [EmailAddress]
+            [DataMember]
             public string Email { get; set; }
         }
 }

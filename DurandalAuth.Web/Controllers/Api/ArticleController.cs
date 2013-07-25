@@ -20,9 +20,9 @@ namespace DurandalAuth.Web.Controllers.Api
             this.UnitOfWork = uow;
         }
 
-        public IEnumerable<Article> Get()
+        public IQueryable<Article> Get()
         {
-            return UnitOfWork.ArticleRepository.GetAll();
+            return UnitOfWork.ArticleRepository.All();
         }
     }
 }
