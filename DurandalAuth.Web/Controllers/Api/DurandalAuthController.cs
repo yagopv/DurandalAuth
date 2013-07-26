@@ -38,8 +38,8 @@ namespace DurandalAuth.Web.Controllers
         {
             return new LookupBundle
             {
-                //AddressTypes = _unitOfWork.AddressTypes.All().ToList(),
-                //PhoneNumberTypes = _unitOfWork.PhoneNumberTypes.All().ToList(),
+                Categories = UnitOfWork.CategoryRepository.All().ToList(),
+                Tags = UnitOfWork.TagRepository.All().ToList()
             };
         }
     }

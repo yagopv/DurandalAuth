@@ -17,6 +17,8 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/toastr.js")
 		  .Include("~/Scripts/jquery.hammer.min.js")
 		  .Include("~/Scripts/Stashy.js")
+          .Include("~/scripts/Q.js")
+          .Include("~/scripts/breeze.debug.js")
 		);
 
 	  bundles.Add(

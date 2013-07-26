@@ -47,5 +47,19 @@ namespace DurandalAuth.Domain.Model
         [DataMember]
         public string Text { get; set; }
 
+        /// <summary>
+        /// Foreign CategoryId key
+        /// </summary>
+        public int CategoryId { get; set; }
+
+        /// <summary>
+        /// Related Category
+        /// </summary>        
+        public Category Category { get; set; }
+
+        /// <summary>
+        /// Related Tags
+        /// </summary>
+        public ICollection<Tag> Tags { get; set; }
     }
 }

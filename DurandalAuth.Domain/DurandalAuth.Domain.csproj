@@ -51,7 +51,9 @@
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Model\AuditInfo.cs" />
     <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Extensions.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />

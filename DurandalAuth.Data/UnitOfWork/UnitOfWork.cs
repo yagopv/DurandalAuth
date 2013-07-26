@@ -28,14 +28,18 @@ namespace DurandalAuth.Data.UnitOfWork
             contextProvider = new EFContextProvider<DurandalAuthDbContext>();
 
             ArticleRepository = new Repository<Article>(contextProvider.Context);
+            CategoryRepository = new Repository<Category>(contextProvider.Context);
+            TagRepository = new Repository<Tag>(contextProvider.Context);
             UserProfileRepository = new Repository<UserProfile>(contextProvider.Context);
         }
 
         /// <summary>
         /// Reporitories
         /// </summary>
-        public IRepository<Article> ArticleRepository {get; private set;}
-        public IRepository<UserProfile> UserProfileRepository {get; private set;}
+        public IRepository<Article> ArticleRepository {get; private set;}        
+        public IRepository<Category> CategoryRepository { get; private set; }
+        public IRepository<Tag> TagRepository { get; private set; }
+        public IRepository<UserProfile> UserProfileRepository { get; private set; }
 
         /// <summary>
         /// Check if Database exists. 

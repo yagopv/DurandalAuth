@@ -1,5 +1,5 @@
-﻿define(['durandal/plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler'],
-    function (router, app, appsecurity, errorhandler) {
+﻿define(['durandal/plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler','services/entitymanagerprovider'],
+    function (router, app, appsecurity, errorhandler, entitymanagerprovider) {
 
     var viewmodel = {
         router: router,
@@ -10,10 +10,12 @@
         },
         activate: function () {
             // Get current auth info
-            appsecurity.getAuthInfo().then(function (data) {
-                appsecurity.user(data);
-                return router.activate('home');
-            }).fail(self.handlevalidationerrors);
+            $.when(appsecurity.getAuthInfo(), entitymanagerprovider.prepare())
+                .then(function (authinfo, entitymanagerinfo) {
+                    appsecurity.user(authinfo[0]);
+                    return router.activate('home');
+                })
+                .fail(self.handlevalidationerrors);
         }
     };
 

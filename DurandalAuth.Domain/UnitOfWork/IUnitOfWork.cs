@@ -16,6 +16,8 @@ namespace DurandalAuth.Domain.UnitOfWork
     public interface IUnitOfWork
     {
         IRepository<Article> ArticleRepository { get; }
+        IRepository<Category> CategoryRepository { get; }
+        IRepository<Tag> TagRepository { get; }
         IRepository<UserProfile> UserProfileRepository { get; }
 
         bool DatabaseExists();

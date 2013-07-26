@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DurandalAuth.Domain.Model;
+using System.Collections.Generic;
 
 namespace DurandalAuth.Web.Helpers
 {
     public class LookupBundle
     {
-        //public IEnumerable<AddressType> AddressTypes { get; set; }
-        //public IEnumerable<PhoneNumberType> PhoneNumberTypes { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
     }
 }
