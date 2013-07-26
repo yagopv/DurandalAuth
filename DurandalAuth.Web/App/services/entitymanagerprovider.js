@@ -1,4 +1,4 @@
-﻿define(['durandal/app'],
+define(['durandal/app'],
     function (app) {
 
         breeze.NamingConvention.camelCase.setAsDefault();
@@ -49,7 +49,7 @@
                     }
 
                     var query = breeze.EntityQuery
-                        .from('resourcemgt/lookups');
+                        .from('durandalauth/lookups');
 
                     return masterManager.executeQuery(query);
                 });
