@@ -25,8 +25,8 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
                     provider.manager().rejectChanges();
                 };
 
-                this.articles = repository.create(provider, null, 'durandalauth/articles');
-                
+                this.articles = repository.create(provider, null, 'durandalauth/articles');                
+                this.userprofiles = repository.create(provider, null, 'durandalauth/userprofiles');
             };
 
             return unitofwork;

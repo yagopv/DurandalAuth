@@ -1,10 +1,11 @@
-﻿define(function () {
+﻿define(['services/unitofwork'] , function(unitofwork) {
     return {
-        userProfiles: ko.observable(),
+        userProfiles: ko.observableArray(),
         activate: function () {
-            var self = this;
+            var self = this,
+                uow = unitofwork.create();
             ga('send', 'pageview');
-            return $.get("api/userprofile").then(function (data) {
+            return  uow.userprofiles.all().then(function (data) {
                 self.userProfiles(data);
             });
         }

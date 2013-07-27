@@ -9,7 +9,6 @@ using DurandalAuth.Web.Helpers;
 namespace DurandalAuth.Web.Controllers
 {
     [BreezeController]
-    [AllowAnonymous]
     public class DurandalAuthController : ApiController
     {
         IUnitOfWork UnitOfWork;
@@ -19,12 +18,22 @@ namespace DurandalAuth.Web.Controllers
             UnitOfWork = uow;
         }
 
-        // ~/breeze/resourcemgt/Articles
+        // ~/breeze/durandalauth/Articles
         [HttpGet]
+        [Authorize(Roles = "User")]
         public IQueryable<Article> Articles()
         {
             return UnitOfWork.ArticleRepository.All();
         }
+
+        // ~/breeze/durandalauth/UserProfiles
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public IQueryable<UserProfile> UserProfiles()
+        {
+            return UnitOfWork.UserProfileRepository.All();
+        }
+
 
         [HttpPost]
         public SaveResult SaveChanges(JObject saveBundle)
@@ -32,8 +41,9 @@ namespace DurandalAuth.Web.Controllers
             return UnitOfWork.Commit(saveBundle);
         }
 
-        // ~/breeze/resourcemgt/Lookups
+        // ~/breeze/durandalauth/Lookups
         [HttpGet]
+        [AllowAnonymous]
         public LookupBundle Lookups()
         {
             return new LookupBundle

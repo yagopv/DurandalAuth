@@ -1,10 +1,12 @@
-﻿define(function () {
+﻿define('[services/unitofwork]',function (unitofwork) {
 
     return {
         articles: ko.observable(),
         viewAttached: function () {
-            var self = this;
-            $.get("api/article").then(function (data) {
+            var self = this,
+                uow = unitofwork.create();
+
+            uow.articles.all().then(function (data) {
                 self.articles(data);
                 Stashy.Table("#articles", { idprefix: "art-", menuClass: "btn btn-primary" }).on();
             });            
