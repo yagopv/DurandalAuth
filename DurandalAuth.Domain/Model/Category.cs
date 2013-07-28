@@ -25,6 +25,7 @@ namespace DurandalAuth.Domain.Model
         /// Category Name
         /// </summary>
         [StringLength(100)]
+        [DataMember]
         public string Name { get; set; }
 
     }

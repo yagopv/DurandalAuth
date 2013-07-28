@@ -86,7 +86,7 @@ define(function (require) {
 					self.addAntiForgeryTokenToAjaxRequests();
 					if (data.IsAuthenticated == true) {
 						if (navigateToUrl) {
-							router.navigateTo(navigateToUrl);
+							router.navigateTo("#/" + navigateToUrl);
 						} else {
 							router.navigateTo("/#/account");
 						}

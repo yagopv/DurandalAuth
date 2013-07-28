@@ -25,8 +25,10 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
                     provider.manager().rejectChanges();
                 };
 
-                this.articles = repository.create(provider, null, 'durandalauth/articles');                
-                this.userprofiles = repository.create(provider, null, 'durandalauth/userprofiles');
+                this.articles = repository.create(provider, "Article", 'durandalauth/articles');                
+                this.userprofiles = repository.create(provider, "UserProfile", 'durandalauth/userprofiles');
+                this.categories = repository.create(provider, "Category", 'durandalauth/lookups', breeze.FetchStrategy.FromLocalCache);
+                this.tags = repository.create(provider, "Tag", 'durandalauth/lookups', breeze.FetchStrategy.FromLocalCache);
             };
 
             return unitofwork;

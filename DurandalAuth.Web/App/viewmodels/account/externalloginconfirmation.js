@@ -37,7 +37,7 @@ function (appsecurity,router,utils,errorhandler) {
         */  
         activate: function () {
             var self = this;
-            ga('send', 'pageview');
+            ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
             return appsecurity.getExternalLoginConfirmationData
                 (utils.getURLParameter("returnurl"),
                  utils.getURLParameter("username"),
