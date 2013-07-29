@@ -1,17 +1,38 @@
+/** 
+    * @module UnitOfWork containing all repositories
+    * @requires app
+    * @requires entitymanagerprovider
+    * @requires repository 
+*/
+
 define(['services/entitymanagerprovider', 'services/repository', 'durandal/app'],
     function (entityManagerProvider, repository, app) {
 
         var refs = {};
 
+        /**
+        * UnitOfWork ctor
+	    * @constructor
+	    */
         var UnitOfWork = (function () {
 
             var unitofwork = function () {
                 var provider = entityManagerProvider.create();
 
+                /**
+                * Has the current UnitOfWork changed?
+		        * @method
+		        * @return {bool}
+		        */ 
                 this.hasChanges = function () {
                     return provider.manager().hasChanges();
                 };
 
+                /**
+                * Commit changeset
+    	        * @method
+		        * @return {promise}
+		        */ 
                 this.commit = function () {
                     var saveOptions = new breeze.SaveOptions({ resourceName: 'durandalauth/savechanges' });
 
@@ -21,10 +42,15 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
                         });
                 };
 
+                /**
+                * Rollback changes
+                * @method
+		        */ 
                 this.rollback = function () {
                     provider.manager().rejectChanges();
                 };
 
+                // Repositories
                 this.articles = repository.create(provider, "Article", 'durandalauth/articles');                
                 this.userprofiles = repository.create(provider, "UserProfile", 'durandalauth/userprofiles');
                 this.categories = repository.create(provider, "Category", 'durandalauth/lookups', breeze.FetchStrategy.FromLocalCache);
@@ -73,10 +99,21 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
             get: get
         };
 
+        /**
+    	 * Get a new UnitOfWork instance
+		 * @method
+		 * @return {UnitOfWork}
+		*/ 
         function create() {
             return new UnitOfWork();
         }
 
+        /**
+		 * Get a new UnitOfWork based on the provided key
+		 * @method
+         * @param {int/string} key - Key used in the reference store
+		 * @return {promise}
+		*/  
         function get(key) {
             if (!refs[key]) {
                 refs[key] = new SmartReference();
@@ -85,6 +122,10 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
             return refs[key];
         }
 
+        /**
+    	 * Delete references
+		 * @method         
+		*/ 
         function clean() {
             for (key in refs) {
                 if (refs[key].referenceCount == 0) {

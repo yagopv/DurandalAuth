@@ -1,3 +1,8 @@
+/** 
+    * @module Provides the Breeze Entity Manager
+	* @requires app
+*/
+
 define(['durandal/app'],
     function (app) {
 
@@ -5,6 +10,10 @@ define(['durandal/app'],
         var serviceName = 'breeze';
         var masterManager = new breeze.EntityManager(serviceName);
 
+        /**
+        * Entity Manager ctor
+	    * @constructor
+	    */
         var EntityManagerProvider = (function () {
 
             var entityManagerProvider = function () {
@@ -37,10 +46,22 @@ define(['durandal/app'],
 
         return self;
 
+        /**
+		 * Get a new Entity Manager instance
+		 * @method
+		 * @return {EntityManagerProvider}
+		*/  
         function create() {
             return new EntityManagerProvider();
         }
 
+    	/**
+		 * Prepare Entity Manager
+         *  - Fetch Metadata from server
+         *  - Get lookup data
+		 * @method
+		 * @return {promise}
+		*/        
         function prepare() {
             return masterManager.fetchMetadata()
                 .then(function () {

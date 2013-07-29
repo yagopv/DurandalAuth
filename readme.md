@@ -12,7 +12,9 @@ The included features are:
 
 - Model validation both client (knockout validation) and server (data attributes)
 
-- UnitOfWork and Repository patterns on server
+- UnitOfWork and Repository patterns both client and server
+
+- Using Breeze JS in the client for better data management
 
 
 ##Check out!! ...
