@@ -305,7 +305,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <None Include="Scripts\breeze.intellisense.js" />
-    <Content Include="Scripts\breeze.debug.js" />
+    <Content Include="Scripts\breeze.js" />
     <Content Include="Scripts\breeze.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
