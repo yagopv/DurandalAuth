@@ -16,6 +16,8 @@ The included features are:
 
 - Using Breeze JS in the client for better data management
 
+- Styled with Bootstrap v3
+
 
 ##Check out!! ...
 
