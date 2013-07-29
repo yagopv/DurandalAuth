@@ -18,14 +18,14 @@ namespace DurandalAuth.Data.UnitOfWork
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly EFContextProvider<DurandalAuthDbContext> contextProvider;
+        private readonly DurandalAuthDbContextProvider contextProvider;
 
         /// <summary>
         /// ctor
         /// </summary>
         public UnitOfWork()
         {
-            contextProvider = new EFContextProvider<DurandalAuthDbContext>();
+            contextProvider = new DurandalAuthDbContextProvider();
 
             ArticleRepository = new Repository<Article>(contextProvider.Context);
             CategoryRepository = new Repository<Category>(contextProvider.Context);

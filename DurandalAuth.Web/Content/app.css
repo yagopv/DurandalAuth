@@ -1,9 +1,9 @@
 ﻿/* knockout Validation */
 
 .validationMessage {
-    display: block;
-    margin-top: 1%;
-    color: rgb(219, 32, 32);
+	display: block;
+	margin-top: 1%;
+	color: rgb(219, 32, 32);
 }
 
 /* Durandal */
@@ -51,36 +51,32 @@
 }
 
 footer {
-    background-color:#000;
-    color : #999;    
+	background-color:#000;
+	color : #999;    
 }
 
 .footer-content {
-    padding : 3%;
-    color : #FFF;
+	padding : 3%;
+	color : #999;
 }
-      
+	  
 footer li {
-    line-height : 2em
+	line-height : 2em
 }
 
 footer li a {
-    font-size : 1.5em;    
+	font-size : 1.5em;    
 }
 
 footer a {
-    color : #ccc;    
+	color : #ccc;    
 }
 
 footer a:hover {
-    color : #FFF;        
+	color : #FFF;        
 }
 
 @media (max-width: 979px) {
-	.page-host {
-		padding-top: 40px;
-	}
-
 	.navbar-fixed-top {
 		margin-bottom: 0;
 	}
@@ -89,19 +85,18 @@ footer a:hover {
 
 @media (max-width: 768px) {
 	.page-host {
-        padding-left : 10px;
-        padding-right : 10px;
-        padding-top : 20px;
+		padding-left : 10px;
+		padding-right : 10px;
 	}
 
-    .brand {
-        margin-left : 10px !important;
-    }
+	.brand {
+		margin-left : 10px !important;
+	}
 }
 
 
 /* helpers */
 
 .mart5 {
-    margin-top : 5%;
+	margin-top : 5%;
 }

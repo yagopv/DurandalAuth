@@ -283,15 +283,12 @@
     <Content Include="App\views\home\home.html" />
     <Content Include="App\views\user\user.html" />
     <Content Include="Content\app.css" />
-    <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\durandal.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\ie10mobile.css" />
     <Content Include="Content\images\arrow.png" />
-    <Content Include="Content\images\glyphicons-halflings-white.png" />
-    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\spinner.png" />
     <Content Include="Content\Stashy.css" />
     <Content Include="Content\toastr.css" />

@@ -25,7 +25,6 @@ namespace DurandalAuth.Web {
 		new StyleBundle("~/Content/css")
 		  .Include("~/Content/ie10mobile.css")
 		  .Include("~/Content/bootstrap.css")
-		  .Include("~/Content/bootstrap-responsive.css")
 		  .Include("~/Content/font-awesome.css")
 		  .Include("~/Content/durandal.css")
 		  .Include("~/Content/toastr.css")

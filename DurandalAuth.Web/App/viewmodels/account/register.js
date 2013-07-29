@@ -27,21 +27,23 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/errorhandle
             /** @property {observable} confirmpassword */
             confirmpassword : confirmpassword,
             
+            activate : function () {
+                ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
+            },
+
             /**
              * Register a new user
              * @method
             */
             register : function () {
-                var self = this;
-                ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
+                var self = this;                
                 if (this.errors().length != 0) {                    
                     this.errors.showAllMessages();
                     return;
                 }
-
                 appsecurity.register(this.username(), this.email(), this.password(), this.confirmpassword())
                     .fail(self.handlevalidationerrors)
-                }
+            }
         }
 
         errorhandler.includeIn(viewmodel);

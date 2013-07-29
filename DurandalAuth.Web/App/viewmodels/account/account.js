@@ -49,11 +49,12 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
             }
             appsecurity.changePassword(this.withLocalForm.oldPassword(), this.withLocalForm.newPassword(), this.withLocalForm.confirmNewPassword())
             .then(function () {
-                    appsecurity.hasLocalAccount().then(function (data) {
+                appsecurity.hasLocalAccount().then(function (data) {
                     self.hasAccount(data);
                     self.withLocalForm.oldPassword("");
                     self.withLocalForm.newPassword("");
                     self.withLocalForm.confirmNewPassword("");
+                    self.withLocalFormErrors.errors.showAllMessages(false);
                     logger.logSuccess("Password changed succesfully", null, null, true);
                 });
             }).fail(self.handlevalidationerrors);
@@ -72,10 +73,16 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
             appsecurity.createLocalAccount(this.withoutLocalForm.newPassword(), this.withoutLocalForm.confirmNewPassword())
             .then(function () {
                 appsecurity.hasLocalAccount().then(function (data) {
-                    self.hasAccount(data);
+                    self.hasAccount(data);                    
                     self.withoutLocalForm.newPassword("");
                     self.withoutLocalForm.confirmNewPassword("");
                     logger.logSuccess("Local account created succesfully", null, null, true);
+                    appsecurity.externalAccounts()
+                        .then(function (accounts) {
+                        self.externalAccounts(accounts.ExternalLogins);
+                        self.showRemoveButton(accounts.ShowRemoveButton);
+                    })
+                    .fail(self.handlevalidationerrors);
                 });
             }).fail(self.handlevalidationerrors);
         },

@@ -1,23 +1,23 @@
 <div class="row">
-    <div class="col-offset-1 col-lg-5 well">                
+    <div class="col-lg-6 well">                
         <form data-bind="if : hasAccount, submit : changePassword">
             <fieldset>
                 <legend>Change Password</legend>
                 <div class="form-group" data-bind="validationElement: withLocalForm.oldPassword">
-                    <label for="oldpassword">Old Password</label>
+                    <label class="control-label" for="oldpassword">Old Password</label>
                     <input class="form-control" type="password"  data-bind="value: withLocalForm.oldPassword" placeholder="Old Password">
                 </div>                   
                 <div class="form-group" data-bind="validationElement: withLocalForm.newPassword">
-                    <label  for="newPassword">New Password</label>                   
+                    <label class="control-label" for="newPassword">New Password</label>                   
                     <input class="form-control" type="password"  data-bind="value: withLocalForm.newPassword" placeholder="New Password">                                        
                 </div>  
                 <div class="form-group" data-bind="validationElement: withLocalForm.confirmNewPassword">
-                       <label for="confirmNewPassword">Confirm new Password</label>
+                       <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
                        <input class="form-control" type="password"  data-bind="value: withLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
                 </div>                                                      
                 <div>
-                    <button type="submit" class="btn btn-default">Change password</button>
-                    <button type="reset" class="btn">Reset</button>
+                    <button type="submit" class="btn btn-primary">Change password</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
                 </div>                
             </fieldset>
        </form>  
@@ -25,39 +25,36 @@
             <fieldset>
                 <legend>Create Local Account</legend>
                 <div class="form-group" data-bind="validationElement: withoutLocalForm.newPassword">
-                    <label for="newPassword">New Password</label>                       
+                    <label class="control-label" for="newPassword">New Password</label>                       
                     <input class="form-control" type="password"  data-bind="value: withoutLocalForm.newPassword" placeholder="New Password">                                               
                 </div>  
                 <div class="form-group" data-bind="validationElement: withoutLocalForm.confirmNewPassword">
-                    <label for="confirmNewPassword">Confirm new Password</label>
+                    <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
                     <input class="form-control" type="password"  data-bind="value: withoutLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
                 </div>                                                      
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-default">Create local account</button>
-                    <button type="reset" class="btn">Reset</button>                     
+                    <button type="submit" class="btn btn-primary">Create local account</button>
+                    <button type="reset" class="btn btn-default">Reset</button>                     
                </div>                   
             </fieldset>                            
        </form>  
     </div>
 
-    <div class="col-lg-5 well">
+    <div class="col-offset-1 col-lg-5 well">
         <div data-bind="visible : externalAccounts().length > 0">
             <h3>You have registered logins with the following providers</h3>
-            <table>
-                <tbody data-bind="foreach : externalAccounts">
-                    <tr>
-                        <td class="well" data-bind="text : ProviderDisplayName"></td>
-                        <td class="well" data-bind="if : $parent.showRemoveButton">
-                            <a class="btn btn-primary" href="#" data-bind="click : function(data,event) { $parent.removeExternalAccount($parent,data,event); }, text : 'Remove'"></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
+            <div class="row" data-bind="foreach : externalAccounts">
+                <div class="col-4">
+                    <p class="lead" data-bind="text : ProviderDisplayName" style="border:none"></p>
+                </div>
+                <div class="col-8" data-bind="if : $parent.showRemoveButton">
+                    <a class="btn btn-danger" href="#" data-bind="click : function(data,event) { $parent.removeExternalAccount($parent,data,event); }, text : 'Remove'"></a>
+                </div>
+            </div>
+        </div>        
         <div>
             <h3>Associate more external accounts to this one</h3>
-            <ul class="unstyled" data-bind="foreach : appsecurity.externalLogins">
+            <ul class="list-unstyled" data-bind="foreach : appsecurity.externalLogins">
                 <li>
                     <a class="lead" href="#"  data-bind="click: function (data, event) { $parent.externalLogin($parent, data, event) }, attr: { 'data-provider': Provider }">
                         <i data-bind="css: $parent.socialIcon($data)"></i>

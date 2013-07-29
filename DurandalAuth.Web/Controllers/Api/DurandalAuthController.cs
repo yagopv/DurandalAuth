@@ -36,8 +36,9 @@ namespace DurandalAuth.Web.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         public SaveResult SaveChanges(JObject saveBundle)
-        {
+        {             
             return UnitOfWork.Commit(saveBundle);
         }
 
