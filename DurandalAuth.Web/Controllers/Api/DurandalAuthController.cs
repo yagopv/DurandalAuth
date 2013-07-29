@@ -34,9 +34,9 @@ namespace DurandalAuth.Web.Controllers
             return UnitOfWork.UserProfileRepository.All();
         }
 
-
         [HttpPost]
         [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         public SaveResult SaveChanges(JObject saveBundle)
         {             
             return UnitOfWork.Commit(saveBundle);
