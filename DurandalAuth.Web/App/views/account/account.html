@@ -1,52 +1,46 @@
-<div class="row-fluid">
-    <div class="offset1 span5 well">                
+<div class="row">
+    <div class="col-offset-1 col-lg-5 well">                
         <form data-bind="if : hasAccount, submit : changePassword">
-            <h2> Change Password </h2>
-            <div class="control-group" data-bind="validationElement: withLocalForm.oldPassword">
-                <label class="control-label" for="oldpassword">Old Password</label>
-                    <div class="controls">
-                        <input type="password"  data-bind="value: withLocalForm.oldPassword" placeholder="Old Password">                       
-                    </div>
-             </div>                   
-             <div class="control-group" data-bind="validationElement: withLocalForm.newPassword">
-                   <label class="control-label" for="newPassword">New Password</label>
-                   <div class="controls">
-                        <input type="password"  data-bind="value: withLocalForm.newPassword" placeholder="New Password">                        
-                    </div>
-              </div>  
-             <div class="control-group" data-bind="validationElement: withLocalForm.confirmNewPassword">
-                   <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
-                   <div class="controls">
-                        <input type="password"  data-bind="value: withLocalForm.confirmNewPassword" placeholder="Confirm New Password">                        
-                    </div>
-              </div>                                                      
-              <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Change password</button>
-                    <button type="reset" class="btn">Reset</button>                     
-               </div>                               
+            <fieldset>
+                <legend>Change Password</legend>
+                <div class="form-group" data-bind="validationElement: withLocalForm.oldPassword">
+                    <label for="oldpassword">Old Password</label>
+                    <input class="form-control" type="password"  data-bind="value: withLocalForm.oldPassword" placeholder="Old Password">
+                </div>                   
+                <div class="form-group" data-bind="validationElement: withLocalForm.newPassword">
+                    <label  for="newPassword">New Password</label>                   
+                    <input class="form-control" type="password"  data-bind="value: withLocalForm.newPassword" placeholder="New Password">                                        
+                </div>  
+                <div class="form-group" data-bind="validationElement: withLocalForm.confirmNewPassword">
+                       <label for="confirmNewPassword">Confirm new Password</label>
+                       <input class="form-control" type="password"  data-bind="value: withLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
+                </div>                                                      
+                <div>
+                    <button type="submit" class="btn btn-default">Change password</button>
+                    <button type="reset" class="btn">Reset</button>
+                </div>                
+            </fieldset>
        </form>  
        <form data-bind="if: !hasAccount(), submit: createLocalAccount">
-            <h2> Create Local Account </h2>
-             <div class="control-group" data-bind="validationElement: withoutLocalForm.newPassword">
-                   <label class="control-label" for="newPassword">New Password</label>
-                   <div class="controls">
-                        <input type="password"  data-bind="value: withoutLocalForm.newPassword" placeholder="New Password">                        
-                    </div>
-              </div>  
-             <div class="control-group" data-bind="validationElement: withoutLocalForm.confirmNewPassword">
-                   <label class="control-label" for="confirmNewPassword">Confirm new Password</label>
-                   <div class="controls">
-                        <input type="password"  data-bind="value: withoutLocalForm.confirmNewPassword" placeholder="Confirm New Password">                        
-                    </div>
-              </div>                                                      
-              <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Create local account</button>
+            <fieldset>
+                <legend>Create Local Account</legend>
+                <div class="form-group" data-bind="validationElement: withoutLocalForm.newPassword">
+                    <label for="newPassword">New Password</label>                       
+                    <input class="form-control" type="password"  data-bind="value: withoutLocalForm.newPassword" placeholder="New Password">                                               
+                </div>  
+                <div class="form-group" data-bind="validationElement: withoutLocalForm.confirmNewPassword">
+                    <label for="confirmNewPassword">Confirm new Password</label>
+                    <input class="form-control" type="password"  data-bind="value: withoutLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
+                </div>                                                      
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-default">Create local account</button>
                     <button type="reset" class="btn">Reset</button>                     
-               </div>                               
+               </div>                   
+            </fieldset>                            
        </form>  
     </div>
 
-    <div class="span5 well">
+    <div class="col-lg-5 well">
         <div data-bind="visible : externalAccounts().length > 0">
             <h3>You have registered logins with the following providers</h3>
             <table>

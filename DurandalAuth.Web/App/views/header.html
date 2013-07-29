@@ -1,35 +1,35 @@
-﻿<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-          <div>
-           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-           </a>
-              <a class="brand" href="/#/">DurandalAuth</a>                   
-                <div class="nav-collapse collapse">
-                     <ul class="nav" data-bind="foreach: router.visibleRoutes">
-                         <li data-bind="css: { active: isActive }">
-                             <a data-bind="attr: { href: hash }, html: name"></a>
-                         </li>
-                     </ul>
-                     <ul class="nav pull-right" data-bind="with: appsecurity.user">
-                        <li data-bind="if: !IsAuthenticated">
-                                 <a href="/#/login">Login</a>
-                        </li>
-                         <li class="dropdown" data-bind="if: IsAuthenticated">
-                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                     Hi <span data-bind="    text: UserName"></span>
-                                   <b class="caret"></b>
-                             </a>                                
-                             <ul class="dropdown-menu">
-                               <li><a href="/#/account">Manage Profile</a></li>
-                               <li class="divider"></li>
-                               <li><a href="#" data-bind="click: $parent.logout">Logout</a></li>
-                             </ul>
-                       </li>
-                     </ul>
-                </div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div>
+            <a href="/#/" class="navbar-brand">DurandalAuth</a>
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>              
+            <div class="nav-collapse navbar-inverse-collapse collapse" style="height: 0px;">
+                <ul class="nav navbar-nav" data-bind="foreach: router.visibleRoutes">
+                    <li data-bind="css: { active: isActive }">
+                       <a data-bind="attr: { href: hash }, html: name"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right" data-bind="with: appsecurity.user">
+                    <li data-bind="if: !IsAuthenticated">
+                        <a href="/#/login">Login</a>
+                    </li>
+                    <li class="dropdown" data-bind="if: IsAuthenticated">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Hi <span data-bind="    text: UserName"></span>
+                            <b class="caret"></b>
+                       </a>                                
+                       <ul class="dropdown-menu">
+                            <li><a href="/#/account">Manage Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-bind="click: $parent.logout">Logout</a></li>
+                        </ul>
+                    </li>                    
+                </ul>                
+            </div>              
        </div>
     </div>
 </div>

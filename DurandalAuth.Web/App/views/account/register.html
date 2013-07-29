@@ -1,39 +1,30 @@
-<div class="row-fluid">
-       <div class="offset3 span6">
-            <div class="well">                
-               <!-- Login form  -->
-               <form class="form-horizontal" data-bind="submit :  register">
-                   <!-- Username -->
-                   <div class="control-group" data-bind="validationElement: username">
-                     <label class="control-label" for="username">Username</label>
-                     <div class="controls">
-                        <input type="text"  data-bind="value: username" placeholder="User name">      
-                     </div>
-                   </div>
-                   <!-- Username -->
-                   <div class="control-group" data-bind="validationElement: email">
-                     <label class="control-label" for="username">Email</label>
-                     <div class="controls">
-                        <input type="text"  data-bind="value: email" placeholder="Email"> 
-                     </div>
-                   </div>
-                   <!-- Password -->
-                   <div class="control-group" data-bind="validationElement: password">
-                     <label class="control-label" for="email">Password</label>
-                     <div class="controls">
-                        <input type="password"  data-bind="value: password" placeholder="Password">  
-                     </div>
-                   </div>  
-                   <div class="control-group" data-bind="validationElement: confirmpassword">
-                     <label class="control-label" for="email">ConfirmPassword</label>
-                     <div class="controls">
-                        <input type="password"  data-bind="value: confirmpassword" placeholder="Confirm Password">  
-                     </div>
-                   </div>  
-                   <div class="form-actions">
-                     <button type="submit" class="btn btn-primary">Register</button>
-                     <button type="reset" class="btn">Reset</button>
+<div class="row">
+    <div class="col-offset-3 col-lg-6">
+        <div class="well">                        
+            <form class="form-horizontal" data-bind="submit :  register">
+                <fieldset>
+                    <legend>Register new account</legend>
+                    <div class="form-group" data-bind="validationElement: username">
+                        <label for="username">Username</label>                        
+                        <input class="form-control" type="text"  data-bind="value: username" placeholder="User name">      
+                    </div>
+                    <div class="form-group" data-bind="validationElement: email">
+                        <label for="username">Email</label>                     
+                        <input class="form-control" type="text"  data-bind="value: email" placeholder="Email"> 
                    </div>                   
+                   <div class="form-group" data-bind="validationElement: password">
+                        <label for="email">Password</label>
+                        <input class="form-control" type="password"  data-bind="value: password" placeholder="Password">  
+                   </div>  
+                   <div class="form-group" data-bind="validationElement: confirmpassword">
+                        <label for="email">ConfirmPassword</label>
+                        <input class="form-control" type="password"  data-bind="value: confirmpassword" placeholder="Confirm Password">  
+                   </div>  
+                   <div>
+                       <button type="submit" class="btn btn-primary">Register</button>
+                       <button type="reset" class="btn">Reset</button>
+                   </div>                        
+                </fieldset>               
                </form>                      
              </div> 
        </div>          

@@ -1,4 +1,4 @@
-﻿requirejs.config({
+requirejs.config({
 	paths: {
 		'text': 'durandal/amd/text'
 	}
@@ -65,7 +65,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 			// Configure ko validation
 			ko.validation.init({
 				decorateElement: true,
-				errorElementClass: "error",
+				errorElementClass: "has-error",
 				registerExtenders: true,
 				messagesOnModified: true,
 				insertMessages: true,
