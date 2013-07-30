@@ -43,13 +43,15 @@
     <div class="col-offset-1 col-lg-5 well">
         <div data-bind="visible : externalAccounts().length > 0">
             <h3>You have registered logins with the following providers</h3>
-            <div class="row" data-bind="foreach : externalAccounts">
-                <div class="col-4">
-                    <p class="lead" data-bind="text : ProviderDisplayName" style="border:none"></p>
-                </div>
-                <div class="col-8" data-bind="if : $parent.showRemoveButton">
-                    <a class="btn btn-danger" href="#" data-bind="click : function(data,event) { $parent.removeExternalAccount($parent,data,event); }, text : 'Remove'"></a>
-                </div>
+            <div data-bind="foreach : externalAccounts">
+                <div class="row">
+                    <div class="col-4">
+                        <p class="lead" data-bind="text : ProviderDisplayName" style="border:none"></p>
+                    </div>
+                    <div class="col-8" data-bind="if : $parent.showRemoveButton">
+                        <a class="btn btn-danger" href="#" data-bind="click : function(data,event) { $parent.removeExternalAccount($parent,data,event); }, text : 'Remove'"></a>
+                    </div>
+                </div>                
             </div>
         </div>        
         <div>
