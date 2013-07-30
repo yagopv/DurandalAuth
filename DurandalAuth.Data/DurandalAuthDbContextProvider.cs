@@ -34,7 +34,7 @@ namespace DurandalAuth.Data
             }
 
             List<EntityInfo> articles;
-            if (saveMap.TryGetValue(typeof(UserProfile), out articles))
+            if (saveMap.TryGetValue(typeof(Article), out articles))
             {
                 if (articles.Any() && !Roles.IsUserInRole("Administrator"))
                 {
@@ -47,7 +47,7 @@ namespace DurandalAuth.Data
             }
 
             List<EntityInfo> categories;
-            if (saveMap.TryGetValue(typeof(UserProfile), out categories))
+            if (saveMap.TryGetValue(typeof(Category), out categories))
             {
                 if (categories.Any() && !Roles.IsUserInRole("Administrator"))
                 {
@@ -60,7 +60,7 @@ namespace DurandalAuth.Data
             }
 
             List<EntityInfo> tags;
-            if (saveMap.TryGetValue(typeof(UserProfile), out tags))
+            if (saveMap.TryGetValue(typeof(Tag), out tags))
             {
                 if (categories.Any() && !Roles.IsUserInRole("Administrator"))
                 {

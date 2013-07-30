@@ -1,5 +1,5 @@
-﻿define(['services/unitofwork'] , function(unitofwork) {
-    return {
+﻿define(['services/unitofwork'], function (unitofwork) {
+    var viewmodel = {
         userProfiles: ko.observableArray(),
         activate: function () {
             var self = this,
@@ -10,4 +10,6 @@
             });
         }
     }
+
+    return viewmodel;
 });

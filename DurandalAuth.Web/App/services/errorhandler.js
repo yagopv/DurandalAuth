@@ -20,7 +20,7 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                  * @param {object} error - The error object
                 */
                 this.handleError = function (error) {
-                    if (error.message.match(/validation error/i)) {
+                    if (error.entityErrors) {
                         error.message = util.getSaveValidationErrorMessage(error);
                     }
 
