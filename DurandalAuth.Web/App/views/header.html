@@ -13,12 +13,12 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-right" data-bind="with: appsecurity.user">
-                <li data-bind="if: !IsAuthenticated">
-                    <a href="/#/login">Login</a>
+                <li data-bind="if: !IsAuthenticated">                    
+                    <a href="/#/login"><i class="icon-user"></i>&nbsp; Login</a>
                 </li>
                 <li class="dropdown" data-bind="if: IsAuthenticated">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Hi <span data-bind="    text: UserName"></span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        
+                        <i class="icon-user"></i>&nbsp; Hi <span data-bind="    text: UserName"></span>
                         <b class="caret"></b>
                    </a>                                
                    <ul class="dropdown-menu">

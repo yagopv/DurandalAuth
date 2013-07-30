@@ -172,8 +172,7 @@ define(function (require) {
 		 * @return {promise}
 		*/  
 		externalLogin: function (provider, returnurl) {
-			var promise = location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;
-			return promise;
+			location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;			
 		},
 		
 		/**

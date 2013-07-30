@@ -1,12 +1,13 @@
-﻿using Breeze.WebApi;
-using DurandalAuth.Domain.Contracts;
-using DurandalAuth.Domain.Model;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using DurandalAuth.Domain.Contracts;
+using DurandalAuth.Domain.Model;
+using Newtonsoft.Json.Linq;
+using Breeze.WebApi;
 
 namespace DurandalAuth.Domain.UnitOfWork
 {
