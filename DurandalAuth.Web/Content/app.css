@@ -7,6 +7,7 @@
 }
 
 /* Durandal */
+
 .splash {
 	text-align: center;
 	margin: 10% 0 0 0;
@@ -30,15 +31,6 @@
 .page-host {
 	position: relative;
 	padding-top: 80px;
-}
-
-.navbar-fixed-top .navbar-inner {
-	padding-left: 1em;
-	padding-right: 1em;
-}
-
-.navbar-fixed-top .icon-home {
-	font-size: 18px
 }
 
 .loader {
@@ -76,6 +68,24 @@ footer a:hover {
 	color : #FFF;        
 }
 
+
+/* Bootstrap overrides */
+
+.navbar-fixed-top .navbar-inner {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.navbar-fixed-top .icon-home {
+	font-size: 18px
+}
+
+.label {
+	font-size : 1em !important;
+}
+
+/* Media queries */
+
 @media (max-width: 979px) {
 	.navbar-fixed-top {
 		margin-bottom: 0;
@@ -95,7 +105,7 @@ footer a:hover {
 }
 
 
-/* helpers */
+/* Helpers */
 
 .mart5 {
 	margin-top : 5%;
