@@ -9,16 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Domain", "Dura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Data", "DurandalAuth.Data\DurandalAuth.Data.csproj", "{11826A10-6277-40A9-83FD-CE0398077715}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{416B4315-79B5-4A0F-9FD4-CA3D69A3462F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5004619-2C0A-4971-9DC6-959A1C610E30}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9328BB99-C36F-4EDF-8068-F88C6EBD1CDC}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5004619-2C0A-4971-9DC6-959A1C610E30}"
-	ProjectSection(SolutionItems) = preProject
-		readme.md = readme.md
 	EndProjectSection
 EndProject
 Global
