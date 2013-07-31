@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-6">                
         <form data-bind="if: hasAccount, submit: changePassword">
-           <div class="panel panel-primary">
+           <div class="panel">
                 <div class="panel-heading">
                     <h3>Change Password</h3>
                 </div>
@@ -24,7 +24,7 @@
             </div>
        </form>  
        <form data-bind="if: !hasAccount(), submit: createLocalAccount">
-           <div class="panel panel-primary">
+           <div class="panel">
                 <div class="panel-heading">
                     <h3>Create Local Account</h3>
                 </div>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="col-offset-1 col-lg-5">
-        <div class="panel panel-primary" data-bind="visible : externalAccounts().length > 0">
+        <div class="panel" data-bind="visible : externalAccounts().length > 0">
             <div class="panel-heading">
                 <h3>You have registered logins with the following providers</h3>
             </div>            
