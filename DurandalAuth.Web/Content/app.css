@@ -45,6 +45,7 @@
 footer {
 	background-color:#000;
 	color : #999;    
+    display:none;
 }
 
 .footer-content {

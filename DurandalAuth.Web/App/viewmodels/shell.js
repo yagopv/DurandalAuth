@@ -8,6 +8,9 @@
             var self = this;
             appsecurity.logout().fail(self.handlevalidationerrors);
         },
+        viewAttached : function() {
+            $(document).find("footer").show();
+        },
         activate: function () {
             // Get current auth info
             $.when(appsecurity.getAuthInfo(), entitymanagerprovider.prepare())
