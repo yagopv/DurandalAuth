@@ -345,10 +345,10 @@ namespace DurandalAuth.Web.Controllers.Api
         [AntiForgeryToken]
         public HttpResponseMessage ChangePassword(ChangePasswordModel model)
         {            
-            // Cannot change admin password in this test application
-            // Remove this for real usage
-            if (Roles.IsUserInRole("Administrator")) {
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Cannot change admin password in this demo app. Remove lines in ChangePassword (AccountController) action for real usage"));
+            // Cannot change passwords for test users
+            // Remove following lines for real usage
+            if (Roles.IsUserInRole("Administrator") || WebSecurity.CurrentUserName == "user") {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Cannot change test users passwords (admin & user) in this demo app. Remove lines in ChangePassword (AccountController) action for real usage"));
             }
 
             bool changePasswordSucceeded;
