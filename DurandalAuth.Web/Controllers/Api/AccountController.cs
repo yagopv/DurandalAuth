@@ -46,9 +46,6 @@ namespace DurandalAuth.Web.Controllers.Api
         [AllowAnonymous]
         public UserInfo Login(Credential credential)
         {
-            var token = WebSecurity.GeneratePasswordResetToken("admin");
-            WebSecurity.ResetPassword(token, "admin1234");
-
             // try to sign in
             if (WebSecurity.Login(credential.UserName, credential.Password, persistCookie: credential.RememberMe))
             {
@@ -350,7 +347,7 @@ namespace DurandalAuth.Web.Controllers.Api
         {            
             // Cannot change admin password in this test application
             // Remove this for real usage
-            if (Roles.IsUserInRole("Admin")) {
+            if (Roles.IsUserInRole("Administrator")) {
                 throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Cannot change admin password in this demo app. Remove lines in ChangePassword (AccountController) action for real usage"));
             }
 
