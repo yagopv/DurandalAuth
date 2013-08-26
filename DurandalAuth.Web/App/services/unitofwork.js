@@ -5,8 +5,8 @@
     * @requires repository 
 */
 
-define(['services/entitymanagerprovider', 'services/repository', 'durandal/app'],
-    function (entityManagerProvider, repository, app) {
+define(['services/entitymanagerprovider', 'services/repository', 'durandal/app', 'services/config'],
+    function (entityManagerProvider, repository, app, config) {
 
         var refs = {};
 
@@ -51,10 +51,10 @@ define(['services/entitymanagerprovider', 'services/repository', 'durandal/app']
                 };
 
                 // Repositories
-                this.articles = repository.create(provider, "Article", 'durandalauth/articles');                
-                this.userprofiles = repository.create(provider, "UserProfile", 'durandalauth/userprofiles');
-                this.categories = repository.create(provider, "Category", 'durandalauth/lookups', breeze.FetchStrategy.FromLocalCache);
-                this.tags = repository.create(provider, "Tag", 'durandalauth/lookups', breeze.FetchStrategy.FromLocalCache);
+                this.articles = repository.create(provider, "Article", config.articlesLocation);
+                this.userprofiles = repository.create(provider, "UserProfile", config.profileLocation);
+                this.categories = repository.create(provider, "Category", config.lookupLocation, breeze.FetchStrategy.FromLocalCache);
+                this.tags = repository.create(provider, "Tag", config.lookupLocation, breeze.FetchStrategy.FromLocalCache);
             };
 
             return unitofwork;
