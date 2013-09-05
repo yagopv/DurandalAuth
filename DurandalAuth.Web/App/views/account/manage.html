@@ -1,0 +1,91 @@
+<div id="manage">
+    <div class="container">
+        <div class="page-header">
+            <h1>Manage your account   <small>change passwords and manage your external accounts</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">                
+                <form data-bind="if: hasAccount, submit: changePassword" class="form-horizontal">
+                    <div class="page-header">
+                        <h4>Change password</h4>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: withLocalForm.oldPassword">
+                        <label class="control-label col-lg-4" for="oldpassword">Old Password</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="password"  data-bind="value: withLocalForm.oldPassword" placeholder="Old Password">
+                        </div>                        
+                    </div>
+                    <div class="form-group" data-bind="validationElement: withLocalForm.newPassword">
+                        <label class="control-label col-lg-4" for="newPassword">New Password</label>        
+                        <div class="col-lg-8">           
+                            <input class="form-control" type="password"  data-bind="value: withLocalForm.newPassword" placeholder="New Password">                                        
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: withLocalForm.confirmNewPassword">
+                           <label class="control-label col-lg-4" for="confirmNewPassword">Confirm new Password</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="password"  data-bind="value: withLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary">Change password</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+                    </div>                   
+               </form>  
+               <form data-bind="if: !hasAccount(), submit: createLocalAccount" class="form-horizontal col-lg-offset-1">
+                    <fieldset>
+                        <legend>Create local account</legend>
+                        <div class="form-group" data-bind="validationElement: withoutLocalForm.newPassword">
+                            <label class="control-label col-lg-4" for="newPassword">New Password</label> 
+                            <div class="col-lg-8">                      
+                                <input class="form-control" type="password"  data-bind="value: withoutLocalForm.newPassword" placeholder="New Password">                                               
+                            </div>
+                        </div>  
+                        <div class="form-group" data-bind="validationElement: withoutLocalForm.confirmNewPassword">
+                            <label class="control-label col-lg-4" for="confirmNewPassword">Confirm new Password</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="password"  data-bind="value: withoutLocalForm.confirmNewPassword" placeholder="Confirm New Password">                                           
+                            </div>
+                        </div>         
+                        <div class="form-group">
+                            <div class="col-lg-offset-4">
+                                <button type="submit" class="btn btn-primary">Create local account</button>
+                                <button type="reset" class="btn btn-default">Reset</button>                
+                            </div>        
+                        </div>                                             
+                    </fieldset>
+               </form>  
+            </div>
+
+            <div class="col-lg-offset-1 col-lg-5">
+                <div data-bind="visible: externalAccounts().length > 0">
+                    <div class="page-header">
+                        <h4>You have registered logins with the following providers</h4>
+                    </div>
+                </div>
+                <div data-bind="foreach: externalAccounts">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <p class="lead" data-bind="text: ProviderDisplayName" style="border:none"></p>
+                        </div>
+                        <div class="col-lg-8" data-bind="if: $parent.showRemoveButton">
+                            <a class="btn btn-danger" href="#" data-bind="click: function (data, event) { $parent.removeExternalAccount($parent, data, event); }, text: 'Remove'"></a>
+                        </div>
+                    </div>                
+                </div>        
+                <div class="page-header">
+                    <h4>Associate more external accounts to this one</h4>
+                </div>                
+                <div class="list-group" data-bind="foreach: appsecurity.externalLogins">                        
+                    <a class="list-group-item lead" href="#"  data-bind="click: function (data, event) { $parent.externalLogin($parent, data, event) }, attr: { 'data-provider': Provider }">
+                        <i data-bind="css: $parent.socialIcon($data)"></i>
+                        <span data-bind="text: ProviderDisplayName"></span>
+                    </a>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
