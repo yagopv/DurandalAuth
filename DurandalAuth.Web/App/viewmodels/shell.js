@@ -1,9 +1,11 @@
-﻿define(['durandal/plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler','services/entitymanagerprovider'],
-    function (router, app, appsecurity, errorhandler, entitymanagerprovider) {
+﻿define(['durandal/plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler', 'services/entitymanagerprovider', 'model/modelBuilder'],
+    function (router, app, appsecurity, errorhandler, entitymanagerprovider, modelBuilder) {
+
+    entitymanagerprovider.modelBuilder = modelBuilder.extendMetadata;
 
     var viewmodel = {
         router: router,
-        appsecurity : appsecurity,
+        appsecurity: appsecurity,
         logout: function () {
             var self = this;
             appsecurity.logout().fail(self.handlevalidationerrors);
@@ -12,13 +14,20 @@
             $(document).find("footer").show();
         },
         activate: function () {
+            var self = this;
             // Get current auth info
-            $.when(appsecurity.getAuthInfo(), entitymanagerprovider.prepare())
-                .then(function (authinfo, entitymanagerinfo) {
-                    appsecurity.user(authinfo[0]);
-                    return router.activate('home');
-                })
-                .fail(self.handlevalidationerrors);
+
+            return entitymanagerprovider
+                    .prepare()
+                    .then(function() {
+                        appsecurity.getAuthInfo()
+                            .then(function(authinfo) {
+                                appsecurity.user(authinfo);
+                                return router.activate('home/index');
+                            })
+                            .fail(self.handlevalidationerrors);
+                    })
+                    .fail(self.handlevalidationerrors);
         }
     };
 

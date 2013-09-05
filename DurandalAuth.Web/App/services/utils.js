@@ -4,10 +4,12 @@
 
 define(function () {
     return {
+        getURLParameter: getURLParameter,
+        addItemAnimation: addItemAnimation,
+        removeItemAnimation: removeItemAnimation,
         getCurrentDate: getCurrentDate,
         getSaveValidationErrorMessage: getSaveValidationErrorMessage,
-        getEntityValidationErrorMessage: getEntityValidationErrorMessage,
-        getURLParameter: getURLParameter
+        getEntityValidationErrorMessage: getEntityValidationErrorMessage        
     }
 
     /**
@@ -21,12 +23,35 @@ define(function () {
         );
     }
 
+    /**
+     * Add items to knockout foreach bindings with an animation
+     * @param {string} elem - The element to add
+    */
+    function addItemAnimation(elem) {
+        if (elem.nodeType === 1) {
+            $(elem).addClass("animated fadeInLeft");
+        }
+    }
+
+    /**
+     * Remove items to knockout foreach bindings with an animation
+     * @param {string} elem - The element to remove
+    */
+    function removeItemAnimation(elem) {
+        if (elem.nodeType === 1) {
+            $(elem).addClass("animated fadeOutLeft");
+            setTimeout(function () {
+                $(elem).remove();
+            }, 500);
+        } 
+    }
+
     /** 
      * Get current date
      * @return {Date} - Current date
     */ 
     function getCurrentDate() {
-        return new Date();
+        return moment.utc().format();
     }
 
     /**

@@ -88,7 +88,7 @@ define(function (require) {
 						if (navigateToUrl) {
 							router.navigateTo("#/" + navigateToUrl);
 						} else {
-							router.navigateTo("/#/account");
+							router.navigateTo("/#/account/manage");
 						}
 					}
 				})
@@ -99,7 +99,7 @@ define(function (require) {
 			return promise;
 		},
 		
-		/**
+	    /**
 		 * Sign out an user
 		 * @method
 		 * @return {promise}
@@ -111,7 +111,7 @@ define(function (require) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
 					if (router.activeRoute().settings.authorize != null) {
-						router.navigateTo("/#/home");
+						router.navigateTo("/#/home/index");
 					}
 				})
 				.fail(function (data) {
@@ -135,7 +135,7 @@ define(function (require) {
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					router.navigateTo("/#/account");
+					router.navigateTo("/#/account/manage");
 				});
 			return promise;
 		},

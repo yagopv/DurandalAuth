@@ -47,7 +47,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                 if (redirect != "null") {
                     this.isRedirect(true);
                 }
-                this.returnUrl(redirect != "null" ? redirect : "account");
+                this.returnUrl(redirect != "null" ? redirect : "account/manage");
 
                 return appsecurity.getExternalLogins().then(function (data) {
                     appsecurity.externalLogins(data);

@@ -13,7 +13,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
         hasAccount: ko.observable(),
         
         /** @property {observable} returnUrl */
-        returnUrl: ko.observable("account"),
+        returnUrl: ko.observable("manage"),
 
         /** @property {object} withLocalForm */
         withLocalForm: {

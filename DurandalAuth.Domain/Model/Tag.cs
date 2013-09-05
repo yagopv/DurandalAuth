@@ -17,9 +17,8 @@ namespace DurandalAuth.Domain.Model
     public class Tag
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember]
-        public int TagId { get; set; }
+        public Guid TagId { get; set; }
 
         /// <summary>
         /// Tag Name
@@ -28,5 +27,18 @@ namespace DurandalAuth.Domain.Model
         [StringLength(100)]
         [DataMember]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Related Article
+        /// </summary>        
+        [DataMember]
+        public Guid ArticleId { get; set; }
+
+        /// <summary>
+        /// Related Article
+        /// </summary>
+        [ForeignKey("ArticleId")]
+        [DataMember]
+        public Article Article { get; set; }
     }
 }

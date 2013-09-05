@@ -115,9 +115,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Services" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.1.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\net45\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
@@ -194,10 +191,6 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-    <Reference Include="Thinktecture.IdentityModel, Version=3.4.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Thinktecture.IdentityModel.3.4.4\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
-    </Reference>
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
     </Reference>
@@ -264,9 +257,16 @@
     <Content Include="App\durandal\viewModel.js" />
     <Content Include="App\durandal\viewModelBinder.js" />
     <Content Include="App\durandal\widget.js" />
+    <Content Include="App\model\modelBuilder.js" />
+    <Content Include="App\services\privatearticlerepository.js" />
     <Content Include="App\services\entitymanagerprovider.js" />
+    <Content Include="App\services\publicarticlerepository.js" />
     <Content Include="App\services\repository.js" />
     <Content Include="App\services\unitofwork.js" />
+    <Content Include="App\viewmodels\user\article.js" />
+    <Content Include="App\viewmodels\home\about.js" />
+    <Content Include="App\viewmodels\home\articles.js" />
+    <Content Include="App\views\user\article.html" />
     <Content Include="App\views\header.html" />
     <Content Include="App\main-built.js" />
     <Content Include="App\main.js" />
@@ -275,36 +275,53 @@
     <Content Include="App\services\logger.js" />
     <Content Include="App\services\utils.js" />
     <Content Include="App\viewmodels\account\register.js" />
-    <Content Include="App\viewmodels\admin\admin.js" />
-    <Content Include="App\viewmodels\account\account.js" />
+    <Content Include="App\viewmodels\admin\panel.js" />
+    <Content Include="App\viewmodels\account\manage.js" />
     <Content Include="App\viewmodels\account\externalloginconfirmation.js" />
     <Content Include="App\viewmodels\account\externalloginfailure.js" />
     <Content Include="App\viewmodels\account\login.js" />
     <Content Include="App\viewmodels\shell.js" />
-    <Content Include="App\viewmodels\home\home.js" />
-    <Content Include="App\viewmodels\user\user.js" />
+    <Content Include="App\viewmodels\home\index.js" />
+    <Content Include="App\viewmodels\user\dashboard.js" />
     <Content Include="App\views\account\register.html" />
-    <Content Include="App\views\admin\admin.html" />
-    <Content Include="App\views\account\account.html" />
+    <Content Include="App\views\admin\panel.html" />
+    <Content Include="App\views\account\manage.html" />
     <Content Include="App\views\account\externalloginconfirmation.html" />
     <Content Include="App\views\account\externalloginfailure.html" />
     <Content Include="App\views\account\login.html" />
+    <Content Include="App\views\home\about.html" />
+    <Content Include="App\views\home\articles.html" />
     <Content Include="App\views\shell.html" />
-    <Content Include="App\views\home\home.html" />
-    <Content Include="App\views\user\user.html" />
+    <Content Include="App\views\home\index.html" />
+    <Content Include="App\views\user\dashboard.html" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\default.css" />
     <Content Include="Content\durandal.css" />
     <Content Include="Content\font-awesome-ie7.css" />
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\icons\icon_angles.png" />
+    <Content Include="Content\icons\icon_library.png" />
+    <Content Include="Content\icons\icon_cloud.png" />
+    <Content Include="Content\icons\icon_data.png" />
+    <Content Include="Content\icons\icon_lock.png" />
+    <Content Include="Content\icons\icon_project.png" />
+    <Content Include="Content\icons\icon_question.png" />
+    <Content Include="Content\icons\icon_social.png" />
+    <Content Include="Content\icons\icon_user.png" />
+    <Content Include="Content\icons\no_photo.png" />
     <Content Include="Content\ie10mobile.css" />
     <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\spinner.png" />
+    <Content Include="Content\images\zen-form-sprites.png" />
+    <Content Include="Content\jquery.tagsinput.css" />
     <Content Include="Content\Stashy.css" />
     <Content Include="Content\toastr.css" />
+    <Content Include="Content\vs.css" />
+    <Content Include="Content\zen-form.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Properties\Settings.settings">
@@ -316,30 +333,36 @@
     <Content Include="Content\font\fontawesome-webfont.eot" />
     <Content Include="Content\font\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
     <None Include="Scripts\breeze.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\breeze.debug.js" />
     <Content Include="Scripts\breeze.js" />
     <Content Include="Scripts\breeze.min.js" />
+    <Content Include="Scripts\highlight.pack.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.hammer.min.js" />
+    <Content Include="Scripts\jquery.tagsinput.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
     <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\marked.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\q.js" />
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\Stashy.js" />
     <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\zen-form.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

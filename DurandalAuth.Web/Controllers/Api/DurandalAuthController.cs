@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Web.Helpers;
+using WebMatrix.WebData;
+using DurandalAuth.Web.Filters;
 
 namespace DurandalAuth.Web.Controllers
 {
@@ -21,9 +23,17 @@ namespace DurandalAuth.Web.Controllers
         // ~/breeze/durandalauth/Articles
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IQueryable<Article> Articles()
+        public IQueryable<Article> PrivateArticles()
         {
-            return UnitOfWork.ArticleRepository.All();
+            return UnitOfWork.ArticleRepository.Find(a => a.CreatedBy == WebSecurity.CurrentUserName);
+        }
+
+        // ~/breeze/durandalauth/Articles
+        [HttpGet]
+        [AllowAnonymous]
+        public IQueryable<Article> PublicArticles()
+        {
+            return UnitOfWork.ArticleRepository.Find(a => a.IsPublished == true);
         }
 
         // ~/breeze/durandalauth/UserProfiles
@@ -36,6 +46,7 @@ namespace DurandalAuth.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [AntiForgeryToken]
         public SaveResult SaveChanges(JObject saveBundle)
         {             
             return UnitOfWork.Commit(saveBundle);
@@ -48,8 +59,7 @@ namespace DurandalAuth.Web.Controllers
         {
             return new LookupBundle
             {
-                Categories = UnitOfWork.CategoryRepository.All().ToList(),
-                Tags = UnitOfWork.TagRepository.All().ToList()
+                Categories = UnitOfWork.CategoryRepository.All().ToList()
             };
         }
     }

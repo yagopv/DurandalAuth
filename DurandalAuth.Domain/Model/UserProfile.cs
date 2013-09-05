@@ -40,6 +40,7 @@ namespace DurandalAuth.Domain.Model
             [DataType(DataType.EmailAddress)]
             [StringLength(200)]
             [EmailAddress]
+            [DataMember]
             public string Email { get; set; }
         }
 }

@@ -7,6 +7,7 @@ namespace DurandalAuth.Web {
 	  bundles.IgnoreList.Clear();
 	  AddDefaultIgnorePatterns(bundles.IgnoreList);
 
+	  // js Vendor
 	  bundles.Add(
 		new ScriptBundle("~/scripts/vendor")
 		  .Include("~/Scripts/jquery-{version}.js")
@@ -19,8 +20,14 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/Stashy.js")
 		  .Include("~/Scripts/Q.js")
 		  .Include("~/Scripts/breeze.js")
+		  .Include("~/Scripts/moment.js")
+		  .Include("~/Scripts/jquery.tagsinput.js")
+		  .Include("~/Scripts/marked.js")
+		  .Include("~/Scripts/zen-form.js")
+		  .Include("~/Scripts/highlight.pack.js")
 		);
 
+	  // css vendor
 	  bundles.Add(
 		new StyleBundle("~/Content/css")
 		  .Include("~/Content/ie10mobile.css")
@@ -29,8 +36,12 @@ namespace DurandalAuth.Web {
 		  .Include("~/Content/durandal.css")
 		  .Include("~/Content/toastr.css")
 		  .Include("~/Content/Stashy.css")
+		  .Include("~/Content/jquery.tagsinput.css")
+		  .Include("~/Content/zen-form.css")
+		  .Include("~/Content/vs.css")
 		);
 
+	  // css custom
 	  bundles.Add(
 		new StyleBundle("~/Content/custom")
 		  .Include("~/Content/app.css")

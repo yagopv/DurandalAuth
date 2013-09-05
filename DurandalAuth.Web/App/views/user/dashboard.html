@@ -1,0 +1,130 @@
+﻿<div id="dashboard">
+    <div class="container">
+        <div class="page-header">
+            <h1>Dashboard</h1>
+        </div>
+        <p class="lead">Write, update and delete your personal articles</p>
+
+        <a class="btn btn-primary" data-bind="click : newArticle"><i class="icon-plus-sign"></i>   New Article</a>
+
+        <a class="btn btn-success" data-bind="click: saveArticles"><i class="icon-save"></i>   Save all changes</a>
+
+        <!-- Articles List -->
+
+        <div id="dashboard-articles" data-bind="foreach : { data : articles, afterAdd : utils.addItemAnimation, beforeRemove : utils.removeItemAnimation }" class="mart5">
+            <div class="row">
+                <div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+                    <div class="st-image">
+                        <div class="st-image-container">
+                            <a class="thumbnail">
+                                <img data-bind="attr: { src: imageUrl }" alt="Article Logo"/>
+                            </a>                            
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                    <h2 class="mart0" data-bind="text : title"></h2>
+                    <div class="mart2">
+                        <span class="label label-info" data-bind="text: formattedCreatedDate"></span>
+                        <span class="label label-success" data-bind="visible: isPublished">Published</span>
+                        <span class="label label-warning" data-bind="visible: !isPublished()">Pending</span>
+                        <span class="label label-danger" data-bind="visible: unsavedChanges">Unsaved changes</span>
+                        <span class="label label-danger" data-bind="visible: hasValidationErrors">Article with validation errors</span>
+                    </div>
+                    <p  class="mart2" data-bind="text : description"></p>
+                    <div data-bind="foreach: tags" class="mart2">
+                        <span class="label label-primary" data-bind="text: name"></span>
+                    </div>
+                    <div class="mart2">
+                        <a class="btn btn-primary" data-bind="click: function () { $parent.editArticle(this, $parent) }">Edit</a>
+                        <a class="btn btn-danger" data-bind="click: function () { $parent.deleteArticle(this, $parent, false) }">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <!-- Articles List End -->
+
+        <!-- Edited Article -->
+
+        <div class="modal fade" id="edited-article"  data-bind="with: selectedArticle">
+          <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: $parent.closeModal">&times;</button>
+                        <h1 class="modal-title" data-bind="text: title() == '' ? 'New article' : title"></h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" data-bind="validationElement: imageUrl">
+                            <div class="page-header">
+                                <h2><i class="icon-picture"></i>   Logo  <small>enter logo for the article</small></h2>                                        
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-4 col-md-3 col-lg-2">
+                                    <div class="st-image">
+                                        <div class="st-image-container">
+                                            <a href="#" class="thumbnail">
+                                                <img id="selected-article-img" data-bind="attr: { src: imageUrl }" alt="Url for the image representing the Article" />                                
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9 col-sm-8 col-md-9 col-lg-10">                                    
+                                    <input class="form-control mart2" type="text"  data-bind="value: imageUrl" placeholder="Url for the image representing the Article">                        
+                                    <span class="help-block">Enter the image url you would like to use as the main image for this article</span>
+                                </div>                                                        
+                            </div>
+                        </div>
+                        <div class="page-header">
+                            <h2><i class="icon-list-ul"></i>   Main info   <small>enter some info about the article</small></h2>
+                        </div>
+                        <div class="form-group" data-bind="validationElement: title">
+                             <label class="control-label" for="username">Title</label>                        
+                             <input class="form-control" type="text"  data-bind="value: title" placeholder="Title">      
+                        </div>
+                        <div class="form-group" data-bind="validationElement: description">
+                             <label class="control-label" for="username">Brief description</label>                     
+                             <textarea rows="4" cols="60" class="form-control" data-bind="value: description" placeholder="Description"></textarea> 
+                        </div>
+                        <div class="form-group" data-bind="validationElement: categoryId">
+                            <label class="control-label" for="email">Categorize the article</label>
+                            &nbsp;&nbsp;<select data-bind="options: $parent.categories, optionsText: 'name', optionsValue: 'categoryId', value: categoryId, optionsCaption: 'Choose...'"></select>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-bind="checked: isPublished"> <span>Publish</span>
+                            </label>
+                        </div>
+                        <div class="page-header">
+                            <h2><i class="icon-pencil"></i>   Content   <small>write your article. Markdown is allowed</small></h2>
+                        </div>
+                        <div class="form-group" data-bind="validationElement: markdown">
+                            <div>
+                                <a class="btn btn-primary"  href="#" data-bind="click: function () { $parent.changePreview(this, $parent) }"><i class="icon-eye-open"></i>  Change Edit/Preview</a>
+                                <a class="btn btn-primary go-zen"  href="#"><i class="icon-pencil"></i>  Edit in Zen Mode with no distraction</a>
+                            </div>                        
+                            <div class="form-group mart2">                                
+                                <textarea rows="10" cols="60" class="form-control auto-height-textarea zen-mode" data-bind="value: markdown, visible: !$parent.preview(), event: { 'change': $parent.convertMarkdown }" placeholder="Enter content here using markdown"></textarea>
+                            </div>
+                            <div class="mart5" data-bind="html: html, visible: $parent.preview"></div>
+                            <p class="text-right"><abbr title="Markdown is allowed within the textarea. Click preview for watch html result">markdown</abbr></p>
+                        </div>
+                        <div class="page-header">
+                            <h2><i class="icon-tags"></i>   Tags   <small>start tagging your article</small></h2>
+                        </div>
+                        <div class="form-group">
+                             <input id="tags" class="form-control" type="text"  data-bind="value: splitTags">      
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $parent.closeModal">Close</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Edited Article -->
+
+    </div>
+</div>

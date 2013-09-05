@@ -1,33 +1,36 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div>
-        <a href="/#/" class="navbar-brand">DurandalAuth</a>
-        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">        
+        <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-main-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>              
-        <div class="nav-collapse navbar-inverse-collapse collapse" style="height: 0px;">
-            <ul class="nav navbar-nav" data-bind="foreach: router.visibleRoutes">
-                <li data-bind="css: { active: isActive }">
-                   <a data-bind="attr: { href: hash }, html: name"></a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav pull-right" data-bind="with: appsecurity.user">
-                <li data-bind="if: !IsAuthenticated">                    
-                    <a href="/#/login"><i class="icon-user"></i>&nbsp; Login</a>
-                </li>
-                <li class="dropdown" data-bind="if: IsAuthenticated">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        
-                        <i class="icon-user"></i>&nbsp; Hi <span data-bind="    text: UserName"></span>
-                        <b class="caret"></b>
-                   </a>                                
-                   <ul class="dropdown-menu">
-                        <li><a href="/#/account">Manage Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" data-bind="click: $parent.logout">Logout</a></li>
-                    </ul>
-                </li>                    
-            </ul>                
-        </div>              
+        <a href="/#/home/index" class="navbar-brand">DurandalAuth</a>
     </div>
-</div>
+    <div class="collapse navbar-collapse navbar-main-collapse" style="height: 0px;">
+        <ul class="nav navbar-nav" data-bind="foreach: router.visibleRoutes">
+            <li data-bind="css: { active: isActive }">
+               <a data-bind="attr: { href: hash }, html: name"></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-bind="with: appsecurity.user">
+            <li data-bind="if: !IsAuthenticated">                    
+                <a href="/#/account/login"><i class="icon-user"></i>&nbsp; Login</a>
+            </li>
+            <li class="dropdown" data-bind="if: IsAuthenticated">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i>&nbsp; Hi <span data-bind="    text: UserName"></span>
+                    <b class="caret"></b>
+               </a>                                
+               <ul class="dropdown-menu" data-bind="with : $parent">
+                    <li><a href="/#/account/manage">Manage your account</a></li>
+                    <li><a href="/#/user/dashboard">Dashboard</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['Administrator'])" class="divider"></li>
+                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a href="/#/admin/panel">Admin Panel</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" data-bind="click: logout">Logout</a></li>
+                </ul>
+            </li>                    
+        </ul>                
+    </div>              
+</nav>

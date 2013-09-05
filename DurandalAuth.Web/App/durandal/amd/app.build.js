@@ -28,6 +28,7 @@
     "durandal/plugins/router",
     "durandal/transitions/entrance",
     "services/appsecurity",
+    "services/articlerepository",
     "services/entitymanagerprovider",
     "services/errorhandler",
     "services/logger",

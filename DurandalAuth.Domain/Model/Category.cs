@@ -17,9 +17,8 @@ namespace DurandalAuth.Domain.Model
     public class Category
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember]
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         /// <summary>
         /// Category Name

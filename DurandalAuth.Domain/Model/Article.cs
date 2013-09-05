@@ -19,10 +19,9 @@ namespace DurandalAuth.Domain.Model
         /// <summary>
         /// Post identity
         /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]        
         [DataMember]
-        public int ArticleId { get; set; }
+        public Guid ArticleId { get; set; }
 
         /// <summary>
         /// Title of this article
@@ -33,6 +32,13 @@ namespace DurandalAuth.Domain.Model
         public string Title { get; set; }
 
         /// <summary>
+        /// The title replacing spaces by hyphens in order to include in urls
+        /// </summary>
+        [StringLength(200)]
+        [DataMember]
+        public string UrlCodeReference { get; set; }
+
+        /// <summary>
         /// Description for this article
         /// </summary>
         [Required]
@@ -41,25 +47,52 @@ namespace DurandalAuth.Domain.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// HTML Text for the given post
+        /// Url for the image representing the post
+        /// </summary>
+        [Required]
+        [StringLength(500)]
+        [DataType(DataType.ImageUrl)]
+        [DataMember]
+        public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// Will store markdown text
+        /// </summary>
+        [DataMember]
+        public string Markdown { get; set; }
+
+        /// <summary>
+        /// Will store the markdown converted to html for quicker rendering
         /// </summary>
         [DataType(DataType.Html)]
         [DataMember]
-        public string Text { get; set; }
+        public string Html { get; set; }
+
+        /// <summary>
+        /// If the article is published and visible to others or not
+        /// </summary>
+        [DataMember]
+        [Required]
+        public bool IsPublished { get; set; }
+
 
         /// <summary>
         /// Foreign CategoryId key
-        /// </summary>
-        public int CategoryId { get; set; }
+        /// </summary> 
+        [DataMember]
+        public Guid CategoryId { get; set; }
 
         /// <summary>
         /// Related Category
-        /// </summary>        
+        /// </summary>
+        [ForeignKey("CategoryId")]
+        [DataMember]
         public Category Category { get; set; }
 
         /// <summary>
         /// Related Tags
         /// </summary>
-        public ICollection<Tag> Tags { get; set; }
+        [DataMember]
+        public  ICollection<Tag> Tags { get; set; }
     }
 }
