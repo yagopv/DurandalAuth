@@ -4,6 +4,9 @@
 
         activate: function () {
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
+
+            // Resize #features
+            $(document).trigger("debouncedresize");
         },
 
         viewAttached: function () {
