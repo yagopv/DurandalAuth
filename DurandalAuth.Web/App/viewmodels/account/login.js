@@ -47,7 +47,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                 if (redirect != "null") {
                     this.isRedirect(true);
                 }
-                this.returnUrl(redirect != "null" ? redirect : "manage");
+                this.returnUrl(redirect);
 
                 return appsecurity.getExternalLogins().then(function (data) {
                     appsecurity.externalLogins(data);
@@ -68,7 +68,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                 var credential = new appsecurity.credential(this.username(), this.password(), this.rememberMe() || false),
                     self = this;
 
-                appsecurity.login(credential, self.returnUrl())
+                appsecurity.login(credential, self.returnUrl() != "null" ? self.returnUrl() : "account/manage")
                     .fail(self.handlevalidationerrors);
             },
 
@@ -88,7 +88,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
              * @param {object} event
             */
             externalLogin: function (parent, data, event) {
-                appsecurity.externalLogin(data.Provider, this.returnUrl());
+                appsecurity.externalLogin(data.Provider, this.returnUrl() != "null" ? self.returnUrl() : "manage");
             },
 
             /**
