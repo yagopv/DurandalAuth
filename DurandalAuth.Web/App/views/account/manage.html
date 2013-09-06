@@ -67,10 +67,10 @@
                 </div>
                 <div data-bind="foreach: externalAccounts">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-xs-4">
                             <p class="lead" data-bind="text: ProviderDisplayName" style="border:none"></p>
                         </div>
-                        <div class="col-lg-8" data-bind="if: $parent.showRemoveButton">
+                        <div class="col-xs-8" data-bind="if: $parent.showRemoveButton">
                             <a class="btn btn-danger" href="#" data-bind="click: function (data, event) { $parent.removeExternalAccount($parent, data, event); }, text: 'Remove'"></a>
                         </div>
                     </div>                
