@@ -5,8 +5,8 @@
 	* @requires repository 
 */
 
-define(['services/entitymanagerprovider', 'services/repository','services/privatearticlerepository', 'services/publicarticlerepository', 'durandal/app'],
-	function (entityManagerProvider, repository, privatearticlerepository, publicarticlerepository, app) {
+define(['services/entitymanagerprovider', 'services/repository','services/privatearticlerepository', 'services/publicarticlerepository', 'durandal/app', 'services/config'],
+	function (entityManagerProvider, repository, privatearticlerepository, publicarticlerepository, app, config) {
 
 		var refs = {};
 
@@ -51,11 +51,10 @@ define(['services/entitymanagerprovider', 'services/repository','services/privat
 				};
 
 				// Repositories
-				this.privatearticles = privatearticlerepository.create(provider, "Article", 'durandalauth/privatearticles');
-				this.publicarticles = publicarticlerepository.create(provider, "Article", 'durandalauth/publicarticles');
-				this.userprofiles = repository.create(provider, "UserProfile", 'durandalauth/userprofiles');
-				this.categories = repository.create(provider, "Category", 'durandalauth/categories', breeze.FetchStrategy.FromLocalCache);
-				this.tags = repository.create(provider, "Tag", 'durandalauth/tags');
+				this.privatearticles = privatearticlerepository.create(provider, "Article", config.privateArticlesLocation);
+				this.publicarticles = publicarticlerepository.create(provider, "Article", config.publicArticlesLocation);
+				this.userprofiles = repository.create(provider, "UserProfile", config.userProfileLocation);
+				this.categories = repository.create(provider, "Category", config.categoriesLocation, breeze.FetchStrategy.FromLocalCache);
 			};
 
 			return unitofwork;
@@ -102,6 +101,104 @@ define(['services/entitymanagerprovider', 'services/repository','services/privat
 
 		/**
 		 * Get a new UnitOfWork instance
+=======
+define(['services/entitymanagerprovider', 'services/repository', 'durandal/app', 'services/config'],
+    function (entityManagerProvider, repository, app, config) {
+
+        var refs = {};
+
+        /**
+        * UnitOfWork ctor
+	    * @constructor
+	    */
+        var UnitOfWork = (function () {
+
+            var unitofwork = function () {
+                var provider = entityManagerProvider.create();
+
+                /**
+                * Has the current UnitOfWork changed?
+		        * @method
+		        * @return {bool}
+		        */ 
+                this.hasChanges = function () {
+                    return provider.manager().hasChanges();
+                };
+
+                /**
+                * Commit changeset
+    	        * @method
+		        * @return {promise}
+		        */ 
+                this.commit = function () {
+                    var saveOptions = new breeze.SaveOptions({ resourceName: 'durandalauth/savechanges' });
+
+                    return provider.manager().saveChanges(null, saveOptions)
+                        .then(function (saveResult) {
+                            app.trigger('saved', saveResult.entities);
+                        });
+                };
+
+                /**
+                * Rollback changes
+                * @method
+		        */ 
+                this.rollback = function () {
+                    provider.manager().rejectChanges();
+                };
+
+                // Repositories
+                this.articles = repository.create(provider, "Article", config.articlesLocation);
+                this.userprofiles = repository.create(provider, "UserProfile", config.profileLocation);
+                this.categories = repository.create(provider, "Category", config.lookupLocation, breeze.FetchStrategy.FromLocalCache);
+                this.tags = repository.create(provider, "Tag", config.lookupLocation, breeze.FetchStrategy.FromLocalCache);
+            };
+
+            return unitofwork;
+        })();
+
+        var SmartReference = (function () {
+
+            var ctor = function () {
+                var value = null;
+
+                this.referenceCount = 0;
+
+                this.value = function () {
+                    if (value === null) {
+                        value = new UnitOfWork();
+                    }
+
+                    this.referenceCount++;
+                    return value;
+                };
+
+                this.clear = function () {
+                    value = null;
+                    this.referenceCount = 0;
+
+                    clean();
+                };
+            };
+
+            ctor.prototype.release = function () {
+                this.referenceCount--;
+                if (this.referenceCount === 0) {
+                    this.clear();
+                }
+            };
+
+            return ctor;
+        })();
+
+        return {
+            create: create,
+            get: get
+        };
+
+        /**
+    	 * Get a new UnitOfWork instance
+>>>>>>> 43ecb643197c832112ef0c9b83cfba4877b98442
 		 * @method
 		 * @return {UnitOfWork}
 		*/ 

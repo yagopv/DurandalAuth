@@ -3,8 +3,8 @@
 	* @requires app
 */
 
-define(['durandal/app'],
-	function (app) {
+define(['durandal/app', 'services/config'],
+	function (app, config) {
 
 		breeze.NamingConvention.camelCase.setAsDefault();
 		var serviceName = 'breeze';
@@ -70,7 +70,7 @@ define(['durandal/app'],
 					}
 
 					var query = breeze.EntityQuery
-						.from('durandalauth/lookups');
+						.from(config.lookupLocation);
 
 					return masterManager.executeQuery(query);
 				});

@@ -259,6 +259,7 @@
     <Content Include="App\durandal\widget.js" />
     <Content Include="App\model\modelBuilder.js" />
     <Content Include="App\services\privatearticlerepository.js" />
+    <Content Include="App\services\config.js" />
     <Content Include="App\services\entitymanagerprovider.js" />
     <Content Include="App\services\publicarticlerepository.js" />
     <Content Include="App\services\repository.js" />

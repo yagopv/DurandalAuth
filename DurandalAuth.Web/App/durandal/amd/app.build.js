@@ -29,6 +29,7 @@
     "durandal/transitions/entrance",
     "model/modelBuilder",
     "services/appsecurity",
+    "services/config",
     "services/entitymanagerprovider",
     "services/errorhandler",
     "services/logger",
