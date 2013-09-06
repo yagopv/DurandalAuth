@@ -140,8 +140,13 @@
 }
 
 #articles .st-offcanvas-main:before {
-	padding-bottom : 100em;
-	box-shadow : -2px -8px 8px #999 inset;
+    padding-bottom: 100em;
+    -webkit-box-shadow: -2px -8px 8px #999 inset;
+    box-shadow: -2px -8px 8px #999 inset;
+}
+
+#articles .offcanvas-buttons {
+    margin-top : 10px;
 }
 
 #articles .showmenubutton {
@@ -149,11 +154,15 @@
 	text-decoration : none;
 	font-size : 2em;
 	display : block;
-	color : #000;
+    background: #000;
+    color: #FFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
 }
 
 #articles .showmenubutton:hover {
-	color : rgba(0, 0, 0, 0.8);
+	background : rgba(0, 0, 0, 0.8);
 }
 
 @media (min-width: 768px) {

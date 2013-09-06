@@ -38,6 +38,7 @@
 
         viewAttached: function () {
             Stashy.OffCanvas("#articles .st-offcanvas", {
+                closeOnClickOutside : false
             }).layout();
             $("#articles .st-offcanvas").animate({ opacity: 1 }, 500);
         },
