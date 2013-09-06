@@ -52,7 +52,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 				{ url: 'account/externalloginconfirmation', moduleId: 'viewmodels/account/externalloginconfirmation', name: 'External login confirmation', visible: false },
 				{ url: 'account/externalloginfailure', moduleId: 'viewmodels/account/externalloginfailure', name: 'External login failure', visible: false },
 				{ url: 'account/register', moduleId: 'viewmodels/account/register', name: 'Register', visible: false },
-				{ url: 'account/manage', moduleId: 'viewmodels/account/manage', name: 'Manage account', visible: false, settings: { authorize: ["User"] } },
+				{ url: 'account/manage', moduleId: 'viewmodels/account/manage', name: 'Manage account', visible: false, settings: { authorize: ["User", "Administrator"] } },
 
                 // User articles urls
 			    { url: 'user/dashboard', moduleId: 'viewmodels/user/dashboard', name: 'Dashboard', settings: { authorize: ["User"] }, visible: false },

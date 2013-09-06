@@ -24,7 +24,7 @@
                </a>                                
                <ul class="dropdown-menu" data-bind="with : $parent">
                     <li><a href="/#/account/manage">Manage your account</a></li>
-                    <li><a href="/#/user/dashboard">Dashboard</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a href="/#/user/dashboard">Dashboard</a></li>
                     <li data-bind="visible: appsecurity.isUserInRole(['Administrator'])" class="divider"></li>
                     <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a href="/#/admin/panel">Admin Panel</a></li>
                     <li class="divider"></li>

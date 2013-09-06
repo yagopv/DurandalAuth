@@ -37,7 +37,7 @@ namespace DurandalAuth.Data.Migrations
             if (!WebSecurity.UserExists("admin"))
             {
                 WebSecurity.CreateUserAndAccount("admin", "admin1234", new { Email = "admin@mydomain.com" }, false);
-                Roles.AddUsersToRoles(new string[] { "admin" }, new string[] { "User", "Administrator" });
+                Roles.AddUsersToRoles(new string[] { "admin" }, new string[] { "Administrator" });
             }
 
             DurandalAuthDbContext uow = new DurandalAuthDbContext();
