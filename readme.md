@@ -6,7 +6,7 @@ The included features are:
 
 - Forms and oAuth authentication and authorization using SimpleMembership providers
 
-- Authorization in the Durandal views via *guardRoute()*
+- Authorization in Durandal views
 
 - AntiForgery tokens
 
@@ -16,7 +16,7 @@ The included features are:
 
 - Using Breeze JS in the client for better data management
 
-- Styled with Bootstrap v3
+- Styled with Bootstrap 3
 
 
 ##Check out!! ...
