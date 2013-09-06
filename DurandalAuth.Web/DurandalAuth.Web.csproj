@@ -296,7 +296,6 @@
     <Content Include="App\views\user\dashboard.html" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\default.css" />
     <Content Include="Content\durandal.css" />
     <Content Include="Content\font-awesome-ie7.css" />
     <Content Include="Content\font-awesome-ie7.min.css" />
