@@ -56,7 +56,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plu
 
                 // User articles urls
 			    { url: 'user/dashboard', moduleId: 'viewmodels/user/dashboard', name: 'Dashboard', settings: { authorize: ["User"] }, visible: false },
-                { url: ':createdby/:category/:urlcodereference', moduleId: 'viewmodels/user/article', name: 'Article', visible: false },
+                { url: ':createdby/:categorycode/:articlecode', moduleId: 'viewmodels/user/article', name: 'Article', visible: false },
 			]);
 
 			// Add antiforgery => Validate on server

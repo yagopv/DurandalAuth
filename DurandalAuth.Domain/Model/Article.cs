@@ -28,11 +28,11 @@ namespace DurandalAuth.Domain.Model
         /// </summary>
         [Required]
         [StringLength(200)]
-        [DataMember]
+        [DataMember]        
         public string Title { get; set; }
 
         /// <summary>
-        /// The title replacing spaces by hyphens in order to include in urls
+        /// The title accesible by url
         /// </summary>
         [StringLength(200)]
         [DataMember]
@@ -94,5 +94,16 @@ namespace DurandalAuth.Domain.Model
         /// </summary>
         [DataMember]
         public  ICollection<Tag> Tags { get; set; }
+
+        /// <summary>
+        /// Create a url reference
+        /// </summary>
+        /// <param name="title">The string to convert</param>
+        public void SetUrlReference()
+        {
+            char[] arr = this.Title.Where(c => (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))).ToArray();
+            var urlcodereference = new string(arr);
+            this.UrlCodeReference = urlcodereference.Trim().ToLower().Replace(" ", "-");
+        }
     }
 }

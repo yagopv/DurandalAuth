@@ -3,7 +3,7 @@ namespace DurandalAuth.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -38,9 +38,12 @@ namespace DurandalAuth.Data.Migrations
                     {
                         CategoryId = c.Guid(nullable: false),
                         Name = c.String(maxLength: 100),
+                        UrlCodeReference = c.String(maxLength: 100),
                     })
                 .PrimaryKey(t => t.CategoryId);
-            
+
+            CreateIndex("dbo.DurandalAuth_Categories", "UrlCodeReference"); // Important to keep this Index creation !!
+
             CreateTable(
                 "dbo.DurandalAuth_Tags",
                 c => new
@@ -69,7 +72,8 @@ namespace DurandalAuth.Data.Migrations
         {
             DropIndex("dbo.DurandalAuth_Tags", new[] { "ArticleId" });
             DropIndex("dbo.DurandalAuth_Articles", new[] { "CategoryId" });
-            DropIndex("dbo.DurandalAuth_Articles", new[] { "UrlCodeReference" }); // Important to keep this Index drop !!
+            DropIndex("dbo.DurandalAuth_Articles", new[] { "UrlCodeReference" });
+            DropIndex("dbo.DurandalAuth_Categories", new[] { "UrlCodeReference" });
             DropForeignKey("dbo.DurandalAuth_Tags", "ArticleId", "dbo.DurandalAuth_Articles");
             DropForeignKey("dbo.DurandalAuth_Articles", "CategoryId", "dbo.DurandalAuth_Categories");
             DropTable("dbo.DurandalAuth_UserProfiles");

@@ -44,35 +44,46 @@ namespace DurandalAuth.Data.Migrations
 
             if (!uow.Categories.Any())
             {
-                uow.Categories.AddOrUpdate(new Domain.Model.Category()
+                
+                Category category1 =  new Category()
                 {
                     CategoryId = Guid.NewGuid(),
-                    Name = "About DurandalAuth"
-                });
+                    Name = "About DurandalAuth",
+                };
+                category1.SetUrlReference();
+                uow.Categories.AddOrUpdate(category1);
 
-                uow.Categories.AddOrUpdate(new Domain.Model.Category()
+                Category category2 = new Category()
                 {
                     CategoryId = Guid.NewGuid(),
-                    Name = "General"
-                });
+                    Name = "General",
+                };
+                category2.SetUrlReference();
+                uow.Categories.AddOrUpdate(category2);
 
-                uow.Categories.AddOrUpdate(new Domain.Model.Category()
+                Category category3 = new Category()
                 {
                     CategoryId = Guid.NewGuid(),
-                    Name = "Development"
-                });
+                    Name = "Development",
+                };
+                category3.SetUrlReference();
+                uow.Categories.AddOrUpdate(category3);
 
-                uow.Categories.AddOrUpdate(new Domain.Model.Category()
+                Category category4 = new Category()
                 {
                     CategoryId = Guid.NewGuid(),
-                    Name = "Technology"
-                });
+                    Name = "Technology",
+                };
+                category4.SetUrlReference();
+                uow.Categories.AddOrUpdate(category4);
 
-                uow.Categories.AddOrUpdate(new Domain.Model.Category()
+                Category category5 = new Category()
                 {
                     CategoryId = Guid.NewGuid(),
-                    Name = "Security"
-                });
+                    Name = "Security",
+                };
+                category5.SetUrlReference();
+                uow.Categories.AddOrUpdate(category5);
 
                 uow.SaveChanges();
 

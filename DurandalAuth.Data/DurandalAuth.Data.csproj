@@ -66,9 +66,9 @@
   <ItemGroup>
     <Compile Include="DurandalAuthDbContext.cs" />
     <Compile Include="DurandalAuthDbContextProvider.cs" />
-    <Compile Include="Migrations\201309042015270_InitialMigration.cs" />
-    <Compile Include="Migrations\201309042015270_InitialMigration.Designer.cs">
-      <DependentUpon>201309042015270_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201309061650120_Initial.cs" />
+    <Compile Include="Migrations\201309061650120_Initial.Designer.cs">
+      <DependentUpon>201309061650120_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,8 +88,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309042015270_InitialMigration.resx">
-      <DependentUpon>201309042015270_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201309061650120_Initial.resx">
+      <DependentUpon>201309061650120_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
