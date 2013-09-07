@@ -10,7 +10,7 @@
             var self = this;
             appsecurity.logout().fail(self.handlevalidationerrors);
         },
-        viewAttached : function() {
+        attached : function() {
             $(document).find("footer").show();
         },
         activate: function () {

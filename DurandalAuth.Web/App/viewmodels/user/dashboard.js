@@ -35,7 +35,7 @@
 
         },
 
-        viewAttached : function(view) {
+        attached : function(view) {
             var self = this;
             Stashy.FocalPoint("#dashboard img").on();            
             $("#dashboard #edited-article").on("hide.bs.modal", function () {

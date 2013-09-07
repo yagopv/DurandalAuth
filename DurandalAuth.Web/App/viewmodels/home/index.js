@@ -13,7 +13,7 @@
             
         },
 
-        viewAttached: function () {
+        attached: function () {
             Stashy.Slider("#index #featured", { showControls: false, showIndicators: false, enableTouch: true }).on();
             $("#index #featured").animate({ opacity: 1 }, 500);
         },
