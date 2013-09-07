@@ -172,7 +172,7 @@ define(function (require) {
 		 * @return {promise}
 		*/  
 		externalLogin: function (provider, returnurl) {
-			location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + returnurl;			
+			location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + encodeURIComponent(returnurl);			
 		},
 		
 		/**
@@ -185,7 +185,7 @@ define(function (require) {
 		 * @return {promise}
 		*/          
 		getExternalLoginConfirmationData : function(returnurl, username, provideruserid, provider) {
-			var promise = $.get(baseAdress + "/externalloginconfirmation?returnurl=" + returnurl + "&username=" + username + "&provideruserid=" + provideruserid + "&provider=" + provider);
+		    var promise = $.get(baseAdress + "/externalloginconfirmation?returnurl=" + encodeURIComponent(returnurl) + "&username=" + username + "&provideruserid=" + provideruserid + "&provider=" + provider);
 			return promise;
 		},
 		
