@@ -1,4 +1,4 @@
-﻿define(['durandal/plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler', 'services/entitymanagerprovider', 'model/modelBuilder'],
+﻿define(['plugins/router', 'durandal/app', 'services/appsecurity', 'services/errorhandler', 'services/entitymanagerprovider', 'model/modelBuilder'],
     function (router, app, appsecurity, errorhandler, entitymanagerprovider, modelBuilder) {
 
     entitymanagerprovider.modelBuilder = modelBuilder.extendMetadata;
@@ -23,7 +23,7 @@
                         appsecurity.getAuthInfo()
                             .then(function(authinfo) {
                                 appsecurity.user(authinfo);
-                                return router.activate('home/index');
+                                return router.navigate('home/index');
                             })
                             .fail(self.handlevalidationerrors);
                     })

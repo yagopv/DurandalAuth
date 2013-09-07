@@ -5,7 +5,7 @@
     * @requires errorHandler
 */
 
-define(['services/appsecurity', 'durandal/plugins/router', 'services/errorhandler'],
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
     function (appsecurity, router, errorhandler) {
 
         var username = ko.observable().extend({ required: true }),

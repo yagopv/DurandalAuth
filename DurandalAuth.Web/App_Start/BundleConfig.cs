@@ -13,7 +13,6 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/jquery-{version}.js")
 		  .Include("~/Scripts/knockout-{version}.js")
 		  .Include("~/Scripts/knockout.validation.js")          
-		  .Include("~/Scripts/sammy-{version}.js")
 		  .Include("~/Scripts/bootstrap.js")
 		  .Include("~/Scripts/toastr.js")
 		  .Include("~/Scripts/jquery.hammer.min.js")

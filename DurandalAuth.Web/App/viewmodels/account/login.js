@@ -6,7 +6,7 @@
     * @requires utils
 */
 
-define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'services/errorhandler'],
+define(['services/appsecurity', 'plugins/router', 'services/utils', 'services/errorhandler'],
     function (appsecurity, router, utils, errorhandler) {
 
         var username = ko.observable().extend({ required: true }),
@@ -47,7 +47,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                 if (redirect != "null") {
                     this.isRedirect(true);
                 }
-                this.returnUrl(redirect != "null" ? redirect : "manage");
+                this.returnUrl(redirect != "null" ? redirect : "account/manage");
 
                 return appsecurity.getExternalLogins().then(function (data) {
                     appsecurity.externalLogins(data);

@@ -1,117 +1,128 @@
-requirejs.config({
-	paths: {
-		'text': 'durandal/amd/text'
-	}
+require.config({
+    paths: {
+        'text': '../Scripts/text',
+        'durandal': '../Scripts/durandal',
+        'plugins': '../Scripts/durandal/plugins',
+        'transitions': '../Scripts/durandal/transitions'
+    }
 });
 
-define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'durandal/plugins/router','services/appsecurity'],
+define('jquery', function () { return jQuery; });
+define('knockout', ko);
+
+define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'plugins/router', 'services/appsecurity'],
 	function (app, viewLocator, system, router, appsecurity) {
 
-		//>>excludeStart("build", true);
-		system.debug(true);
-		//>>excludeEnd("build");
+	    system.debug(true);
 
-		app.title = 'Durandal Auth';
+	    app.title = 'Durandal Auth';
 
-		app.start().then(function () {
+	    app.configurePlugins({
+	        router: true
+	    });
 
-		    // Q shim
-		    system.defer = function (action) {
-		        var deferred = Q.defer();
-		        action.call(deferred, deferred);
-		        var promise = deferred.promise;
-		        deferred.promise = function () {
-		            return promise;
-		        };
+	    app.start().then(function () {
 
-		        return deferred;
-		    };
+	        //// Q shim
+	        //system.defer = function (action) {
+	        //    var deferred = Q.defer();
+	        //    action.call(deferred, deferred);
+	        //    var promise = deferred.promise;
+	        //    deferred.promise = function () {
+	        //        return promise;
+	        //    };
 
-			//Replace 'viewmodels' in the moduleId with 'views' to locate the view.
-			//Look for partial views in a 'views' folder in the root.
-			viewLocator.useConvention();
+	        //    return deferred;
+	        //};
 
-			//configure routing
-			router.useConvention();
+	        //Replace 'viewmodels' in the moduleId with 'views' to locate the view.
+	        //Look for partial views in a 'views' folder in the root.
+	        viewLocator.useConvention();
 
-			// Config Routes
-			// Routes with authorize flag will be forbidden and will redirect to login page
-			// As this is javascript and is controlled by the user and his browser, the flag is only a UI guidance. You should always check again on 
-			// server in order to ensure the resources travelling back on the wire are really allowed
-			router.map([
+	        // Config Routes
+	        // Routes with authorize flag will be forbidden and will redirect to login page
+	        // As this is javascript and is controlled by the user and his browser, the flag is only a UI guidance. You should always check again on 
+	        // server in order to ensure the resources travelling back on the wire are really allowed
+
+	        var routes = [
                 // Nav urls
-				{ url: 'home/index', moduleId: 'viewmodels/home/index', name: 'Home', visible: true },
-				{ url: 'home/articles', moduleId: 'viewmodels/home/articles', name: 'Articles', visible: true },
-				{ url: 'home/about', moduleId: 'viewmodels/home/about', name: 'About', visible: true },				
+				{ route: 'home/index', moduleId: 'home/index', title: 'Home', nav: true },
+				{ route: 'home/articles', moduleId: 'home/articles', title: 'Articles', nav: true },
+				{ route: 'home/about', moduleId: 'home/about', title: 'About', nav: true },
 
                 // Admin panel url
-                { url: 'admin/panel', moduleId: 'viewmodels/admin/panel', name: 'Admin Panel', settings: { authorize: ["Administrator"] }, visible: false },
+                { route: 'admin/panel', moduleId: 'admin/panel', title: 'Admin Panel', params: { authorize: ["Administrator"] }, nav: false },
 
                 // Account Controller urls
-                { url: 'account/login', moduleId: 'viewmodels/account/login', name: 'Login', visible: false },
-				{ url: 'account/externalloginconfirmation', moduleId: 'viewmodels/account/externalloginconfirmation', name: 'External login confirmation', visible: false },
-				{ url: 'account/externalloginfailure', moduleId: 'viewmodels/account/externalloginfailure', name: 'External login failure', visible: false },
-				{ url: 'account/register', moduleId: 'viewmodels/account/register', name: 'Register', visible: false },
-				{ url: 'account/manage', moduleId: 'viewmodels/account/manage', name: 'Manage account', visible: false, settings: { authorize: ["User", "Administrator"] } },
+                { route: 'account/login', moduleId: 'account/login', title: 'Login', nav: false },
+				{ route: 'account/externalloginconfirmation', moduleId: 'account/externalloginconfirmation', title: 'External login confirmation', nav: false },
+				{ route: 'account/externalloginfailure', moduleId: 'account/externalloginfailure', title: 'External login failure', nav: false },
+				{ route: 'account/register', moduleId: 'account/register', title: 'Register', nav: false },
+				{ route: 'account/manage', moduleId: 'account/manage', title: 'Manage account', nav: false, params: { authorize: ["User", "Administrator"] } },
 
                 // User articles urls
-			    { url: 'user/dashboard', moduleId: 'viewmodels/user/dashboard', name: 'Dashboard', settings: { authorize: ["User"] }, visible: false },
-                { url: ':createdby/:categorycode/:articlecode', moduleId: 'viewmodels/user/article', name: 'Article', visible: false },
-			]);
+			    { route: 'user/dashboard', moduleId: 'user/dashboard', title: 'Dashboard', params: { authorize: ["User"] }, nav: false },
+                { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article', title: 'Article', nav: false },
+	        ];
 
-			// Add antiforgery => Validate on server
-			appsecurity.addAntiForgeryTokenToAjaxRequests();
+	        router.makeRelative({ moduleId: 'viewmodels' })
+                .map(routes)
+                .buildNavigationModel() // Finds all nav routes and readies them
+                .activate();            // Activate the router
 
-			// If the route has the authorize flag and the user is not logged in => navigate to login view
-			router.guardRoute = function (routeInfo) {
-				if (routeInfo.settings.authorize) {
-					if (appsecurity.user().IsAuthenticated && appsecurity.isUserInRole(routeInfo.settings.authorize)) {
-						return true
-					} else {
-						return "/#/account/login?redirectto=" + routeInfo.url;
-					}
-				}
-				return true;
-			}
+	        // Add antiforgery => Validate on server
+	        appsecurity.addAntiForgeryTokenToAjaxRequests();
 
-			//Loading indicator
+	        // If the route has the authorize flag and the user is not logged in => navigate to login view
+	        router.guardRoute = function (instance, instruction) {
+	            if (instruction.params.authorize) {
+	                if (appsecurity.user().IsAuthenticated && appsecurity.isUserInRole(routeInfo.settings.authorize)) {
+	                    return true
+	                } else {
+	                    return "/#/account/login?redirectto=" + routeInfo.url;
+	                }
+	            }
+	            return true;
+	        }
 
-			var loader = new Stashy.Loader("body");
+	        //Loading indicator
 
-			$(document).ajaxStart(function () {
-				loader.on("fixed", "4em", "#000", "prepend");
-			}).ajaxComplete(function () {
-				loader.off();
-			});
+	        var loader = new Stashy.Loader("body");
 
-			// Configure ko validation
-			ko.validation.init({
-				decorateElement: true,
-				errorElementClass: "has-error",
-				registerExtenders: true,
-				messagesOnModified: true,
-				insertMessages: true,
-				parseInputAttributes: true,
-				messageTemplate: null
-			});
+	        $(document).ajaxStart(function () {
+	            loader.on("fixed", "4em", "#000", "prepend");
+	        }).ajaxComplete(function () {
+	            loader.off();
+	        });
 
-		    //hightlight.js configuration
-			marked.setOptions({
-			    highlight: function (code) {
-			        return hljs.highlightAuto(code).value;
-			    },
-			    sanitize: true,
-			    breaks : true
-			});
+	        // Configure ko validation
+	        ko.validation.init({
+	            decorateElement: true,
+	            errorElementClass: "has-error",
+	            registerExtenders: true,
+	            messagesOnModified: true,
+	            insertMessages: true,
+	            parseInputAttributes: true,
+	            messageTemplate: null
+	        });
 
-		    // Automatic resizing for textareas
-		    // auto adjust the height of
-			$(document).on('keyup', '.auto-height-textarea', function (e) {
-			    $(this).css('height', 'auto');
-			    $(this).height(this.scrollHeight);
-			});			
+	        //hightlight.js configuration
+	        marked.setOptions({
+	            highlight: function (code) {
+	                return hljs.highlightAuto(code).value;
+	            },
+	            sanitize: true,
+	            breaks: true
+	        });
 
-			//Show the app by setting the root view model for our application with a transition.
-			app.setRoot('viewmodels/shell', 'entrance');
-		});
+	        // Automatic resizing for textareas
+	        // auto adjust the height of
+	        $(document).on('keyup', '.auto-height-textarea', function (e) {
+	            $(this).css('height', 'auto');
+	            $(this).height(this.scrollHeight);
+	        });
+
+	        //Show the app by setting the root view model for our application with a transition.
+	        app.setRoot('viewmodels/shell', 'entrance');
+	    });
 	});

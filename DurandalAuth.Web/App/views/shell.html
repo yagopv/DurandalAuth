@@ -1,12 +1,12 @@
 <div>
-    <header data-bind="compose : 'header.html'"></header>
-    <div class="page-host">
-            <!--ko compose: { 
-                model: router.activeItem, //wiring the router
-                afterCompose: router.afterCompose, //wiring the router
-                transition:'entrance', //use the 'entrance' transition when switching views
-                cacheViews:true //telling composition to keep views in the dom, and reuse them (only a good idea with singleton view models)
-            }--><!--/ko-->
+    <header data-bind="compose: 'header.html'"></header>
+    <div class="page-host" data-bind="router: {
+
+    model: router.activeItem, //wiring the router
+    afterCompose: router.afterCompose, //wiring the router
+    transition: 'entrance', //use the 'entrance' transition when switching views
+    cacheViews: true //telling composition to keep views in the dom, and reuse them (only a good idea with singleton view models)
+}">
     </div>
 </div>
 

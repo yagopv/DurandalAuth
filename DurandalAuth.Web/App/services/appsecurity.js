@@ -9,7 +9,7 @@ define(function (require) {
 
 	var system = require('durandal/system'),
 		app = require('durandal/app'),
-		router = require('durandal/plugins/router');
+		router = require('plugins/router');
 		
 	var self = this;
 	
@@ -74,21 +74,21 @@ define(function (require) {
 		 * Sign in a user
 		 * @method
 		 * @param {Credential} credential - An object with the user credential
-		 * @param {string} navigateToUrl - If informed and the login is correct
+		 * @param {string} navigateUrl - If informed and the login is correct
 		 *                                 a navigation to the url will be performed
 		 * @return {promise}
 		*/
-		login:  function (credential, navigateToUrl) {
+		login:  function (credential, navigateUrl) {
 			var self = this;
 			var promise = $.post(baseAdress + "/login", credential)
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
 					if (data.IsAuthenticated == true) {
-						if (navigateToUrl) {
-							router.navigateTo("#/" + navigateToUrl);
+						if (navigateUrl) {
+							router.navigate(navigateUrl);
 						} else {
-							router.navigateTo("/#/account/manage");
+							router.navigate("account/manage");
 						}
 					}
 				})
@@ -110,8 +110,8 @@ define(function (require) {
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					if (router.activeRoute().settings.authorize != null) {
-						router.navigateTo("/#/home/index");
+					if (router.activeItem().settings.authorize != null) {
+						router.navigate("/#/home/index");
 					}
 				})
 				.fail(function (data) {
@@ -135,7 +135,7 @@ define(function (require) {
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					router.navigateTo("/#/account/manage");
+					router.navigate("/#/account/manage");
 				});
 			return promise;
 		},
