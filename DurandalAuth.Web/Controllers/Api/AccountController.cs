@@ -240,7 +240,7 @@ namespace DurandalAuth.Web.Controllers.Api
                     //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                     //ViewBag.ReturnUrl = returnUrl;
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/account/externalloginconfirmation?returnurl=" + returnUrl + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/account/externalloginconfirmation?returnurl=account%2F" + returnUrl + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
                     return response;
                 }
             }
