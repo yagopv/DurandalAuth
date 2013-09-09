@@ -36,7 +36,7 @@
 
         },
 
-        viewAttached: function () {
+        attached: function () {
             Stashy.OffCanvas("#articles .st-offcanvas", {
                 closeOnClickOutside : false
             }).layout();

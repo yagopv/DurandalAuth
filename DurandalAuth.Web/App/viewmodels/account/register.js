@@ -5,7 +5,7 @@
     * @requires errorHandler
 */
 
-define(['services/appsecurity', 'durandal/plugins/router', 'services/errorhandler'],
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
     function (appsecurity, router, errorhandler) {
 
         var username = ko.observable().extend({ required: true }),
@@ -41,7 +41,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/errorhandle
                     this.errors.showAllMessages();
                     return;
                 }
-                appsecurity.register(this.username(), this.email(), this.password(), this.confirmpassword())
+                appsecurity.register(this.username(), this.email(), this.password(), this.confirmpassword(), "account/manage")
                     .fail(self.handlevalidationerrors)
             }
         }

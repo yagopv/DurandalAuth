@@ -2,12 +2,11 @@
     * @module Confirm an external login
     * @requires appsecurity
     * @requires router
-    * @requires utils
     * @requires errorHandler
 */
 
-define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'services/errorhandler'],
-function (appsecurity,router,utils,errorhandler) {
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
+function (appsecurity,router,errorhandler) {
 
     var DisplayName = ko.observable(),
         UserName = ko.observable().extend({ required: true }),
@@ -35,14 +34,14 @@ function (appsecurity,router,utils,errorhandler) {
          * Activate view
          * @method
         */  
-        activate: function () {
+        activate: function (splat) {
             var self = this;
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
             return appsecurity.getExternalLoginConfirmationData
-                (utils.getURLParameter("returnurl"),
-                 utils.getURLParameter("username"),
-                 utils.getURLParameter("provideruserid"),
-                 utils.getURLParameter("provider"))
+                (splat.returnurl,
+                 splat.username,
+                 splat.provideruserid,
+                 splat.provider)
                     .then(function (data) {
                         self.DisplayName(data.DisplayName);
                         self.UserName(data.UserName.split("@")[0]);
@@ -64,7 +63,7 @@ function (appsecurity,router,utils,errorhandler) {
             }
             appsecurity.confirmExternalAccount(self.DisplayName(), self.UserName(), self.Email(), self.ExternalLoginData())
                 .then(function (data) {                    
-                    router.navigateTo("/#/" + self.ReturnUrl());
+                    router.navigate(self.ReturnUrl());
                 }).fail(self.handlevalidationerrors);
             }
     }

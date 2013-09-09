@@ -3,11 +3,10 @@
     * @requires appsecurity
     * @requires router
     * @requires errorHandler
-    * @requires utils
 */
 
-define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'services/errorhandler'],
-    function (appsecurity, router, utils, errorhandler) {
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
+    function (appsecurity, router, errorhandler) {
 
         var username = ko.observable().extend({ required: true }),
             password = ko.observable().extend({ required: true, minLength: 6 }),
@@ -41,9 +40,9 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
               * @method
               * @return {promise} - Promise of getting external logins and showing them in the view
             */   
-            activate: function () {
-                ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
-                var redirect = utils.getURLParameter("redirectto");
+            activate: function (splat) {
+                ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });                
+                var redirect = splat ?  splat.redirectto : null;
                 if (redirect != "null") {
                     this.isRedirect(true);
                 }
@@ -68,7 +67,12 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
                 var credential = new appsecurity.credential(this.username(), this.password(), this.rememberMe() || false),
                     self = this;
 
-                appsecurity.login(credential, self.returnUrl() != "null" ? self.returnUrl() : "account/manage")
+                appsecurity.login(credential)
+                    .then(function(data) {
+                        if (data.IsAuthenticated == true) {
+                            router.navigate(self.returnUrl() != null ? self.returnUrl() : "account/manage");
+                        }
+                    })
                     .fail(self.handlevalidationerrors);
             },
 
@@ -88,7 +92,7 @@ define(['services/appsecurity', 'durandal/plugins/router', 'services/utils', 'se
              * @param {object} event
             */
             externalLogin: function (parent, data, event) {
-                appsecurity.externalLogin(data.Provider, this.returnUrl() != "null" ? self.returnUrl() : "manage");
+                appsecurity.externalLogin(data.Provider, this.returnUrl() != null ? this.returnUrl() : "account/manage");
             },
 
             /**

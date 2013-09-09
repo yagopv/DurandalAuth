@@ -37,9 +37,9 @@
 		@Scripts.Render("~/scripts/vendor")
 		
 		@if(HttpContext.Current.IsDebuggingEnabled) {
-			<script type="text/javascript" src="~/App/durandal/amd/require.js" data-main="@Url.Content("~/App/main")"></script>
+			<script type="text/javascript" src="@Url.Content("~/Scripts/require.js")" data-main="@Url.Content("~/App/main")"></script>
 		} else {
-			<script type="text/javascript" src="~/App/main-built.js"></script>			
+			<script type="text/javascript" src="@Url.Content("~/App/main-built.js")"></script>			
 		}
 	</body>
 </html>

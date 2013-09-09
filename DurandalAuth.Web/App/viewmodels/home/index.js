@@ -4,22 +4,25 @@
 
         activate: function () {
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
-
-            // Resize #features
-            setTimeout(function () {
-                $(document).trigger("debouncedresize");
-                $("#index #featured").animate({ opacity: 1 }, 100);
-            }, 500);
+            animateFeatured();
             
         },
 
-        viewAttached: function () {
+        attached: function () {
             Stashy.Slider("#index #featured", { showControls: false, showIndicators: false, enableTouch: true }).on();
-            $("#index #featured").animate({ opacity: 1 }, 500);
+            animateFeatured();
         },
 
         deactivate: function () {
             $("#index #featured").animate({ opacity: 0 }, 100);
         }
     };
+
+    function animateFeatured() {
+        $("#index #featured").animate({ opacity: 0 }, 100);
+        setTimeout(function () {
+            $(document).trigger("debouncedresize");
+            $("#index #featured").animate({ opacity: 1 }, 100);
+        }, 500);
+    }
 });

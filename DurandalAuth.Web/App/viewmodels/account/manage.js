@@ -10,10 +10,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
     var viewmodel = {
         
         /** @property {observable} hasAccount - Has the authenticated user any account */         
-        hasAccount: ko.observable(),
-        
-        /** @property {observable} returnUrl */
-        returnUrl: ko.observable("manage"),
+        hasAccount: ko.observable(),       
 
         /** @property {object} withLocalForm */
         withLocalForm: {
@@ -135,8 +132,7 @@ define(['services/appsecurity', 'services/errorhandler', 'services/logger'], fun
          * @param {object} event
         */
         externalLogin: function (parent, data, event) {
-            appsecurity.externalLogin(data.Provider, this.returnUrl())
-                .fail(self.log(data, true));
+            appsecurity.externalLogin(data.Provider, "account/manage")
         },
 
         /**

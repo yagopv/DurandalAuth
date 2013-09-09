@@ -9,7 +9,7 @@ define(function (require) {
 
 	var system = require('durandal/system'),
 		app = require('durandal/app'),
-		router = require('durandal/plugins/router');
+		router = require('plugins/router');
 		
 	var self = this;
 	
@@ -61,7 +61,7 @@ define(function (require) {
 		*/
 		isUserInRole: function (roles) {
 			var self = this,
-				  isuserinrole = false;
+				isuserinrole = false;
 			$.each(roles, function (key, value) {
 				if (self.user().Roles.indexOf(value) != -1) {
 					isuserinrole = true;
@@ -78,19 +78,12 @@ define(function (require) {
 		 *                                 a navigation to the url will be performed
 		 * @return {promise}
 		*/
-		login:  function (credential, navigateToUrl) {
+		login:  function (credential) {
 			var self = this;
 			var promise = $.post(baseAdress + "/login", credential)
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					if (data.IsAuthenticated == true) {
-						if (navigateToUrl) {
-							router.navigateTo("#/" + navigateToUrl);
-						} else {
-							router.navigateTo("/#/account/manage");
-						}
-					}
 				})
 				.fail(function (data) {
 					self.user({ IsAuthenticated: false, UserName: "", Roles: [] });
@@ -110,8 +103,8 @@ define(function (require) {
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					if (router.activeRoute().settings.authorize != null) {
-						router.navigateTo("/#/home/index");
+					if (router.activeInstruction().config.authorize != undefined) {
+						router.navigate("");
 					}
 				})
 				.fail(function (data) {
@@ -129,13 +122,13 @@ define(function (require) {
 		 * @param {string} confirmpassword
 		 * @return {promise}
 		*/        
-		register: function (username, email, password, confirmpassword) {
+		register: function (username, email, password, confirmpassword, returnurl) {
 			var self = this;
 			var promise = $.post(baseAdress + "/register", { username: username, email: email, password: password, confirmpassword: confirmpassword })
 				.done(function (data) {
 					self.user(data);
 					self.addAntiForgeryTokenToAjaxRequests();
-					router.navigateTo("/#/account/manage");
+					router.navigate(returnurl);
 				});
 			return promise;
 		},
