@@ -431,7 +431,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if '$(Configuration)'=='Debug' (
+    <PostBuildEvent>if '$(Configuration)'=='Debug' {
     cd $(ProjectDir)
     weyland build
 }</PostBuildEvent>
