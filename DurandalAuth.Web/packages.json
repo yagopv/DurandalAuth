@@ -1,7 +1,0 @@
-﻿{
-   "name": "DurandalAuth",
-   "version": "1.0.0",
-   "dependencies": {
-     "weyland": "*"
-   }
-}
