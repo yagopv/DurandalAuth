@@ -3,18 +3,18 @@
     var viewmodel = {
         article: ko.observable(),
 
-        activate: function (splat) {
+        activate: function (createdby, categorycode, articlecode) {
             var self = this,
-                ref = unitofwork.get(splat.createdby + "/" + splat.categorycode + "/" + splat.articlecode);
+                ref = unitofwork.get(createdby + "/" + categorycode + "/" + articlecode);
 
             var uow = ref.value();
 
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
 
             return uow.publicarticles
-                .find(breeze.Predicate.create("urlCodeReference", "==", splat.articlecode)
-                                        .and("category.urlCodeReference", "==", splat.categorycode)
-                                        .and("createdBy", "==", splat.createdby), 0, 1)
+                .find(breeze.Predicate.create("urlCodeReference", "==", articlecode)
+                                        .and("category.urlCodeReference", "==", categorycode)
+                                        .and("createdBy", "==", createdby), 0, 1)
                 .then(function (article) {
                     self.article(article[0]);
                 }
