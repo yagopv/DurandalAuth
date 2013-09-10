@@ -335,6 +335,7 @@
     <Content Include="Scripts\durandal\viewEngine.js" />
     <Content Include="Scripts\durandal\viewLocator.js" />
     <Content Include="weyland-config.js" />
+    <Content Include="packages.json" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -431,10 +432,9 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if '$(Configuration)'=='Debug' {
-    cd $(ProjectDir)
-    weyland build
-}</PostBuildEvent>
+    <PostBuildEvent>cd $(ProjectDir)
+weyland build
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
