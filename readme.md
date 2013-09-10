@@ -36,4 +36,5 @@ weyland build
 Or you can follow this links:
 
 [Building with weyland](http://durandaljs.com/documentation/Building-with-Weyland/)
+
 [Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio/)
