@@ -4,7 +4,7 @@
 
 define(function () {
     return {
-        getURLParameter: getURLParameter,
+        getUrlParameter: getUrlParameter,
         addItemAnimation: addItemAnimation,
         removeItemAnimation: removeItemAnimation,
         getCurrentDate: getCurrentDate,
@@ -17,7 +17,7 @@ define(function () {
      * @param {string} name - The name of the parameter
      * @return {string}
     */
-    function getURLParameter(name) {
+    function getUrlParameter(name) {
         return decodeURI(
             (RegExp(name + '=' + '(.+?)(&|$)').exec(location.href) || [, null])[1]
         );

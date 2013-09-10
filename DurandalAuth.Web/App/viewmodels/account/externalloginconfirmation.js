@@ -5,8 +5,8 @@
     * @requires errorHandler
 */
 
-define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
-function (appsecurity,router,errorhandler) {
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler', 'services/utils'],
+function (appsecurity,router,errorhandler,utils) {
 
     var DisplayName = ko.observable(),
         UserName = ko.observable().extend({ required: true }),
@@ -40,7 +40,7 @@ function (appsecurity,router,errorhandler) {
             return appsecurity.getExternalLoginConfirmationData
                 (splat.returnurl,
                  splat.username,
-                 splat.provideruserid,
+                 utils.getUrlParameter("provideruserid"),  // Important!! because the provider user id not recognize routes with '?'
                  splat.provider)
                     .then(function (data) {
                         self.DisplayName(data.DisplayName);
