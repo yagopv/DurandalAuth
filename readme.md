@@ -19,6 +19,21 @@ The included features are:
 - Styled with Bootstrap 3
 
 
-##Check out!! ...
+##Check it out!! ...
 
 ... the [sample site](https://durandalauth.azurewebsites.net) and play with it
+
+##Weyland config
+
+When you make changes over this project you are going to need to optimize the Durandal files, so remember, you have to install **node** and **weyland**
+
+```
+//install node and run this in your command line
+npm install -g weyland
+weyland build
+```
+
+Or you can follow this links:
+
+[Building with weyland](http://durandaljs.com/documentation/Building-with-Weyland/)
+[Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio/)
