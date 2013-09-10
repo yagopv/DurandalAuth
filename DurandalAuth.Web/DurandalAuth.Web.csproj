@@ -431,8 +431,10 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
-weyland build</PostBuildEvent>
+    <PostBuildEvent>if '$(Configuration)'=='Debug' (
+    cd $(ProjectDir)
+    weyland build
+}</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
