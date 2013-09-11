@@ -243,6 +243,7 @@
     <Content Include="App\services\publicarticlerepository.js" />
     <Content Include="App\services\repository.js" />
     <Content Include="App\services\unitofwork.js" />
+    <Content Include="App\viewmodels\header.js" />
     <Content Include="App\viewmodels\notfound.js" />
     <Content Include="App\viewmodels\user\article.js" />
     <Content Include="App\viewmodels\home\about.js" />
