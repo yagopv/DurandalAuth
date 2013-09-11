@@ -99,11 +99,13 @@
 
         deleteArticle: function (article, parent, closemodal) {
             var self = this;
-            var length = article.tags().length;
-            for (var i = 0; i < length ; i++) {
-                unitofwork.tags.delete(article.tags()[0]);
-            }
+
+            ko.utils.arrayForEach(article.tags(), function () {
+                article.deleteTag(article.tags()[0]); // Because deleteTag decrement by one
+            });
+
             unitofwork.privatearticles.delete(article);
+
             unitofwork.commit()
                 .then(function () {
                     parent.articles.remove(article);
