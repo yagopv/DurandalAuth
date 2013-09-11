@@ -75,7 +75,11 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 			    $(this).height(this.scrollHeight);
 			});			
 
-			//Show the app by setting the root view model for our application with a transition.
-			app.setRoot('viewmodels/shell');
+			appsecurity.getAuthInfo()
+                .then(function (authinfo) {                            
+                    appsecurity.user(authinfo);
+                    //Show the app by setting the root view model for our application with a transition.
+                    app.setRoot('viewmodels/shell');
+            });
 		});
 	});
