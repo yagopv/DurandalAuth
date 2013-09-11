@@ -231,7 +231,7 @@ namespace DurandalAuth.Web.Controllers.Api
                     // If the current user is logged in add the new account
                     OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + url);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/" + url);
                     return response;
                 }
                 else
@@ -241,14 +241,14 @@ namespace DurandalAuth.Web.Controllers.Api
                     //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                     //ViewBag.ReturnUrl = returnUrl;
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/account/externalloginconfirmation?returnurl=" + url + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginconfirmation?returnurl=" + url + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
                     return response;
                 }
             }
             catch (Exception ex)
             {
                 var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/account/externalloginfailure");
+                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginfailure");
                 return response;                
             }
         }

@@ -25,10 +25,12 @@ namespace DurandalAuth.Web
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();            
+            RouteConfig.RegisterWebApiRoutes(GlobalConfiguration.Configuration);
+            RouteConfig.RegisterMVCRoutes(RouteTable.Routes);
+            AuthConfig.RegisterMVCAuth(GlobalFilters.Filters);
+            AuthConfig.RegisterWebApiAuth(GlobalConfiguration.Configuration);
+            AuthConfig.RegisterOAuth();            
+            BundleConfig.RegisterBundles(BundleTable.Bundles);            
 
             if (!WebSecurity.Initialized)
             {                
