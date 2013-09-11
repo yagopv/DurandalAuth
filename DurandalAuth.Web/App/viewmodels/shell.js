@@ -47,23 +47,23 @@
 
                                 return router.map([
                                     // Nav urls
-                                    { route: '',                                      moduleId: 'home/index',                        title: 'Home',                        nav: true },
-                                    { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true },
-                                    { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true },
+                                    { route: '',                                      moduleId: 'home/index',                        title: 'Home',                        nav: true, hash : "#/"    },
+                                    { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash : "#home/articles" },
+                                    { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true, hash : "#home/about"    },
                                     { route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found',                   nav: false },
 
                                     // Admin panel url
-                                    { route: 'admin/panel',                           moduleId: 'admin/panel',                       title: 'Admin Panel',                 nav: false,  authorize: ["Administrator"] } ,
+                                    { route: 'admin/panel',                           moduleId: 'admin/panel',                       title: 'Admin Panel',                 nav: false, hash : "#admin/panel",  authorize: ["Administrator"] } ,
 
                                     // Account Controller urls
-                                    { route: 'account/login',                         moduleId: 'account/login',                     title: 'Login',                       nav: false },
-                                    { route: 'account/externalloginconfirmation',     moduleId: 'account/externalloginconfirmation', title: 'External login confirmation', nav: false },
-                                    { route: 'account/externalloginfailure',          moduleId: 'account/externalloginfailure',      title: 'External login failure',      nav: false },
-                                    { route: 'account/register',                      moduleId: 'account/register',                  title: 'Register',                    nav: false },
-                                    { route: 'account/manage',                        moduleId: 'account/manage',                    title: 'Manage account',              nav: false,  authorize: ["User", "Administrator"] },
+                                    { route: 'account/login',                         moduleId: 'account/login',                     title: 'Login',                       nav: false, hash : "#account/login" },
+                                    { route: 'account/externalloginconfirmation',     moduleId: 'account/externalloginconfirmation', title: 'External login confirmation', nav: false, hash : "#account/externalloginconfirmation" },
+                                    { route: 'account/externalloginfailure',          moduleId: 'account/externalloginfailure',      title: 'External login failure',      nav: false, hash : "#account/externalloginfailure" },
+                                    { route: 'account/register',                      moduleId: 'account/register',                  title: 'Register',                    nav: false, hash : "#account/register" },
+                                    { route: 'account/manage',                        moduleId: 'account/manage',                    title: 'Manage account',              nav: false, hash : "#account/manage",  authorize: ["User", "Administrator"] },
 
                                     // User articles urls
-                                    { route: 'user/dashboard',                        moduleId: 'user/dashboard',                    title: 'Dashboard',                   nav: false,  authorize: ["User"]  },
+                                    { route: 'user/dashboard',                        moduleId: 'user/dashboard',                    title: 'Dashboard',                   nav: false, hash : "#user/dashboard",  authorize: ["User"]  },
                                     { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article',                      title: 'Article',                     nav: false },
                                 ])
                                 .buildNavigationModel()
