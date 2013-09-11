@@ -23,7 +23,7 @@
                             .then(function (authinfo) {
 
                                 // Get current auth info
-                                appsecurity.user(authinfo);
+                                self.appsecurity.user(authinfo);
 
                                 //configure routing
                                 router.makeRelative({ moduleId: 'viewmodels' });
