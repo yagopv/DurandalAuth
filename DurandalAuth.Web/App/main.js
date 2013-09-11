@@ -43,7 +43,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 			var loader = new Stashy.Loader("body");
 
 			$(document).ajaxStart(function () {
-				loader.on("fixed", "4em", "#000", "prepend");
+				loader.on("fixed", "1px", "#FFF", "prepend");
 			}).ajaxComplete(function () {
 				loader.off();
 			});
