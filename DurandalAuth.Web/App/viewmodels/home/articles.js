@@ -15,10 +15,18 @@
 
         articles: ko.observableArray(),
 
-        activate: function () {
+        activate: function () {           
+            ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
+        },
+
+        attached: function () {
             var self = this;
 
-            ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });            
+            Stashy.OffCanvas("#articles .st-offcanvas", {
+                closeOnClickOutside : false
+            }).layout();
+
+            $("#articles .st-offcanvas").animate({ opacity: 1 }, 500);
 
             var articles = unitofwork.publicarticles.find(getPredicate(self.search(), self.selectedCategory()), self.page(), self.count())
                                 .then(function (articles) {
@@ -27,20 +35,12 @@
             );
 
             var categories = unitofwork.categories.all()
-                                .then(function(categories) {
+                                .then(function (categories) {
                                     self.categories(categories)
                                 }
             );
 
             return Q.all([articles, categories]).fail(self.handleError);
-
-        },
-
-        attached: function () {
-            Stashy.OffCanvas("#articles .st-offcanvas", {
-                closeOnClickOutside : false
-            }).layout();
-            $("#articles .st-offcanvas").animate({ opacity: 1 }, 500);
         },
 
         evaluateKey : function () {

@@ -45,7 +45,7 @@
                                 // As this is javascript and is controlled by the user and his browser, the flag is only a UI guidance. You should always check again on 
                                 // server in order to ensure the resources travelling back on the wire are really allowed
 
-                                router.map([
+                                return router.map([
                                     // Nav urls
                                     { route: '',                                      moduleId: 'home/index',                        title: 'Home',                        nav: true },
                                     { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true },
@@ -67,9 +67,8 @@
                                     { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article',                      title: 'Article',                     nav: false },
                                 ])
                                 .buildNavigationModel()
-                                .mapUnknownRoutes('notfound', 'not-found');
-
-                                return router.activate();
+                                .mapUnknownRoutes('notfound', 'not-found')
+                                .activate({ pushState : true });
 
                             })
                             .fail(self.handlevalidationerrors);

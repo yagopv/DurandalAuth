@@ -14,7 +14,7 @@ define(function (require) {
 	var self = this;
 	
 	/** @property {string} baseAdress - Base address for the api calls */
-	var baseAdress = "api/account";
+	var baseAdress = "/api/account";
 
 	/**         
 	 * @class

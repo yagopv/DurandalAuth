@@ -34,14 +34,14 @@ function (appsecurity,router,errorhandler,utils) {
          * Activate view
          * @method
         */  
-        activate: function (splat) {
+        activate: function () {
             var self = this;
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
-            return appsecurity.getExternalLoginConfirmationData
-                (splat.returnurl,
-                 splat.username,
-                 utils.getUrlParameter("provideruserid"),  // Important!! because the provider user id not recognize routes with '?'
-                 splat.provider)
+            return appsecurity.getExternalLoginConfirmationData(
+                utils.getUrlParameter("returnurl"),
+                utils.getUrlParameter("username"),
+                utils.getUrlParameter("provideruserid"),  // Important!! because the provider user id not recognize routes with '?'
+                utils.getUrlParameter("provider"))
                     .then(function (data) {
                         self.DisplayName(data.DisplayName);
                         self.UserName(data.UserName.split("@")[0]);

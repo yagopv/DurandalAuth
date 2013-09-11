@@ -333,6 +333,7 @@
 
                 // Add close button
                 App.env.addObject('a', {
+                    href : '#',
                     class: 'zen-forms-close-button',
                     html: '<i class="zen-icon zen-icon--close"></i> Exit Zen Mode'
                 }, function () {
@@ -341,6 +342,7 @@
 
                 // Add theme switch button
                 App.env.addObject('a', {
+                    href : '#',
                     class: 'zen-forms-theme-switch',
                     html: '<i class="zen-icon zen-icon--theme"></i> Switch theme'
                 }, function () {

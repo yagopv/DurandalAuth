@@ -212,7 +212,7 @@ namespace DurandalAuth.Web.Controllers.Api
                 if (!result.IsSuccessful)
                 {
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/account/externalloginfailure");
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginfailure");
                     return response;
                 }
 
@@ -222,7 +222,7 @@ namespace DurandalAuth.Web.Controllers.Api
                     Thread.CurrentPrincipal = principal;
                     HttpContext.Current.User = principal;
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/#/" + url);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/" + url);
                     return response;
                 }
 

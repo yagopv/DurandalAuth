@@ -211,14 +211,12 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Api\AccountController.cs" />
-    <Compile Include="Controllers\Api\MetadataController.cs" />
-    <Compile Include="Controllers\Api\DurandalAuthController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\MetadataController.cs" />
+    <Compile Include="Controllers\DurandalAuthController.cs" />
     <Compile Include="Helpers\LookupBundle.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="Filters\ModelValidationAttribute.cs" />
@@ -377,11 +375,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\_splash.cshtml" />
-    <Content Include="Views\Home\Footer.cshtml" />
-    <Content Include="Views\Home\Analytics.cshtml" />
+    <Content Include="index.cshtml">
+      <BrowseToURL>~/</BrowseToURL>
+    </Content>
     <Content Include="Scripts\jquery-2.0.3.min.map" />
   </ItemGroup>
   <ItemGroup>
@@ -432,7 +428,7 @@
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

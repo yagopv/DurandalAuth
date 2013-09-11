@@ -5,7 +5,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>              
-        <a href="/#/" class="navbar-brand">DurandalAuth</a>
+        <a href="/" class="navbar-brand">DurandalAuth</a>
     </div>
     <div class="collapse navbar-collapse navbar-main-collapse" style="height: 0px;">
         <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
@@ -15,7 +15,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" data-bind="with: appsecurity.user">
             <li data-bind="if: !IsAuthenticated">                    
-                <a href="/#/account/login"><i class="icon-user"></i>&nbsp; Login</a>
+                <a href="account/login"><i class="icon-user"></i>&nbsp; Login</a>
             </li>
             <li class="dropdown" data-bind="if: IsAuthenticated">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -23,10 +23,10 @@
                     <b class="caret"></b>
                </a>                                
                <ul class="dropdown-menu" data-bind="with : $parent">
-                    <li><a href="/#/account/manage">Manage your account</a></li>
-                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a href="/#/user/dashboard">Dashboard</a></li>
+                    <li><a href="account/manage">Manage your account</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a href="user/dashboard">Dashboard</a></li>
                     <li data-bind="visible: appsecurity.isUserInRole(['Administrator'])" class="divider"></li>
-                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a href="/#/admin/panel">Admin Panel</a></li>
+                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a href="admin/panel">Admin Panel</a></li>
                     <li class="divider"></li>
                     <li><a href="#" data-bind="click: logout">Logout</a></li>
                 </ul>

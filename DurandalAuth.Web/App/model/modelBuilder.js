@@ -37,7 +37,6 @@
                 this.throwIfNotOwnerOf(tag);
 
                 tag.entityAspect.setDeleted();
-                this.tags.remove(tag);
             };
 
             articleCtor.prototype.throwIfNotOwnerOf = function (obj) {

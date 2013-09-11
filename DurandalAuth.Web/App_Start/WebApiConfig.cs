@@ -38,6 +38,7 @@ namespace DurandalAuth.Web
             config.EnableQuerySupport();
 
             config.Filters.Add(new AuthorizeAttribute());
+
             if (!HttpContext.Current.IsDebuggingEnabled)
             {
                 config.Filters.Add(new RequireHttpsAttribute());

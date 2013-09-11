@@ -5,9 +5,9 @@
         </div>
         <p class="lead">Write, update and delete your personal articles</p>
 
-        <a class="btn btn-primary" data-bind="click : newArticle"><i class="icon-plus-sign"></i>   New Article</a>
+        <a href="#" class="btn btn-primary" data-bind="click : newArticle"><i class="icon-plus-sign"></i>   New Article</a>
 
-        <a class="btn btn-success" data-bind="click: saveArticles"><i class="icon-save"></i>   Save all changes</a>
+        <a href="#" class="btn btn-success" data-bind="click: saveArticles"><i class="icon-save"></i>   Save all changes</a>
 
         <!-- Articles List -->
 
@@ -36,8 +36,8 @@
                         <span class="label label-primary" data-bind="text: name"></span>
                     </div>
                     <div class="mart2">
-                        <a class="btn btn-primary" data-bind="click: function () { $parent.editArticle(this, $parent) }">Edit</a>
-                        <a class="btn btn-danger" data-bind="click: function () { $parent.deleteArticle(this, $parent, false) }">Delete</a>
+                        <a href="#" class="btn btn-primary" data-bind="click: function () { $parent.editArticle(this, $parent) }">Edit</a>
+                        <a href="#" class="btn btn-danger" data-bind="click: function () { $parent.deleteArticle(this, $parent, false) }">Delete</a>
                     </div>
                 </div>
             </div>
@@ -101,8 +101,8 @@
                         </div>
                         <div class="form-group" data-bind="validationElement: markdown">
                             <div>
-                                <a class="btn btn-primary"  href="#" data-bind="click: function () { $parent.changePreview(this, $parent) }"><i class="icon-eye-open"></i>  Change Edit/Preview</a>
-                                <a class="btn btn-primary go-zen"  href="#"><i class="icon-pencil"></i>  Edit in Zen Mode with no distraction</a>
+                                <a href="#" class="btn btn-primary"  data-bind="click: function () { $parent.changePreview(this, $parent) }"><i class="icon-eye-open"></i>  Change Edit/Preview</a>
+                                <a href="#" class="btn btn-primary go-zen"><i class="icon-pencil"></i>  Edit in Zen Mode with no distraction</a>
                             </div>                        
                             <div class="form-group mart2">                                
                                 <textarea rows="10" cols="60" class="form-control auto-height-textarea zen-mode" data-bind="value: markdown, visible: !$parent.preview(), event: { 'change': $parent.convertMarkdown }" placeholder="Enter content here using markdown"></textarea>

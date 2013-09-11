@@ -7,7 +7,7 @@ define(['durandal/app', 'services/config'],
 	function (app, config) {
 
 		breeze.NamingConvention.camelCase.setAsDefault();
-		var serviceName = 'breeze';
+		var serviceName = '/breeze';
 		var masterManager = new breeze.EntityManager(serviceName);
 
 		/**

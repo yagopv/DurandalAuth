@@ -1,0 +1,83 @@
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Durandal Auth</title>
+		
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<link rel="apple-touch-startup-image" href="~/Content/images/ios-startup-image-landscape.png" media="(orientation:landscape)" />
+		<link rel="apple-touch-startup-image" href="~/Content/images/ios-startup-image-portrait.png" media="(orientation:portrait)" />
+		<link rel="apple-touch-icon" href="~/Content/images/icon.png"/>
+		
+		@Styles.Render("~/Content/css")
+		@Styles.Render("~/Content/custom")
+
+		<script type="text/javascript">
+			if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+				var msViewportStyle = document.createElement("style");
+				var mq = "@@-ms-viewport{width:auto!important}";
+				msViewportStyle.appendChild(document.createTextNode(mq));
+				document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+			}
+		</script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsCode"]', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsDomain"]');    
+
+        </script>
+	</head>
+	<body>
+		<div class="st-sticky-wrap" id="applicationHost">
+			<div class="splash">
+                <div class="message">
+                    DurandalAuth sample template
+                </div>
+                <i class="icon-spinner icon-2x icon-spin active"></i>
+            </div>
+		</div>
+		<footer class="st-sticky-footer">
+	        <div class="row">
+		        <div class="col-sm-6">
+			        <div class="footer-content">
+				        <p>Designed and created by <a href="http://twitter.com/yperezva">@@yperezva</a></p>
+				        <p>DurandalAuth template is licensed under the <a href="https://raw.github.com/yagopv/stashy/master/license.txt" target="_blank">MIT license</a></p>
+			        </div>
+		        </div>
+		        <div class="col-sm-6">    
+			        <div class="footer-content">                
+				        <ul class="list-unstyled">
+					        <li>
+						        <a href="https://github.com/yagopv/durandalauth" target="_blank"><i class="icon-github"></i>&nbsp;View project on Github</a>
+					        </li>
+					        <li>
+						        <a href="https://twitter.com/yperezva" target="_blank"><i class="icon-twitter-sign"></i>&nbsp;Follow me on Twitter</a></li>
+					        <li>
+						        <a href="mailto:yago.perez@outlook.com"><i class="icon-envelope-alt"></i>&nbsp;Email me</a>
+					        </li>
+				        </ul>
+			        </div>
+		        </div>                    
+	        </div>                        
+        </footer>
+		
+		@Scripts.Render("~/scripts/vendor")
+		
+		@if(HttpContext.Current.IsDebuggingEnabled) {
+			<script type="text/javascript" src="/Scripts/require.js" data-main="/App/main"></script>
+		} else {
+			<script type="text/javascript" src="/App/main-built.js"></script>			
+		}
+	</body>
+</html>

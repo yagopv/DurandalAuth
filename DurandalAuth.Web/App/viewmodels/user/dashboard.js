@@ -16,8 +16,35 @@
 
         activate: function () {
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
+        },
 
+        attached : function(view) {
             var self = this;
+
+            Stashy.FocalPoint("#dashboard img").on();
+
+            $("#dashboard #edited-article").on("hide.bs.modal", function () {
+                if (self.selectedArticle().entityAspect.hasValidationErrors) {
+                    var validationErrors = ko.validation.group(self.selectedArticle());
+                    self.selectedArticle().errors.showAllMessages();                    
+                }
+                self.selectedArticle().unsavedChanges(self.selectedArticle().entityAspect.entityState.isAddedModifiedOrDeleted());
+            });
+
+            Stashy.ShowMeMore("#dashboard-articles .row", {
+                linkClass: "btn btn-primary",
+                linkText: "Show more articles",
+                howMany: 4
+            }).on();
+
+            $("#dashboard #edited-article").on("shown.bs.modal", function () {
+                $("#dashboard #edited-article .zen-mode").zenForm({ trigger: '#dashboard #edited-article .go-zen' });                
+                $("#dashboard #edited-article .zen-mode").keyup();
+            });
+
+            $("#dashboard #edited-article").on("zf-destroyed", function () {
+                $("#dashboard #edited-article .zen-mode").trigger("change");
+            });
 
             var articles = unitofwork.privatearticles.all()
                                 .then(function (articles) {
@@ -31,33 +58,7 @@
                                 }
             );
 
-            return Q.all([articles, categories]).fail(self.handleError);
-
-        },
-
-        attached : function(view) {
-            var self = this;
-            Stashy.FocalPoint("#dashboard img").on();            
-            $("#dashboard #edited-article").on("hide.bs.modal", function () {
-                if (self.selectedArticle().entityAspect.hasValidationErrors) {
-                    var validationErrors = ko.validation.group(self.selectedArticle());
-                    self.selectedArticle().errors.showAllMessages();                    
-                }
-                self.selectedArticle().unsavedChanges(self.selectedArticle().entityAspect.entityState.isAddedModifiedOrDeleted());
-            });
-            Stashy.ShowMeMore("#dashboard-articles .row", {
-                linkClass: "btn btn-primary",
-                linkText: "Show more articles",
-                howMany: 4
-            }).on();
-            $("#dashboard #edited-article").on("shown.bs.modal", function () {
-                $("#dashboard #edited-article .zen-mode").zenForm({ trigger: '#dashboard #edited-article .go-zen' });                
-                $("#dashboard #edited-article .zen-mode").keyup();
-            });
-
-            $("#dashboard #edited-article").on("zf-destroyed", function () {
-                $("#dashboard #edited-article .zen-mode").trigger("change");
-            });            
+            Q.all([articles, categories]).fail(self.handleError);
         },
 
         newArticle: function () {
@@ -99,11 +100,13 @@
 
         deleteArticle: function (article, parent, closemodal) {
             var self = this;
-            var length = article.tags().length;
-            for (var i = 0; i < length ; i++) {
-                unitofwork.tags.delete(article.tags()[0]);
-            }
+
+            ko.utils.arrayForEach(article.tags(), function () {
+                article.deleteTag(article.tags()[0]); // Because deleteTag decrement by one
+            });
+
             unitofwork.privatearticles.delete(article);
+
             unitofwork.commit()
                 .then(function () {
                     parent.articles.remove(article);
