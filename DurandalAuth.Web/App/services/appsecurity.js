@@ -165,7 +165,7 @@ define(function (require) {
 		 * @return {promise}
 		*/  
 		externalLogin: function (provider, returnurl) {
-			location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + encodeURIComponent(returnurl);			
+		    location.href = baseAdress + "/externallogin?provider=" + provider + "&returnurl=" + encodeURIComponent(returnurl) + "&pushstate=" + router.options.pushState;
 		},
 		
 		/**

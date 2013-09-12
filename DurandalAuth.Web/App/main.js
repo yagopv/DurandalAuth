@@ -1,11 +1,11 @@
 requirejs.config({
-    baseUrl : "/App",
-    paths: {
-        'text': '../Scripts/text',
-        'durandal': '../Scripts/durandal',
-        'plugins': '../Scripts/durandal/plugins',
-        'transitions': '../Scripts/durandal/transitions'
-    }
+	baseUrl : "/App",
+	paths: {
+		'text': '../Scripts/text',
+		'durandal': '../Scripts/durandal',
+		'plugins': '../Scripts/durandal/plugins',
+		'transitions': '../Scripts/durandal/transitions'
+	}
 });
 
 define('jquery', function () { return jQuery; });
@@ -20,13 +20,13 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 
 		app.title = 'Durandal Auth';
 
-	    //specify which plugins to install and their configuration
+		//specify which plugins to install and their configuration
 		app.configurePlugins({
-		    router: true,
-		    dialog: true,
-		    widget: {
-		        kinds: ['expander']
-		    }
+			router: true,
+			dialog: true,
+			widget: {
+				kinds: ['expander']
+			}
 		});
 
 		app.start().then(function () {
@@ -59,27 +59,27 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 				messageTemplate: null
 			});
 
-		    //hightlight.js configuration
+			//hightlight.js configuration
 			marked.setOptions({
-			    highlight: function (code) {
-			        return hljs.highlightAuto(code).value;
-			    },
-			    sanitize: true,
-			    breaks : true
+				highlight: function (code) {
+					return hljs.highlightAuto(code).value;
+				},
+				sanitize: true,
+				breaks : true
 			});
 
-		    // Automatic resizing for textareas
-		    // auto adjust the height of
+			// Automatic resizing for textareas
+			// auto adjust the height of
 			$(document).on('keyup', '.auto-height-textarea', function (e) {
-			    $(this).css('height', 'auto');
-			    $(this).height(this.scrollHeight);
+				$(this).css('height', 'auto');
+				$(this).height(this.scrollHeight);
 			});			
 
 			appsecurity.getAuthInfo()
-                .then(function (authinfo) {                            
-                    appsecurity.user(authinfo);
-                    //Show the app by setting the root view model for our application with a transition.
-                    app.setRoot('viewmodels/shell');
-            });
+				.then(function (authinfo) {                            
+					appsecurity.user(authinfo);
+					//Show the app by setting the root view model for our application with a transition.
+					app.setRoot('viewmodels/shell');
+			});
 		});
 	});

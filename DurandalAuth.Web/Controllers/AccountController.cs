@@ -180,12 +180,12 @@ namespace DurandalAuth.Web.Controllers.Api
         /// <returns>http response code</returns>
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage ExternalLogin(string provider, string returnUrl)
+        public HttpResponseMessage ExternalLogin(string provider, string returnUrl, bool pushstate)
         {
             try
             {
                 // Start oAuth authentication and call the ExternalLoginCallback when returning to this domain
-                OAuthWebSecurity.RequestAuthentication(provider, "/api/account/ExternalLoginCallback?returnurl=" + returnUrl);
+                OAuthWebSecurity.RequestAuthentication(provider, "/api/account/ExternalLoginCallback?returnurl=" + returnUrl + "&pushstate=" + pushstate);
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -203,16 +203,17 @@ namespace DurandalAuth.Web.Controllers.Api
         /// <returns>http response</returns>
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage ExternalLoginCallback(string returnUrl)
+        public HttpResponseMessage ExternalLoginCallback(string returnUrl, bool pushstate)
         {
             var url = returnUrl ?? "";
+            var pushstateHash = pushstate == true ? "/" : "#";
             try
             {
                 AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication();
                 if (!result.IsSuccessful)
                 {
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginfailure");
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + pushstateHash + "account/externalloginfailure");
                     return response;
                 }
 
@@ -222,7 +223,7 @@ namespace DurandalAuth.Web.Controllers.Api
                     Thread.CurrentPrincipal = principal;
                     HttpContext.Current.User = principal;
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/" + url);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + pushstateHash + url);
                     return response;
                 }
 
@@ -231,7 +232,7 @@ namespace DurandalAuth.Web.Controllers.Api
                     // If the current user is logged in add the new account
                     OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/" + url);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + pushstateHash + url);
                     return response;
                 }
                 else
@@ -241,14 +242,14 @@ namespace DurandalAuth.Web.Controllers.Api
                     //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                     //ViewBag.ReturnUrl = returnUrl;
                     var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginconfirmation?returnurl=" + url + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
+                    response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + pushstateHash + "account/externalloginconfirmation?returnurl=" + url + "&username=" + result.UserName + "&provideruserid=" + result.ProviderUserId + "&provider=" + result.Provider);
                     return response;
                 }
             }
             catch (Exception ex)
             {
                 var response = Request.CreateResponse(HttpStatusCode.Redirect);
-                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + "/account/externalloginfailure");
+                response.Headers.Location = new Uri("http://" + Request.RequestUri.Authority + pushstateHash + "account/externalloginfailure");
                 return response;                
             }
         }
