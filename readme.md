@@ -16,6 +16,8 @@ The included features are:
 
 - Using Breeze JS in the client for better data management
 
+- pushState enabled
+
 - Styled with Bootstrap 3
 
 
@@ -38,3 +40,12 @@ Or you can follow this links:
 [Building with weyland](http://durandaljs.com/documentation/Building-with-Weyland/)
 
 [Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio/)
+
+##About pushState
+
+Since Durandal 2.0 we can use pushState so this feature is enabled by default. If you prefer hashes you can always set pushState to false in shell.js
+
+```
+.activate({ pushState : true }); // set to false for using hash style url´s
+
+```
