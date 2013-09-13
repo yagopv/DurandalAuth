@@ -296,13 +296,11 @@
     <Content Include="Content\icons\no_photo.png" />
     <Content Include="Content\ie10mobile.css" />
     <Content Include="Content\images\arrow.png" />
-    <Content Include="Content\images\icon.png" />
-    <Content Include="Content\images\ios-startup-image-landscape.png" />
-    <Content Include="Content\images\ios-startup-image-portrait.png" />
     <Content Include="Content\images\spinner.png" />
     <Content Include="Content\images\zen-form-sprites.png" />
     <Content Include="Content\jquery.tagsinput.css" />
     <Content Include="Content\Stashy.css" />
+    <Content Include="Content\Stashy.min.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\vs.css" />
     <Content Include="Content\zen-form.css" />
@@ -333,6 +331,9 @@
     <Content Include="Scripts\durandal\transitions\entrance.js" />
     <Content Include="Scripts\durandal\viewEngine.js" />
     <Content Include="Scripts\durandal\viewLocator.js" />
+    <Content Include="Scripts\jquery.hammer.min.js" />
+    <Content Include="Scripts\Stashy.js" />
+    <Content Include="Scripts\Stashy.min.js" />
     <Content Include="weyland-config.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="Scripts\breeze.intellisense.js" />
@@ -346,7 +347,6 @@
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Scripts\jquery.hammer.min.js" />
     <Content Include="Scripts\jquery.tagsinput.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
@@ -362,7 +362,6 @@
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
-    <Content Include="Scripts\Stashy.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\zen-form.js" />
