@@ -42,7 +42,7 @@
                             { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash : "#home/articles" },
                             { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true, hash : "#home/about"    },
                             { route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found',                   nav: false },
-
+                                
                             // Admin panel url
                             { route: 'admin/panel',                           moduleId: 'admin/panel',                       title: 'Admin Panel',                 nav: false, hash : "#admin/panel",  authorize: ["Administrator"] } ,
 
@@ -58,7 +58,7 @@
                             { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article',                      title: 'Article',                     nav: false },
                         ])
                         .buildNavigationModel()
-                        .mapUnknownRoutes('notfound', 'not-found')
+                        .mapUnknownRoutes('notfound', 'notfound')
                         .activate({ pushState : true });
                     })
                     .fail(self.handlevalidationerrors);
