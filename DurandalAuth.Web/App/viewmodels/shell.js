@@ -58,7 +58,7 @@
                             { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article',                      title: 'Article',                     nav: false },
                         ])
                         .buildNavigationModel()
-                        .mapUnknownRoutes('notfound', 'notfound')
+                        .mapUnknownRoutes("notfound","notfound")
                         .activate({ pushState : true });
                     })
                     .fail(self.handlevalidationerrors);
