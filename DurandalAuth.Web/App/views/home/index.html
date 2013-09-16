@@ -118,12 +118,12 @@
 				<p>The main objective of this sample application is to provide a way to authenticate and authorize users similar to the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social providers among another useful features.</p>
 				<p>I decided to leverage the first template I created to build a more complete application in order to show what Breeze JS can do for you and how to protect saving changes on server.</p>            
 				<hr />
-				<p>The first thing you should do is create a new account using the <a href="/#/account/login">membership system or the oAuth providers</a>.</p>
+				<p>The first thing you should do is create a new account using the <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">membership system or the oAuth providers</a>.</p>
 				<p>After registration, a <span class="label label-info">User</span> 
-				role will be assigned to you that will permit access to the <a href="/#/user/dashboard">user dashboard</a>. Once there, you can start writing articles.</p>
+				role will be assigned to you that will permit access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>. Once there, you can start writing articles.</p>
 				<p>While writing on your dashboard, remember to set the article 
 				as a public article if you want to make it visible for the rest of the community.</p>
-				<p>Administrator users can access the <a href="/#/admin/panel">admin panel view</a>. If you want to access this view, you'll need to have the 
+				<p>Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>. If you want to access this view, you'll need to have the 
 				<span class="label label-info">Administrator</span> role.</p>
 				<p>Try to log in with the following: <span class="label label-success">admin/admin1234</span> and once there, you will be able to check a list with the registered users on this site.</p>
 				<hr />
