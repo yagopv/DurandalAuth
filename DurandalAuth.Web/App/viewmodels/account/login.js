@@ -17,6 +17,9 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 
         var viewmodel =  {
             
+            /** @property {function} convertRouteToHash */
+            convertRouteToHash: router.convertRouteToHash,
+
             /** @property {observable} username */
             username : username,
             
