@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Web", "DurandalAuth.Web\DurandalAuth.Web.csproj", "{7AB3DCB4-C479-4348-A2AA-D1E8BB6495AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.DI", "DurandalAuth.DI\DurandalAuth.DI.csproj", "{6786DD5D-C7B5-4107-A048-DFF45F7A1DDA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Domain", "DurandalAuth.Domain\DurandalAuth.Domain.csproj", "{0A4BF6AD-F505-4C97-89EA-EE0DB3BF7031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Data", "DurandalAuth.Data\DurandalAuth.Data.csproj", "{11826A10-6277-40A9-83FD-CE0398077715}"
@@ -31,10 +29,6 @@ Global
 		{7AB3DCB4-C479-4348-A2AA-D1E8BB6495AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AB3DCB4-C479-4348-A2AA-D1E8BB6495AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AB3DCB4-C479-4348-A2AA-D1E8BB6495AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6786DD5D-C7B5-4107-A048-DFF45F7A1DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6786DD5D-C7B5-4107-A048-DFF45F7A1DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6786DD5D-C7B5-4107-A048-DFF45F7A1DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6786DD5D-C7B5-4107-A048-DFF45F7A1DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A4BF6AD-F505-4C97-89EA-EE0DB3BF7031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A4BF6AD-F505-4C97-89EA-EE0DB3BF7031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A4BF6AD-F505-4C97-89EA-EE0DB3BF7031}.Release|Any CPU.ActiveCfg = Release|Any CPU

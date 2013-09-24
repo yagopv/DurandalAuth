@@ -15,11 +15,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using DurandalAuth.Data.UnitOfWork;
-using DurandalAuth.Domain.UnitOfWork;
 using StructureMap;
 
-namespace DurandalAuth.DI {
+using DurandalAuth.Domain.UnitOfWork;
+using DurandalAuth.Data.UnitOfWork;
+
+namespace DurandalAuth.Web.DependencyResolution {
     public static class IoC {
         public static IContainer Initialize() {
             ObjectFactory.Initialize(x =>

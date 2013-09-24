@@ -18,18 +18,16 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using StructureMap;
-
 using DurandalAuth.Web.DependencyResolution;
-using DurandalAuth.DI;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(DurandalAuth.Web.App_Start.StructuremapMvc), "Start")]
 
 namespace DurandalAuth.Web.App_Start {
-	public static class StructuremapMvc {
-		public static void Start() {
+    public static class StructuremapMvc {
+        public static void Start() {
 			IContainer container = IoC.Initialize();
-			DependencyResolver.SetResolver(new StructureMapDependencyResolver(container));
-			GlobalConfiguration.Configuration.DependencyResolver = new StructureMapDependencyResolver(container);
-		}
-	}
+            DependencyResolver.SetResolver(new StructureMapDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new StructureMapDependencyResolver(container);
+        }
+    }
 }
