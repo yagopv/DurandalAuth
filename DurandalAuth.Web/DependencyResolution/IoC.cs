@@ -19,6 +19,7 @@ using StructureMap;
 
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Data.UnitOfWork;
+using DurandalAuth.Web.Helpers;
 
 namespace DurandalAuth.Web.DependencyResolution {
     public static class IoC {
@@ -31,6 +32,7 @@ namespace DurandalAuth.Web.DependencyResolution {
                                         scan.WithDefaultConventions();
                                     });
                             x.For<IUnitOfWork>().Use<UnitOfWork>();
+                            x.For<ISnapshot>().Use<BlitlineSnapshot>();
                         });
             return ObjectFactory.Container;
         }
