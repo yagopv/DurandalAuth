@@ -31,8 +31,8 @@ namespace DurandalAuth.Web.DependencyResolution {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-                            x.For<IUnitOfWork>().Use<UnitOfWork>();
-                            x.For<ISnapshot>().Use<BlitlineSnapshot>();
+                            x.For<IUnitOfWork>().HttpContextScoped().Use<UnitOfWork>();
+                            x.For<ISnapshot>().HttpContextScoped().Use<BlitlineSnapshot>();
                         });
             return ObjectFactory.Container;
         }

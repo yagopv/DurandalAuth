@@ -31,7 +31,13 @@ namespace DurandalAuth.Web.Controllers
         public async Task<ActionResult> Index()
         {
             // If the request is not from a bot or the system is not ready or taking snapshots => control to Durandal app
-            if (!Snapshot.IsBot(Request) || !Snapshot.Ready())
+            if (!Snapshot.IsBot(Request))
+            {
+                return View();
+            }
+
+            // Checck if everyting is ok for taking snapshots
+            if (!Snapshot.Ready())
             {
                 return View();
             }

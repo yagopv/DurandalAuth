@@ -38,19 +38,6 @@ namespace DurandalAuth.Web.Helpers
         public BlitlineSnapshot()
         {
             storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ToString());
-
-            blobClient = storageAccount.CreateCloudBlobClient();
-
-            container = blobClient.GetContainerReference("snapshots");
-
-            container.CreateIfNotExists();
-
-            container.SetPermissions(
-                new BlobContainerPermissions
-                {
-                    PublicAccess =
-                        BlobContainerPublicAccessType.Blob
-                });
         }
 
         /// <summary>
@@ -73,6 +60,20 @@ namespace DurandalAuth.Web.Helpers
         /// <returns>bool</returns>
         public bool Ready()
         {
+            // Create  snapshots container if not exists
+            blobClient = storageAccount.CreateCloudBlobClient();
+
+            container = blobClient.GetContainerReference("snapshots");
+
+            container.CreateIfNotExists();
+
+            container.SetPermissions(
+                new BlobContainerPermissions
+                {
+                    PublicAccess =
+                        BlobContainerPublicAccessType.Blob
+                });
+
             // Check if Blitline is configured
             if (ConfigurationManager.AppSettings["BlitlineApiId"] != "{BlitlineApiId}")
             {
@@ -186,7 +187,7 @@ namespace DurandalAuth.Web.Helpers
             var json = new
             {
                 applicationXXXid = ConfigurationManager.AppSettings["BlitlineApiId"],
-                src = url,
+                src = url.Replace("?_escaped_fragment_=", ""),
                 srcXXXtype = "screen_shot_url",
                 srcXXXdata = new
                 {
