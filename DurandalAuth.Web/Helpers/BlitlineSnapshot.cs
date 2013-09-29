@@ -47,7 +47,9 @@ namespace DurandalAuth.Web.Helpers
         /// <returns></returns>
         public bool IsBot(HttpRequestBase request)
         {
-            if (request.QueryString["_escaped_fragment_"] != null)
+            //request.QueryString["_escaped_fragment_"] != null ||
+            if (request.UserAgent.ToLowerInvariant().Contains("googlebot") ||
+                request.UserAgent.ToLowerInvariant().Contains("bingbot"))
             {
                 return true;
             }
@@ -187,7 +189,7 @@ namespace DurandalAuth.Web.Helpers
             var json = new
             {
                 applicationXXXid = ConfigurationManager.AppSettings["BlitlineApiId"],
-                src = url.Replace("?_escaped_fragment_=", ""),
+                src = url, //.Replace("?_escaped_fragment_=", ""),
                 srcXXXtype = "screen_shot_url",
                 srcXXXdata = new
                 {
