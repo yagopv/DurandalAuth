@@ -231,7 +231,7 @@
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
-    <Compile Include="Helpers\BlitlineSnapshot.cs" />
+    <Compile Include="Helpers\Snapshot.cs" />
     <Compile Include="Helpers\ISnapshot.cs" />
     <Compile Include="Helpers\LookupBundle.cs" />
     <Compile Include="Filters\ModelValidationAttribute.cs" />

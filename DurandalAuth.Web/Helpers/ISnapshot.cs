@@ -15,6 +15,12 @@ namespace DurandalAuth.Web.Helpers
     public interface ISnapshot
     {
         /// <summary>
+        /// Check if the snapshot service is configured
+        /// </summary>
+        /// <returns>bool</returns>
+        bool Configured();
+
+        /// <summary>
         /// Check if is a bot
         /// </summary>
         /// <param name="request">The request object</param>
@@ -22,29 +28,8 @@ namespace DurandalAuth.Web.Helpers
         bool IsBot(HttpRequestBase request);
 
         /// <summary>
-        /// Check if all is ready for taking snapshots => Is a bot? Is configured via cloud services or headless browsers?
+        /// Get the snapshot
         /// </summary>
-        /// <returns>bool</returns>
-        bool Ready();
-
-        /// <summary>
-        /// Create the snapshot
-        /// </summary>
-        Task<bool> Create(string url);
-
-        /// <summary>
-        /// Get the html for return to google bot
-        /// </summary>
-        string Get(string url);
-
-        /// <summary>
-        /// Check if the snapshot exists so you don´t need to create it again
-        /// </summary>
-        bool Exist(string url);
-
-        /// <summary>
-        /// Check if the snapshot is expired so you need to create it again
-        /// </summary>
-        bool IsExpired(string url);
+        Task<string> Get(string url, string userAgent);
     }
 }

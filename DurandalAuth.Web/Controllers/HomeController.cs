@@ -36,46 +36,22 @@ namespace DurandalAuth.Web.Controllers
                 return View();
             }
 
-            // Checck if everyting is ok for taking snapshots
-            if (!Snapshot.Ready())
+            // Check if the service is configured
+            if (!Snapshot.Configured())
             {
                 return View();
             }
 
-
-            // If everything is ready for crawl => Take snapshot and return html
-
-            var url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.RawUrl;
-
+            // Take snapshot for bot
             try
             {
-                if (Snapshot.Exist(url))
-                {
-                    if (Snapshot.IsExpired(url))
-                    {
-                        if (await Snapshot.Create(url))
-                        {
-                            return Content(Snapshot.Get(url));
-                        }
-                    }
-                    else
-                    {
-                        return Content(Snapshot.Get(url));
-                    }
-                }
-                else
-                {
-                    if (await Snapshot.Create(url))
-                    {
-                        return Content(Snapshot.Get(url));
-                    }
-                }
+                var result = await Snapshot.Get(Request.Url.Scheme + "://" + Request.Url.Authority +  Request.RawUrl.Replace("?_escaped_fragment_=",""), Request.UserAgent);
+                return Content(result);
             }
             catch (Exception ex)
             {
                 return View();
             }
-            return View();
         }
 
     }
