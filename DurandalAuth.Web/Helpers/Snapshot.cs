@@ -61,7 +61,7 @@ namespace DurandalAuth.Web.Helpers
             
             CrawlerConfig config = new CrawlerConfig() 
             {
-                ApiId = ConfigurationManager.AppSettings["SnapshotApiId"],
+                ApiId = ConfigurationManager.AppSettings["CrawlerServiceApiId"],
                 Application = "durandalauth",
                 ExpirationDate = DateTime.UtcNow.AddDays(3),
                 Store = true,
@@ -69,7 +69,7 @@ namespace DurandalAuth.Web.Helpers
                 UserAgent = userAgent
             };
 
-            var response = await client.PostAsJsonAsync<CrawlerConfig>(ConfigurationManager.AppSettings["CrawlerEndPoint"], config);
+            var response = await client.PostAsJsonAsync<CrawlerConfig>(ConfigurationManager.AppSettings["CrawlerServiceEndPoint"], config);
 
             response.EnsureSuccessStatusCode();
 
