@@ -29,7 +29,8 @@ namespace DurandalAuth.Web.Helpers
         public bool Configured()
         {
             if (ConfigurationManager.AppSettings["CrawlerServiceApiId"] != "{CrawlerServiceApiId}" &&
-                ConfigurationManager.AppSettings["CrawlerServiceEndPoint"] != "{CrawlerServiceEndPoint}")
+                ConfigurationManager.AppSettings["CrawlerServiceEndPoint"] != "{CrawlerServiceEndPoint}" &&
+                ConfigurationManager.AppSettings["CrawlerServiceApplication"] != "{CrawlerServiceApplication}")
             {
                 return true;
             }
@@ -62,7 +63,7 @@ namespace DurandalAuth.Web.Helpers
             CrawlerConfig config = new CrawlerConfig() 
             {
                 ApiId = ConfigurationManager.AppSettings["CrawlerServiceApiId"],
-                Application = "durandalauth",
+                Application = ConfigurationManager.AppSettings["CrawlerServiceApplication"],
                 ExpirationDate = DateTime.UtcNow.AddDays(3),
                 Store = true,
                 Url = url,
