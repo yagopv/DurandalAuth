@@ -49,7 +49,7 @@
                             </div>
                             <p class="mart2" data-bind="text: description"></p>
                             <div class="mart2">
-                                <a class="btn btn-primary" data-bind="attr: { href: (createdBy() + '/' + category().urlCodeReference() + '/' + urlCodeReference()).toLowerCase() }"><i class="icon-eye"></i>View article</a>
+                                <a class="btn btn-primary" data-bind="attr: { href: $parent.convertRouteToHash('/' + createdBy() + '/' + category().urlCodeReference() + '/' + urlCodeReference()).toLowerCase() }"><i class="icon-eye"></i>View article</a>
                             </div>
                         </div>
                     </div>

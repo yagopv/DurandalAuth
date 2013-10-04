@@ -1,8 +1,11 @@
-﻿define(['services/unitofwork', 'services/errorhandler'], function (unitofwork, errorhandler) {
+﻿define(['services/unitofwork', 'services/errorhandler', 'plugins/router'], function (unitofwork, errorhandler, router) {
 
     var unitofwork = unitofwork.create();
 
     var viewmodel = {
+
+        convertRouteToHash: router.convertRouteToHash,
+
         search : ko.observable(""),
 
         selectedCategory: ko.observable(""),
