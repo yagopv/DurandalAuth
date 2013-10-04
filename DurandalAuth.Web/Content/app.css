@@ -46,6 +46,10 @@
 
 /* General CSS */
 
+body {
+    overflow-x : hidden;
+}
+
 .padt15px {
 	padding-top : 15px;
 }
