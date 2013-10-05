@@ -45,8 +45,12 @@ namespace DurandalAuth.Web.Controllers
             // Take snapshot for bot
             try
             {
-                var result = await Snapshot.Get(Request.Url.AbsoluteUri.Replace("?_escaped_fragment_=",""), Request.UserAgent);
+                var result = await Snapshot.Get(Request.Url.AbsoluteUri.Replace("?_escaped_fragment_=", ""), Request.UserAgent);
                 return Content(result);
+            }
+            catch (HttpException ex)
+            {
+                return new HttpNotFoundResult(ex.Message);
             }
             catch (Exception ex)
             {

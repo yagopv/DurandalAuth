@@ -2,18 +2,18 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://testypv.azurewebsites.net</loc>
+      <loc>https://durandalauthtest.azurewebsites.net</loc>
    </url>
    <url>
-      <loc>https://testypv.azurewebsites.net/home/articles</loc>
+      <loc>https://durandalauthtest.azurewebsites.net/home/articles</loc>
    </url>
    <url>
-      <loc>https://testypv.azurewebsites.net/home/about</loc>
+      <loc>https://durandalauthtest.azurewebsites.net/home/about</loc>
    </url>
    <url>
-      <loc>https://testypv.azurewebsites.net/account/login</loc>
+      <loc>https://durandalauthtest.azurewebsites.net/account/login</loc>
    </url>
    <url>
-      <loc>https://testypv.azurewebsites.net/account/register</loc>
+      <loc>https://durandalauthtest.azurewebsites.net/account/register</loc>
    </url>    
 </urlset> 

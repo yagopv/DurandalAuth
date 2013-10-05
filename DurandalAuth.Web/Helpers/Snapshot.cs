@@ -13,6 +13,7 @@ using System.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Web;
+using HtmlAgilityPack;
 
 namespace DurandalAuth.Web.Helpers
 {
@@ -74,7 +75,26 @@ namespace DurandalAuth.Web.Helpers
 
             response.EnsureSuccessStatusCode();
 
-            return response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            if (DurandalViewNotFound(result))
+            {
+                throw new HttpException(404, "Durandal view not found");
+            }
+
+            return result;
+        }
+
+        private bool DurandalViewNotFound(string html)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            HtmlNode node = doc.DocumentNode.SelectSingleNode("//div[@id='notfound']");
+            if (node != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 
