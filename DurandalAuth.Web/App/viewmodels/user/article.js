@@ -1,11 +1,17 @@
-﻿define(['services/unitofwork'], function (unitofwork) {
+﻿define(['services/unitofwork','plugins/router'], function (unitofwork, router) {
+
+    var reference;
 
     var viewmodel = {
+
         article: ko.observable(),
 
         activate: function (createdby, categorycode, articlecode) {
-            var self = this,
-                ref = unitofwork.get(createdby + "/" + categorycode + "/" + articlecode);
+            var self = this;
+
+            reference = createdby + "/" + categorycode + "/" + articlecode;
+
+            var ref = unitofwork.get(reference);
 
             var uow = ref.value();
 
@@ -16,15 +22,13 @@
                                         .and("category.urlCodeReference", "==", categorycode)
                                         .and("createdBy", "==", createdby), 0, 1)
                 .then(function (article) {
-                    self.article(article[0]);
+                    article[0] != undefined ? self.article(article[0]) : router.navigate("notfound");
                 }
             );
         },
 
         deactivate: function () {
-            unitofwork.get(this.article().createdBy() + "/" +
-                           this.article().category().urlCodeReference() + "/" +
-                           this.article().urlCodeReference()).release();
+            unitofwork.get(reference).release();
         }
     };
 
