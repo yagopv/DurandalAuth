@@ -75,6 +75,23 @@
 						<div class="col-sm-offset-1 col-sm-10">
 							<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
 								<a class="thumbnail" href="#">
+									<img src="/Content/icons/icon_seo.png" alt="SEO ready!!" />
+								</a>                                        
+							</div>
+							<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+								<h1 class="mart0">SEO Optimization</h1>
+								<p class="mart2 prewrap">The template is ready to be SEO crawlable using a <a href="#" onclick="window.open('https://github.com/yagopv/azurecrawler', '_blank')">headless broser</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="st-slider-content">
+					<div class="row">
+						<div class="col-sm-offset-1 col-sm-10">
+							<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+								<a class="thumbnail" href="#">
 									<img src="/Content/icons/icon_angles.png" alt="Bootstrap!!" />
 								</a>                                        
 							</div>
@@ -106,7 +123,7 @@
 			<div class="col-lg-4 text-center">
 				<img src="/Content/icons/icon_project.png" alt="Project" width="150" />                
 				<h3>Visit the project site ...</h3>
-				<p>... <a href="https://github.com/yagopv/DurandalAuth" target="_blank">on Github</a> and check the code if you want.</p>
+				<p>... <a href="#" onclick="window.open('https://github.com/yagopv/durandalauth', '_blank')"> on Github</a> and check the code if you want.</p>
 			</div>
 		</div>
 		<div class="row mart5">
@@ -135,5 +152,17 @@
 			</div>
 		</div>
 		<hr />
+        <div class="row">
+			<div class="col-lg-12">
+				<div class="page-header">
+					<h2>About SEO Optimization</h2>
+				</div>            
+                <p>The template is ready to be SEO crawlable. DurandalAuth implements the <a href="#" onclick="window.open('https://developers.google.com/webmasters/ajax-crawling/docs/getting-started', '_blank')"> google ajax crawling scheme</a> for pages without hash fragments. You need the default pushstate option enabled.</p>
+                <p>I created a interface (Helpers/ISnapshot.cs) that needs to be implemented in order to work.</p>
+                <p>The default implementation uses <a href="#" onclick="window.open('https://github.com/yagopv/azurecrawler', '_blank')"> a new project I created called AzureCrawler</a>.</p>
+                <p>This new project is a Worker Role ready to be deployed to Windows Azure and serving a REST Web API via OWIN. The Web API executes a phantomjs process when receiving requests and returns html snapshots. Moreover, AzureCrawler can save the snapshot to Azure Storage and keep it there with the expiration date you choose, so next time the page is requested for any bot, the stored snapshot will be served.</p>
+                <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
+			</div>
+        </div>
 	</div>
 </div>

@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Data", "Durand
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5004619-2C0A-4971-9DC6-959A1C610E30}"
 	ProjectSection(SolutionItems) = preProject
+		license.txt = license.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject

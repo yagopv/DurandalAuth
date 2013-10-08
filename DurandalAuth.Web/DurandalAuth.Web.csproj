@@ -309,6 +309,7 @@
     <Content Include="Content\icons\icon_lock.png" />
     <Content Include="Content\icons\icon_project.png" />
     <Content Include="Content\icons\icon_question.png" />
+    <Content Include="Content\icons\icon_seo.png" />
     <Content Include="Content\icons\icon_social.png" />
     <Content Include="Content\icons\icon_user.png" />
     <Content Include="Content\icons\no_photo.png" />
