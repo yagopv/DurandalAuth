@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /account/
 Allow: /account/login
 Allow: /account/register
-Sitemap: https://testypv.azurewebsites.net/sitemap.xml
+Sitemap: https://durandalauth.azurewebsites.net/sitemap.xml
