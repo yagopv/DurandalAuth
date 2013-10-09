@@ -69,7 +69,7 @@ namespace DurandalAuth.Web.Controllers.Api
         /// <summary>
         /// Sign out the authenticated user
         /// </summary>
-        /// <returns>Authenticathion object containing the result of the sign out operation</returns>
+        /// <returns>Authentication object containing the result of the sign out operation</returns>
         [HttpPost]
         [AntiForgeryToken]
         [HttpOptions]
@@ -99,7 +99,7 @@ namespace DurandalAuth.Web.Controllers.Api
         /// Register a new account using the Membership system
         /// </summary>
         /// <param name="model">Register model</param>
-        /// <returns>Authenticathion object containing the result of the register operation</returns>
+        /// <returns>Authentication object containing the result of the register operation</returns>
         [HttpPost]
         [AllowAnonymous]
         [AntiForgeryToken]
@@ -437,7 +437,7 @@ namespace DurandalAuth.Web.Controllers.Api
         }
 
         /// <summary>
-        /// Dissasociate an external account
+        /// Disassociate an external account
         /// </summary>
         /// <param name="provider">The registered provider</param>
         /// <param name="providerUserId">The Id in the provider</param>
@@ -448,7 +448,7 @@ namespace DurandalAuth.Web.Controllers.Api
         {
             string ownerAccount = OAuthWebSecurity.GetUserName(model.Provider, model.ProviderUserId);
 
-            // Dissasociate account if authenticated user is the owner
+            // Disassociate account if authenticated user is the owner
             if (ownerAccount == User.Identity.Name)
             {
                 // Using transaction to avoid dissasociation of the last linked account
