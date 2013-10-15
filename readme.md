@@ -61,4 +61,10 @@ The default implementation uses [a new project I created called AzureCrawler](ht
 
 This new project is a Worker Role ready to be deployed to Windows Azure and serving a REST Web API via OWIN. The Web API executes a phantomjs process when receiving requests and returns html snapshots. Moreover, AzureCrawler can save the snapshot to Azure Storage and keep it there with the expiration date you choose, so next time the page is requested for any bot, the stored snapshot will be served.
 
-I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs
+I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs.
+
+Check durandalauth site at google:
+
+```
+site:durandalauth.azurewebsites.net
+```
