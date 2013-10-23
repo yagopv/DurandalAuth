@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Breeze.WebApi;
+using Breeze.WebApi.EF;
 
 using DurandalAuth.Domain.Model;
 using System.Web.Security;
