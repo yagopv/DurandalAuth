@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /account/
-Allow: /account/login
-Allow: /account/register
-Sitemap: https://durandalauth.azurewebsites.net/sitemap.xml

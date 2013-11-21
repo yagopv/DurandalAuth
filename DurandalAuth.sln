@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Web", "DurandalAuth.Web\DurandalAuth.Web.csproj", "{7AB3DCB4-C479-4348-A2AA-D1E8BB6495AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurandalAuth.Domain", "DurandalAuth.Domain\DurandalAuth.Domain.csproj", "{0A4BF6AD-F505-4C97-89EA-EE0DB3BF7031}"
