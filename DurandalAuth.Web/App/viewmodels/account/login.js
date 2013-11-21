@@ -18,13 +18,12 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
         function ExternalLoginProviderViewModel(data) {
             var self = this;
 
-            // Data
             self.name = ko.observable(data.name);
             
-            // Operations
             self.login = function () {
                 sessionStorage["state"] = data.state;
                 sessionStorage["loginUrl"] = data.url;
+
                 // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
                 // to localStorage to work around this problem.
                 appsecurity.archiveSessionStorageToLocalStorage();
@@ -32,12 +31,6 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                 window.location = data.url;
             };
 
-            /**
-             * Get the social icon class (Font-Awesome) for the social logins
-             * @method
-             * @param {object} data
-             * @return {string} - Icon class
-            */
             self.socialIcon = function (data) {
                 var icon = "";
                 switch (data.name.toLowerCase()) {
@@ -62,35 +55,35 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 
         var viewmodel =  {
             
-            /** @property {function} convertRouteToHash */
             convertRouteToHash: router.convertRouteToHash,
-
-            /** @property {observable} username */
+            
             username : username,
             
-            /** @property {observable} password */
             password : password,
             
-            /** @property {observable} rememberMe - Remember the user for the following visits */
             rememberMe : rememberMe,
             
-            /** @property {observable} returnUrl */
             returnUrl : returnUrl,
             
-            /** @property {observable} isRedirect */
             isRedirect : isRedirect,
             
-            /** @property {appsecurity} appsecurity */
             appsecurity: appsecurity,
 
-            /** @property {observableArray} externalLoginProviders */
             externalLoginProviders: ko.observableArray(),
 
-            /**
-              * Activate view
-              * @method
-              * @return {promise} - Promise of getting external logins and showing them in the view
-            */   
+            attached: function () {
+                var self = this;
+
+                appsecurity.getExternalLogins(appsecurity.returnUrl, true)
+                    .then(function (data) {
+                        if (typeof (data) === "object") {
+                            for (var i = 0; i < data.length; i++) {
+                                self.externalLoginProviders.push(new ExternalLoginProviderViewModel(data[i]));
+                            }
+                        }
+                    }).fail(self.handleauthenticationerrors);
+            },
+  
             activate: function (splat) {
                 var self = this,
                     redirect = splat ? splat.redirectto : null;
@@ -101,21 +94,10 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                     this.isRedirect(true);
                 }
                 this.returnUrl(redirect);
-
-                return appsecurity.getExternalLogins(appsecurity.returnUrl, true)
-                    .then(function (data) {
-                        if (typeof (data) === "object") {
-                            for (var i = 0; i < data.length; i++) {
-                                self.externalLoginProviders.push(new ExternalLoginProviderViewModel(data[i]));
-                            }
-                        }
-                    }).fail(self.handleauthenticationerrors);
+                
+                return true;
             },
 
-            /**
-             * Login the user using forms auth
-             * @method
-            */
             login: function () {
                 var self = this;
 
@@ -135,10 +117,6 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                 }).fail(self.handleauthenticationerrors);
             },
 
-            /**
-             * Logout user
-             * @method
-            */
             logout: function () {
                 appsecurity.logout();
             }
