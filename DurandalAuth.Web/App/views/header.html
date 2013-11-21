@@ -1,0 +1,39 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">        
+        <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-main-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>              
+        <a data-bind="attr: { href: router.convertRouteToHash('/' + router.navigationModel()[0].hash) }" class="navbar-brand">DurandalAuth</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-main-collapse" style="height: 0px;">
+        <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
+            <li data-bind="css: { active: isActive }">
+               <a data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title"></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-bind="if: typeof(appsecurity.userInfo()) == 'undefined'">
+            <li>
+                <a data-bind="attr: { href: router.convertRouteToHash('/account/login') }"><i class="icon-user"></i>&nbsp; Login</a>
+            </li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right" data-bind="if: !(typeof(appsecurity.userInfo()) == 'undefined')">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i>&nbsp; Hi <span data-bind="text: appsecurity.userInfo().name"></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a data-bind="attr: { href: router.convertRouteToHash('/account/manage') }">Manage your account</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a data-bind="    attr: { href: router.convertRouteToHash('/user/dashboard') }">Dashboard</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['Administrator'])" class="divider"></li>
+                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a data-bind="    attr: { href: router.convertRouteToHash('/admin/panel') }">Admin Panel</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" data-bind="click: logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>                          
+    </div>              
+</nav>
