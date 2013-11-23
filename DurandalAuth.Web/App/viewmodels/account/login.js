@@ -11,11 +11,10 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
         var username = ko.observable().extend({ required: true }),
             password = ko.observable().extend({ required: true, minLength: 6 }),
             rememberMe = ko.observable(),
-            returnUrl = ko.observable(),
-            isRedirect = ko.observable(false),
+            returnUrl = ko.observable(null),
             isAuthenticated = ko.observable(false);
 
-        function ExternalLoginProviderViewModel(data) {
+        function ExternalLoginProviderViewModel(data, returnUrl) {
             var self = this;
 
             self.name = ko.observable(data.name);
@@ -23,6 +22,9 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
             self.login = function () {
                 sessionStorage["state"] = data.state;
                 sessionStorage["loginUrl"] = data.url;
+                if (returnUrl) {
+                    sessionStorage["redirectTo"] = returnUrl;
+                }                
 
                 // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
                 // to localStorage to work around this problem.
@@ -63,39 +65,30 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
             
             rememberMe : rememberMe,
             
-            returnUrl : returnUrl,
-            
-            isRedirect : isRedirect,
+            returnUrl : returnUrl,       
             
             appsecurity: appsecurity,
 
             externalLoginProviders: ko.observableArray(),
-
-            attached: function () {
-                var self = this;
-
-                appsecurity.getExternalLogins(appsecurity.returnUrl, true)
-                    .then(function (data) {
-                        if (typeof (data) === "object") {
-                            for (var i = 0; i < data.length; i++) {
-                                self.externalLoginProviders.push(new ExternalLoginProviderViewModel(data[i]));
-                            }
-                        }
-                    }).fail(self.handleauthenticationerrors);
-            },
   
             activate: function (splat) {
-                var self = this,
-                    redirect = splat ? splat.redirectto : null;
+                var self = this;
 
                 ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
 
-                if (redirect != "null") {
-                    this.isRedirect(true);
-                }
-                this.returnUrl(redirect);
+                if (splat && splat.returnUrl) {
+                    self.returnUrl(splat.returnUrl);
+                }                
                 
-                return true;
+                return appsecurity.getExternalLogins(appsecurity.returnUrl, true)
+                    .then(function (data) {
+                        if (typeof (data) === "object") {
+                            self.externalLoginProviders.removeAll();
+                            for (var i = 0; i < data.length; i++) {
+                                self.externalLoginProviders.push(new ExternalLoginProviderViewModel(data[i], self.returnUrl() ? self.returnUrl() : null ));
+                            }
+                        }
+                    }).fail(self.handleauthenticationerrors);                
             },
 
             login: function () {
@@ -113,6 +106,11 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                 }).done(function (data) {
                     if (data.userName && data.access_token) {
                         appsecurity.setAuthInfo(data.userName, data.roles, data.access_token, self.rememberMe);
+                        if (self.returnUrl()) {
+                            router.navigate(self.returnUrl());
+                        } else {
+                            router.navigate("account/manage");
+                        }
                     }
                 }).fail(self.handleauthenticationerrors);
             },

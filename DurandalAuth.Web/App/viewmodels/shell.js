@@ -32,10 +32,10 @@
                                     if (appsecurity.isUserInRole(instruction.config.authorize)) {
                                         return true;
                                     } else {                                        
-                                        return "/account/login";
+                                        return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
                                     }
                                 } else {                                    
-                                    return "/account/login";
+                                    return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
                                 }
                             } else {
                                 return true;
