@@ -40,7 +40,7 @@
                 </div>
                 <div class="list-group" data-bind="foreach: externalLoginProviders">
                     <a class="list-group-item lead" href="#" data-bind="click: login, attr: { 'data-provider': name,  title: 'Log in using your ' + name() + ' account'}">
-                        <i data-bind="css: socialIcon"></i>
+                        <i data-bind="css: socialIcon($data)"></i>
                         <span data-bind="text: name"></span>
                     </a>
                 </div>

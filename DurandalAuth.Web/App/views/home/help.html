@@ -1,0 +1,50 @@
+﻿<div id="help">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2>How is this site working?</h2>
+                </div>
+                <p>This site simulates a community-managed article repository. People with accounts can write articles in their dashboards and make them public on the web.</p>
+                <p>The main objective of this sample application is to provide a way to authenticate and authorize users similar to the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social providers among another useful features.</p>
+                <p>I decided to leverage the first template I created to build a more complete application in order to show what Breeze JS can do for you and how to protect saving changes on server.</p>
+                <hr />
+                <p>The first thing you should do is create a new account using the <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">membership system or the oAuth providers</a>.</p>
+                <p>
+                    After registration, a <span class="label label-info">User</span>
+                    role will be assigned to you that will permit access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>. Once there, you can start writing articles.
+                </p>
+                <p>
+                    While writing on your dashboard, remember to set the article
+                    as a public article if you want to make it visible for the rest of the community.
+                </p>
+                <p>
+                    Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>. If you want to access this view, you'll need to have the
+                    <span class="label label-info">Administrator</span> role.
+                </p>
+                <p>Try to log in with the following: <span class="label label-success">admin/admin1234</span> and once there, you will be able to check a list with the registered users on this site.</p>
+                <hr />
+                <blockquote class="bs-callout bs-callout-danger">
+                    <h2>Remember !!</h2>
+                    <p class="lead">
+                        The authorization system in the client can always be hacked!
+                        Always authenticate and authorize the request in the server when retrieving the necessary data for your views.
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2>About SEO Optimization</h2>
+                </div>
+                <p>The template is ready to be SEO crawlable. DurandalAuth implements the <a href="#" onclick="window.open('https://developers.google.com/webmasters/ajax-crawling/docs/getting-started', '_blank')"> google ajax crawling scheme</a> for pages without hash fragments. You need the default pushstate option enabled.</p>
+                <p>I created a interface (Helpers/ISnapshot.cs) that needs to be implemented in order to work.</p>
+                <p>The default implementation uses <a href="#" onclick="window.open('https://github.com/yagopv/azurecrawler', '_blank')"> a new project I created called AzureCrawler</a>.</p>
+                <p>This new project is a Worker Role ready to be deployed to Windows Azure and serving a REST Web API via OWIN. The Web API executes a phantomjs process when receiving requests and returns html snapshots. Moreover, AzureCrawler can save the snapshot to Azure Storage and keep it there with the expiration date you choose, so next time the page is requested for any bot, the stored snapshot will be served.</p>
+                <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>

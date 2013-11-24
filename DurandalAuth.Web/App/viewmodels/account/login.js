@@ -24,7 +24,9 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                 sessionStorage["loginUrl"] = data.url;
                 if (returnUrl) {
                     sessionStorage["redirectTo"] = returnUrl;
-                }                
+                } else {
+                    sessionStorage["redirectTo"] = "account/manage";
+                }
 
                 // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
                 // to localStorage to work around this problem.
@@ -35,21 +37,21 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 
             self.socialIcon = function (data) {
                 var icon = "";
-                switch (data.name.toLowerCase()) {
+                switch (data.name().toLowerCase()) {
                     case "facebook":
-                        icon = "icon-facebook-sign"
+                        icon = "fa fa-facebook-square";
                         break;
                     case "twitter":
-                        icon = "icon-twitter-sign"
+                        icon = "fa fa-twitter-square";
                         break;
                     case "google":
-                        icon = "icon-google-plus-sign"
+                        icon = "fa fa-google-plus-square";
                         break;
                     case "microsoft":
-                        icon = "icon-envelope"
+                        icon = "fa fa-envelope";
                         break;
                     default:
-                        icon = "icon-check-sign"
+                        icon = "fa fa-check-square";
                 }
                 return icon;
             }

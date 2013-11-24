@@ -30,21 +30,21 @@ function (system,appsecurity, errorhandler, logger, utils) {
 
 	    self.socialIcon = function (provider) {
 	        var icon = "";
-	        switch (provider.Provider.toLowerCase()) {
+	        switch (provider.name().toLowerCase()) {
 	            case "facebook":
-	                icon = "icon-facebook-sign";
+	                icon = "fa fa-facebook-square";
 	                break;
 	            case "twitter":
-	                icon = "icon-twitter-sign";
+	                icon = "fa fa-twitter-square";
 	                break;
 	            case "google":
-	                icon = "icon-google-plus-sign";
+	                icon = "fa fa-google-plus-square";
 	                break;
 	            case "microsoft":
-	                icon = "icon-envelope";
+	                icon = "fa fa-envelope";
 	                break;
 	            default:
-	                icon = "icon-check-sign";
+	                icon = "fa fa-check-square";
 	        }
 	        return icon;
 	    };
@@ -93,7 +93,11 @@ function (system,appsecurity, errorhandler, logger, utils) {
 				self.changing(false);
 				reset();
 				logger.logSuccess("Password changed", null, null, true);
-			}).fail(self.handlevalidationerrors);
+			})
+            .fail(self.handlevalidationerrors)
+		    .fail(function () {
+		        self.changing(false);
+		    });
 		};
 	}
 
@@ -250,11 +254,15 @@ function (system,appsecurity, errorhandler, logger, utils) {
                             typeof (data.externalLoginProviders) !== "undefined") {
 
                             self.userName(data.userName);
+
                             self.localLoginProvider(data.localLoginProvider);
+                            self.userLogins.removeAll();
 
                             for (var i = 0; i < data.logins.length; i++) {
                                 self.userLogins.push(new RemoveLoginViewModel(data.logins[i], self));
                             }
+
+                            self.externalLoginProviders.removeAll();
 
                             for (var i = 0; i < data.externalLoginProviders.length; i++) {
                                 self.externalLoginProviders.push(new AddExternalLoginProviderViewModel(data.externalLoginProviders[i]));

@@ -12,18 +12,22 @@
 
 .splash {
 	text-align: center;
-	margin: 10% 0 0 0;
+	margin: 0;
+    background : #6246cb;
+    opacity : 0.8;
+    color : #FFF;
+    height : 100em;
 }
 
 .splash .message {
+    padding-top : 10%;
 	font-size: 5em;
 	line-height: 1.5em;
 	-webkit-text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
 	text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
-	text-transform: uppercase;
 }
 
-.splash .icon-spinner {
+.splash .fa-spinner {
 	text-align: center;
 	display: inline-block;
 	font-size: 5em;
@@ -81,18 +85,6 @@ body {
 	vertical-align: middle;
 }
 
-.strawberry {
-	background-color : #9e2865;
-	color : #FFF;
-	border-color:transparent;
-}
-
-.sky {
-	background-color : #3FB5DA;
-	color : #FFF;
-	border-color:transparent;
-}
-
 .prewrap {
 	white-space: pre-wrap;
 }
@@ -112,17 +104,6 @@ body {
 
 #index #featured {
 	margin-top : -30px;
-	opacity : 0;
-}
-
-#index #featured .st-slider-control,
-#index #featured .st-slider-indicators  li {
-	background: #808080;
-}
-
-#index #featured .st-slider-control:hover,
-#index #featured .st-slider-indicators  li.active {
-	background: #4f3838;
 }
 
 /* Articles */
@@ -136,11 +117,11 @@ body {
 }
 
 #articles .st-offcanvas-menu {
-	padding-bottom : 30em;
+    padding : 2% 2% 30em 2% ;
 }
 
 #articles .st-offcanvas-main {
-	padding-top : 0;
+	padding : 0 2% 0 2%;
 }
 
 #articles .st-offcanvas-main:before {
@@ -220,14 +201,14 @@ body {
 /* Footer */
 
 footer {
-	background-color:#000;
-	color : #999;    
+	background-color:#3d288e;
+	color : #FFF;    
 	display:none;
 }
 
 .footer-content {
 	padding : 3%;
-	color : #999;
+	color : #FFF;
 }
 	  
 footer li {
@@ -239,7 +220,7 @@ footer li a {
 }
 
 footer a {
-	color : #ccc;    
+	color : #eee;    
 }
 
 footer a:hover {

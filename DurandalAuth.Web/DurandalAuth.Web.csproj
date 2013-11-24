@@ -78,8 +78,9 @@
     <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.2.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
@@ -214,6 +215,7 @@
     <Content Include="App\viewmodels\header.js" />
     <Content Include="App\viewmodels\home\about.js" />
     <Content Include="App\viewmodels\home\articles.js" />
+    <Content Include="App\viewmodels\home\help.js" />
     <Content Include="App\viewmodels\home\index.js" />
     <Content Include="App\viewmodels\notfound.js" />
     <Content Include="App\viewmodels\shell.js" />
@@ -228,6 +230,7 @@
     <Content Include="App\views\header.html" />
     <Content Include="App\views\home\about.html" />
     <Content Include="App\views\home\articles.html" />
+    <Content Include="App\views\home\help.html" />
     <Content Include="App\views\home\index.html" />
     <Content Include="App\views\notfound.html" />
     <Content Include="App\views\shell.html" />
@@ -237,12 +240,12 @@
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-whiteplum.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\durandal.css" />
-    <Content Include="Content\fontawesome\font-awesome.css" />
-    <Content Include="Content\fontawesome\font-awesome.min.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\icons\icon_angles.png" />
     <Content Include="Content\icons\icon_cloud.png" />
     <Content Include="Content\icons\icon_data.png" />
@@ -264,12 +267,10 @@
     <Content Include="Content\Stashy.min.css" />
     <Content Include="Content\vs.css" />
     <Content Include="Content\zen-form.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\almond-custom.js" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
@@ -282,6 +283,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -322,6 +330,7 @@
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\Stashy.js" />
     <Content Include="Scripts\Stashy.min.js" />
+    <Content Include="Scripts\zen-form.js" />
     <Content Include="weyland-config.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />

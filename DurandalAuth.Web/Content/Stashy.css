@@ -1,5 +1,5 @@
 /*!
- * Stashy v1.1.0 by @yperezva
+ * Stashy v1.1.1 by @yperezva
  * Copyright 2013 Yago Pérez Vázquez
  * Licensed under http://http://opensource.org/licenses/MIT
  */
@@ -1884,6 +1884,7 @@ video {
 .st-notify h4,
 .st-notify h5,
 .st-notify h6 {
+  font-weight: bold;
   margin: 0;
 }
 .st-notify .st-notify-content {
@@ -1925,35 +1926,35 @@ video {
   background: #000000;
 }
 .st-notify.default * {
-  color: #333333;
+  color: #cccccc;
 }
 .st-notify.error {
   border: #d52a2a 1px solid;
   background: #d52a2a;
 }
 .st-notify.error * {
-  color: #e67f7f;
+  color: #ffffff;
 }
 .st-notify.info {
   border: #2092f3 1px solid;
   background: #2092f3;
 }
 .st-notify.info * {
-  color: #81c1f8;
+  color: #ffffff;
 }
 .st-notify.warning {
   border: #f29444 1px solid;
   background: #f29444;
 }
 .st-notify.warning * {
-  color: #f9cba3;
+  color: #ffffff;
 }
 .st-notify.success {
-  border: #2cd386 1px solid;
-  background: #2cd386;
+  border: #00ff89 1px solid;
+  background: #00ff89;
 }
 .st-notify.success * {
-  color: #80e5b6;
+  color: #ffffff;
 }
 .st-notify .st-notify-close {
   position: relative;

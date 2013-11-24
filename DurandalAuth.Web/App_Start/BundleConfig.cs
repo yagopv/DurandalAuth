@@ -30,8 +30,8 @@ namespace DurandalAuth.Web {
 	  bundles.Add(
 		new StyleBundle("~/Content/css")
 		  .Include("~/Content/ie10mobile.css")
-		  .Include("~/Content/bootstrap.css")
-		  .Include("~/Content/fontawesome/font-awesome.css")
+		  .Include("~/Content/bootstrap-whiteplum.css")
+		  .Include("~/Content/font-awesome.css")
 		  .Include("~/Content/durandal.css")
 		  .Include("~/Content/toastr.css")
 		  .Include("~/Content/Stashy.css")

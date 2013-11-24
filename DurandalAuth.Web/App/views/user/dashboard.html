@@ -5,9 +5,9 @@
         </div>
         <p class="lead">Write, update and delete your personal articles</p>
 
-        <a href="#" class="btn btn-primary" data-bind="click : newArticle"><i class="icon-plus-sign"></i>   New Article</a>
+        <a href="#" class="btn btn-primary" data-bind="click : newArticle"><i class="fa fa-plus-circle"></i>   New Article</a>
 
-        <a href="#" class="btn btn-success" data-bind="click: saveArticles"><i class="icon-save"></i>   Save all changes</a>
+        <a href="#" class="btn btn-success" data-bind="click: saveArticles"><i class="fa fa-save"></i>   Save all changes</a>
 
         <!-- Articles List -->
 
@@ -58,7 +58,7 @@
                     <div class="modal-body">
                         <div class="form-group" data-bind="validationElement: imageUrl">
                             <div class="page-header">
-                                <h2><i class="icon-picture"></i>   Logo  <small>enter logo for the article</small></h2>                                        
+                                <h2><i class="fa fa-picture-o"></i>   Logo  <small>enter logo for the article</small></h2>                                        
                             </div>
                             <div class="row">
                                 <div class="col-xs-3 col-sm-4 col-md-3 col-lg-2">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="page-header">
-                            <h2><i class="icon-list-ul"></i>   Main info   <small>enter some info about the article</small></h2>
+                            <h2><i class="fa fa-list-ul"></i>   Main info   <small>enter some info about the article</small></h2>
                         </div>
                         <div class="form-group" data-bind="validationElement: title">
                              <label class="control-label" for="username">Title</label>                        
@@ -97,12 +97,12 @@
                             </label>
                         </div>
                         <div class="page-header">
-                            <h2><i class="icon-pencil"></i>   Content   <small>write your article. Markdown is allowed</small></h2>
+                            <h2><i class="fa fa-pencil"></i>   Content   <small>write your article. Markdown is allowed</small></h2>
                         </div>
                         <div class="form-group" data-bind="validationElement: markdown">
                             <div>
-                                <a href="#" class="btn btn-primary"  data-bind="click: function () { $parent.changePreview(this, $parent) }"><i class="icon-eye-open"></i>  Change Edit/Preview</a>
-                                <a href="#" class="btn btn-primary go-zen"><i class="icon-pencil"></i>  Edit in Zen Mode with no distraction</a>
+                                <a href="#" class="btn btn-primary"  data-bind="click: function () { $parent.changePreview(this, $parent) }"><i class="fa fa-eye"></i>  Change Edit/Preview</a>
+                                <a href="#" class="btn btn-primary go-zen"><i class="fa fa-pencil"></i>  Edit in Zen Mode with no distraction</a>
                             </div>                        
                             <div class="form-group mart2">                                
                                 <textarea rows="10" cols="60" class="form-control auto-height-textarea zen-mode" data-bind="value: markdown, visible: !$parent.preview(), event: { 'change': $parent.convertMarkdown }" placeholder="Enter content here using markdown"></textarea>
@@ -111,7 +111,7 @@
                             <p class="text-right"><abbr title="Markdown is allowed within the textarea. Click preview for watch html result">markdown</abbr></p>
                         </div>
                         <div class="page-header">
-                            <h2><i class="icon-tags"></i>   Tags   <small>start tagging your article</small></h2>
+                            <h2><i class="fa fa-tags"></i>   Tags   <small>start tagging your article</small></h2>
                         </div>
                         <div class="form-group">
                              <input id="tags" class="form-control" type="text"  data-bind="value: splitTags">      

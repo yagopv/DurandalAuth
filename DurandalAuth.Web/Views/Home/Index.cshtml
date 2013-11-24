@@ -43,9 +43,9 @@
 		<div class="st-sticky-wrap" id="applicationHost">
 			<div class="splash">
                 <div class="message">
-                    DurandalAuth sample template
+                    DurandalAuth 2.0
                 </div>
-                <i class="icon-spinner icon-2x icon-spin active"></i>
+                <i class="fa fa-spinner fa-4x fa-spin active"></i>
             </div>
 		</div>
 		<footer class="st-sticky-footer">
@@ -60,12 +60,12 @@
 			        <div class="footer-content">                
 				        <ul class="list-unstyled">
 					        <li>
-						        <a href="#" onclick="window.open('https://github.com/yagopv/durandalauth', '_blank')"><i class="icon-github"></i>&nbsp;View project on Github</a>
+						        <a href="#" onclick="window.open('https://github.com/yagopv/durandalauth', '_blank')"><i class="fa fa-github"></i>&nbsp;View project on Github</a>
 					        </li>
 					        <li>
-						        <a href="#" onclick="window.open('https://twitter.com/yperezva', '_blank')"><i class="icon-twitter-sign"></i>&nbsp;Follow me on Twitter</a></li>
+						        <a href="#" onclick="window.open('https://twitter.com/yperezva', '_blank')"><i class="fa fa-twitter"></i>&nbsp;Follow me on Twitter</a></li>
 					        <li>
-						        <a href="#" onclick="document.location.href = 'mailto:yago.perez@outlook.com'"><i class="icon-envelope-alt"></i>&nbsp;Email me</a>
+						        <a href="#" onclick="document.location.href = 'mailto:yago.perez@outlook.com'"><i class="fa fa-envelope"></i>&nbsp;Email me</a>
 					        </li>
 				        </ul>
 			        </div>
@@ -78,23 +78,8 @@
 		@if(HttpContext.Current.IsDebuggingEnabled) {
 			<script type="text/javascript" src="/Scripts/require.js" data-main="/App/main"></script>
 		} else {
-			<script type="text/javascript" src="/App/main-built.js"></script>			
+			<script type="text/javascript" src="/App/main-built.js"></script>	  		
 		}
-
-        <!-- AddThis Smart Layers BEGIN -->
-        <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-526ec65d59442092"></script>
-        <script type="text/javascript">
-          addthis.layers({
-            'theme' : 'transparent',
-            'share' : {
-              'position' : 'right',
-              'services' : "twitter,linkedin,facebook,more",
-              'postShareRecommendedMsg' : ""
-            }   
-          });
-        </script>
-        <!-- AddThis Smart Layers END -->    
 
 	</body>
 </html>

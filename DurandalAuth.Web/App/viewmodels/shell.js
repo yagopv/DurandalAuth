@@ -50,8 +50,9 @@
                         return router.map([
                             // Nav urls
                             { route: ['','home/index'],                       moduleId: 'home/index',                        title: 'Home',                        nav: true, hash : "#home/index"    },
-                            { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash : "#home/articles" },
-                            { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true, hash : "#home/about"    },
+                            { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash: "#home/articles" },
+                            { route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: true, hash : "#home/help" },
+                            { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true, hash : "#home/about" },
                             { route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found',                   nav: false },
                                 
                             // Admin panel url
