@@ -19,7 +19,7 @@ namespace DurandalAuth.Data.Migrations
         {
             UserManager<UserProfile> UserManager = new UserManager<UserProfile>(new UserStore<UserProfile>(context));
             RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
+                        
             if (!RoleManager.RoleExists("Administrator"))
             {
                 RoleManager.Create(new IdentityRole("Administrator"));
@@ -43,7 +43,7 @@ namespace DurandalAuth.Data.Migrations
             }
 
             DurandalAuthDbContext uow = new DurandalAuthDbContext();
-
+            
             if (!uow.Categories.Any())
             {
 
