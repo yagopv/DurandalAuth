@@ -1,5 +1,5 @@
 /** 
- * @module Manage Account
+ * @module Login
  * @requires appsecurity
  * @requires router
  * @requires errorHandler

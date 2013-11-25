@@ -10,27 +10,29 @@
                         <h4>Sign in with your credentials</h4>
                     </div>
                     <div class="form-group" data-bind="validationElement: username">
-                       <label class="control-label col-lg-4" for="username">Username</label>
+                        <label class="control-label col-lg-4" for="username">Username</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text"  data-bind="value: username" placeholder="User name">                       
+                            <input class="form-control" type="text" data-bind="value: username" placeholder="User name">
                         </div>
                     </div>
                     <div class="form-group" data-bind="validationElement: password">
                         <label class="control-label col-lg-4" for="email">Password</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="password"  data-bind="value: password" placeholder="Password">                        
+                            <input class="form-control" type="password" data-bind="value: password" placeholder="Password">
                         </div>
-                    </div>  
+                    </div>
                     <div class="checkbox col-lg-offset-4">
                         <label class="checkbox">
                             <input type="checkbox" data-bind="value: rememberMe">Remember me
-                        </label>                      
-                    </div>                                                                                                     
+                        </label>
+                    </div>
                     <div class="col-lg-offset-4 mart2">
                         <button type="submit" class="btn btn-primary" data-bind="click: login">Sign in</button>
-                        <button type="reset" class="btn btn-default">Reset</button>                        
-                        <p class="mart5"> <a href="#" class="btn btn-link" data-bind="attr: { href: convertRouteToHash('/account/register') }">Register</a>if don't have and account?</p>
-                    </div> 
+                        <button type="reset" class="btn btn-default">Reset</button>
+                        <hr />
+                        <a href="#" class="btn btn-default" data-bind="attr: { href: convertRouteToHash('/account/register') }">Register if don't have and account</a>
+                        <hr/>
+                    </div>
                 </form>                      
             </div>
     

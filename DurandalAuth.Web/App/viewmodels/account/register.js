@@ -1,8 +1,8 @@
 /** 
-    * @module Manage registering users
-    * @requires appsecurity
-    * @requires router
-    * @requires errorHandler
+  * @module Manage registering users
+  * @requires appsecurity
+  * @requires router
+  * @requires errorHandler
 */
 
 define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
@@ -15,26 +15,18 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
         
         var viewmodel =  {
             
-            /** @property {observable} confirmNewPassword */
             username : username,
             
-            /** @property {observable} email */
             email : email,
             
-            /** @property {observable} password */
             password :  password,
             
-            /** @property {observable} confirmpassword */
             confirmpassword : confirmpassword,
             
             activate : function () {
                 ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
             },
 
-            /**
-             * Register a new user
-             * @method
-            */
             register : function () {
                 var self = this;                
                 if (this.errors().length != 0) {                    
@@ -60,6 +52,7 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 								data.access_token, 
 								self.rememberMe);
 						}
+						router.navigate("account/manage");
 					}).fail(self.handleauthenticationerrors);
 				}).fail(self.handlevalidationerrors);				
             }

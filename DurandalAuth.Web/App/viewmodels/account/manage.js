@@ -1,5 +1,6 @@
 /** 
  * @module Module for managing user accounts
+ * @requires system
  * @requires appsecurity
  * @requires errorHandler
  * @requires logger
