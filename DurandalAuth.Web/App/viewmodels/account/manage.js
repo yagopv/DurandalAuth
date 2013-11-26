@@ -102,7 +102,7 @@ function (system,appsecurity, errorhandler, logger, utils) {
 		};
 	}
 
-	function RemoveLoginViewModel(data, parent) {
+	function RemoveLoginViewModel(data, userLogins) {
 		// Private state
 		var self = this,
 			providerKey = ko.observable(data.providerKey);
@@ -124,7 +124,7 @@ function (system,appsecurity, errorhandler, logger, utils) {
 				providerKey: providerKey()
 			}).done(function (data) {
 				self.removing(false);
-				parent.userLogins.remove(self);
+				userLogins.remove(self);
 				logger.logSuccess("Login removed succesfully", null, null, true);				
 			}).fail(self.handlevalidationerrors);
 		};
@@ -160,7 +160,7 @@ function (system,appsecurity, errorhandler, logger, utils) {
 				userLogins.push(new RemoveLoginViewModel({
 					loginProvider: localLoginProvider(),
 					providerKey: userName()
-				}));
+				}, userLogins));
 				logger.logSuccess("Password set successfully", null, null, true);
 			}).fail(errorhandler.handlevalidationerrors);
 		};
@@ -260,7 +260,7 @@ function (system,appsecurity, errorhandler, logger, utils) {
                             self.userLogins.removeAll();
 
                             for (var i = 0; i < data.logins.length; i++) {
-                                self.userLogins.push(new RemoveLoginViewModel(data.logins[i], self));
+                                self.userLogins.push(new RemoveLoginViewModel(data.logins[i], self.userLogins));
                             }
 
                             self.externalLoginProviders.removeAll();
