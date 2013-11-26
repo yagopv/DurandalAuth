@@ -75,7 +75,7 @@ define(['durandal/system'],
                         contentType: "inline",
                         animDuration: "fast",
                         closeArea: "element",
-                        animDuration : 5000
+                        activeDuration: 5000
                     }).toast("right", "bottom", true);
                 } else {
                     if (toastType === 'success') {
@@ -87,7 +87,7 @@ define(['durandal/system'],
                             contentType: "inline",
                             animDuration: "fast",
                             closeArea: "element",
-                            animDuration : 5000
+                            activeDuration: 5000
                         }).toast("right", "bottom", true);
                     } else {
                         Stashy.Notify({
@@ -98,7 +98,7 @@ define(['durandal/system'],
                             contentType: "inline",
                             animDuration: "fast",
                             closeArea: "element",
-                            animDuration : 5000
+                            activeDuration: 5000
                         }).toast("right", "bottom", true);
                     }
                 }
