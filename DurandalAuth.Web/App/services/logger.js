@@ -1,6 +1,6 @@
 /** 
-    * @module Logging errors to the console and showing toasts with Stashy.Notify
-    * @requires system
+ * @module Logging errors to the console and showing toasts with Stashy.Notify
+ * @requires system
 */
 
 define(['durandal/system'],
@@ -68,34 +68,37 @@ define(['durandal/system'],
             if (showToast) {
                 if (toastType === 'error') {
                     Stashy.Notify({
-                        title: "Something failed :(",
-                        content: message,
+                        title: "<i class='fa fa-warning'></i>   Something failed",
+                        content:  message,
                         titleSize: 4,
                         style: "error",
                         contentType: "inline",
                         animDuration: "fast",
-                        closeArea: "element"
+                        closeArea: "element",
+                        animDuration : 5000
                     }).toast("right", "bottom", true);
                 } else {
                     if (toastType === 'success') {
                         Stashy.Notify({
-                            title: "Success !! :)",
+                            title: "<i class='fa fa-smile-o'></i>   Success !!",
                             content: message,
                             titleSize: 4,
                             style: "success",
                             contentType: "inline",
                             animDuration: "fast",
-                            closeArea: "element"
+                            closeArea: "element",
+                            animDuration : 5000
                         }).toast("right", "bottom", true);
                     } else {
                         Stashy.Notify({
-                            title: "Information",
+                            title: "<i class='fa fa-info'></i>   Info message",
                             content: message,
                             titleSize: 4,
                             style: "info",
                             contentType: "inline",
                             animDuration: "fast",
-                            closeArea: "element"
+                            closeArea: "element",
+                            animDuration : 5000
                         }).toast("right", "bottom", true);
                     }
                 }
