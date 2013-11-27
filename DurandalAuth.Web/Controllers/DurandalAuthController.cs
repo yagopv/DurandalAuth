@@ -74,7 +74,6 @@ namespace DurandalAuth.Web.Controllers
         /// <returns>Save result</returns>
         [HttpPost]
         [AllowAnonymous]
-        [AntiForgeryToken]
         public SaveResult SaveChanges(JObject saveBundle)
         {             
             return UnitOfWork.Commit(saveBundle);

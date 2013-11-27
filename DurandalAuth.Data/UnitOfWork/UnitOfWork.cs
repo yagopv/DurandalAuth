@@ -28,9 +28,9 @@ namespace DurandalAuth.Data.UnitOfWork
         /// <summary>
         /// ctor
         /// </summary>
-        public UnitOfWork(UserManager<UserProfile> usermanager, IIdentity identity)
+        public UnitOfWork(UserManager<UserProfile> usermanager)
         {
-            contextProvider = new DurandalAuthDbContextProvider(usermanager, identity);
+            contextProvider = new DurandalAuthDbContextProvider(usermanager);
 
             ArticleRepository = new Repository<Article>(contextProvider.Context);
             CategoryRepository = new Repository<Category>(contextProvider.Context);

@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Web;
+using System.Threading;
 
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -28,6 +29,7 @@ using DurandalAuth.Data.UnitOfWork;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Helpers;
+using System.Security.Principal;
 
 namespace DurandalAuth.Web.DependencyResolution {
     public static class IoC {
@@ -38,9 +40,10 @@ namespace DurandalAuth.Web.DependencyResolution {
                                     {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
-                                    });
+                                    });                            
+
                             x.For<IUnitOfWork>().HttpContextScoped().Use(
-                                () => new UnitOfWork(new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())), HttpContext.Current.User.Identity));
+                                () => new UnitOfWork(new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext()))));
 
                             x.For<ISnapshot>().HttpContextScoped().Use<Snapshot>();
 

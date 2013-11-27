@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Principal;
 
@@ -21,13 +22,11 @@ namespace DurandalAuth.Data
     public class DurandalAuthDbContextProvider : EFContextProvider<DurandalAuthDbContext> 
     {
         protected UserManager<UserProfile> UserManager { get; private set; }
-        protected IIdentity Identity { get; private set; }
 
-        public DurandalAuthDbContextProvider(UserManager<UserProfile> usermanager, IIdentity identity)
+        public DurandalAuthDbContextProvider(UserManager<UserProfile> usermanager)
             : base() 
         {
             UserManager = usermanager;
-            Identity = identity;
         }
  
         /// <summary>
@@ -48,16 +47,16 @@ namespace DurandalAuth.Data
                 Article article = entityInfo.Entity as Article;                
 
                 if (entityInfo.EntityState == EntityState.Added)
-                {
+                {                    
                     article.SetUrlReference();
-                    article.CreatedBy = Identity.GetUserName();
+                    article.CreatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
                     article.CreatedDate = DateTime.UtcNow;
-                    article.UpdatedBy = Identity.GetUserName();
+                    article.UpdatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
                     article.UpdatedDate = DateTime.UtcNow;
                 }
                 if (entityInfo.EntityState == EntityState.Modified)
                 {
-                    article.UpdatedBy = Identity.GetUserName();
+                    article.UpdatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
                     article.UpdatedDate = DateTime.UtcNow;
                 }                                               
             }
@@ -105,7 +104,7 @@ namespace DurandalAuth.Data
                 {                    
                     // Mandatory => Registered users saving articles
 
-                    if (!UserManager.IsInRole(Identity.GetUserId(), "User") || !Identity.IsAuthenticated)
+                    if (!UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "User") || !Thread.CurrentPrincipal.Identity.IsAuthenticated)
                     {
                         var errors = articles.Select(oi =>
                         {
@@ -119,8 +118,8 @@ namespace DurandalAuth.Data
                     articles.ForEach(a =>  {
                         Article article = a.Entity as Article;
                         if (
-                            (a.EntityState == EntityState.Modified || a.EntityState == EntityState.Added || a.EntityState == EntityState.Deleted) && 
-                             article.CreatedBy != Identity.GetUserName()
+                            (a.EntityState == EntityState.Modified || a.EntityState == EntityState.Added || a.EntityState == EntityState.Deleted) &&
+                             article.CreatedBy != Thread.CurrentPrincipal.Identity.GetUserName()
                            )
                         {
                             throw new EntityErrorsException(new List<EFEntityError>() { 
@@ -137,7 +136,7 @@ namespace DurandalAuth.Data
 
             if (saveMap.TryGetValue(typeof(Category), out categories))
             {
-                if (categories.Any() && !UserManager.IsInRole(Identity.GetUserId(),"Administrator"))
+                if (categories.Any() && !UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "Administrator"))
                 {
                     var errors = categories.Select(oi =>
                     {
@@ -155,7 +154,7 @@ namespace DurandalAuth.Data
             {
                 if (tags.Any())                                
                 {
-                    if (!UserManager.IsInRole(Identity.GetUserId(), "User") || !Identity.IsAuthenticated)
+                    if (!UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "User") || !Thread.CurrentPrincipal.Identity.IsAuthenticated)
                     {
                         var errors = userprofiles.Select(oi =>
                         {
