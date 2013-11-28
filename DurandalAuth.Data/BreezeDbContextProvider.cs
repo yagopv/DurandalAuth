@@ -19,11 +19,11 @@ namespace DurandalAuth.Data
     /// <summary>
     /// Define here your business rules
     /// </summary>
-    public class DurandalAuthDbContextProvider : EFContextProvider<DurandalAuthDbContext> 
+    public class BreezeDbContextProvider : EFContextProvider<DurandalAuthDbContext> 
     {
-        protected UserManager<UserProfile> UserManager { get; private set; }
+        protected UserManager<UserProfile> UserManager { get; private set; }    
 
-        public DurandalAuthDbContextProvider(UserManager<UserProfile> usermanager)
+        public BreezeDbContextProvider(UserManager<UserProfile> usermanager)
             : base() 
         {
             UserManager = usermanager;

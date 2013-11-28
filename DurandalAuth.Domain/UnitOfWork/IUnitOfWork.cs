@@ -21,12 +21,10 @@ namespace DurandalAuth.Domain.UnitOfWork
         IRepository<Category> CategoryRepository { get; }
         IRepository<Tag> TagRepository { get; }
         IRepository<UserProfile> UserProfileRepository { get; }
-
-        bool DatabaseExists();
-        void DatabaseInitialize();
-        string Metadata();
-
-        SaveResult Commit(JObject changeSet);
         void Commit();
+
+        //Breeze specific
+        string Metadata();
+        SaveResult Commit(JObject changeSet);
     }
 }

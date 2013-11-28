@@ -23,14 +23,14 @@ namespace DurandalAuth.Data.UnitOfWork
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DurandalAuthDbContextProvider contextProvider;
+        private readonly BreezeDbContextProvider contextProvider;
 
         /// <summary>
         /// ctor
         /// </summary>
         public UnitOfWork(UserManager<UserProfile> usermanager)
         {
-            contextProvider = new DurandalAuthDbContextProvider(usermanager);
+            contextProvider = new BreezeDbContextProvider(usermanager);
 
             ArticleRepository = new Repository<Article>(contextProvider.Context);
             CategoryRepository = new Repository<Category>(contextProvider.Context);
@@ -45,25 +45,6 @@ namespace DurandalAuth.Data.UnitOfWork
         public IRepository<Category> CategoryRepository { get; private set; }
         public IRepository<Tag> TagRepository { get; private set; }
         public IRepository<UserProfile> UserProfileRepository { get; private set; }
-
-        /// <summary>
-        /// Check if Database exists. 
-        /// Being used in Global.asax
-        /// </summary>
-        /// <returns></returns>
-        public bool DatabaseExists()
-        {
-            return contextProvider.Context.Database.Exists();
-        }
-
-        /// <summary>
-        /// Initialize Database
-        /// Being used in Global.asax
-        /// </summary>
-        public void DatabaseInitialize()
-        {
-            contextProvider.Context.Database.Initialize(true);
-        }
 
         /// <summary>
         /// Get breeze Metadata

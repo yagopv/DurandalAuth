@@ -50,7 +50,7 @@ namespace DurandalAuth.Web.DependencyResolution {
                             x.For<UserManager<UserProfile>>().HttpContextScoped().Use(() => new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())));
 
                             x.For<ISecureDataFormat<AuthenticationTicket>>().HttpContextScoped().Use(() => Startup.OAuthOptions.AccessTokenFormat);
-
+                            
                         });
             return ObjectFactory.Container;
         }
