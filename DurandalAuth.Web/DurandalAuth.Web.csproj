@@ -379,6 +379,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BreezeValidator.cs" />
     <Compile Include="Helpers\ISnapshot.cs" />
     <Compile Include="Helpers\LookupBundle.cs" />
     <Compile Include="Helpers\Snapshot.cs" />

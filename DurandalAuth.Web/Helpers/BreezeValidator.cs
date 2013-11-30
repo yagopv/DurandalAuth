@@ -1,40 +1,26 @@
-﻿using System;
+﻿using Breeze.ContextProvider;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Principal;
-
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-using Breeze.ContextProvider.EF6;
-using Breeze.ContextProvider;
-
+using System.Web;
+using DurandalAuth.Domain.Validators;
 using DurandalAuth.Domain.Model;
+using Breeze.ContextProvider.EF6;
+using Microsoft.AspNet.Identity;
 
-namespace DurandalAuth.Data
+namespace DurandalAuth.Web.Helpers
 {
-    /// <summary>
-    /// Define here your business rules
-    /// </summary>
-    public class BreezeDbContextProvider : EFContextProvider<DurandalAuthDbContext> 
+    public class BreezeValidator : IBreezeValidator
     {
-        protected UserManager<UserProfile> UserManager { get; private set; }    
+        UserManager<UserProfile> UserManager { get; set; }
 
-        public BreezeDbContextProvider(UserManager<UserProfile> usermanager)
-            : base() 
+        public BreezeValidator(UserManager<UserProfile> usermanager)
         {
-            UserManager = usermanager;
+            this.UserManager = usermanager;
         }
- 
-        /// <summary>
-        /// Actions to perform before save any entity
-        /// </summary>
-        /// <param name="entityInfo">The entity info</param>
-        /// <returns>true/false</returns>
-        protected override bool BeforeSaveEntity(EntityInfo entityInfo) {
+
+        public bool BeforeSaveEntity(EntityInfo entityInfo)
+        {
 
             // Add custom logic here in order to save entities
             // Return false if don´t want to  save the entity 
@@ -44,21 +30,21 @@ namespace DurandalAuth.Data
 
             if (entityInfo.Entity.GetType() == typeof(Article))
             {
-                Article article = entityInfo.Entity as Article;                
+                Article article = entityInfo.Entity as Article;
 
                 if (entityInfo.EntityState == EntityState.Added)
-                {                    
+                {
                     article.SetUrlReference();
-                    article.CreatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
+                    article.CreatedBy = HttpContext.Current.User.Identity.GetUserName();
                     article.CreatedDate = DateTime.UtcNow;
-                    article.UpdatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
+                    article.UpdatedBy = HttpContext.Current.User.Identity.GetUserName();
                     article.UpdatedDate = DateTime.UtcNow;
                 }
                 if (entityInfo.EntityState == EntityState.Modified)
                 {
-                    article.UpdatedBy = Thread.CurrentPrincipal.Identity.GetUserName();
+                    article.UpdatedBy = HttpContext.Current.User.Identity.GetUserName();
                     article.UpdatedDate = DateTime.UtcNow;
-                }                                               
+                }
             }
 
             // - Before saving categories we have to create the custom UrlCodeReference in order to access them from a url route
@@ -69,13 +55,14 @@ namespace DurandalAuth.Data
                 if (entityInfo.EntityState == EntityState.Added)
                 {
                     category.SetUrlReference();
-                }                
+                }
             }
 
             return true;
-       }
- 
-        protected override Dictionary<Type, List<EntityInfo>> BeforeSaveEntities(Dictionary<Type, List<EntityInfo>> saveMap) {
+        }
+
+        public Dictionary<Type, List<EntityInfo>> BeforeSaveEntities(Dictionary<Type, List<EntityInfo>> saveMap)
+        {
 
             // Add custom logic here in order to save entities
 
@@ -84,7 +71,7 @@ namespace DurandalAuth.Data
             // - In order to save and manage accounts you need to use the AccountController and not Breeze
 
             if (saveMap.TryGetValue(typeof(UserProfile), out userprofiles))
-            {                                
+            {
                 var errors = userprofiles.Select(oi =>
                 {
                     return new EFEntityError(oi, "Save Failed", "Cannot save Users using the Breeze api", "UserProfileId");
@@ -99,12 +86,12 @@ namespace DurandalAuth.Data
             // - Only article owner can save the article
 
             if (saveMap.TryGetValue(typeof(Article), out articles))
-            {               
+            {
                 if (articles.Any())
-                {                    
+                {
                     // Mandatory => Registered users saving articles
 
-                    if (!UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "User") || !Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                    if (!UserManager.IsInRole(HttpContext.Current.User.Identity.GetUserId(), "User") || !HttpContext.Current.User.Identity.IsAuthenticated)
                     {
                         var errors = articles.Select(oi =>
                         {
@@ -115,16 +102,17 @@ namespace DurandalAuth.Data
 
                     // Mandatory => Only article owner can save the article
 
-                    articles.ForEach(a =>  {
+                    articles.ForEach(a =>
+                    {
                         Article article = a.Entity as Article;
                         if (
                             (a.EntityState == EntityState.Modified || a.EntityState == EntityState.Added || a.EntityState == EntityState.Deleted) &&
-                             article.CreatedBy != Thread.CurrentPrincipal.Identity.GetUserName()
+                             article.CreatedBy != HttpContext.Current.User.Identity.GetUserName()
                            )
                         {
                             throw new EntityErrorsException(new List<EFEntityError>() { 
                                 new EFEntityError(a, "Save Failed", "You don´t have permissions for save this article", "ArticleId") 
-                            });                    
+                            });
                         }
                     });
                 }
@@ -136,7 +124,7 @@ namespace DurandalAuth.Data
 
             if (saveMap.TryGetValue(typeof(Category), out categories))
             {
-                if (categories.Any() && !UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "Administrator"))
+                if (categories.Any() && !UserManager.IsInRole(HttpContext.Current.User.Identity.GetUserId(), "Administrator"))
                 {
                     var errors = categories.Select(oi =>
                     {
@@ -152,15 +140,15 @@ namespace DurandalAuth.Data
 
             if (saveMap.TryGetValue(typeof(Tag), out tags))
             {
-                if (tags.Any())                                
+                if (tags.Any())
                 {
-                    if (!UserManager.IsInRole(Thread.CurrentPrincipal.Identity.GetUserId(), "User") || !Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                    if (!UserManager.IsInRole(HttpContext.Current.User.Identity.GetUserId(), "User") || !HttpContext.Current.User.Identity.IsAuthenticated)
                     {
                         var errors = userprofiles.Select(oi =>
                         {
                             return new EFEntityError(oi, "Save Failed", "Only registered users can save tags", "TagId");
                         });
-                        throw new EntityErrorsException(errors);                    
+                        throw new EntityErrorsException(errors);
                     }
                 }
             }

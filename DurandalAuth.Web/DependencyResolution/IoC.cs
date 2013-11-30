@@ -30,6 +30,7 @@ using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Helpers;
 using System.Security.Principal;
+using DurandalAuth.Domain.Validators;
 
 namespace DurandalAuth.Web.DependencyResolution {
     public static class IoC {
@@ -43,7 +44,10 @@ namespace DurandalAuth.Web.DependencyResolution {
                                     });                            
 
                             x.For<IUnitOfWork>().HttpContextScoped().Use(
-                                () => new UnitOfWork(new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext()))));
+                                () => new UnitOfWork(
+                                      new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())), 
+                                      new BreezeValidator(new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext()))))
+                            );
 
                             x.For<ISnapshot>().HttpContextScoped().Use<Snapshot>();
 
@@ -52,6 +56,7 @@ namespace DurandalAuth.Web.DependencyResolution {
                             x.For<ISecureDataFormat<AuthenticationTicket>>().HttpContextScoped().Use(() => Startup.OAuthOptions.AccessTokenFormat);
                             
                         });
+
             return ObjectFactory.Container;
         }
     }

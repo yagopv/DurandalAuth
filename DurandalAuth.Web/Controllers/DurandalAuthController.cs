@@ -11,6 +11,10 @@ using DurandalAuth.Web.Helpers;
 using DurandalAuth.Web.Filters;
 using Microsoft.AspNet.Identity;
 using System.IdentityModel.Services;
+using System.Collections.Generic;
+using System;
+using System.Threading;
+using Breeze.ContextProvider.EF6;
 
 
 namespace DurandalAuth.Web.Controllers

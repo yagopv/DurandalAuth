@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Principal;
-
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 
 using Breeze.ContextProvider;
+using Breeze.ContextProvider.EF6;
 using Newtonsoft.Json.Linq;
 
 using DurandalAuth.Data.Repositories;
 using DurandalAuth.Domain.Repositories;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
+using DurandalAuth.Domain.Validators;
 
 namespace DurandalAuth.Data.UnitOfWork
 {
@@ -23,14 +17,15 @@ namespace DurandalAuth.Data.UnitOfWork
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly BreezeDbContextProvider contextProvider;
-
+        private readonly EFContextProvider<DurandalAuthDbContext> contextProvider;
         /// <summary>
         /// ctor
         /// </summary>
-        public UnitOfWork(UserManager<UserProfile> usermanager)
+        public UnitOfWork(UserManager<UserProfile> usermanager, IBreezeValidator breezevalidator)
         {
-            contextProvider = new BreezeDbContextProvider(usermanager);
+            contextProvider = new EFContextProvider<DurandalAuthDbContext>();
+            contextProvider.BeforeSaveEntitiesDelegate = breezevalidator.BeforeSaveEntities;
+            contextProvider.BeforeSaveEntityDelegate = breezevalidator.BeforeSaveEntity;
 
             ArticleRepository = new Repository<Article>(contextProvider.Context);
             CategoryRepository = new Repository<Category>(contextProvider.Context);

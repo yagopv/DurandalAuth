@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DurandalAuthDbContext.cs" />
-    <Compile Include="BreezeDbContextProvider.cs" />
     <Compile Include="Migrations\201311122013574_Initial.cs" />
     <Compile Include="Migrations\201311122013574_Initial.Designer.cs">
       <DependentUpon>201311122013574_Initial.cs</DependentUpon>
