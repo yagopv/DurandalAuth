@@ -6,7 +6,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 
@@ -20,8 +19,6 @@ using DurandalAuth.Web.Models;
 using DurandalAuth.Web.Results;
 using DurandalAuth.Web.Providers;
 using DurandalAuth.Domain.Model;
-using System.Security.Principal;
-using System.Threading;
 using DurandalAuth.Domain.UnitOfWork;
 
 namespace DurandalAuth.Web.Controllers

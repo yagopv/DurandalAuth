@@ -1,9 +1,9 @@
 /** 
-    * @module Manage errors in the app
-    * @requires logger
-    * @requires system
-    * @requires utils
-*/
+ * @module Manage errors in the app
+ * @requires logger
+ * @requires system
+ * @requires utils
+ */
 
 define(['services/logger', 'durandal/system', 'services/utils'],
     function (logger, system, util) {
@@ -11,14 +11,14 @@ define(['services/logger', 'durandal/system', 'services/utils'],
         var ErrorHandler = (function () {
             /**
              * @constructor
-            */
+             */
             var ctor = function (targetObject) {
 
                 /** 
                  * Handle Breeze validation errors
                  * @method
                  * @param {object} error - The error object
-                */
+                 */
                 this.handleError = function (error) {
                     if (error.entityErrors) {
                         error.message = util.getSaveValidationErrorMessage(error);
@@ -33,7 +33,7 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                  * @method
                  * @param {string} message
                  * @param {bool} showToast - Show a toast using toastr.js
-                */
+                 */
                 this.log = function (message, showToast) {
                     logger.log(message, null, system.getModuleId(targetObject), showToast);                    
                 };
@@ -45,7 +45,7 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                  * @param {jQueryXMLHttpRequest} jqXHR
 				 * @param {string} textStatus
 				 * @param {string} error
-                */
+                 */
                 this.handlevalidationerrors = function (jqXHR, textStatus, error) {
 					var data,
 						items;
@@ -83,7 +83,7 @@ define(['services/logger', 'durandal/system', 'services/utils'],
                  * @method
                  * @param {object} errors
 				 * @returns {object} error object
-                */
+                 */
                 this.handleauthenticationerrors = function (errors) {
                     if (errors.responseText != "") {
                         var data = $.parseJSON(errors.responseText);
@@ -110,7 +110,7 @@ define(['services/logger', 'durandal/system', 'services/utils'],
          * @method
          * @param {object} targetObject
          * @return {object} - The extended object
-        */
+         */
         function includeIn(targetObject) {
             return $.extend(targetObject, new ErrorHandler(targetObject));
         }

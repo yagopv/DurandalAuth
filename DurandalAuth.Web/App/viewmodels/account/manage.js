@@ -120,13 +120,17 @@ function (system,appsecurity, errorhandler, logger, utils) {
             var self = this;
 			self.removing(true);
 			appsecurity.removeLogin({
-				loginProvider: self.loginProvider(),
-				providerKey: providerKey()
+			    loginProvider: self.loginProvider(),
+			    providerKey: providerKey()
 			}).done(function (data) {
-				self.removing(false);
-				userLogins.remove(self);
-				logger.logSuccess("Login removed succesfully", null, null, true);				
-			}).fail(self.handlevalidationerrors);
+			    self.removing(false);
+			    userLogins.remove(self);
+			    logger.logSuccess("Login removed succesfully", null, null, true);
+			})
+            .fail(self.handlevalidationerrors)
+            .fail(function () {
+                self.removing(false);
+            });
 		};
 	}
 
@@ -152,6 +156,8 @@ function (system,appsecurity, errorhandler, logger, utils) {
 			}
 			self.setting(true);
 
+			errorhandler.includeIn(self);
+
 			appsecurity.setPassword({
 				newPassword: self.newPassword(),
 				confirmPassword: self.confirmPassword()
@@ -162,7 +168,11 @@ function (system,appsecurity, errorhandler, logger, utils) {
 					providerKey: userName()
 				}, userLogins));
 				logger.logSuccess("Password set successfully", null, null, true);
-			}).fail(errorhandler.handlevalidationerrors);
+			})
+            .fail(self.handlevalidationerrors)
+			.fail(function () {
+			    self.setting(false);
+			});
 		};
 	}
 

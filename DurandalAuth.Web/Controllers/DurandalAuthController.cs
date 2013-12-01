@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http;
 
+using Microsoft.AspNet.Identity;
 using Breeze.WebApi2;
 using Breeze.ContextProvider;
 using Newtonsoft.Json.Linq;
@@ -8,14 +9,6 @@ using Newtonsoft.Json.Linq;
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Web.Helpers;
-using DurandalAuth.Web.Filters;
-using Microsoft.AspNet.Identity;
-using System.IdentityModel.Services;
-using System.Collections.Generic;
-using System;
-using System.Threading;
-using Breeze.ContextProvider.EF6;
-
 
 namespace DurandalAuth.Web.Controllers
 {

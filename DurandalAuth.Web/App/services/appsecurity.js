@@ -1,14 +1,13 @@
 /** 
- * @module Authentication module
+ * @module Authentication module. 
+ *         All the interactions with users should start from this module
  * @requires system
- * @requires app
  * @requires router
  * @requires routeconfig
  * @requires utils
- * @requires history
  */
 
-define(["durandal/system","durandal/app","plugins/router","services/routeconfig", "services/utils", "plugins/history"]
+define(["durandal/system","durandal/app","plugins/router","services/routeconfig", "services/utils"]
 	,function (system, app, router, routeconfig, utils, history) {
 
 	var self = this;
@@ -110,7 +109,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
     function cleanUpLocation() {
         window.location.hash = "";
 
-        if (typeof (history.pushState) !== "undefined") {
+        if (history && typeof (history.pushState) !== "undefined") {
             history.pushState("", document.title, location.pathname);
         }
     };
@@ -151,8 +150,16 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 
     return {
 
+        /** property {object} userInfo - The user object */
         userInfo: ko.observable(),
 
+        /**
+         * Set the authentication info. Look in storage for stored info
+         * param {string} userName
+         * param {Array} roles
+         * param {string} accessToken
+         * param {bool} persistent
+         */
         setAuthInfo: function (userName, roles, accessToken, persistent) {
             var self = this;
 
@@ -166,6 +173,9 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			self.userInfo(new UserInfoViewModel(userName, roles));
 		},
 		
+        /**
+         * Remove authentication info
+         */
         clearAuthInfo: function () {
             var self = this;
 
@@ -173,6 +183,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
             self.userInfo(undefined);
         },
 
+        /**
+         * Check if the authenticathed user belongs to the role
+         * param {Array} roles
+         */
 		isUserInRole : function (roles) {
 			var self = this,
 				isuserinrole = false;
@@ -186,12 +200,22 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			return isuserinrole;
 		},
 
+        /**
+         * Get the security headers for sending authenticated ajax requests to the server
+         */
 		getSecurityHeaders: getSecurityHeaders,
 
+        /**
+         * Helper method for storing authentication info in the Local Storage
+         */
 		archiveSessionStorageToLocalStorage : archiveSessionStorageToLocalStorage,
 
 		returnUrl : routeconfig.siteUrl,
-		
+
+        /**
+         * Add external Login
+         * param {object} data - External login info
+         */
 		addExternalLogin : function (data) {
 			return $.ajax(routeconfig.addExternalLoginUrl, {
 				type: "POST",
@@ -200,6 +224,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Change the password
+         * param {object} data - Change password info
+         */
 		changePassword : function (data) {
 			return $.ajax(routeconfig.changePasswordUrl, {
 				type: "POST",
@@ -208,6 +236,12 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Get the external logins list
+         * param {string} returnUrl
+         * param {bool} generateState - If true the server will generate a Guid for matching in the client
+         *                              when the authentication provider returns the authentication result
+         */
 		getExternalLogins : function (returnUrl, generateState) {
 			return $.ajax(externalLoginsUrl(returnUrl, generateState), {
 				cache: false,
@@ -215,6 +249,12 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Get account info for managing the authenticated user data
+         * param {object} returnUrl
+         * param {bool} generateState - If true the server will generate a Guid for matching in the client
+         *                              when the authentication provider returns the authentication result
+         */
 		getManageInfo : function (returnUrl, generateState) {
 			return $.ajax(manageInfoUrl(returnUrl, generateState), {
 				cache: false,
@@ -222,6 +262,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Get authenticated user info
+         * param {object} accessToken
+         */
 		getUserInfo : function (accessToken) {
 		    var self = this,
                 headers;
@@ -240,6 +284,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Login the user
+         * param {object} data - Login info
+         */
 		login : function (data) {
 		    return $.ajax(routeconfig.loginUrl, {
 		        type: "POST",
@@ -247,6 +295,9 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 		    });
 		},
 
+        /**
+         * Logout the user
+         */
 		logout : function () {
 			return $.ajax(routeconfig.logoutUrl, {
 				type: "POST",
@@ -254,6 +305,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Register new user
+         * param {object} data - Registration info
+         */
 		register : function (data) {
 		    return $.ajax(routeconfig.registerUrl, {
 				type: "POST",
@@ -261,6 +316,11 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Register external user
+         * param {string} accessToken
+         * param {object} data - Registration info
+         */
 		registerExternal : function (accessToken, data) {
 			return $.ajax(routeconfig.registerExternalUrl, {
 				type: "POST",
@@ -271,6 +331,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Remove login from the user
+         * param {object} data - Remove login info
+         */
 		removeLogin : function (data) {
 			return $.ajax(routeconfig.removeLoginUrl, {
 				type: "POST",
@@ -279,6 +343,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+        /**
+         * Set authenticated user password
+         * param {object} data - Set password info
+         */
 		setPassword : function (data) {
 			return $.ajax(routeconfig.setPasswordUrl, {
 				type: "POST",
@@ -287,6 +355,9 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 		
+        /**
+         * Get a list of users
+         */
 		getUsers: function () {
 		    return $.ajax(routeconfig.getUsersUrl, {
 		        type: "GET",
@@ -294,6 +365,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 		    });
 		},
 
+        /**
+         * Always call this method when initializating the application for getting authenticated user info (from storage)
+         * or redirect when returning from a provider or associating another login
+         */
 		initializeAuth : function() {
 			var self = this;						
 

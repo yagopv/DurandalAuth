@@ -1,6 +1,6 @@
 /** 
-	* @module Provides the Breeze Entity Manager
-	* @requires app
+ * @module Provides the Breeze Entity Manager
+ * @requires app
 */
 
 define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
@@ -19,9 +19,9 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 		var masterManager = new breeze.EntityManager(serviceName);
 
 		/**
-		* Entity Manager ctor
-		* @constructor
-		*/
+		 * Entity Manager ctor
+		 * @constructor
+		 */
 		var EntityManagerProvider = (function () {
 
 			var entityManagerProvider = function () {

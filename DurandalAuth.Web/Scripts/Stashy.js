@@ -1,5 +1,5 @@
 /*!
- * Stashy v1.1.1 by @yperezva
+ * Stashy v1.1.2 by @yperezva
  * Copyright 2013 Yago Pérez Vázquez
  * Licensed under http://http://opensource.org/licenses/MIT
  */
@@ -1622,17 +1622,22 @@ window.Modernizr = (function( window, document, undefined ) {
                     self.element.addClass("fadeOut");
                     setTimeout(function() {
                         self.element.remove();
+                        self = null;                        
                         if (toastC.children().length == 0) {
                             toastC.remove();					
                         }				
-                        self = null;				
+                        
                     }, self.options.animDuration == "fast" ? 1000 : 2000);
                 };
 			this.element.addClass((radius ? "radius" : " ") + " " + "fadeIn");
 			toastC.append(this.element);
             
             if (self.options.activeDuration > 0) {
-                setTimeout(hide, self.options.activeDuration);
+                setTimeout(function() { 
+                    if (self) { 
+                        hide();
+                    } 
+                }, self.options.activeDuration);
             }
             
 			this.closeElement.on("click", hide);
@@ -1650,17 +1655,21 @@ window.Modernizr = (function( window, document, undefined ) {
                     self.element.addClass(positionY == "top" ? "fadeOutUp" : "fadeOutDown");
                     setTimeout(function() {
                         self.element.remove();
+                        self = null;                        
                         if (barC.children().length == 0) {
                             barC.remove();					
                         }				
-                        self = null;
                     }, self.options.animDuration == "fast" ? 1000 : 2000);
                 };
 			this.element.addClass(positionY == "top" ? "fadeInDown" : "fadeInUp");
 			barC.append(this.element);
             
             if (self.options.activeDuration > 0) {
-                setTimeout(hide, self.options.activeDuration);
+                setTimeout(function() { 
+                    if (self) { 
+                        hide();
+                    } 
+                }, self.options.activeDuration);
             }
             
 			this.closeElement.on("click", hide);			
@@ -1677,7 +1686,7 @@ window.Modernizr = (function( window, document, undefined ) {
                     self.element.addClass(positionX == "left" ? "fadeOutLeft" : "fadeOutRight");
                     setTimeout(function() {
                         self.element.remove();
-                        self = null;
+                        self = null;                        
                     }, self.options.animDuration == "fast" ? 1000 : 2000);
                 };
 			this.element.addClass("panel " + positionX)
@@ -1685,7 +1694,11 @@ window.Modernizr = (function( window, document, undefined ) {
 			$(this.options.target).append(this.element);
             
             if (self.options.activeDuration > 0) {
-                setTimeout(hide, self.options.activeDuration);
+                setTimeout(function() { 
+                    if (self) { 
+                        hide();
+                    } 
+                }, self.options.activeDuration);
             }
             
 			this.closeElement.on("click", hide);				

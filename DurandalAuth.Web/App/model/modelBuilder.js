@@ -1,4 +1,10 @@
-﻿define(['services/appsecurity','services/utils'],
+﻿/** 
+ * @module This module has the responsability of creating breeze entities
+ *         Add here all your initializers, constructors, ...etc
+ * @requires appsecurity
+ * @requires utils
+ */
+define(['services/appsecurity', 'services/utils'],
     function (appsecurity,utils) {
         var foreignKeyInvalidValue = 0;
 
@@ -8,12 +14,20 @@
 
         return self;
 
+        /**
+         * Extend entities
+         * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
+         */
         function extendMetadata(metadataStore) {
             extendArticle(metadataStore);
             extendCategory(metadataStore);
             extendTag(metadataStore);
         };
 
+        /**
+         * Extend articles
+         * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
+         */
         function extendArticle(metadataStore) {
             var articleCtor = function () {
                 this.articleId = ko.observable(breeze.core.getUuid());
@@ -64,6 +78,10 @@
             metadataStore.registerEntityTypeCtor('Article', articleCtor, articleInitializer);
         };
         
+        /**
+         * Extend categories
+         * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
+         */
         function extendCategory(metadataStore) {
             var categoryCtor = function () {
                 this.categoryId = ko.observable(breeze.core.getUuid());
@@ -71,6 +89,10 @@
             metadataStore.registerEntityTypeCtor('Category', categoryCtor);
         };
 
+        /**
+         * Extend tags
+         * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
+         */
         function extendTag(metadataStore) {
             var tagCtor = function () {
                 this.tagId = ko.observable(breeze.core.getUuid());
@@ -78,12 +100,20 @@
             metadataStore.registerEntityTypeCtor('Tag', tagCtor);
         };
 
+        /**
+         * Helper function for ensure the type of an entity is the requested
+         * param {object} obj - The entity
+         * param {string} entityTypeName - The type name
+         */
         function ensureEntityType(obj, entityTypeName) {
             if (!obj.entityType || obj.entityType.shortName !== entityTypeName) {
                 throw new Error('Object must be an entity of type ' + entityTypeName);
             }
         };
 
+        /**
+         * Add Knockout.Validation rules from the entities metadata
+         */
         function addValidationRules(entity) {
             var entityType = entity.entityType,
                 i,
@@ -152,6 +182,10 @@
             }
         };
 
+        /**
+         * Extend the entity with a has errors property
+         * param {object} entity - The entity
+         */
         function addhasValidationErrorsProperty(entity) {
 
             var prop = ko.observable(false);
