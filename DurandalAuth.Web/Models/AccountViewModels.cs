@@ -42,4 +42,9 @@ namespace DurandalAuth.Web.Models
 
         public string ProviderKey { get; set; }
     }
+
+    public class UserProfileViewModel
+    {
+        public string UserName { get; set;}
+    }
 }

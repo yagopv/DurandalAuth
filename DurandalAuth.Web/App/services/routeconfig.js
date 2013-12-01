@@ -9,20 +9,20 @@ define(function () {
         saveChangesUrl: "durandalauth/savechanges",
         publicArticlesUrl: "durandalauth/publicarticles",
         privateArticlesUrl: "durandalauth/privatearticles",
-        userProfileUrl: "durandalauth/userprofiles",
         categoriesUrl: "durandalauth/categories",
 		
 		//Authentication Routes
-        addExternalLoginUrl : "/api/Account/AddExternalLogin",
-        changePasswordUrl : "/api/Account/changePassword",
-        loginUrl : "/Token",
-        logoutUrl : "/api/Account/Logout",
-        registerUrl : "/api/Account/Register",
-        registerExternalUrl : "/api/Account/RegisterExternal",
-        removeLoginUrl : "/api/Account/RemoveLogin",
-        setPasswordUrl: "/api/Account/setPassword",
+        addExternalLoginUrl : "/api/account/addexternallogin",
+        changePasswordUrl : "/api/account/changepassword",
+        loginUrl : "/token",
+        logoutUrl : "/api/account/logout",
+        registerUrl : "/api/account/register",
+        registerExternalUrl : "/api/account/registerexternal",
+        removeLoginUrl : "/api/account/removelogin",
+        setPasswordUrl: "/api/account/setpassword",
         siteUrl : "/",
-        userInfoUrl : "/api/Account/UserInfo"
+        userInfoUrl: "/api/account/userinfo",
+        getUsersUrl : "/api/account/getusers"
     };
 
     return routes;

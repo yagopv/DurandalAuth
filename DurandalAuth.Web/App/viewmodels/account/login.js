@@ -30,8 +30,8 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 
                 // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
                 // to localStorage to work around this problem.
-                appsecurity.archiveSessionStorageToLocalStorage();
-                
+                appsecurity.archiveSessionStorageToLocalStorage();                
+
                 window.location = data.url;
             };
 
@@ -108,6 +108,14 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                 }).done(function (data) {
                     if (data.userName && data.access_token) {
                         appsecurity.setAuthInfo(data.userName, data.roles, data.access_token, self.rememberMe);
+
+                        // get the current default Breeze AJAX adapter
+                        var ajaxAdapter = breeze.config.getAdapterInstance("ajax");
+                        // set fixed headers
+                        ajaxAdapter.defaultSettings = {
+                            headers: appsecurity.getSecurityHeaders()
+                        };
+
                         if (self.returnUrl()) {
                             router.navigate(self.returnUrl());
                         } else {

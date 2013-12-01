@@ -1,4 +1,4 @@
-﻿define(['services/unitofwork'], function (unitofwork) {
+﻿define(['services/appsecurity'], function (appsecurity) {
     var viewmodel = {
         userprofiles: ko.observableArray(),
 
@@ -7,10 +7,9 @@
         },
 
         attached: function () {
-            var self = this,
-                uow = unitofwork.create();
+            var self = this;
 
-            uow.userprofiles.all().then(function (data) {
+            appsecurity.getUsers().then(function (data) {
                 self.userprofiles(data);
             });
         }

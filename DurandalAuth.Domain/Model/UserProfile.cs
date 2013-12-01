@@ -16,16 +16,16 @@ namespace DurandalAuth.Domain.Model
     /// </summary>
     [DataContract(IsReference = true)]
     public class UserProfile : IdentityUser
-        {
-            /// <summary>
-            ///  Email for the User
-            /// </summary>
-            /// <remarks>Ignoring this field by not using DataMember</remarks>
-            [Required]
-            [DataType(DataType.EmailAddress)]
-            [StringLength(200)]
-            [EmailAddress]
-            [DataMember]
-            public string Email { get; set; }
-        }
+    {
+        /// <summary>
+        ///  Email for the User
+        /// </summary>
+        /// <remarks>Ignoring this field by not using DataMember</remarks>
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(200)]
+        [EmailAddress]
+        [DataMember]
+        public string Email { get; set; }
+    }
 }

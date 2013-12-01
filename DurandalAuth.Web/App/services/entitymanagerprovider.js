@@ -3,18 +3,8 @@
 	* @requires app
 */
 
-define(['durandal/app', 'services/routeconfig'],
-	function (app, routeconfig) {
-
-	    function getSecurityHeaders() {
-	        var accessToken = sessionStorage["accessToken"] || localStorage["accessToken"];
-
-	        if (accessToken) {
-	            return { "Authorization": "Bearer " + accessToken };
-	        }
-
-	        return {};
-	    }
+define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
+	function (app, routeconfig, appsecurity) {
 
 	    breeze.NamingConvention.camelCase.setAsDefault();
 
@@ -22,7 +12,7 @@ define(['durandal/app', 'services/routeconfig'],
 	    var ajaxAdapter = breeze.config.getAdapterInstance("ajax");
 	    // set fixed headers
 	    ajaxAdapter.defaultSettings = {
-	        headers: getSecurityHeaders()
+	        headers: appsecurity.getSecurityHeaders()
 	    };
 
 	    var serviceName = '/breeze';

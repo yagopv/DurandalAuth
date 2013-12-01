@@ -186,6 +186,8 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			return isuserinrole;
 		},
 
+		getSecurityHeaders: getSecurityHeaders,
+
 		archiveSessionStorageToLocalStorage : archiveSessionStorageToLocalStorage,
 
 		returnUrl : routeconfig.siteUrl,
@@ -285,6 +287,13 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 		
+		getUsers: function () {
+		    return $.ajax(routeconfig.getUsersUrl, {
+		        type: "GET",
+		        headers: getSecurityHeaders()
+		    });
+		},
+
 		initializeAuth : function() {
 			var self = this;						
 

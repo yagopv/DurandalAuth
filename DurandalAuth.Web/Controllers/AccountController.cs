@@ -22,6 +22,7 @@ using DurandalAuth.Web.Providers;
 using DurandalAuth.Domain.Model;
 using System.Security.Principal;
 using System.Threading;
+using DurandalAuth.Domain.UnitOfWork;
 
 namespace DurandalAuth.Web.Controllers
 {
@@ -35,19 +36,21 @@ namespace DurandalAuth.Web.Controllers
     {
         private const string LocalLoginProvider = "Local";
 
+        UserManager<UserProfile> UserManager { get; set; }
+        IUnitOfWork UnitOfwork { get; set; }
+        ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; set; }
+
         /// <summary>
         /// ctor
         /// </summary>
-        public AccountController(UserManager<UserProfile> userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        public AccountController(IUnitOfWork unitofwork, 
+                                 UserManager<UserProfile> userManager,
+                                 ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
+            this.UnitOfwork = unitofwork;
+            this.UserManager = userManager;
+            this.AccessTokenFormat = accessTokenFormat;
         }
-
-        public UserManager<UserProfile> UserManager { get; private set; }
-
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         /// <summary>
         /// Get user info
@@ -468,6 +471,14 @@ namespace DurandalAuth.Web.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Authorize(Roles="Administrator")]
+        public IEnumerable<UserProfileViewModel> GetUsers()
+        {
+            var users = UnitOfwork.UserProfileRepository.All();
+            return users.Select(user => new UserProfileViewModel { UserName = user.UserName }).ToList();
         }
 
         protected override void Dispose(bool disposing)

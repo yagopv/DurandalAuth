@@ -13,7 +13,7 @@ namespace DurandalAuth.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201311122013574_Initial"; }
+            get { return "201312011746348_Initial"; }
         }
         
         string IMigrationMetadata.Source

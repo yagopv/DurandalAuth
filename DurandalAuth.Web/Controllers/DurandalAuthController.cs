@@ -61,17 +61,6 @@ namespace DurandalAuth.Web.Controllers
         }
 
         /// <summary>
-        /// Get user profiles
-        /// </summary>
-        /// <returns>IQueryable user profiles</returns>
-        [HttpGet]      
-        [Authorize(Roles="Administrator")]        
-        public IQueryable<UserProfile> UserProfiles()
-        {
-            return UnitOfWork.UserProfileRepository.All();
-        }
-
-        /// <summary>
         /// Save changes to data store
         /// </summary>
         /// <param name="saveBundle">The changes</param>
