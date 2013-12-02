@@ -22,15 +22,71 @@
                     Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>. If you want to access this view, you'll need to have the
                     <span class="label label-info">Administrator</span> role.
                 </p>
-                <p>Try to log in with the following: <span class="label label-success">admin/admin1234</span> and once there, you will be able to check a list with the registered users on this site.</p>
-                <hr />
-                <blockquote class="bs-callout bs-callout-danger">
-                    <h2>Remember !!</h2>
-                    <p class="lead">
-                        The authorization system in the client can always be hacked!
-                        Always authenticate and authorize the request in the server when retrieving the necessary data for your views.
-                    </p>
-                </blockquote>
+                <p>Try to log in with the following: <span class="label label-success">admin/admin1234</span> and once there, you will be able to check a list with the registered users on this site.</p>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2>Add you own Entities</h2>
+                </div>
+                <p>One of the first things you would like to do with this sample template is creating your own entities. Yo can do so following this steps.</p>
+                <ul>
+                    <li>
+                        <h3><strong>Domain Layer</strong></h3>
+                        <ul>
+                            <li>
+                                <p>First step should be adding the new entity to the <strong>Model</strong> folder.</p>
+                                <p>It´s important to remember the <em>[DataContract]</em> and <em>[DataMember]</em> attributes. Fields not decorated with <em>[DataMember]</em> won´t be managed by Breeze and won´t be propagated to the client application.</p>
+                            </li>
+                            <li>
+                                <p>Optionally you can add a extended repository contract like <em>IMyNewEntityRepository.cs</em> in the <strong>Repositories</strong> folder.</p>
+                                <p>This new repository will inherit from <em>IRepository.cs</em> and should content specific methods for the new entity.</p>
+                                <p>You should do this only if need more functionality that the included in <em>IRepository.cs</em>.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3><strong>Data Layer</strong></h3>
+                        <ul>
+                            <li>
+                                <p>Add the newly created entity to the <em>DurandalAuthDbContext.cs</em> class.</p>
+                            </li>
+                            <li>
+                                <p>If you decided to create a new repository contract in the <strong>Domain layer</strong>, you need to implement it in the <strong>Data layer</strong>.</p>
+                                <p>Create a new <em>MyNewEntityRepository.cs</em> class under the <strong>Repositories</strong> folder implementing <em>IMyNewEntityRepository.cs</em> interface.</p>
+                            </li>
+                            <li>
+                                <p>Add the new repository to the <em>UnitOfWork.cs</em>.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3><strong>Web Layer</strong></h3>
+                        <ul>
+                            <li>
+                                <p>Add methods to the <em>DurandalAuthController.cs</em> class in order to retrieve the new entity data. If you prefer to not use <strong>Breeze</strong>, create a new Api Controller for the resource and call it from the client using standard AJAX calls.</p>
+                            </li>
+                            <li>
+                                <p>Under the Durandal App folder:</p>
+                                <ol>
+                                    <li>
+                                        <p>Add new initialization methods and constructors for the breeze entities using the <em>model/modelBuilder.js</em> module.</p>
+                                    </li>
+                                    <li>
+                                        <p>Add a new breeze resource in the <em>services/unitofwork.js</em> module using the base <em>repository.js</em> module or a new one you can create extending that one. Samples for extending <em>repository.js</em> are <em>privatearticlesrepository.js</em> and <em>publicarticlesrepository.js</em>.</p>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p>Perhaps you would like to add some bussiness rules for the new entity. This sort of things can be accomplished in several ways like using data attributes. Another way breeze specific is using Breeze delegates. Under the <strong>Helpers</strong> folder you have the <em>BreezeValidator.cs</em> class implementing the <em>IBreezeValidator.cs</em> on the Domain layer. The Breeze delegates are asigned in the <em>UnitOfWork.cs</em> class under the <strong>Data Layer</strong>.</p>
+                            </li>
+                            <li>
+                                <p>If you create new interfaces for repositories, remember to add them to the <em>IoC.cs</em> container under the <strong>DependencyResolution folder</strong>.</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
@@ -45,6 +101,13 @@
                 <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
             </div>
         </div>
-        <hr/>
+        <blockquote class="bs-callout bs-callout-danger">
+            <h2>Remember !!</h2>
+            <p class="lead">
+                The authorization system in the client can always be hacked!
+                Always authenticate and authorize the request in the server when retrieving the necessary data for your views.
+            </p>
+        </blockquote>
+        <hr />
     </div>
 </div>
