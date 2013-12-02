@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 
 namespace DurandalAuth.Web.Models
 {
-    // Modelos usados como parámetros para las acciones de AccountController.
-
+    //AccountController parameter models
     public class AddExternalLoginBindingModel
     {
         [Required]        

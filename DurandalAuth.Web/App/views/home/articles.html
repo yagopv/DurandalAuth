@@ -49,7 +49,7 @@
                             </div>
                             <p class="mart2" data-bind="text: description"></p>
                             <div class="mart2">
-                                <a class="btn btn-primary" data-bind="attr: { href: $parent.convertRouteToHash('/' + createdBy() + '/' + category().urlCodeReference() + '/' + urlCodeReference()).toLowerCase(), title : title }"><i class="fa fa-eye" ></i>View article</a>
+                                <a class="btn btn-primary" data-bind="attr: { href: $parent.convertRouteToHash('/' + createdBy() + '/' + category().urlCodeReference() + '/' + urlCodeReference()).toLowerCase(), title : title }"><i class="fa fa-eye" ></i>   View article</a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Articles List End -->
-                <a href="#" id="btn-loadmore" class="btn btn-primary mart2" data-bind="click: loadMoreArticles">Load more articles</a>
+                <a href="#" id="btn-loadmore" class="btn btn-primary mart2" data-bind="click: loadMoreArticles"><i class="fa fa-plus-circle"></i>   Load more articles</a>
             </div>
             <hr class="mart2" />
         </div>

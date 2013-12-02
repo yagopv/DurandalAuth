@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace DurandalAuth.Web.Models
 {
-    // Modelos devueltos por las acciones de AccountController.
-
+    // AccountController view  models
     public class ExternalLoginViewModel
     {
         public string Name { get; set; }

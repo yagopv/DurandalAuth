@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h2>How is this site working?</h2>
+                    <h2><i class="fa fa-question-circle"></i>   How is this site working?</h2>
                 </div>
                 <p>This site simulates a community-managed article repository. People with accounts can write articles in their dashboards and make them public on the web.</p>
                 <p>The main objective of this sample application is to provide a way to authenticate and authorize users similar to the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social providers among another useful features.</p>
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h2>Add you own Entities</h2>
+                    <h2><i class="fa fa-plus-circle"></i>   Add you own Entities</h2>
                 </div>
                 <p>One of the first things you would like to do with this sample template is creating your own entities. Yo can do so following this steps.</p>
                 <ul>
@@ -92,11 +92,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h2>About SEO Optimization</h2>
+                    <h2><i class="fa fa-search"></i>   About SEO Optimization</h2>
                 </div>
-                <p>The template is ready to be SEO crawlable. DurandalAuth implements the <a href="#" onclick="window.open('https://developers.google.com/webmasters/ajax-crawling/docs/getting-started', '_blank')"> google ajax crawling scheme</a> for pages without hash fragments. You need the default pushstate option enabled.</p>
+                <p>The template is ready to be SEO crawlable. DurandalAuth implements the <a href="https://developers.google.com/webmasters/ajax-crawling/docs/getting-started" target="_blank"> google ajax crawling scheme</a> for pages without hash fragments. You need the default pushstate option enabled.</p>
                 <p>I created a interface (Helpers/ISnapshot.cs) that needs to be implemented in order to work.</p>
-                <p>The default implementation uses <a href="#" onclick="window.open('https://github.com/yagopv/azurecrawler', '_blank')"> a new project I created called AzureCrawler</a>.</p>
+                <p>The default implementation uses <a href="https://github.com/yagopv/azurecrawler" target="_blank"> a new project I created called AzureCrawler</a>.</p>
                 <p>This new project is a Worker Role ready to be deployed to Windows Azure and serving a REST Web API via OWIN. The Web API executes a phantomjs process when receiving requests and returns html snapshots. Moreover, AzureCrawler can save the snapshot to Azure Storage and keep it there with the expiration date you choose, so next time the page is requested for any bot, the stored snapshot will be served.</p>
                 <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
             </div>

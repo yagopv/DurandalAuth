@@ -100,6 +100,32 @@ body {
 	border-color: #dFb5b4;
 }
 
+/* Header */
+
+#sharebar {
+    margin-right : 30px;
+}
+
+#sharebar i {
+    font-size: 1.3em;
+}
+
+@media (min-width: 768px) {
+    #sharebar i {
+        -moz-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+}
+
+@media (max-width: 768px) {
+    #sharebar span {
+        display: inline !important;
+    }
+}
+
 /* Index */
 
 #index #featured {
@@ -183,6 +209,7 @@ body {
 	color : #FFF;
 	min-height : 250px;
 	margin-top : 10px;
+    background : #7a62d3;
 }
 
 .about-content p {
