@@ -4,7 +4,7 @@ A way to authenticate users using Durandal and token authentication with the new
 
 The included features are:
 
-- Authentication and Authorization using the new ASP.NET Identity system and token authentication
+- Authentication and authorization using the new ASP.NET Identity system and token authentication
 
 - Authorization in Durandal views
 

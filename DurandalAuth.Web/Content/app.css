@@ -13,7 +13,6 @@
 .splash {
 	text-align: center;
 	margin: 0;
-    background : #6246cb;
     opacity : 0.8;
     color : #FFF;
     height : 100em;
@@ -168,7 +167,8 @@ body {
 }
 
 #articles .offcanvas-buttons {
-    margin-top : 10px;
+    margin : 0 -16px 0 -16px;
+    padding : 5px;
 }
 
 #articles .showmenubutton {
@@ -176,15 +176,13 @@ body {
 	text-decoration : none;
 	font-size : 2em;
 	display : block;
-    background: #000;
     color: #FFF;
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 5px;
 }
 
 #articles .showmenubutton:hover {
-	background : rgba(0, 0, 0, 0.8);
+	opacity : 0.6;
 }
 
 @media (min-width: 768px) {

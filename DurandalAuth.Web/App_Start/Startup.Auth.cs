@@ -30,7 +30,7 @@ namespace DurandalAuth.Web
 				//Use ApplicationOAuthProvider in order to authenticate
                 Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14), //Token expiration => The user will remain authenticated for 14 days
                 AllowInsecureHttp = true                
             };
         }

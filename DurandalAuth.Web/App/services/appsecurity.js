@@ -370,7 +370,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
          * or redirect when returning from a provider or associating another login
          */
 		initializeAuth : function() {
-			var self = this;						
+			var self = this;
 
 			return system.defer(function (dfd) {
 				var fragment = getFragment(),
