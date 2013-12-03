@@ -1,14 +1,12 @@
 ## What´s this?
 
-This template is a port of the default ASP MVC 4 Internet template and its security system.
+A way to authenticate users using Durandal and token authentication with the new ASP.NET Identity membership.
 
 The included features are:
 
-- Forms and oAuth authentication and authorization using SimpleMembership providers
+- Authentication and Authorization using the new ASP.NET Identity system and token authentication
 
 - Authorization in Durandal views
-
-- AntiForgery tokens
 
 - Model validation both client (knockout validation) and server (data attributes)
 
@@ -19,6 +17,8 @@ The included features are:
 - pushState enabled
 
 - Styled with Bootstrap 3
+
+- Optional SEO ready using [AzureCrawler](http://github.com/yagopv/azurecrawler)
 
 
 ##Check it out!! ...
@@ -41,15 +41,6 @@ Or you can follow this links:
 
 [Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio/)
 
-
-##About pushState
-
-Since Durandal 2.0 we can use pushState so this feature is enabled by default. If you prefer hashes you can always set pushState to false in shell.js
-
-```
-.activate({ pushState : true }); // set to false for using hash style url´s
-
-```
 
 ##About SEO Optimization
 

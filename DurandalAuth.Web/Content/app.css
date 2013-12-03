@@ -34,6 +34,17 @@
 	margin-top: 50px;
 }
 
+@media (max-width: 768px) {
+    .splash .message {
+        font-size : 2.5em;
+    }
+
+    .splash .fa-spinner {
+        font-size : 3.5em;
+    }
+}
+
+
 .page-host {
 	position: relative;
 	padding-top: 80px;

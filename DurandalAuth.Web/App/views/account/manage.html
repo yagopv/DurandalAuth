@@ -23,14 +23,15 @@
                                 <input type="password" id="ChangePasswordConfirmPassword" class="form-control" data-bind="value: confirmPassword" />
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success" data-bind="click: change, disable: changing">Cambiar contraseña</button>
+                                <button type="submit" class="btn btn-primary" data-bind="click: change, disable: changing">Cambiar contraseña</button>
+                                <button type="reset" class="btn btn-default">Reset</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div data-bind="visible : !hasLocalPassword()">
                     <div data-bind="with: setPassword">
-                        <p>You don´t have any local password for this site. Add a local account by entering a password in this form and you won´t need any external login anymore</p>
+                        <p class="lead">You don´t have any local password for this site. Add a local account by entering a password in this form and you won´t need any external login anymore</p>
                         <form class="form-horizontal" role="form">
                             <h2>Create local account</h2>
                             <hr />
@@ -43,13 +44,14 @@
                                 <input type="password" id="SetPasswordConfirmPassword" class="form-control" data-bind="value: confirmPassword" />                                
                             </div>
                             <div class="form-group">
-                               <button type="submit" class="btn btn-success" data-bind="click: set, disable: setting">Create local account</button>                               
+                               <button type="submit" class="btn btn-primary" data-bind="click: set, disable: setting">Create local account</button>                               
+                                <button type="reset" class="btn btn-default">Reset</button>
                             </div>
                         </form>
                     </div>
                 </div>
           </section>
-          <section class="col-md-6">
+            <section class="col-md-5 col-md-offset-1">
                 <ul class="text-danger" data-bind="foreach: errors">
                     <li data-bind="text: $data"></li>
                 </ul>
@@ -58,7 +60,7 @@
                     <table class="table">
                         <tbody data-bind="foreach: userLogins">
                             <tr>
-                                <td data-bind="text: loginProvider"></td>
+                                <td class="lead" data-bind="text: loginProvider"></td>
                                 <td>
                                     <div data-bind="if: $parent.canRemoveLogin">
                                         <form>
@@ -74,16 +76,16 @@
                     </table>
                 </div>
                 <h2>Add a new external account</h2>
-                <hr/>
+                <hr />
                 <div data-bind="visible: !hasExternalLogin()">
-                    <p>
+                    <p class="lead">
                         There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
                         for details on setting up this ASP.NET application to support logging in via external services.
                     </p>
                 </div>
                 <div data-bind="visible: hasExternalLogin">
                     <div class="list-group" data-bind="foreach: externalLoginProviders">
-                        <a  href="#" class="list-group-item lead" data-bind="click: login, attr: { 'data-provider': name,  title: 'Log in using your ' + name() + ' account'}">
+                        <a href="#" class="list-group-item lead" data-bind="click: login, attr: { 'data-provider': name,  title: 'Log in using your ' + name() + ' account'}">
                             <i data-bind="css: socialIcon($data)"></i>
                             <span data-bind="text: name"></span>
                         </a>
