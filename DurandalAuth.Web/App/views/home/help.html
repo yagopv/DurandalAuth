@@ -5,24 +5,43 @@
                 <div class="page-header">
                     <h2 class="text-primary"><i class="fa fa-question-circle"></i>   How is this site working?</h2>
                 </div>
-                <p>This site simulates a community-managed article repository. People with accounts can write articles in their dashboards and make them public on the web.</p>
-                <p>The main objective of this sample application is to provide a way to authenticate and authorize users similar to the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social providers among another useful features.</p>
-                <p>I decided to leverage the first template I created to build a more complete application in order to show what Breeze JS can do for you and how to protect saving changes on server.</p>
-                <hr />
-                <p>The first thing you should do is create a new account using the <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">membership system or the oAuth providers</a>.</p>
                 <p>
-                    After registration, a <span class="label label-primary">User</span>
-                    role will be assigned to you that will permit access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>. Once there, you can start writing articles.
+                    This site simulates a community-managed article repository. People with accounts can write articles in their
+                    dashboards and make them public on the web.
+                </p>
+                <p>
+                    The main objective of this sample application is to provide a way to authenticate and authorize users similar to
+                    the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social
+                    providers among another useful features.
+                </p>
+                <p>
+                    I decided to leverage the first template I created to build a more complete application in order to show what Breeze JS
+                    can do for you and how to protect saving changes on server.
+                </p>
+                <hr />
+                <p>
+                    The first thing you should do is create a new account using the <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">
+                        membership system or the oAuth providers
+                    </a>.
+                </p>
+                <p>
+                    After registration, a <span class="text-info">User</span>
+                    role will be assigned to you that will permit access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>.
+                    Once there, you can start writing articles.
                 </p>
                 <p>
                     While writing on your dashboard, remember to set the article
                     as a public article if you want to make it visible for the rest of the community.
                 </p>
                 <p>
-                    Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>. If you want to access this view, you'll need to have the
-                    <span class="label label-primary">Administrator</span> role.
+                    Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>.
+                    If you want to access this view, you'll need to have the
+                    <span class="text-info">Administrator</span> role.
                 </p>
-                <p>Try to log in with the following: <span class="label label-primary">admin/admin1234</span> and once there, you will be able to check a list with the registered users on this site.</p>                
+                <p>
+                    Try to log in with the following: <span class="text-info">admin/admin1234</span> and once there, you will be able to check a list with
+                    the registered users on this site.
+                </p>
             </div>
         </div>
         <div class="row">
@@ -37,10 +56,16 @@
                         <ul>
                             <li>
                                 <p>First step should be adding the new entity to the <span class="text-info">Model</span> folder.</p>
-                                <p>It´s important to remember the <span class="text-info">[DataContract]</span> and <span class="text-info">[DataMember]</span> attributes. Fields not decorated with <span class="text-info">[DataMember]</span> won´t be managed by Breeze and won´t be propagated to the client application.</p>
+                                <p>
+                                    It´s important to remember the <span class="text-info">[DataContract]</span> and <span class="text-info">[DataMember]</span>
+                                    attributes. Fields not decorated with <span class="text-info">[DataMember]</span> won´t be managed by Breeze and won´t be propagated to the client application.
+                                </p>
                             </li>
                             <li>
-                                <p>Optionally you can add a extended repository contract like <span class="text-info">IMyNewEntityRepository.cs</span> in the <span class="text-info">Repositories</span> folder.</p>
+                                <p>
+                                    Optionally you can add a extended repository contract like <span class="text-info">IMyNewEntityRepository.cs</span>
+                                    in the <span class="text-info">Repositories</span> folder.
+                                </p>
                                 <p>This new repository will inherit from <span class="text-info">IRepository.cs</span> and should content specific methods for the new entity.</p>
                                 <p>You should do this only if need more functionality that the included in <span class="text-info">IRepository.cs</span>.</p>
                             </li>
@@ -53,8 +78,14 @@
                                 <p>Add the newly created entity to the <span class="text-info">DurandalAuthDbContext.cs</span> class.</p>
                             </li>
                             <li>
-                                <p>If you decided to create a new repository contract in the <span class="text-info">Domain layer</span>, you need to implement it in the <span class="text-info">Data layer</span>.</p>
-                                <p>Create a new <span class="text-info">MyNewEntityRepository.cs</span> class under the <span class="text-info">Repositories</span> folder implementing <span class="text-info">IMyNewEntityRepository.cs</span> interface.</p>
+                                <p>
+                                    If you decided to create a new repository contract in the <span class="text-info">Domain layer</span>, you need to
+                                    implement it in the <span class="text-info">Data layer</span>.
+                                </p>
+                                <p>
+                                    Create a new <span class="text-info">MyNewEntityRepository.cs</span> class under the <span class="text-info">Repositories</span> folder
+                                    implementing <span class="text-info">IMyNewEntityRepository.cs</span> interface.
+                                </p>
                             </li>
                             <li>
                                 <p>Add the new repository to the <span class="text-info">UnitOfWork.cs</span>.</p>
@@ -65,7 +96,11 @@
                         <h3><span class="text-primary">Web Layer</span></h3>
                         <ul>
                             <li>
-                                <p>Add methods to the <span class="text-info">DurandalAuthController.cs</span> class in order to retrieve the new entity data. If you prefer to not use <span class="text-info">Breeze</span>, create a new Api Controller for the resource and call it from the client using standard AJAX calls.</p>
+                                <p>
+                                    Add methods to the <span class="text-info">DurandalAuthController.cs</span> class in order to retrieve the new entity data.
+                                    If you prefer to not use <span class="text-info">Breeze</span>, create a new Api Controller for the resource and call it from
+                                    the client using standard AJAX calls.
+                                </p>
                             </li>
                             <li>
                                 <p>Under the Durandal App folder:</p>
@@ -74,19 +109,87 @@
                                         <p>Add new initialization methods and constructors for the breeze entities using the <span class="text-info">model/modelBuilder.js</span> module.</p>
                                     </li>
                                     <li>
-                                        <p>Add a new breeze resource in the <span class="text-info">services/unitofwork.js</span> module using the base <span class="text-info">repository.js</span> module or a new one you can create extending that one. Samples for extending <span class="text-info">repository.js</span> are <span class="text-info">privatearticlesrepository.js</span> and <span class="text-info">publicarticlesrepository.js</span>.</p>
+                                        <p>
+                                            Add a new breeze resource in the <span class="text-info">services/unitofwork.js</span> module using the base
+                                            <span class="text-info">repository.js</span> module or a new one you can create extending that one. Samples for
+                                            extending <span class="text-info">repository.js</span> are <span class="text-info">privatearticlesrepository.js</span> and
+                                            <span class="text-info">publicarticlesrepository.js</span>.
+                                        </p>
                                     </li>
                                 </ol>
                             </li>
                             <li>
-                                <p>Perhaps you would like to add some bussiness rules for the new entity. This sort of things can be accomplished in several ways like using data attributes. Another way breeze specific is using Breeze delegates. Under the <span class="text-info">Helpers</span> folder you have the <span class="text-info">BreezeValidator.cs</span> class implementing the <span class="text-info">IBreezeValidator.cs</span> on the Domain layer. The Breeze delegates are asigned in the <span class="text-info">UnitOfWork.cs</span> class under the <span class="text-info">Data Layer</span>.</p>
+                                <p>
+                                    Perhaps you would like to add some bussiness rules for the new entity. This sort of things can be accomplished in several ways
+                                    like using data attributes. Another way breeze specific is using Breeze delegates. Under the <span class="text-info">Helpers</span> folder you have
+                                    the <span class="text-info">BreezeValidator.cs</span> class implementing the <span class="text-info">IBreezeValidator.cs</span> on the Domain layer.
+                                    The Breeze delegates are asigned in the <span class="text-info">UnitOfWork.cs</span> class under the <span class="text-info">Data Layer</span>.
+                                </p>
                             </li>
                             <li>
-                                <p>If you create new interfaces for repositories, remember to add them to the <span class="text-info">IoC.cs</span> container under the <span class="text-info">DependencyResolution folder</span>.</p>
+                                <p>
+                                    If you create new interfaces for repositories, remember to add them to the <span class="text-info">IoC.cs</span> container under the
+                                    <span class="text-info">DependencyResolution folder</span>.
+                                </p>
                             </li>
                         </ul>
                     </li>
                 </ul>
+                <div class="well well-danger mart2">
+                    <h3>Important !!</h3>
+                    <p>
+                        The authorization system in the client can always be hacked!
+                        Always authenticate and authorize the request in the server when retrieving the necessary data for your views.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2 class="text-primary"><i class="fa fa-lock"></i>   OAuth bearer token authentication using OWIN</h2>
+                </div>
+                <p>
+                    The DurandalAuth authentication system is based in OAuth with bearer tokens and OWIN. Most of the code is similar to the new ASP MVC 5 SPA application
+                    template but adapted for being used with Durandal. If you are familiar with that template you will understand DurandalAuth.
+                </p>
+                <p>
+                    For learning about bearer token authentication I recommend reading <a href="http://blogs.msdn.com/b/webdev/archive/2013/09/20/understanding-security-features-in-spa-template.aspx" target="_blank">this blog post</a>
+                    about the new SPA template included in Visual Studio 2013.
+                </p>
+                <p>
+                    The OAuth flows implemented in DurandalAuth are <a href="http://tools.ietf.org/html/rfc6749#section-4.3" target="_blank">Resource Owner Password Credentials Grant</a>
+                    for local authentication and <a href="http://tools.ietf.org/html/rfc6749#section-4.2" target="_blank">Implicit Grant</a> for external authentication services.
+                </p>
+                <p>
+                    The use of bearer tokens implies you should be using HTTPS protocol to orevent the token to be intercepted. By default DurandalAuth is configured for redirect all
+                    the requests to HTTPS.
+                </p>
+                <p>The bearer token will be sent with each authenticated AJAX request to the server. You can check the request <span class="text-info">Authorize header</span> using your favourite tool.</p>
+                <div class="well mart2">
+                    <h3>About token expiration</h3>
+                    <p>
+                        When checking the Remember Me checkbox in the login view, the token will be stored in the localstorage for subsequent sessions.
+                        By default DurandalAuth has configured a token expiration of 14 days since the user is authenticated. It means that when the 14 are completed,
+                        the token will become invalid and the user must authenticate again.
+                        The token expiration duration is configured in <span class="text-info">Startup.Auth.cs</span> so use your preferred timeframe.
+                    </p>
+                    <p>When authenticating with external services, the token is stored in sessionstorage so the user must authenticate again in a new session.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2 class="text-primary"><i class="fa fa-exchange"></i>   Theming with BootStrap</h2>
+                </div>
+                <p>I choose Bootstrap for theming DurandalAuth. I think is easy to understand, mature and widely used.</p>
+                <p>
+                    The theme applied by default is called WhitePlum, a beautiful purple theme,  but  you can use your own one replacing
+                    in <span class="text-info">BundleConfig.cs</span> the <span class="text-info">bootstrap-whiteplum.css</span> file with your own theme.
+                    Be aware about the Bootstrap nuget package is included so you can use bootstrap.css file in the <span class="text-info">Content</span> folder and
+                    the default theme will be applied.
+                </p>
             </div>
         </div>
         <div class="row">
@@ -101,13 +204,6 @@
                 <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
             </div>
         </div>
-        <blockquote class="bs-callout bs-callout-danger">
-            <h2>Remember !!</h2>
-            <p class="lead">
-                The authorization system in the client can always be hacked!
-                Always authenticate and authorize the request in the server when retrieving the necessary data for your views.
-            </p>
-        </blockquote>
         <hr />
     </div>
 </div>

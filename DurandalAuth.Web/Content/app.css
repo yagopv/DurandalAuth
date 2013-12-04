@@ -113,7 +113,7 @@ body {
 /* Header */
 
 #sharebar {
-    margin-right : 30px;
+    margin-right : 5px;
 }
 
 #sharebar i {
@@ -237,9 +237,11 @@ body {
 /* Footer */
 
 footer {
+    max-width : 100%;
 	background-color:#3d288e;
 	color : #FFF;    
 	display:none;
+    overflow-x : hidden;
 }
 
 .footer-content {
@@ -266,23 +268,9 @@ footer a:hover {
 
 /* Bootstrap overrides */
 
-body {
-  font-family: "Open Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: "Open Sans","Helvetica Neue", Helvetica, Arial, sans-serif;
+.well-danger {
+    background : rgb(233, 29, 29);
+    border : rgb(233, 29, 29);
 }
 
 .navbar-fixed-top .navbar-inner {

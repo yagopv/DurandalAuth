@@ -9,12 +9,9 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="format-detection" content="telephone=no"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        
 		<meta name="fragment" content="!">
-		
-		<link rel="apple-touch-startup-image" href="~/Content/images/ios-startup-image-landscape.png" media="(orientation:landscape)" />
-		<link rel="apple-touch-startup-image" href="~/Content/images/ios-startup-image-portrait.png" media="(orientation:portrait)" />
-		<link rel="apple-touch-icon" href="~/Content/images/icon.png"/>
 		
 		@Styles.Render("~/Content/css")
 		@Styles.Render("~/Content/custom")
@@ -44,8 +41,8 @@
 			<div class="splash well">
                 <div class="message">
                     DurandalAuth 2
-                </div>
-                <i class="fa fa-spinner fa-4x fa-spin active"></i>
+                    <p class="lead">ASP Identity token authentication and Durandal working together</p>
+                </div>                
             </div>
 		</div>
 		<footer class="st-sticky-footer">
