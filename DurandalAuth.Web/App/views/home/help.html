@@ -11,36 +11,33 @@
                 </p>
                 <p>
                     The main objective of this sample application is to provide a way to authenticate and authorize users similar to
-                    the default ASP MVC 4 Internet template. You will find Forms and oAuth authentication built-in with the main social
-                    providers among another useful features.
-                </p>
-                <p>
-                    I decided to leverage the first template I created to build a more complete application in order to show what Breeze JS
-                    can do for you and how to protect saving changes on server.
+                    the default ASP MVC 5 SPA template but configured for being used with <span class="text-success">Durandal</span>.
+                    You will find <span class="text-success">OAuth bearer token authentication</span> built-in for local and external providers among another useful features.
                 </p>
                 <hr />
                 <p>
-                    The first thing you should do is create a new account using the <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">
+                    The first thing you can do in this site is creating a new account using the
+                    <a href="#" data-bind="attr: { href: convertRouteToHash('account/login') }">
                         membership system or the oAuth providers
                     </a>.
                 </p>
                 <p>
-                    After registration, a <span class="text-info">User</span>
-                    role will be assigned to you that will permit access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>.
+                    After logged in, the <span class="text-success">User</span>
+                    role will be assigned to your new user that will allow access to the <a href="#" data-bind="attr: { href: convertRouteToHash('user/dashboard') }">user dashboard</a>.
                     Once there, you can start writing articles.
                 </p>
                 <p>
-                    While writing on your dashboard, remember to set the article
-                    as a public article if you want to make it visible for the rest of the community.
+                    While writing on your dashboard, remember to set the article as a public article if you want to make it visible for the rest of the community.
                 </p>
                 <p>
-                    Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>.
-                    If you want to access this view, you'll need to have the
-                    <span class="text-info">Administrator</span> role.
+                    Administrator users can access the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>, but not the dashboard
+                    because they have assigned the <span class="text-success">Administrator</span> role. but not the
+                    <span class="text-success"> User one</span>.
                 </p>
                 <p>
-                    Try to log in with the following: <span class="text-info">admin/admin1234</span> and once there, you will be able to check a list with
-                    the registered users on this site.
+                    For accesing the <a href="#" data-bind="attr: { href: convertRouteToHash('admin/panel') }">admin panel view</a>, try to log in with the
+                    following user and password, <span class="text-success">admin/admin1234</span>. Once there, you will be able to check a list with the registered users
+                    on this site.
                 </p>
             </div>
         </div>
@@ -49,25 +46,28 @@
                 <div class="page-header">
                     <h2 class="text-primary"><i class="fa fa-plus-circle"></i>   Add you own Entities</h2>
                 </div>
-                <p>One of the first things you would like to do with this sample template is creating your own entities. Yo can do so following this steps.</p>
+                <p>
+                    One of the first things you would like to do with this sample template is creating your own entities and your own domain model.
+                    You can remove all the sample entities and add you own ones following this steps.
+                </p>
                 <ul>
                     <li>
                         <h3><span class="text-primary">Domain Layer</span></h3>
                         <ul>
                             <li>
-                                <p>First step should be adding the new entity to the <span class="text-info">Model</span> folder.</p>
+                                <p>First step should be adding the new entity to the <span class="text-success">Model</span> folder.</p>
                                 <p>
-                                    It´s important to remember the <span class="text-info">[DataContract]</span> and <span class="text-info">[DataMember]</span>
-                                    attributes. Fields not decorated with <span class="text-info">[DataMember]</span> won´t be managed by Breeze and won´t be propagated to the client application.
+                                    It´s important to remember the <span class="text-success">[DataContract]</span> and <span class="text-success">[DataMember]</span>
+                                    attributes. Fields not decorated with <span class="text-success">[DataMember]</span> won´t be managed by Breeze and won´t be propagated to the client application.
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    Optionally you can add a extended repository contract like <span class="text-info">IMyNewEntityRepository.cs</span>
-                                    in the <span class="text-info">Repositories</span> folder.
+                                    Optionally you can add a extended repository contract like <span class="text-success">IMyNewEntityRepository.cs</span>
+                                    in the <span class="text-success">Repositories</span> folder.
                                 </p>
-                                <p>This new repository will inherit from <span class="text-info">IRepository.cs</span> and should content specific methods for the new entity.</p>
-                                <p>You should do this only if need more functionality that the included in <span class="text-info">IRepository.cs</span>.</p>
+                                <p>This new repository will inherit from <span class="text-success">IRepository.cs</span> and should content specific methods for the new entity.</p>
+                                <p>You should do this only if need more functionality that the included in <span class="text-success">IRepository.cs</span>.</p>
                             </li>
                         </ul>
                     </li>
@@ -75,20 +75,20 @@
                         <h3><span class="text-primary">Data Layer</span></h3>
                         <ul>
                             <li>
-                                <p>Add the newly created entity to the <span class="text-info">DurandalAuthDbContext.cs</span> class.</p>
+                                <p>Add the newly created entity to the <span class="text-success">DurandalAuthDbContext.cs</span> class.</p>
                             </li>
                             <li>
                                 <p>
-                                    If you decided to create a new repository contract in the <span class="text-info">Domain layer</span>, you need to
-                                    implement it in the <span class="text-info">Data layer</span>.
+                                    If you decided to create a new repository contract in the <span class="text-success">Domain layer</span>, you need to
+                                    implement it in the <span class="text-success">Data layer</span>.
                                 </p>
                                 <p>
-                                    Create a new <span class="text-info">MyNewEntityRepository.cs</span> class under the <span class="text-info">Repositories</span> folder
-                                    implementing <span class="text-info">IMyNewEntityRepository.cs</span> interface.
+                                    Create a new <span class="text-success">MyNewEntityRepository.cs</span> class under the <span class="text-success">Repositories</span> folder
+                                    implementing <span class="text-success">IMyNewEntityRepository.cs</span> interface.
                                 </p>
                             </li>
                             <li>
-                                <p>Add the new repository to the <span class="text-info">UnitOfWork.cs</span>.</p>
+                                <p>Add the new repository to the <span class="text-success">UnitOfWork.cs</span>.</p>
                             </li>
                         </ul>
                     </li>
@@ -97,8 +97,8 @@
                         <ul>
                             <li>
                                 <p>
-                                    Add methods to the <span class="text-info">DurandalAuthController.cs</span> class in order to retrieve the new entity data.
-                                    If you prefer to not use <span class="text-info">Breeze</span>, create a new Api Controller for the resource and call it from
+                                    Add methods to the <span class="text-success">DurandalAuthController.cs</span> class in order to retrieve the new entity data.
+                                    If you prefer to not use <span class="text-success">Breeze</span>, create a new Api Controller for the resource and call it from
                                     the client using standard AJAX calls.
                                 </p>
                             </li>
@@ -106,14 +106,14 @@
                                 <p>Under the Durandal App folder:</p>
                                 <ol>
                                     <li>
-                                        <p>Add new initialization methods and constructors for the breeze entities using the <span class="text-info">model/modelBuilder.js</span> module.</p>
+                                        <p>Add new initialization methods and constructors for the breeze entities using the <span class="text-success">model/modelBuilder.js</span> module.</p>
                                     </li>
                                     <li>
                                         <p>
-                                            Add a new breeze resource in the <span class="text-info">services/unitofwork.js</span> module using the base
-                                            <span class="text-info">repository.js</span> module or a new one you can create extending that one. Samples for
-                                            extending <span class="text-info">repository.js</span> are <span class="text-info">privatearticlesrepository.js</span> and
-                                            <span class="text-info">publicarticlesrepository.js</span>.
+                                            Add a new breeze resource in the <span class="text-success">services/unitofwork.js</span> module using the base
+                                            <span class="text-success">repository.js</span> module or a new one you can create extending that one. Samples for
+                                            extending <span class="text-success">repository.js</span> are <span class="text-success">privatearticlesrepository.js</span> and
+                                            <span class="text-success">publicarticlesrepository.js</span>.
                                         </p>
                                     </li>
                                 </ol>
@@ -121,15 +121,15 @@
                             <li>
                                 <p>
                                     Perhaps you would like to add some bussiness rules for the new entity. This sort of things can be accomplished in several ways
-                                    like using data attributes. Another way breeze specific is using Breeze delegates. Under the <span class="text-info">Helpers</span> folder you have
-                                    the <span class="text-info">BreezeValidator.cs</span> class implementing the <span class="text-info">IBreezeValidator.cs</span> on the Domain layer.
-                                    The Breeze delegates are asigned in the <span class="text-info">UnitOfWork.cs</span> class under the <span class="text-info">Data Layer</span>.
+                                    like using data attributes. Another way breeze specific is using Breeze delegates. Under the <span class="text-success">Helpers</span> folder you have
+                                    the <span class="text-success">BreezeValidator.cs</span> class implementing the <span class="text-success">IBreezeValidator.cs</span> on the Domain layer.
+                                    The Breeze delegates are asigned in the <span class="text-success">UnitOfWork.cs</span> class under the <span class="text-success">Data Layer</span>.
                                 </p>
                             </li>
                             <li>
                                 <p>
-                                    If you create new interfaces for repositories, remember to add them to the <span class="text-info">IoC.cs</span> container under the
-                                    <span class="text-info">DependencyResolution folder</span>.
+                                    If you create new interfaces for repositories, remember to add them to the <span class="text-success">IoC.cs</span> container under the
+                                    <span class="text-success">DependencyResolution folder</span>.
                                 </p>
                             </li>
                         </ul>
@@ -150,31 +150,47 @@
                     <h2 class="text-primary"><i class="fa fa-lock"></i>   OAuth bearer token authentication using OWIN</h2>
                 </div>
                 <p>
-                    The DurandalAuth authentication system is based in OAuth with bearer tokens and OWIN. Most of the code is similar to the new ASP MVC 5 SPA application
-                    template but adapted for being used with Durandal. If you are familiar with that template you will understand DurandalAuth.
+                    The DurandalAuth authentication system is based in <span class="text-success"> OAuth with bearer tokens and OWIN </span>.
+                    A picked up code from the new ASP MVC 5 SPA application template and adapted it for being used with Durandal.
+                    If you are familiar with that template you will understand DurandalAuth.
                 </p>
                 <p>
                     For learning about bearer token authentication I recommend reading <a href="http://blogs.msdn.com/b/webdev/archive/2013/09/20/understanding-security-features-in-spa-template.aspx" target="_blank">this blog post</a>
-                    about the new SPA template included in Visual Studio 2013.
+                    about the new SPA template included in Visual Studio 2013. The ideas implemented in DurandalAuth are pretty much the same.
                 </p>
                 <p>
-                    The OAuth flows implemented in DurandalAuth are <a href="http://tools.ietf.org/html/rfc6749#section-4.3" target="_blank">Resource Owner Password Credentials Grant</a>
+                    The OAuth flows in DurandalAuth are <a href="http://tools.ietf.org/html/rfc6749#section-4.3" target="_blank">Resource Owner Password Credentials Grant</a>
                     for local authentication and <a href="http://tools.ietf.org/html/rfc6749#section-4.2" target="_blank">Implicit Grant</a> for external authentication services.
                 </p>
                 <p>
-                    The use of bearer tokens implies you should be using HTTPS protocol to orevent the token to be intercepted. By default DurandalAuth is configured for redirect all
-                    the requests to HTTPS.
+                    The use of bearer tokens implies you should be using HTTPS protocol to avoid the token to be intercepted. By default DurandalAuth is configured for redirecting all
+                    the requests to HTTPS via the <span class="text-success">RequireHttpsAttribute</span> present in ASP MVC and another one created for the Web API 2 and which you can find on the
+                    <span class="text-success"> Filters</span> folder.
                 </p>
-                <p>The bearer token will be sent with each authenticated AJAX request to the server. You can check the request <span class="text-info">Authorize header</span> using your favourite tool.</p>
+                <p>
+                    When you authenticate successfully and get the access token, this bearer token will be sent with each authenticated AJAX request to the server.
+                    You can check the request <span class="text-success">Authorize header</span> using your favourite tool and will find it.
+                </p>
                 <div class="well mart2">
                     <h3>About token expiration</h3>
                     <p>
                         When checking the Remember Me checkbox in the login view, the token will be stored in the localstorage for subsequent sessions.
                         By default DurandalAuth has configured a token expiration of 14 days since the user is authenticated. It means that when the 14 are completed,
                         the token will become invalid and the user must authenticate again.
-                        The token expiration duration is configured in <span class="text-info">Startup.Auth.cs</span> so use your preferred timeframe.
+                        The token expiration duration is configured in <span class="text-success">Startup.Auth.cs</span> so use your preferred timeframe.
                     </p>
-                    <p>When authenticating with external services, the token is stored in sessionstorage so the user must authenticate again in a new session.</p>
+                    <p>
+                        When authenticating with external services, the token is stored in sessionstorage so the user must authenticate again in a new session. It´s easy to
+                        change this behaviour:
+                    </p>
+                    <pre>
+if (data.hasRegistered) {
+    // Change persistent (last parameter) to true for storing the authentication token in local storage when
+    // login with external services
+    self.setAuthInfo(data.userName, data.roles, fragment.access_token, false);
+    dfd.resolve(true);
+}
+                    </pre>
                 </div>
             </div>
         </div>
@@ -186,8 +202,8 @@
                 <p>I choose Bootstrap for theming DurandalAuth. I think is easy to understand, mature and widely used.</p>
                 <p>
                     The theme applied by default is called WhitePlum, a beautiful purple theme,  but  you can use your own one replacing
-                    in <span class="text-info">BundleConfig.cs</span> the <span class="text-info">bootstrap-whiteplum.css</span> file with your own theme.
-                    Be aware about the Bootstrap nuget package is included so you can use bootstrap.css file in the <span class="text-info">Content</span> folder and
+                    in <span class="text-success">BundleConfig.cs</span> the <span class="text-success">bootstrap-whiteplum.css</span> file with your own theme.
+                    Be aware about the Bootstrap nuget package is included so you can use bootstrap.css file in the <span class="text-success">Content</span> folder and
                     the default theme will be applied.
                 </p>
             </div>
@@ -205,5 +221,14 @@
             </div>
         </div>
         <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2 class="text-primary"><i class="fa fa-question"></i>   Need more information</h2>
+                </div>
+            </div>
+            <p>Write me an email or <a href="#" data-bind="attr: { href: convertRouteToHash('home/about') }">contact with me</a>.</p>
+        </div>
+        <hr/>
     </div>
 </div>

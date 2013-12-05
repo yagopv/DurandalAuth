@@ -273,6 +273,10 @@ footer a:hover {
     border : rgb(233, 29, 29);
 }
 
+.navbar-collapse {
+    max-height : 100% !important;
+}
+
 .navbar-fixed-top .navbar-inner {
 	padding-left: 1em;
 	padding-right: 1em;

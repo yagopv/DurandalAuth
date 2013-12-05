@@ -417,7 +417,9 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 						.done(function (data) {
 							if (typeof (data.userName) !== "undefined" && typeof (data.hasRegistered) !== "undefined"
 								&& typeof (data.loginProvider) !== "undefined") {
-								if (data.hasRegistered) {
+							    if (data.hasRegistered) {
+							        // Change persistent to true for storing the authentication token in local storage when
+                                    // login with external services
 									self.setAuthInfo(data.userName, data.roles, fragment.access_token, false);
 									dfd.resolve(true);
 								}
