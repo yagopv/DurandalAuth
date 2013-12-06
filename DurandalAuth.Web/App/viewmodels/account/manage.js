@@ -56,7 +56,6 @@ function (system,appsecurity, errorhandler, logger, utils) {
 
 		// Private operations
 		function reset() {
-		    self.errors.removeAll();
 		    self.oldPassword(null);
 		    self.newPassword(null);
 		    self.confirmPassword(null);
@@ -72,14 +71,12 @@ function (system,appsecurity, errorhandler, logger, utils) {
 
 		// Other UI state
 		self.changing = ko.observable(false);
-		self.errors = ko.observableArray();
 		self.validationErrors = ko.validation.group([self.oldPassword, self.newPassword, self.confirmPassword]);
 
 		errorhandler.includeIn(self);
 
 		// Operations
 		self.change = function () {
-			self.errors.removeAll();
 			if (self.validationErrors().length > 0) {
 				self.validationErrors.showAllMessages();
 				return;
@@ -143,13 +140,11 @@ function (system,appsecurity, errorhandler, logger, utils) {
 
 		// Other UI state
 		self.setting = ko.observable(false);
-		self.errors = ko.observableArray();
 		self.validationErrors = ko.validation.group([self.newPassword, self.confirmPassword]);
 
 		// Operations
 		self.set = function () {
 		    var self = this;
-			self.errors.removeAll();
 			if (self.validationErrors().length > 0) {
 				self.validationErrors.showAllMessages();
 				return;
@@ -244,8 +239,6 @@ function (system,appsecurity, errorhandler, logger, utils) {
 	    loading: ko.observable(true),
 
 	    message: ko.observable(),
-
-	    errors: ko.observableArray(),
 
 	    changePassword: new ChangePasswordViewModel(userName()),
 

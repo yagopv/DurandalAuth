@@ -130,7 +130,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     #sharebar span {
         display: inline !important;
     }
@@ -273,10 +273,6 @@ footer a:hover {
     border : rgb(233, 29, 29);
 }
 
-.navbar-collapse {
-    max-height : 100% !important;
-}
-
 .navbar-fixed-top .navbar-inner {
 	padding-left: 1em;
 	padding-right: 1em;
@@ -302,3 +298,9 @@ footer a:hover {
 	}
 }
 
+/* Stashy overrides */
+
+.st-loader span[class*="l-"] {
+  width: 5px;
+  height: 5px;
+}

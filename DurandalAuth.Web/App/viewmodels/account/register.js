@@ -51,6 +51,11 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 								data.roles, 
 								data.access_token, 
 								self.rememberMe);
+							self.username("");
+							self.email("");
+							self.password("");
+							self.confirmpassword("");
+							self.errors.showAllMessages(false);
 						}
 						router.navigate("account/manage");
 					}).fail(self.handleauthenticationerrors);

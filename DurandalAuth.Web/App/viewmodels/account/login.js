@@ -116,6 +116,12 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                             headers: appsecurity.getSecurityHeaders()
                         };
 
+                        self.username("");
+                        self.password("");
+                        self.rememberMe(false);
+
+                        self.errors.showAllMessages(false);
+
                         if (self.returnUrl()) {
                             router.navigate(self.returnUrl());
                         } else {
