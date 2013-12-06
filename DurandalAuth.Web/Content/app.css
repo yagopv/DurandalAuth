@@ -300,7 +300,10 @@ footer a:hover {
 
 /* Stashy overrides */
 
-.st-loader span[class*="l-"] {
-  width: 5px;
-  height: 5px;
+@media (max-width: 768px) {
+    .st-loader span[class*="l-"] {
+      width: 5px;
+      height: 5px;
+    }
 }
+
