@@ -59,3 +59,7 @@ Check durandalauth site at google:
 ```
 site:durandalauth.azurewebsites.net
 ```
+
+##Looking for the old version code
+
+Check [this branch](https://github.com/yagopv/DurandalAuth/tree/DurandalAuth-MVC4-SimpleMembership) if you are looking for the MVC 4 with SimpleMembership code.
