@@ -57,7 +57,7 @@ namespace DurandalAuth.Web.Providers
                 
                 if (user == null)
                 {
-                    context.SetError("invalid_grant", "El usuario o la contraseña son incorrectos.");
+                    context.SetError("invalid_grant", "Invalid user or password");
                     return;
                 }
 
