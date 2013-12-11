@@ -28,6 +28,7 @@ using DurandalAuth.Data;
 using DurandalAuth.Data.UnitOfWork;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
+using DurandalAuth.Web.SEO;
 using DurandalAuth.Web.Helpers;
 using System.Security.Principal;
 using DurandalAuth.Domain.Validators;
@@ -44,12 +45,17 @@ namespace DurandalAuth.Web.DependencyResolution {
                                     });                            
 
                             x.For<IUnitOfWork>().HttpContextScoped().Use(
-                                () => new UnitOfWork(
-                                      new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())), 
-                                      new BreezeValidator(new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext()))))
+                                () => new UnitOfWork(new BreezeValidator
+                                                        (new UserManager<UserProfile>
+                                                            (new UserStore<UserProfile>
+                                                                (new DurandalAuthDbContext()))))
                             );
 
                             x.For<ISnapshot>().HttpContextScoped().Use<Snapshot>();
+
+                            x.For<ISitemapGenerator>().HttpContextScoped().Use<SitemapGenerator>();
+
+                            x.For<ISitemapItem>().HttpContextScoped().Use<SitemapItem>();
 
                             x.For<UserManager<UserProfile>>().HttpContextScoped().Use(() => new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())));
 

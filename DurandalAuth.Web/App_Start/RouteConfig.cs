@@ -42,6 +42,12 @@ namespace DurandalAuth.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Sitemap", 
+                url: "sitemap",
+                defaults: new { controller = "Sitemap", action = "Sitemap" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{*url}",
                 defaults: new { controller = "Home", action = "Index" }

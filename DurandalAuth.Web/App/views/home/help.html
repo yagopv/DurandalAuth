@@ -218,6 +218,8 @@ if (data.hasRegistered) {
                 <p>The default implementation uses <a href="https://github.com/yagopv/azurecrawler" target="_blank"> a new project I created called AzureCrawler</a>.</p>
                 <p>This new project is a Worker Role ready to be deployed to Windows Azure and serving a REST Web API via OWIN. The Web API executes a phantomjs process when receiving requests and returns html snapshots. Moreover, AzureCrawler can save the snapshot to Azure Storage and keep it there with the expiration date you choose, so next time the page is requested for any bot, the stored snapshot will be served.</p>
                 <p>I created AzureCrawler like a separate project but it´s easy to bring all the concepts from AzureCrawler to your own project if you want to keep it in the same solution. Another option is creating your own implementation of ISnapshot.cs</p>
+                <p>Another included feature, very useful for SEO, is the dynamic generation of sitemaps. <a href="/sitemap" target="_blank">Click here</a> for browsing to the sitemap of this site.</p>
+                <p>Include your own urls in the <span class="text-success">SitemapController</span> and change the <span class="text-success">robots.txt</span> for pointing to your own domain.</p>
             </div>
         </div>
         <hr />

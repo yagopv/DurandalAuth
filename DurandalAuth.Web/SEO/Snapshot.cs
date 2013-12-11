@@ -15,7 +15,7 @@ using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace DurandalAuth.Web.Helpers
+namespace DurandalAuth.Web.SEO
 {
     /// <summary>
     /// This class provides snapshots with the static html content of this site

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using System.Web;
 
-namespace DurandalAuth.Web.Helpers
+namespace DurandalAuth.Web.SEO
 {
     /// <summary>
     /// This interface is the contract that you have implement in order to make your page ajax crawlable for google bots

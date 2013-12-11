@@ -18,7 +18,9 @@ The included features are:
 
 - Styled with Bootstrap 3
 
-- Optional SEO ready using [AzureCrawler](http://github.com/yagopv/azurecrawler)
+- Optionally, the site is ready for SEO using [AzureCrawler](http://github.com/yagopv/azurecrawler)
+
+- Dynamic Sitemap generation
 
 
 ##Check it out!! ...
@@ -59,6 +61,10 @@ Check durandalauth site at google:
 ```
 site:durandalauth.azurewebsites.net
 ```
+
+Another included feature, very useful for SEO, is the dynamic generation of sitemaps. If you browse to **localhost:port/sitemap** url an XML Sitemap will be rendered.
+
+Include your own urls in the SitemapController and change the **robots.txt** for pointing to your own domain.
 
 ##Looking for the old version code
 

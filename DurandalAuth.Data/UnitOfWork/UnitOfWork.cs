@@ -21,13 +21,13 @@ namespace DurandalAuth.Data.UnitOfWork
         /// <summary>
         /// ctor
         /// </summary>
-        public UnitOfWork(UserManager<UserProfile> usermanager, IBreezeValidator breezevalidator)
+        public UnitOfWork(IBreezeValidator breezevalidator)
         {
             contextProvider = new EFContextProvider<DurandalAuthDbContext>();
             contextProvider.BeforeSaveEntitiesDelegate = breezevalidator.BeforeSaveEntities;
             contextProvider.BeforeSaveEntityDelegate = breezevalidator.BeforeSaveEntity;
 
-            ArticleRepository = new Repository<Article>(contextProvider.Context);
+            ArticleRepository = new ArticleRepository(contextProvider.Context);
             CategoryRepository = new Repository<Category>(contextProvider.Context);
             TagRepository = new Repository<Tag>(contextProvider.Context);
             UserProfileRepository = new Repository<UserProfile>(contextProvider.Context);

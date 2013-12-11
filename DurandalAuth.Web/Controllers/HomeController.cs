@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-using DurandalAuth.Web.Helpers;
+using DurandalAuth.Web.SEO;
 
 namespace DurandalAuth.Web.Controllers
 {

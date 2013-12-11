@@ -30,7 +30,7 @@ namespace DurandalAuth.Data.Repositories
         /// Get all Entities for the concrete type
         /// </summary>
         /// <returns></returns>
-        public IQueryable<TEntity> All()
+        public virtual IQueryable<TEntity> All()
         {
             return Context.Set<TEntity>();
         }
@@ -40,7 +40,7 @@ namespace DurandalAuth.Data.Repositories
         /// </summary>
         /// <param name="predicate">The predicate</param>
         /// <returns></returns>
-        public IQueryable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public virtual IQueryable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate);
         }
@@ -50,7 +50,7 @@ namespace DurandalAuth.Data.Repositories
         /// </summary>
         /// <param name="predicate">The search predicate</param>
         /// <returns>The Entity</returns>
-        public TEntity FirstOrDefault(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity FirstOrDefault(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate).FirstOrDefault();
         }
@@ -60,7 +60,7 @@ namespace DurandalAuth.Data.Repositories
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns>The Entity</returns>
-        public TEntity First(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity First(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate).First();
         }
@@ -70,7 +70,7 @@ namespace DurandalAuth.Data.Repositories
         /// </summary>
         /// <param name="id">The identity</param>
         /// <returns>The Entity</returns>
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return Context.Set<TEntity>().Find(id);
         }
@@ -79,7 +79,7 @@ namespace DurandalAuth.Data.Repositories
         /// Add Entity to the working Context
         /// </summary>
         /// <param name="entity">The Entity</param>
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
         }
@@ -88,7 +88,7 @@ namespace DurandalAuth.Data.Repositories
         /// Remove Entity to the working Context
         /// </summary>
         /// <param name="entity">The Entity</param>
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
         }
@@ -97,7 +97,7 @@ namespace DurandalAuth.Data.Repositories
         /// Attach Entity to the working Context
         /// </summary>
         /// <param name="entity">The Entity</param>
-        public void Attach(TEntity entity)
+        public virtual void Attach(TEntity entity)
         {
             Context.Set<TEntity>().Attach(entity);
         }

@@ -288,6 +288,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\almond-custom.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -356,6 +357,7 @@
     <Compile Include="Controllers\DurandalAuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MetadataController.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
@@ -364,14 +366,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BreezeValidator.cs" />
-    <Compile Include="Helpers\ISnapshot.cs" />
+    <Compile Include="Results\SitemapResult.cs" />
+    <Compile Include="SEO\ISnapshot.cs" />
     <Compile Include="Helpers\LookupBundle.cs" />
-    <Compile Include="Helpers\Snapshot.cs" />
+    <Compile Include="SEO\Snapshot.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOauthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="SEO\ISitemapGenerator.cs" />
+    <Compile Include="SEO\ISitemapItem.cs" />
+    <Compile Include="SEO\SitemapChangeFrequency.cs" />
+    <Compile Include="SEO\SitemapGenerator.cs" />
+    <Compile Include="SEO\SitemapItem.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +394,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Sitemap\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DurandalAuth.Data\DurandalAuth.Data.csproj">
