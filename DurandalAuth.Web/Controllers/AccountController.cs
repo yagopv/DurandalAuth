@@ -210,14 +210,14 @@ namespace DurandalAuth.Web.Controllers
                 && ticket.Properties.ExpiresUtc.HasValue
                 && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
             {
-                return BadRequest("Error de inicio de sesión externo.");
+                return BadRequest("Failed to login to the external provider.");
             }
 
             ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
             if (externalData == null)
             {
-                return BadRequest("El inicio de sesión externo ya está asociado con una cuenta.");
+                return BadRequest("This external login is already associated with an account.");
             }
 
             IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
@@ -514,7 +514,7 @@ namespace DurandalAuth.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    // No hay ningún error ModelState disponible para enviarse, devuelva un BadRequest vacío.
+                    // No hay ningï¿½n error ModelState disponible para enviarse, devuelva un BadRequest vacï¿½o.
                     return BadRequest();
                 }
 
@@ -582,7 +582,7 @@ namespace DurandalAuth.Web.Controllers
 
                 if (strengthInBits % bitsPerByte != 0)
                 {
-                    throw new ArgumentException("strengthInBits se debe dividir uniformemente por 8.", "strengthInBits");
+                    throw new ArgumentException("strengthInBits should be divisible by 8.", "strengthInBits");
                 }
 
                 int strengthInBytes = strengthInBits / bitsPerByte;
