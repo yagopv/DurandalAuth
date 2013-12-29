@@ -443,7 +443,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 						.fail(function () {
 							dfd.resolve(true);
 						});
-				} else {
+				} else if (sessionStorage["accessToken"] || localStorage["accessToken"]) {
 					self.getUserInfo()
 						.done(function (data) {
 							if (data.userName) {
@@ -454,6 +454,8 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 						.fail(function () {
 							dfd.resolve(true);
 						});
+				} else {
+					dfd.resolve(true);
 				}				
 			}).promise();
 		}
