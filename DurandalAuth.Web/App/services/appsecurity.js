@@ -13,68 +13,68 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 	var self = this;
 
 	// Build external login url
-    function externalLoginsUrl(returnUrl, generateState) {
-        return "/api/account/externalLogins?returnUrl=" + (encodeURIComponent(returnUrl)) +
-            "&generateState=" + (generateState ? "true" : "false");
-    };
+	function externalLoginsUrl(returnUrl, generateState) {
+		return "/api/account/externalLogins?returnUrl=" + (encodeURIComponent(returnUrl)) +
+			"&generateState=" + (generateState ? "true" : "false");
+	};
 
 	// Build manage info url
-    function manageInfoUrl(returnUrl, generateState) {
-        return "/api/account/manageinfo?returnUrl=" + (encodeURIComponent(returnUrl)) +
-            "&generateState=" + (generateState ? "true" : "false");
-    };
+	function manageInfoUrl(returnUrl, generateState) {
+		return "/api/account/manageinfo?returnUrl=" + (encodeURIComponent(returnUrl)) +
+			"&generateState=" + (generateState ? "true" : "false");
+	};
 
-    // Get the Authorization header for include in requests
-    function getSecurityHeaders() {
-        var accessToken = sessionStorage["accessToken"] || localStorage["accessToken"];
+	// Get the Authorization header for include in requests
+	function getSecurityHeaders() {
+		var accessToken = sessionStorage["accessToken"] || localStorage["accessToken"];
 
-        if (accessToken) {
-            return { "Authorization": "Bearer " + accessToken };
-        }
+		if (accessToken) {
+			return { "Authorization": "Bearer " + accessToken };
+		}
 
-        return {};
-    };
+		return {};
+	};
 
 	// Get url fragments
-    function getFragment() {
-        if (window.location.hash.indexOf("#") === 0) {
-            return parseQueryString(window.location.hash.substr(1));
-        } else {
-            return {};
-        }
-    };
+	function getFragment() {
+		if (window.location.hash.indexOf("#") === 0) {
+			return parseQueryString(window.location.hash.substr(1));
+		} else {
+			return {};
+		}
+	};
 		
 	// Set query string parameters to an object
-    function parseQueryString(queryString) {
-        var data = {},
-            pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
+	function parseQueryString(queryString) {
+		var data = {},
+			pairs, pair, separatorIndex, escapedKey, escapedValue, key, value;
 
-        if (queryString === null) {
-            return data;
-        }
+		if (queryString === null) {
+			return data;
+		}
 
-        pairs = queryString.split("&");
+		pairs = queryString.split("&");
 
-        for (var i = 0; i < pairs.length; i++) {
-            pair = pairs[i];
-            separatorIndex = pair.indexOf("=");
+		for (var i = 0; i < pairs.length; i++) {
+			pair = pairs[i];
+			separatorIndex = pair.indexOf("=");
 
-            if (separatorIndex === -1) {
-                escapedKey = pair;
-                escapedValue = null;
-            } else {
-                escapedKey = pair.substr(0, separatorIndex);
-                escapedValue = pair.substr(separatorIndex + 1);
-            }
+			if (separatorIndex === -1) {
+				escapedKey = pair;
+				escapedValue = null;
+			} else {
+				escapedKey = pair.substr(0, separatorIndex);
+				escapedValue = pair.substr(separatorIndex + 1);
+			}
 
-            key = decodeURIComponent(escapedKey);
-            value = decodeURIComponent(escapedValue);
+			key = decodeURIComponent(escapedKey);
+			value = decodeURIComponent(escapedValue);
 
-            data[key] = value;
-        }
+			data[key] = value;
+		}
 
-        return data;
-    };
+		return data;
+	};
 	
 	// Clear stored access tokens from local and session storage
 	function clearAccessToken() {
@@ -92,101 +92,101 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 	};
 		
 	// Verify the returned state match with the stored one
-    function verifyStateMatch(fragment) {
-        var state;
+	function verifyStateMatch(fragment) {
+		var state;
 
-        if (typeof (fragment.access_token) !== "undefined") {
-            state = sessionStorage["state"];
-            sessionStorage.removeItem("state");
+		if (typeof (fragment.access_token) !== "undefined") {
+			state = sessionStorage["state"];
+			sessionStorage.removeItem("state");
 
-            if (state === null || fragment.state !== state) {
-                fragment.error = "invalid_state";
-            }
-        }
-    };	
+			if (state === null || fragment.state !== state) {
+				fragment.error = "invalid_state";
+			}
+		}
+	};	
 	
 	// Cleanup location fragment
-    function cleanUpLocation() {
-        window.location.hash = "";
+	function cleanUpLocation() {
+		window.location.hash = "";
 
-        if (history && typeof (history.pushState) !== "undefined") {
-            history.pushState("", document.title, location.pathname);
-        }
-    };
+		if (history && typeof (history.pushState) !== "undefined") {
+			history.pushState("", document.title, location.pathname);
+		}
+	};
 	
 	//Archive session storage to local
 	function archiveSessionStorageToLocalStorage() {
-        var backup = {};
+		var backup = {};
 
-        for (var i = 0; i < sessionStorage.length; i++) {
-            backup[sessionStorage.key(i)] = sessionStorage[sessionStorage.key(i)];
-        }
+		for (var i = 0; i < sessionStorage.length; i++) {
+			backup[sessionStorage.key(i)] = sessionStorage[sessionStorage.key(i)];
+		}
 
-        localStorage["sessionStorageBackup"] = JSON.stringify(backup);
-        sessionStorage.clear();
-    };
+		localStorage["sessionStorageBackup"] = JSON.stringify(backup);
+		sessionStorage.clear();
+	};
 		
 	// Restore session storage from local
 	function restoreSessionStorageFromLocalStorage() {
-        var backupText = localStorage["sessionStorageBackup"],
-            backup;
+		var backupText = localStorage["sessionStorageBackup"],
+			backup;
 
-        if (backupText) {
-            backup = JSON.parse(backupText);
+		if (backupText) {
+			backup = JSON.parse(backupText);
 
-            for (var key in backup) {
-                sessionStorage[key] = backup[key];
-            }
+			for (var key in backup) {
+				sessionStorage[key] = backup[key];
+			}
 
-            localStorage.removeItem("sessionStorageBackup");
-        }
-    };	
+			localStorage.removeItem("sessionStorageBackup");
+		}
+	};	
 	
 	// Class representing user information
 	function UserInfoViewModel(name, roles) {
-        this.name = ko.observable(name);
-        this.roles = ko.observableArray(roles);
+		this.name = ko.observable(name);
+		this.roles = ko.observableArray(roles);
 	};
 
-    return {
+	return {
 
-        /** property {object} userInfo - The user object */
-        userInfo: ko.observable(),
+		/** property {object} userInfo - The user object */
+		userInfo: ko.observable(),
 
-        /**
-         * Set the authentication info. Look in storage for stored info
-         * param {string} userName
-         * param {Array} roles
-         * param {string} accessToken
-         * param {bool} persistent
-         */
-        setAuthInfo: function (userName, roles, accessToken, persistent) {
-            var self = this;
+		/**
+		 * Set the authentication info. Look in storage for stored info
+		 * param {string} userName
+		 * param {Array} roles
+		 * param {string} accessToken
+		 * param {bool} persistent
+		 */
+		setAuthInfo: function (userName, roles, accessToken, persistent) {
+			var self = this;
 
 			if (accessToken) {
 				setAccessToken(accessToken, persistent)
 			}
 
 			if (typeof (roles) == "string") {
-			    roles = roles.split(",");
+				roles = roles.split(",");
 			}
 			self.userInfo(new UserInfoViewModel(userName, roles));
 		},
 		
-        /**
-         * Remove authentication info
-         */
-        clearAuthInfo: function () {
-            var self = this;
+		/**
+		 * Remove authentication info
+		 */
+		clearAuthInfo: function () {
+			var self = this;
 
-            clearAccessToken();
-            self.userInfo(undefined);
-        },
+			clearAccessToken();
+			self.userInfo(undefined);
+		},
 
-        /**
-         * Check if the authenticathed user belongs to the role
-         * param {Array} roles
-         */
+		/**
+		 * Check if the authenticathed user belongs to the role
+		 * param {Array} roles
+		 */
 		isUserInRole : function (roles) {
 			var self = this,
 				isuserinrole = false;
@@ -200,22 +200,22 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			return isuserinrole;
 		},
 
-        /**
-         * Get the security headers for sending authenticated ajax requests to the server
-         */
+		/**
+		 * Get the security headers for sending authenticated ajax requests to the server
+		 */
 		getSecurityHeaders: getSecurityHeaders,
 
-        /**
-         * Helper method for storing authentication info in the Local Storage
-         */
+		/**
+		 * Helper method for storing authentication info in the Local Storage
+		 */
 		archiveSessionStorageToLocalStorage : archiveSessionStorageToLocalStorage,
 
 		returnUrl : routeconfig.siteUrl,
 
-        /**
-         * Add external Login
-         * param {object} data - External login info
-         */
+		/**
+		 * Add external Login
+		 * param {object} data - External login info
+		 */
 		addExternalLogin : function (data) {
 			return $.ajax(routeconfig.addExternalLoginUrl, {
 				type: "POST",
@@ -224,10 +224,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Change the password
-         * param {object} data - Change password info
-         */
+		/**
+		 * Change the password
+		 * param {object} data - Change password info
+		 */
 		changePassword : function (data) {
 			return $.ajax(routeconfig.changePasswordUrl, {
 				type: "POST",
@@ -236,12 +236,12 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Get the external logins list
-         * param {string} returnUrl
-         * param {bool} generateState - If true the server will generate a Guid for matching in the client
-         *                              when the authentication provider returns the authentication result
-         */
+		/**
+		 * Get the external logins list
+		 * param {string} returnUrl
+		 * param {bool} generateState - If true the server will generate a Guid for matching in the client
+		 *                              when the authentication provider returns the authentication result
+		 */
 		getExternalLogins : function (returnUrl, generateState) {
 			return $.ajax(externalLoginsUrl(returnUrl, generateState), {
 				cache: false,
@@ -249,12 +249,12 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Get account info for managing the authenticated user data
-         * param {object} returnUrl
-         * param {bool} generateState - If true the server will generate a Guid for matching in the client
-         *                              when the authentication provider returns the authentication result
-         */
+		/**
+		 * Get account info for managing the authenticated user data
+		 * param {object} returnUrl
+		 * param {bool} generateState - If true the server will generate a Guid for matching in the client
+		 *                              when the authentication provider returns the authentication result
+		 */
 		getManageInfo : function (returnUrl, generateState) {
 			return $.ajax(manageInfoUrl(returnUrl, generateState), {
 				cache: false,
@@ -262,13 +262,13 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Get authenticated user info
-         * param {object} accessToken
-         */
+		/**
+		 * Get authenticated user info
+		 * param {object} accessToken
+		 */
 		getUserInfo : function (accessToken) {
-		    var self = this,
-                headers;
+			var self = this,
+				headers;
 
 			if (typeof (accessToken) !== "undefined") {
 				headers = {
@@ -279,25 +279,25 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			}
 
 			return $.ajax(routeconfig.userInfoUrl, {
-			    cache: false,
-			    headers: headers
+				cache: false,
+				headers: headers
 			});
 		},
 
-        /**
-         * Login the user
-         * param {object} data - Login info
-         */
+		/**
+		 * Login the user
+		 * param {object} data - Login info
+		 */
 		login : function (data) {
-		    return $.ajax(routeconfig.loginUrl, {
-		        type: "POST",
-		        data: data
-		    });
+			return $.ajax(routeconfig.loginUrl, {
+				type: "POST",
+				data: data
+			});
 		},
 
-        /**
-         * Logout the user
-         */
+		/**
+		 * Logout the user
+		 */
 		logout : function () {
 			return $.ajax(routeconfig.logoutUrl, {
 				type: "POST",
@@ -305,22 +305,22 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Register new user
-         * param {object} data - Registration info
-         */
+		/**
+		 * Register new user
+		 * param {object} data - Registration info
+		 */
 		register : function (data) {
-		    return $.ajax(routeconfig.registerUrl, {
+			return $.ajax(routeconfig.registerUrl, {
 				type: "POST",
 				data: data
 			});
 		},
 
-        /**
-         * Register external user
-         * param {string} accessToken
-         * param {object} data - Registration info
-         */
+		/**
+		 * Register external user
+		 * param {string} accessToken
+		 * param {object} data - Registration info
+		 */
 		registerExternal : function (accessToken, data) {
 			return $.ajax(routeconfig.registerExternalUrl, {
 				type: "POST",
@@ -331,10 +331,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Remove login from the user
-         * param {object} data - Remove login info
-         */
+		/**
+		 * Remove login from the user
+		 * param {object} data - Remove login info
+		 */
 		removeLogin : function (data) {
 			return $.ajax(routeconfig.removeLoginUrl, {
 				type: "POST",
@@ -343,10 +343,10 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
-        /**
-         * Set authenticated user password
-         * param {object} data - Set password info
-         */
+		/**
+		 * Set authenticated user password
+		 * param {object} data - Set password info
+		 */
 		setPassword : function (data) {
 			return $.ajax(routeconfig.setPasswordUrl, {
 				type: "POST",
@@ -355,20 +355,20 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 		
-        /**
-         * Get a list of users
-         */
+		/**
+		 * Get a list of users
+		 */
 		getUsers: function () {
-		    return $.ajax(routeconfig.getUsersUrl, {
-		        type: "GET",
-		        headers: getSecurityHeaders()
-		    });
+			return $.ajax(routeconfig.getUsersUrl, {
+				type: "GET",
+				headers: getSecurityHeaders()
+			});
 		},
 
-        /**
-         * Always call this method when initializating the application for getting authenticated user info (from storage)
-         * or redirect when returning from a provider or associating another login
-         */
+		/**
+		 * Always call this method when initializating the application for getting authenticated user info (from storage)
+		 * or redirect when returning from a provider or associating another login
+		 */
 		initializeAuth : function() {
 			var self = this;
 
@@ -399,8 +399,8 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 					self.getUserInfo()
 						.done(function (data) {
 							if (data.userName) {
-							    self.setAuthInfo(data.userName, data.roles);
-							    sessionStorage["redirectTo"] = "account/manage?externalAccessToken=" + externalAccessToken + "&externalError=" + externalError;
+								self.setAuthInfo(data.userName, data.roles);
+								sessionStorage["redirectTo"] = "account/manage?externalAccessToken=" + externalAccessToken + "&externalError=" + externalError;
 							}
 							dfd.resolve(true);
 						})
@@ -408,8 +408,8 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 							dfd.resolve(true);
 						});
 				} else if (typeof (fragment.error) !== "undefined") {
-				    cleanUpLocation();
-				    sessionStorage["redirectTo"] = "account/externalloginfailure";
+					cleanUpLocation();
+					sessionStorage["redirectTo"] = "account/externalloginfailure";
 					dfd.resolve(true);					
 				} else if (typeof (fragment.access_token) !== "undefined") {
 					cleanUpLocation();
@@ -417,9 +417,9 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 						.done(function (data) {
 							if (typeof (data.userName) !== "undefined" && typeof (data.hasRegistered) !== "undefined"
 								&& typeof (data.loginProvider) !== "undefined") {
-							    if (data.hasRegistered) {
-							        // Change persistent to true for storing the authentication token in local storage when
-                                    // login with external services
+								if (data.hasRegistered) {
+									// Change persistent to true for storing the authentication token in local storage when
+									// login with external services
 									self.setAuthInfo(data.userName, data.roles, fragment.access_token, false);
 									dfd.resolve(true);
 								}
@@ -443,6 +443,8 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 						.fail(function () {
 							dfd.resolve(true);
 						});
+				// Checking for the access token in order to get the user info
+				// It is necessary to avoid command prompt issues in Windows Phone. Check issue #12
 				} else if (sessionStorage["accessToken"] || localStorage["accessToken"]) {
 					self.getUserInfo()
 						.done(function (data) {
