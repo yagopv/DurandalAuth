@@ -256,6 +256,7 @@
     <Content Include="App\views\user\article.html" />
     <Content Include="App\views\user\dashboard.html" />
     <Content Include="Content\app.css" />
+    <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap-whiteplum.css" />

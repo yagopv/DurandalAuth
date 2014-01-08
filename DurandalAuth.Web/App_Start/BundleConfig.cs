@@ -23,14 +23,14 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/marked.js")
 		  .Include("~/Scripts/zen-form.js")
 		  .Include("~/Scripts/highlight.pack.js")
-          .Include("~/Scripts/jquery.tagsinput.js")
+		  .Include("~/Scripts/jquery.tagsinput.js")
 		);
 
 	  // css vendor
 	  bundles.Add(
 		new StyleBundle("~/Content/css")
 		  .Include("~/Content/ie10mobile.css")
-		  .Include("~/Content/bootstrap-whiteplum.css")
+		  .Include("~/Content/bootstrap-flatly.css")
 		  .Include("~/Content/font-awesome.css")
 		  .Include("~/Content/durandal.css")
 		  .Include("~/Content/toastr.css")
