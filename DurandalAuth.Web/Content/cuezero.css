@@ -1,0 +1,12 @@
+﻿.cue{
+	font-family:'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
+	font-weight: bold;
+	font-size: 46px;
+	color:hsl(255,77%,100%);
+}
+.zero{
+	font-family:'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
+	font-size: 46px;
+	font-weight: bold;
+	color:hsl(190,77%,50%);
+}
