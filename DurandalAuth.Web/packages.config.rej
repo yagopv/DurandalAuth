@@ -1,0 +1,13 @@
+diff a/DurandalAuth.Web/packages.config b/DurandalAuth.Web/packages.config	(rejected hunks)
+@@ -16,7 +16,11 @@
+    <package id="jQuery" version="2.0.3" targetFramework="net451" />
+    <package id="Knockout.Validation" version="1.0.1" targetFramework="net451" />
+    <package id="knockoutjs" version="3.0.0" targetFramework="net451" />
+++<<<<<<< HEAD
+ +  <package id="Less.js" version="1.5.1" targetFramework="net451" />
+++=======
++   <package id="Microsoft.AspNet.Cors" version="5.0.0" targetFramework="net451" />
+++>>>>>>> upstream/master
+    <package id="Microsoft.AspNet.Identity.Core" version="1.0.0" targetFramework="net451" />
+    <package id="Microsoft.AspNet.Identity.EntityFramework" version="1.0.0" targetFramework="net451" />
+    <package id="Microsoft.AspNet.Identity.Owin" version="1.0.0" targetFramework="net451" />

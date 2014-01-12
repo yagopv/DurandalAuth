@@ -43,6 +43,10 @@ namespace DurandalAuth.Web
 
         public void ConfigureAuth(IAppBuilder app)
         {
+            //Enable Cors support in the Web API. Should go before the activation of Bearer tokens
+            //http://aspnetwebstack.codeplex.com/discussions/467315
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
