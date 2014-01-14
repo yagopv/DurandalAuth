@@ -389,6 +389,9 @@
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\cuezero.less" />
+    <None Include="Properties\PublishProfiles\cuezero - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\cuezero - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\cuezero - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -529,6 +532,10 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == Debug (recess "$(ProjectDir)Content\bootstrap\bootstrap.less" --compress &gt; "$(ProjectDir)Content\bootstrap-flatly.css")</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

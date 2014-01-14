@@ -82,15 +82,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DurandalAuth.Domain\DurandalAuth.Domain.csproj">
-      <Project>{225a4167-60b6-4d9c-ab1e-9517b0325ac8}</Project>
-      <Name>DurandalAuth.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201312011746348_Initial.resx">
       <DependentUpon>201312011746348_Initial.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DurandalAuth.Domain\DurandalAuth.Domain.csproj">
+      <Project>{0a4bf6ad-f505-4c97-89ea-ee0db3bf7031}</Project>
+      <Name>DurandalAuth.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
