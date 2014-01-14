@@ -2,113 +2,105 @@
 
     <div id="featured" class="jumbotron">
         <div class="container">
-            <h1>Welcome to the CueZero</h1>
-            <p>A way to authenticate users using Durandal and token authentication with the new ASP.NET Identity membership</p>
+            <div class="col-sm-7">
+                <div data-bind="mainGraphic:{}"></div>
+            </div>
+            <div class="col-sm-5">
+                <div data-bind="interestForm:{}">
+
+                </div>
+            </div>
         </div>
     </div>
-
+    <div id="divWhen" class="jumbotron featureTitle">
+        <div >
+            <h3 class="featureTitle">When can CueZero help you?</h3>
+        </div>
+    </div>
     <div class="container">
-        <div class="row mart5">
+        <div class="row">
+
             <div class="col-sm-4 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
+                <div data-bind="viewBox: {
+    title: 'I want to monitor our organisational health',
+    content:'Keep track of your organisation\'s pulse. Engage staff in an ongoing dialogue about your organisation\'s effectiveness and be on the lookout for early cues about new issues or opportunities.'
+}">
                 </div>
             </div>
             <div class="col-sm-4 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
+                <div data-bind="viewBox: {
+    title: 'I want to test an idea or solution',
+    content:'Test the waters or validate a hunch. Get early feedback on a problem, opportunity or solution so that you can refine your approach to make sure you’re investing in the right solution.'
+}">
                 </div>
             </div>
             <div class="col-sm-4 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
+                <div data-bind="viewBox: {
+    title: 'I want specific feedback about a strategy or key initiative',
+    content:'Capture early signals about strategy or program effectiveness and course-correct when needed. This immediate and continuous feedback helps you stay ahead of the game rather than waiting until things go wrong.'
+}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divWhat" class="row"></div>
+    <div class="jumbotron featureTitle">
+        <div>
+            <h3 class="featureTitle">How does it help you get more timely, specific and action-oriented feedback?</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-3 text-center">
+                    <div data-bind="viewBox: {
+    title: 'Anytime, Anywhere',
+    content:'CueZero is always on, receiving and reporting feedback in real time so you never miss a cue. Integrate CueZero with your existing workflows – MS Office, Yammer, SaleForce etc. to make giving and tracking feedback a seamless experience.'
+}">
                     </div>
-                    <div class="panel-body">
-                        Panel content
+                </div>
+                <div class="col-sm-3 text-center">
+                    <div data-bind="viewBox: {
+    title: 'Adaptive',
+    content:'Don’t keep collecting answers to the same question over and over again if the context is changing; follow trends as they emerge. CueZero orients to newer, more relevant cues as your focus changes.   You can adapt CueZero in response to feedback or let staff do it for you.'
+}">
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <div data-bind="viewBox: {
+    title: 'Solution-focused',
+    content:'Engage staff in the entire feedback loop – from issue identification, to idea generation, solution selection and implementation tracking. Asking the questions, reporting the responses and communicating action are part of the same process.'
+}">
+                    </div>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <div data-bind="viewBox: {
+    title: 'Strategic and pragmatic',
+    content:'Your strategy and context are unique, so CueZero lets you define these and use them to devise feedback cues, organise and analyse data. CueZero guides you through cue development, and also has a library for common themes like agility, innovation and fundamental management skills.'
+}">
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
+        </div>
+    <div id="divHow" class="jumbotron featureTitle">
+        <div>
+            <h3 class="featureTitle">How does it work?</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="col-sm-4 text-center">
+                    <object data="../Content/images/Stage1Opt.svg" type="image/svg+xml" />
                 </div>
-            </div>
-            <div class="col-sm-3 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
+                <div class="col-sm-4 text-center">
+                    <object data="../Content/images/Stage2Opt.svg" type="image/svg+xml" />
                 </div>
-            </div>
-            <div class="col-sm-3 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
+                <div class="col-sm-4 text-center">
+                    <object data="../Content/images/Stage3Opt.svg" type="image/svg+xml" />
                 </div>
             </div>
         </div>
     </div>
 
     <hr class="container" />
-
-    <div class="container">
-        <div class="row mart5">
-            <div class="col-lg-4 text-center">
-                <img src="/Content/icons/icon_question.png" alt="Why this project?" width="150" />
-                <h2>Why this project?</h2>
-                <p class="lead">
-                    Because I couldn't find any proper way of working with this technology stack and this kind of authentication ... so
-                    I tried to write it myself.
-                </p>
-            </div>
-            <div class="col-lg-4 text-center">
-                <img src="/Content/icons/icon_social.png" alt="Collaborate" width="150" />
-                <h2>Collaborate</h2>
-                <p class="lead">
-                    If you find bugs or want to improve the sample project template, feel free to contact me, create
-                    a pull request, or
-                    whatever you want.
-                </p>
-            </div>
-            <div class="col-lg-4 text-center">
-                <img src="/Content/icons/icon_project.png" alt="Project" width="150" />
-                <h2>Visit the project site ...</h2>
-                <p class="lead">... <a href="https://github.com/yagopv/durandalauth" target="_blank"> on Github</a> and check the code if you want.</p>
-            </div>
-        </div>
-        <hr />
-    </div>
 </div>

@@ -252,6 +252,8 @@
     <Content Include="App\views\account\manage.html" />
     <Content Include="App\views\account\register.html" />
     <Content Include="App\views\admin\panel.html" />
+    <Content Include="App\viewmodels\dialog.js" />
+    <Content Include="App\views\dialog.html" />
     <Content Include="App\views\header.html" />
     <Content Include="App\views\home\about.html" />
     <Content Include="App\views\home\articles.html" />
@@ -261,6 +263,12 @@
     <Content Include="App\views\shell.html" />
     <Content Include="App\views\user\article.html" />
     <Content Include="App\views\user\dashboard.html" />
+    <Content Include="App\widgets\interestForm\view.html" />
+    <Content Include="App\widgets\interestForm\viewModel.js" />
+    <Content Include="App\widgets\mainGraphic\view.html" />
+    <Content Include="App\widgets\mainGraphic\viewModel.js" />
+    <Content Include="App\widgets\viewBox\view.html" />
+    <Content Include="App\widgets\viewBox\viewModel.js" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -280,11 +288,17 @@
     <Content Include="Content\bootstrap\bootswatch.min.css">
       <DependentUpon>bootswatch.less</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap\mixins.css">
+      <DependentUpon>mixins.less</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\variables.css">
       <DependentUpon>variables.less</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap\variables.min.css">
       <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\cuezero.min.css">
+      <DependentUpon>cuezero.less</DependentUpon>
     </Content>
     <Content Include="Content\durandal.css" />
     <Content Include="Content\font-awesome.css" />
@@ -302,17 +316,20 @@
     <Content Include="Content\icons\icon_user.png" />
     <Content Include="Content\icons\no_photo.png" />
     <Content Include="Content\images\arrow.png" />
-    <Content Include="Content\images\CueZero Logo Small.png" />
-    <Content Include="Content\images\CueZero Logo White_transparent %28Custom%29.png" />
-    <Content Include="Content\images\CueZero Logo White_transparent.png" />
+    <Content Include="Content\images\CueZeroLogoOpt.svg" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\ios-startup-image-landscape.png" />
     <Content Include="Content\images\ios-startup-image-portrait.png" />
     <Content Include="Content\images\spinner.png" />
+    <Content Include="Content\images\Stage1Opt.svg" />
+    <Content Include="Content\images\Stage2Opt.svg" />
+    <Content Include="Content\images\Stage3Opt.svg" />
     <Content Include="Content\jquery.tagsinput.css" />
     <Content Include="Content\Stashy.css" />
     <Content Include="Content\Stashy.min.css" />
-    <Content Include="Content\cuezero.css" />
+    <Content Include="Content\cuezero.css">
+      <DependentUpon>cuezero.less</DependentUpon>
+    </Content>
     <Content Include="Content\vs.css" />
     <Content Include="Content\zen-form.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -371,6 +388,8 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\cuezero.less" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

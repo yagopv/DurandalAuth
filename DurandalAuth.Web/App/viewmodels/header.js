@@ -17,7 +17,16 @@
                         }
                     })
                     .fail(self.handlevalidationerrors);
+            },
+
+            attached: function () {
+                $('.nav a').on('click', function () {
+                    $(".navbar-toggle").click();
+                });
             }
+
+
+
         };
 
         errorhandler.includeIn(viewmodel);

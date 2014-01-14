@@ -20,10 +20,10 @@ define(['services/repository'], function (repository) {
 			 * @return {promise}
 			*/
 			this.find = function (predicate, page, count) {
-			    var query = breeze.EntityQuery
+				var query = breeze.EntityQuery
 					.from(resourceName)
-			        .where(predicate)
-                    .orderBy("createdDate desc")
+					.where(predicate)
+					.orderBy("createdDate desc")
 					.expand("Category,Tags")
 					.skip(page * count)
 					.take(count);

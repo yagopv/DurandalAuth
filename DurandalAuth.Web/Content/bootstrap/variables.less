@@ -18,19 +18,29 @@
 // Brand colors
 // -------------------------
 
-@brand-primary:         #272727;
-@brand-success:         #9FDBFF;
+@cz-teal: #458B9F;
+@cz-lightteal:  #83B6C4;
+@cz-palesea: #DBEEF4;
+@cz-aqua:  #9FDBFF;
+@cz-grey: #818181;
+@cz-lightgrey: rgb(217,217,217);
+@cz-gunmetal:  #272727;
+
+@brand-primary:         @cz-gunmetal;
+@brand-success:         @cz-aqua;
 @brand-warning:         #F39C12;
 @brand-danger:          #E74C3C;
-@brand-info:            #458B9F;
-@brand-mid:             #83B6C4;
-@brand-lighter:         #DBEEF4;
+@brand-info:            @cz-lightteal;
+@brand-mid:             @cz-grey;
+@brand-lighter:         @cz-palesea;
+
+
 
 
 // Scaffolding
 // -------------------------
 
-@body-bg:               #fff;
+@body-bg:                @cz-gunmetal;
 @text-color:            @brand-primary;
 
 // Links
@@ -42,12 +52,12 @@
 // Typography
 // -------------------------
 
-@font-family-sans-serif:  "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-family-base:        @font-family-sans-serif;
 
-@font-size-base:          15px;
+@font-size-base:          14px;
 @font-size-large:         ceil(@font-size-base * 1.25); // ~18px
 @font-size-small:         ceil(@font-size-base * 0.85); // ~12px
 
@@ -266,8 +276,8 @@
 @navbar-height:                    60px;
 @navbar-margin-bottom:             @line-height-computed;
 @navbar-border-radius:             @border-radius-base;
-@navbar-padding-horizontal:        floor(@grid-gutter-width / 2);  // ~15px
-@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
+@navbar-padding-horizontal:        floor(@grid-gutter-width / 4);  // ~15px
+@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 8);
 
 @navbar-default-color:             #777;
 @navbar-default-bg:                @gray-dark;
@@ -375,7 +385,7 @@
 
 @jumbotron-padding:              30px;
 @jumbotron-color:                inherit;
-@jumbotron-bg:                   @brand-mid;
+@jumbotron-bg:                   @cz-lightteal;
 @jumbotron-heading-color:        inherit;
 @jumbotron-font-size:            ceil(@font-size-base * 1.5);
 

@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Durandal Auth</title>
+		<title>CueZero</title>
 		
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="format-detection" content="telephone=no"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		
 		<meta name="fragment" content="!">
 		
 		@Styles.Render("~/Content/css")
@@ -24,51 +24,46 @@
 				document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
 			}
 		</script>
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		<script>
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-            ga('create', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsCode"]', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsDomain"]');    
+			ga('create', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsCode"]', '@System.Configuration.ConfigurationManager.AppSettings["AnalyticsDomain"]');    
 
-        </script>
+		</script>
 	</head>
 	<body>
 		<div class="st-sticky-wrap" id="applicationHost">
 			<div class="splash well">
-                <div class="message">
-                    DurandalAuth 2
-                    <p class="lead">ASP Identity token authentication and Durandal working together</p>
-                </div>                
-            </div>
+				<div class="message">
+					<span class="cue">Cue</span><span class="zero">Zero</span>
+					<p class="lead">The performance feedback loop for agile organisations</p>
+				</div>                
+			</div>
 		</div>
 		<footer class="st-sticky-footer">
-	        <div class="row">
-		        <div class="col-sm-6">
-			        <div class="footer-content">
-				        <p>Designed and created by <a href="http://twitter.com/yperezva" target="_blank">@@yperezva</a></p>
-				        <p>DurandalAuth template is licensed under the <a href="https://raw.github.com/yagopv/stashy/master/license.txt" target="_blank">MIT license</a></p>
-			        </div>
-		        </div>
-		        <div class="col-sm-6">    
-			        <div class="footer-content">                
-				        <ul class="list-unstyled">
-					        <li>
-                                <a href="https://github.com/yagopv/durandalauth" target="_blank"><i class="fa fa-github"></i>&nbsp;View project on Github</a>
-					        </li>
-					        <li>
-                                <a href="https://twitter.com/yperezva" target="_blank"><i class="fa fa-twitter"></i>&nbsp;Follow me on Twitter</a></li>
-					        <li>
-                                <a href="mailto:yago.perez@outlook.com" target="_blank"><i class="fa fa-envelope"></i>&nbsp;Email me</a>
-					        </li>
-				        </ul>
-			        </div>
-		        </div>
-	        </div>
-        </footer>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="footer-content">
+					</div>
+				</div>
+				<div class="col-sm-6">    
+					<div class="footer-content">                
+						<ul class="list-unstyled">
+							<li>
+								<a href="https://twitter.com/cue_zero" target="_blank"><i class="fa fa-twitter"></i>&nbsp;Follow CueZero on Twitter</a></li>
+							<li>
+								<a href="mailto:info@cuezero.com" target="_blank"><i class="fa fa-envelope"></i>&nbsp;Email us</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
 		
 		@Scripts.Render("~/scripts/vendor")
 		

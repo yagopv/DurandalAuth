@@ -1,36 +1,37 @@
 ﻿body {
-    background-color: #272727;
+    background-color: @brand-primary;
 }
 
 .cue {
-    font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+    font-family: 'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
     font-weight: bold;
     font-size: 46px;
-    color: #ffffff;
+    color: hsl(255,77%,100%);
 }
 
 .zero {
-    font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+    font-family: 'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
     font-size: 46px;
     font-weight: bold;
-    color: #9fdbff;
+    color: @cz-aqua;
 }
 
-h3.featureTitle {
-    color: #458b9f;
+h3.featureTitle{
+    color: @cz-teal;
     font-weight: bold;
 }
 
-.jumbotron.featureTitle {
-    background-color: #d9d9d9;
-    color: #458b9f;
+.jumbotron.featureTitle{
+        background-color: @cz-lightgrey;
+    color: @cz-teal;
     padding-top: 1% ;
     padding-bottom: 1%;
-    margin-top: 4%;
+    margin-top:4%;
 }
 
+
 .withBackground {
-    background-color: #9fdbff;
+    background-color: @cz-aqua;
 }
 
 .bgTrans {
@@ -109,49 +110,54 @@ h3.featureTitle {
     }
 }
 
-@keyframes interestFormTitle {
-    0% {
-        color: #ffffff;
+@keyframes interestFormTitle{
+  0% {
+        color: hsl(255,77%,100%);
     }
 
     100% {
         color: #000000;
     }
-}
+} 
 
-@-webkit-keyframes interestFormTitle {
-    0% {
-        color: #ffffff;
+@-webkit-keyframes interestFormTitle{
+  0% {
+        color: hsl(255,77%,100%);
     }
 
     100% {
         color: #000000;
     }
-}
+} 
 
-@-moz-keyframes interestFormTitle {
-    0% {
-        color: #ffffff;
+@-moz-keyframes interestFormTitle{
+  0% {
+        color: hsl(255,77%,100%);
     }
 
     100% {
         color: #000000;
     }
-}
+} 
 
-.infoblock .container {
+.infoblock{
+    .container{
     height: 100%;
     border: solid;
-    border-color: #818181;
-}
+    border-color: @cz-grey;
+    }
 
-.infoblock .header {
-    font-size: 18px;
+    .header{
+        font-size: @font-size-h4;
     font-weight: bold;
-    color: #d9d9d9;
+    color: @cz-lightgrey;
+    }
+    .copy{
+    font-size: @font-size-small;
+    color: @cz-lightgrey;
+}
 }
 
-.infoblock .copy {
-    font-size: 12px;
-    color: #d9d9d9;
-}
+
+@import 'bootstrap/variables.less';
+@import 'bootstrap/mixins.less';

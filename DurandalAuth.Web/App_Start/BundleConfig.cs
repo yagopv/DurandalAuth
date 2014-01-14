@@ -44,6 +44,7 @@ namespace DurandalAuth.Web {
 	  bundles.Add(
 		new StyleBundle("~/Content/custom")
 		  .Include("~/Content/app.css")
+          .Include("~/Content/cuezero.css")
 		);
 	}
 

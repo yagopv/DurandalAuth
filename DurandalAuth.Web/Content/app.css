@@ -1,5 +1,5 @@
 ﻿@import url('//fonts.googleapis.com/css?family=Open+Sans:300,500');
-
+@import 'bootstrap/variables.less';
 /* knockout Validation */
 
 .validationMessage {
@@ -13,13 +13,13 @@
 .splash {
 	text-align: center;
 	margin: 0;
-    opacity : 0.8;
-    color : #FFF;
-    height : 100em;
+	opacity : 0.8;
+	color : #FFF;
+	height : 100em;
 }
 
 .splash .message {
-    padding-top : 10%;
+	padding-top : 10%;
 	font-size: 5em;
 	line-height: 1.5em;
 	-webkit-text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
@@ -34,13 +34,13 @@
 }
 
 @media (max-width: 768px) {
-    .splash .message {
-        font-size : 2.5em;
-    }
+	.splash .message {
+		font-size : 2.5em;
+	}
 
-    .splash .fa-spinner {
-        font-size : 3.5em;
-    }
+	.splash .fa-spinner {
+		font-size : 3.5em;
+	}
 }
 
 
@@ -61,7 +61,7 @@
 /* General CSS */
 
 body {
-    overflow-x : hidden;
+	overflow-x : hidden;
 }
 
 .padt15px {
@@ -113,27 +113,27 @@ body {
 /* Header */
 
 #sharebar {
-    margin-right : 5px;
+	margin-right : 5px;
 }
 
 #sharebar i {
-    font-size: 1.3em;
+	font-size: 1.3em;
 }
 
 @media (min-width: 768px) {
-    #sharebar i {
-        -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -o-transform: scale(1.5);
-        -webkit-transform: scale(1.5);
-        transform: scale(1.5);
-    }
+	#sharebar i {
+		-moz-transform: scale(1.5);
+		-ms-transform: scale(1.5);
+		-o-transform: scale(1.5);
+		-webkit-transform: scale(1.5);
+		transform: scale(1.5);
+	}
 }
 
 @media (max-width: 767px) {
-    #sharebar span {
-        display: inline !important;
-    }
+	#sharebar span {
+		display: inline !important;
+	}
 }
 
 /* Index */
@@ -153,7 +153,7 @@ body {
 }
 
 #articles .st-offcanvas-menu {
-    padding : 2% 2% 30em 2% ;
+	padding : 2% 2% 30em 2% ;
 }
 
 #articles .st-offcanvas-main {
@@ -161,14 +161,14 @@ body {
 }
 
 #articles .st-offcanvas-main:before {
-    padding-bottom: 100em;
-    -webkit-box-shadow: -2px -8px 8px #999 inset;
-    box-shadow: -2px -8px 8px #999 inset;
+	padding-bottom: 100em;
+	-webkit-box-shadow: -2px -8px 8px #999 inset;
+	box-shadow: -2px -8px 8px #999 inset;
 }
 
 #articles .offcanvas-buttons {
-    margin : 0 -2% 0 -2.5%;
-    padding : 5px;
+	margin : 0 -2% 0 -2.5%;
+	padding : 5px;
 }
 
 #articles .showmenubutton {
@@ -176,9 +176,9 @@ body {
 	text-decoration : none;
 	font-size : 2em;
 	display : block;
-    color: #FFF;
-    padding-left: 10px;
-    padding-right: 10px;
+	color: #FFF;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #articles .showmenubutton:hover {
@@ -194,7 +194,7 @@ body {
 /* Dashboard */
 
 #dashboard #edited-article .modal-dialog {
-    width : 90%;
+	width : 90%;
 }
 
 @media (min-width: 1024px) {
@@ -218,7 +218,7 @@ body {
 	color : #FFF;
 	min-height : 250px;
 	margin-top : 10px;
-    background : #7a62d3;
+	background : gray;
 }
 
 .about-content p {
@@ -237,11 +237,11 @@ body {
 /* Footer */
 
 footer {
-    max-width : 100%;
-	background-color:#3d288e;
+	max-width : 100%;
+	background-color:#272727;
 	color : #FFF;    
 	display:none;
-    overflow-x : hidden;
+	overflow-x : hidden;
 }
 
 .footer-content {
@@ -269,8 +269,8 @@ footer a:hover {
 /* Bootstrap overrides */
 
 .well-danger {
-    background : rgb(233, 29, 29);
-    border : rgb(233, 29, 29);
+	background : rgb(233, 29, 29);
+	border : rgb(233, 29, 29);
 }
 
 .navbar-fixed-top .navbar-inner {
@@ -301,9 +301,9 @@ footer a:hover {
 /* Stashy overrides */
 
 @media (max-width: 768px) {
-    .st-loader span[class*="l-"] {
-      width: 5px;
-      height: 5px;
-    }
+	.st-loader span[class*="l-"] {
+	  width: 5px;
+	  height: 5px;
+	}
 }
 

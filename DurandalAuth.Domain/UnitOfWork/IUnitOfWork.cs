@@ -21,6 +21,7 @@ namespace DurandalAuth.Domain.UnitOfWork
         IRepository<Category> CategoryRepository { get; }
         IRepository<Tag> TagRepository { get; }
         IRepository<UserProfile> UserProfileRepository { get; }
+        IRepository<Respondent> RespondentRepository { get; }
         void Commit();
 
         //Breeze specific

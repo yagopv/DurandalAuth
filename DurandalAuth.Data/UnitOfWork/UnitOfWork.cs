@@ -31,6 +31,7 @@ namespace DurandalAuth.Data.UnitOfWork
             CategoryRepository = new Repository<Category>(contextProvider.Context);
             TagRepository = new Repository<Tag>(contextProvider.Context);
             UserProfileRepository = new Repository<UserProfile>(contextProvider.Context);
+            RespondentRepository = new Repository<Respondent>(contextProvider.Context);
         }
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace DurandalAuth.Data.UnitOfWork
         public IRepository<Category> CategoryRepository { get; private set; }
         public IRepository<Tag> TagRepository { get; private set; }
         public IRepository<UserProfile> UserProfileRepository { get; private set; }
+        public IRepository<Respondent> RespondentRepository { get; private set; }
 
         /// <summary>
         /// Get breeze Metadata
@@ -67,5 +69,7 @@ namespace DurandalAuth.Data.UnitOfWork
         {
             contextProvider.Context.SaveChanges();
         }
+
+        
     }
 }

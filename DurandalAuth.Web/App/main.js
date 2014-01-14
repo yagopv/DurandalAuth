@@ -18,14 +18,14 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 		system.debug(true);
 		//>>excludeEnd("build");
 
-		app.title = 'Durandal Auth';
+		app.title = 'CueZero';
 
 		//specify which plugins to install and their configuration
 		app.configurePlugins({
 			router: true,
 			dialog: true,
 			widget: {
-				kinds: ['expander']
+				kinds: ['expander', 'viewBox','interestForm', 'mainGraphic']
 			}
 		});
 
@@ -72,10 +72,10 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 				$(this).height(this.scrollHeight);
 			});	
 
-		    //Show the app by setting the root view model for our application with a transition.
+			//Show the app by setting the root view model for our application with a transition.
 			appsecurity.initializeAuth()
-                .then(function (data) {
-                    app.setRoot('viewmodels/shell');
-                });
+				.then(function (data) {
+					app.setRoot('viewmodels/shell');
+				});
 		});
 	});
