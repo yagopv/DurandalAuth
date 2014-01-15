@@ -1,0 +1,18 @@
+﻿<div>
+    <form class="form-horizontal" role="form" data-bind="with: viewModel">
+        <div class="form-group">
+            <label for="fullName" class="sr-only">Name</label>
+            <input type="text" class="form-control col-sm-6 input-sm" id="fullName" placeholder="Name" data-bind="value: fullName, valueUpdate: 'afterkeydown'">
+            <!--<p data-bind="validationMessage: fullName"></p>-->
+        </div>
+        <div class="form-group">
+            <label for="emailAddress" class="sr-only">Email</label>
+            <input type="email" class="form-control col-sm-12 input-sm" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'" required>
+        </div>
+        <div class="form-group">
+            <label for="organisation" class="sr-only">Organisation</label>
+            <input type="text" class="form-control col-sm-12 input-sm" id="organisation" placeholder="Your organisation" data-bind="value: organisation, valueUpdate: 'afterkeydown'" required>
+        </div>
+        <!--<button type="submit" class="btn btn-primary" data-bind="click: submit">Submit</button>-->
+    </form>
+</div>

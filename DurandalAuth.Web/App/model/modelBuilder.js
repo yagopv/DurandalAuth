@@ -22,8 +22,19 @@ define(['services/appsecurity', 'services/utils'],
             extendArticle(metadataStore);
             extendCategory(metadataStore);
             extendTag(metadataStore);
+            extendRespondent(metadataStore);
         };
 
+
+        function extendRespondent(metadataStore) {
+            var respondentCtor = function () {
+
+            }
+            respondentCtor.prototype.addRespondent = function (ifullName, iemailAddress, iorganisation) {
+                var respondent = this.entityAspect.entityManager.createEntity('Respondent', { fullName: ifullName, emailAddress: iemailAddress, organisation: iOrganisation });
+                return respondent;
+            }
+        }
         /**
          * Extend articles
          * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
