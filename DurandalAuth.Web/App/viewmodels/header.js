@@ -20,7 +20,7 @@
             },
 
             attached: function () {
-                $('.nav a').on('click', function () {
+                $('.toggler').on('click', function () {
                     $(".navbar-toggle").click();
                 });
             }

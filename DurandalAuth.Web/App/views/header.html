@@ -25,7 +25,7 @@
             </ul>-->
             <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
                 <li data-bind="css: { active: isActive }">
-                    <a data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title"></a>
+                    <a class="toggler" data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title"></a>
                 </li>
             </ul>
 
@@ -61,22 +61,22 @@
                     <ul class="dropdown-menu">
                         <li role="presentation" class="dropdown-header">Share this site on your favourite network</li>
                         <li>
-                            <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://durandalauth.azurewebsites.net&p[images][0]=&p[title]=DurandalAuth%202.0&p[summary]=ASP.NET%20Identity%20token%20authentication%20using%20Durandal" target="_blank">
+                            <a class="toggler" href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://cuezero.com&p[images][0]=&p[title]=CueZero&p[summary]=The feedback loop for agile organisations" target="_blank">
                                 <i class="fa fa-facebook-square"></i>   Share on Facebook
                             </a>
                         </li>
                         <li>
-                            <a href="http://twitter.com/home?status=DurandalAuth%202.0,%20ASP.NET%20Identity%20token%20authentication%20using%20Durandal%0A%0Ahttps://durandalauth.azurewebsites.net" target="_blank">
+                            <a class="toggler" href="http://twitter.com/home?status=CueZero%20-%20The%20feedback%20loop%20for%20agile%20organisations%0A%0Ahttp://cuezero.com" target="_blank">
                                 <i class="fa fa-twitter-square"></i>   Share on Twitter
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://durandalauth.azurewebsites.net&title=DurandalAuth%202.0&summary=ASP.NET%20Identity%20token%20authentication%20using%20Durandal&source=" target="_blank">
+                            <a class="toggler" href="http://www.linkedin.com/shareArticle?mini=true&url=http://cuezero.com&title=CueZero&summary=The%20Feedback%20loop%20for%20agile%20organisations&source=" target="_blank">
                                 <i class="fa fa-linkedin-square"></i>   Share on LinkedIn
                             </a>
                         </li>
                         <li>
-                            <a href="https://plus.google.com/share?url=https://durandalauth.azurewebsites.net" target="_blank">
+                            <a class="toggler" href="https://plus.google.com/share?url=http://cuezero.com" target="_blank">
                                 <i class="fa fa-google-plus-square"></i>   Share on Google plus
                             </a>
                         </li>
