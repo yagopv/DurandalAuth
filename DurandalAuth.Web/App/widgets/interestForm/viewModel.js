@@ -1,5 +1,11 @@
-﻿define(['durandal/composition', 'jquery'], function (composition, $) {
-    var ctor = function () { };
+﻿define(['durandal/composition', 'jquery', 'durandal/system', 'services/logger', 'services/errorhandler'], function (composition, $, system, logger, errorHandler) {
+    var ctor = function () {
+this.fullName = ko.observable();
+    this.organisation = ko.observable();
+    this.emailAddress = ko.observable();
+    errorhandler.includeIn(this);
+
+    };
 
     var self = this;
 
@@ -17,9 +23,7 @@
 
     }
 
-    this.fullName = ko.observable();
-    this.organisation = ko.observable();
-    this.emailAddress = ko.observable();
+    
 
     flashTitle = function () {
         if(self.name() || self.emailAddress() || self.organisation()){

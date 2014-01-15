@@ -242,6 +242,7 @@
     <Content Include="App\viewmodels\home\articles.js" />
     <Content Include="App\viewmodels\home\help.js" />
     <Content Include="App\viewmodels\home\index.js" />
+    <Content Include="App\viewmodels\home\registerInterest.js" />
     <Content Include="App\viewmodels\notfound.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\viewmodels\user\article.js" />
@@ -259,6 +260,7 @@
     <Content Include="App\views\home\articles.html" />
     <Content Include="App\views\home\help.html" />
     <Content Include="App\views\home\index.html" />
+    <Content Include="App\views\home\registerInterest.html" />
     <Content Include="App\views\notfound.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App\views\user\article.html" />
