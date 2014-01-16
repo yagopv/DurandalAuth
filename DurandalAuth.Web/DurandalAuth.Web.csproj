@@ -320,6 +320,7 @@
     <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\CueZeroFrontPageOpt.svg" />
     <Content Include="Content\images\CueZeroLogoOpt.svg" />
+    <Content Include="Content\images\CueZeroLogoSmallOpt.svg" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\ios-startup-image-landscape.png" />
     <Content Include="Content\images\ios-startup-image-portrait.png" />
