@@ -53,6 +53,17 @@ namespace DurandalAuth.Web.Controllers
             return UnitOfWork.ArticleRepository.Find(a => a.IsPublished == true);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IQueryable<Respondent> Respondents()
+        {
+            if (User.IsInRole("User"))
+            {
+                return UnitOfWork.RespondentRepository.All(); 
+            }
+            throw new HttpResponseException(System.Net.HttpStatusCode.Unauthorized);  
+        }
+
         /// <summary>
         /// Save changes to data store
         /// </summary>
@@ -78,5 +89,7 @@ namespace DurandalAuth.Web.Controllers
                 Categories = UnitOfWork.CategoryRepository.All().ToList()
             };
         }
+
+
     }
 }

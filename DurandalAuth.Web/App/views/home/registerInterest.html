@@ -1,5 +1,5 @@
 ﻿<div>
-    <form class="form-horizontal" role="form" data-bind="with: viewModel">
+    <form class="form-horizontal" role="form" data-bind="with: respondent">
         <div class="form-group">
             <label for="fullName" class="sr-only">Name</label>
             <input type="text" class="form-control col-sm-12" id="fullName" placeholder="Name" data-bind="value: fullName, valueUpdate: 'afterkeydown'">
@@ -7,11 +7,11 @@
         </div>
         <div class="form-group">
             <label for="emailAddress" class="sr-only">Email</label>
-            <input type="email" class="form-control col-sm-12" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'" required>
+            <input type="email" class="form-control col-sm-12" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'">
         </div>
         <div class="form-group">
             <label for="organisation" class="sr-only">Organisation</label>
-            <input type="text" class="form-control col-sm-12" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'" required>
+            <input type="text" class="form-control col-sm-12" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'">
         </div>
         <!--<button type="submit" class="btn btn-primary" data-bind="click: submit">Submit</button>-->
     </form>

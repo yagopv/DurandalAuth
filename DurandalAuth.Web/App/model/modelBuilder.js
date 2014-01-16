@@ -34,6 +34,21 @@ define(['services/appsecurity', 'services/utils'],
                 var respondent = this.entityAspect.entityManager.createEntity('Respondent', { fullName: ifullName, emailAddress: iemailAddress, organisation: iOrganisation });
                 return respondent;
             }
+
+            respondentCtor.prototype.deleteRespondent = function (respondent) {
+                ensureEntityType(respondent, 'Respondent');
+                this.throwIfNotOwnerOf(respondent);
+
+                respondent.entityAspect.setDeleted();
+            };
+
+            var respondentInitializer = function (respondent) {
+                addValidationRules(respondent);
+                addhasValidationErrorsProperty(respondent);
+                respondent.unsavedChanges = ko.observable(respondent.entityAspect.entityState.isAddedModifiedOrDeleted());
+            };
+
+            metadataStore.registerEntityTypeCtor('Respondent', respondentCtor);
         }
         /**
          * Extend articles

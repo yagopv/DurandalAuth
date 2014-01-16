@@ -16,14 +16,17 @@ namespace DurandalAuth.Domain.Model
         public int Id { get; set; }
 
         [StringLength(100)]
+        [Required]
         [DataMember]
         public string FullName { get; set; }
 
         [StringLength(100)]
+        [Required]
         [DataMember]
         public string EmailAddress { get; set; }
 
         [StringLength(100)]
+        [Required]
         [DataMember]
         public string Organisation { get; set; }
 

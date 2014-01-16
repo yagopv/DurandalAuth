@@ -14,7 +14,6 @@
             dialog.show(reg, ['Submit', 'Cancel'])
             .then(function (response) {
                 if (response === 'Submit') {
-                    alert('submitted');
                 }
             })
             .done();

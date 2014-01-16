@@ -21,6 +21,9 @@ define(function () {
 				getMetastore().setEntityTypeForResourceName(resourceName, entityTypeName);
 			}
 
+			
+
+
 			/**
 			 * Get Entity by identity
 			 * @method
@@ -85,8 +88,18 @@ define(function () {
 			 * @param {object} values - Initial values
 			*/ 
 			this.create = function (values) {
-			    var entity = manager().createEntity(entityTypeName, values);
-			    return entity;
+				var entity = manager().createEntity(entityTypeName, values);
+				return entity;
+			};
+
+		    /**
+			 * Set an entity as detached
+			 * @method
+			 * @param {object} entity - The entity to delete
+			*/
+			this.delete = function (entity) {
+			    ensureEntityType(entity, entityTypeName);
+			    entity.entityAspect.setDeleted(entity);
 			};
 
 			/**
@@ -94,9 +107,9 @@ define(function () {
 			 * @method
 			 * @param {object} entity - The entity to delete
 			*/ 
-			this.delete = function(entity) {
+			this.detach = function(entity) {
 				ensureEntityType(entity,entityTypeName);
-				entity.entityAspect.setDeleted(entity);
+				entity.entityAspect.setDetached(entity);
 			};
 
 			function executeQuery(query) {
