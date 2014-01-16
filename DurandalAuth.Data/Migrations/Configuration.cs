@@ -16,6 +16,8 @@ namespace DurandalAuth.Data.Migrations
 
 #if DEBUG
             AutomaticMigrationDataLossAllowed = true; 
+#else
+            AutomaticMigrationDataLossAllowed = true; 
 #endif
         }
 
