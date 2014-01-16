@@ -62,9 +62,9 @@
                         
                         var self = this;
                         
-                        console.log(self.respondent().fullName())
-                        console.log(self.respondent().emailAddress())
-                        console.log(self.respondent().organisation())
+                        console.log(self.respondent)
+                        console.log(self.respondent().emailAddress)
+                        console.log(self.respondent().organisation)
                         this.unitOfWork.commit().fail(
                             self.handleError);
                         return true;

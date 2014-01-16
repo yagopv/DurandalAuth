@@ -43,12 +43,24 @@ define(['services/appsecurity', 'services/utils'],
             };
 
             var respondentInitializer = function (respondent) {
+
+                // Add Url validator to the blog property of a Person entity
+                // Assume em is a preexisting EntityManager.
+                var personType = metadataStore.getEntityType('Respondent'); //get the Respondent type
+                var emailProperty = personType.getProperty("emailAddress"); //get the property definition to validate
+                
+                var validators = emailProperty.validators; // get the property's validator collection
+                //validators.push(Validator.required()); // add a new required validator instance
+                validators.push(breeze.Validator.emailAddress({displayName: "Email Address" })); // add a new email validator instance
                 addValidationRules(respondent);
                 addhasValidationErrorsProperty(respondent);
+
                 respondent.unsavedChanges = ko.observable(respondent.entityAspect.entityState.isAddedModifiedOrDeleted());
             };
 
-            metadataStore.registerEntityTypeCtor('Respondent', respondentCtor);
+            
+
+            metadataStore.registerEntityTypeCtor('Respondent', respondentCtor, respondentInitializer);
         }
         /**
          * Extend articles
@@ -137,6 +149,9 @@ define(['services/appsecurity', 'services/utils'],
             }
         };
 
+
+        
+
         /**
          * Add Knockout.Validation rules from the entities metadata
          */
@@ -156,7 +171,9 @@ define(['services/appsecurity', 'services/utils'],
                     property = entityType.dataProperties[i];
                     propertyName = property.name;
                     propertyObject = entity[propertyName];
+           
                     validators = [];
+                    //alert(propertyName)
 
                     for (u = 0; u < property.validators.length; u += 1) {
                         validator = property.validators[u];
@@ -170,6 +187,7 @@ define(['services/appsecurity', 'services/utils'],
                             message: "",
                             innerValidator: validator
                         };
+                        //console.log(nValidator);
                         validators.push(nValidator);
                     }
                     propertyObject.extend({
@@ -205,6 +223,7 @@ define(['services/appsecurity', 'services/utils'],
                         propertyObject.extend({ notEqual: foreignKeyInvalidValue });
                     }
                 }
+                console.log(propertyObject)
             }
         };
 
