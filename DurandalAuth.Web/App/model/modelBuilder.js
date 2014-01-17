@@ -5,7 +5,8 @@
  * @requires utils
  */
 define(['services/appsecurity', 'services/utils'],
-    function (appsecurity,utils) {
+    function (appsecurity, utils) {
+
         var foreignKeyInvalidValue = 0;
 
         var self = {
@@ -14,15 +15,25 @@ define(['services/appsecurity', 'services/utils'],
 
         return self;
 
+
+        //Change stock validation messages
+
+        //function customiseValidationMessages() {
+        //    breeze.Validator.messageTemplates["required"] = "Dude! The '%displayName%' is really required ... seriously ... as in mandatory";
+        //    console.log(breeze.Validator.messageTemplates);
+        //}
+
         /**
          * Extend entities
          * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
          */
         function extendMetadata(metadataStore) {
+            customiseValidationMessages();
             extendArticle(metadataStore);
             extendCategory(metadataStore);
             extendTag(metadataStore);
             extendRespondent(metadataStore);
+
         };
 
 
@@ -52,8 +63,8 @@ define(['services/appsecurity', 'services/utils'],
                 var validators = emailProperty.validators; // get the property's validator collection
                 //validators.push(Validator.required()); // add a new required validator instance
                 validators.push(breeze.Validator.emailAddress({displayName: "Email Address" })); // add a new email validator instance
-                addValidationRules(respondent);
-                addhasValidationErrorsProperty(respondent);
+                //addValidationRules(respondent);
+                //addhasValidationErrorsProperty(respondent);
 
                 respondent.unsavedChanges = ko.observable(respondent.entityAspect.entityState.isAddedModifiedOrDeleted());
             };

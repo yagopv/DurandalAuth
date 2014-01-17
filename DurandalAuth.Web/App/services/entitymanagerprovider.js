@@ -11,6 +11,9 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 
 		//Standard camelcasing
 		breeze.NamingConvention.camelCase.setAsDefault();
+	    //Change stock validation message
+		breeze.Validator.messageTemplates["required"] = "We need your %displayName% please";
+		breeze.Validator.messageTemplates["emailAddress"] = "The %displayName% %value% isn't a valid email address";
 
 		//More sohpisticated version, from http://stackoverflow.com/questions/14406429/how-do-you-force-breeze-metadata-generated-properties-to-be-camelcase
 		//var namingConv = new breeze.NamingConvention({
@@ -61,6 +64,14 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 						manager.hasChangesChanged.subscribe(function (args) {
 							app.trigger('hasChanges');
 						});
+
+					    // copy options, changing only "validateOnAttach"
+						var valOpts = em.validationOptions.using({ validateOnAttach: false });
+
+					    // reset manager's options
+						manager.setProperties({ validationOptions: valOpts });
+
+
 					}
 
 					return manager;
@@ -96,6 +107,8 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 		function prepare() {
 			return masterManager.fetchMetadata()
 				.then(function (md) {
+
+					console.log(md);
 					var mdet = md.schema.entityType
 					for (et in mdet)
 					{
@@ -106,9 +119,9 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 						//alert(' here we go')
 						var etp = mdet[et].property
 						if (Array.isArray(etp)){
-						    for (p in etp) {
-						        propertyName = etp[p].name.substr(0, 1).toLowerCase() + etp[p].name.substr(1)
-						        console.log(propertyName)
+							for (p in etp) {
+								propertyName = etp[p].name.substr(0, 1).toLowerCase() + etp[p].name.substr(1)
+								console.log(propertyName)
 							console.log(etp[p].displayName)
 							//propertyName = substring(etp[p].name)
 							var prop = etype.getProperty(propertyName);

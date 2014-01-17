@@ -1,5 +1,5 @@
-﻿define(['jquery', 'durandal/system', 'services/logger', 'services/errorhandler', 'services/unitofwork','durandal/app'],
-    function ($, system, logger, errorHandler, unitofwork, app) {
+﻿define(['jquery', 'durandal/system', 'services/logger', 'services/errorhandler', 'services/unitofwork','durandal/app', 'services/customBindings'],
+    function ($, system, logger, errorHandler, unitofwork, app, customBindings) {
 
         var RegisterInterest = (function () {
 

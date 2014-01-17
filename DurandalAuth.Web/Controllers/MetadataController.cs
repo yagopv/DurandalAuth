@@ -46,6 +46,8 @@ namespace DurandalAuth.Web.Controllers
 
             JObject metadata = JObject.Parse(UnitOfWork.Metadata());
             string EFNameSpace = metadata["schema"]["namespace"].ToString();
+
+            //There must be a more elegant way of coding these lines to parse the cSpace.. mapping for iteration in the foreach loop.
             string typeNameSpaces = metadata["schema"]["cSpaceOSpaceMapping"].ToString();
             typeNameSpaces = "{" + typeNameSpaces.Replace("],[", "]|[").Replace("[", "").Replace("]", "").Replace(",", ":").Replace("|", ",") + "}";
             JObject jTypeNameSpaces = JObject.Parse(typeNameSpaces);
@@ -53,6 +55,7 @@ namespace DurandalAuth.Web.Controllers
             foreach (var entityType in metadata["schema"]["entityType"])
             {
                 string typeName = entityType["name"].ToString();
+                //string ns = entityType["name"]["namespace"].ToString();
                 string defaultTypeNameSpace = EFNameSpace + "." + typeName;
                 string entityTypeNameSpace = jTypeNameSpaces[defaultTypeNameSpace].ToString();
                 Type t = BuildManager.GetType(entityTypeNameSpace, false);

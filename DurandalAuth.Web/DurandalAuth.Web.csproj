@@ -222,6 +222,7 @@
     <Content Include="App\main.js" />
     <Content Include="App\model\modelBuilder.js" />
     <Content Include="App\services\appsecurity.js" />
+    <Content Include="App\services\customBindings.js" />
     <Content Include="App\services\entitymanagerprovider.js" />
     <Content Include="App\services\errorhandler.js" />
     <Content Include="App\services\logger.js" />
