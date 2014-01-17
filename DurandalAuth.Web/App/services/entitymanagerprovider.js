@@ -66,8 +66,8 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 						});
 
 					    // copy options, changing only "validateOnAttach"
-						var valOpts = em.validationOptions.using({ validateOnAttach: false });
-
+						var valOpts = masterManager.validationOptions.using({ validateOnAttach: false });
+						console.log(valOpts);
 					    // reset manager's options
 						manager.setProperties({ validationOptions: valOpts });
 
@@ -138,14 +138,6 @@ define(['durandal/app', 'services/routeconfig', 'services/appsecurity'],
 						
 					}
 					
-
-					//ko.utils.arrayForEach(md.schema.entityType, function (et) {
-					//	var etype = masterManager.metadataStore.getEntityType(et.name);
-					//	ko.utils.arrayForEach(et.property, function (p) {
-					//		var prop = etype.getProperty(p.name);
-					//		prop.displayName = p.displayName
-					//	});
-					//});
 
 				   console.log(md);
 

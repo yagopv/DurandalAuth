@@ -28,7 +28,6 @@ define(['services/appsecurity', 'services/utils'],
          * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
          */
         function extendMetadata(metadataStore) {
-            customiseValidationMessages();
             extendArticle(metadataStore);
             extendCategory(metadataStore);
             extendTag(metadataStore);

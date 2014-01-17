@@ -15,6 +15,6 @@
             <input type="text" class="form-control col-sm-12" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'">
             <span class="help-inline" data-bind="breezeValidation: 'organisation'"></span>
         </div>
-        <!--<button type="submit" class="btn btn-primary" data-bind="click: submit">Submit</button>-->
+        <button type="button" class="btn btn-success" data-bind="text: $root.canSave, enable: $root.canSave">Check</button>
     </form>
 </div>

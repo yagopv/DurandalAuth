@@ -15,6 +15,7 @@
 
 
                 this.respondent = ko.observable();
+                this.canSave = ko.observable();
                 //this.viewModel = {
                 //fullName: ko.observable().extend({ required: true }),
                 //organisation: ko.observable().extend({ required: true }),
@@ -22,7 +23,9 @@
                 //}
                 errorHandler.includeIn(this);
                 var self = this;
-                this.respondent.errors = ko.validation.group(self.respondent);
+                //this.respondent.errors = ko.validation.group(self.respondent);
+
+                
                 //this.canSave = ko.computed(function () { return self.viewModel.isValid(); })
 
                 var ref = unitofwork.get();
@@ -35,9 +38,27 @@
             system.setModuleId(ctor, 'viewmodels/home/registerInterest');
 
             ctor.prototype.activate = function (settings) {
-                this.respondent(this.unitOfWork.respondents.create());
+
+                var self = this;
+
+                self.respondent(self.unitOfWork.respondents.create());
                 app.on('hasChanges').then(notify);
-                //this.settings = settings;
+                console.log(self.respondent);
+                
+                self.respondent().entityAspect.entityManager.validationErrorsChanged.subscribe(function (changeArgs) {
+                    
+                    console.log('vchanges');
+                    self.canSave(!self.respondent().entityAspect.hasValidationErrors);
+
+                    console.log(self.canSave());
+                })
+
+                //var self = this;
+                //this.canSave = ko.computed(function () {
+                //    alert(self.respondent().entityAspect.hasValidationErrors)
+                //    return self.respondent().entityAspect.hasValidationErrors
+                //})
+
             };
 
             function notify() {
@@ -48,6 +69,9 @@
             ctor.prototype.attached = function () {
                 // setInterval(flashTitle, 3000);
             }
+
+
+               
 
 
             ctor.prototype.canDeactivate = function (close) {

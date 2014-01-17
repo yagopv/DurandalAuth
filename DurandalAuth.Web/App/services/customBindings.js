@@ -27,7 +27,7 @@
             if (propName === null) {
                 //  $element.prev().data("bind") = "value: itemType"
                 var prevBinds = $msgElement.prev().data("bind");
-                console.log($msgElement.prev());
+                //console.log($msgElement.prev());
                 if (!prevBinds) {
                     $msgElement.text("Could not find prev elements binding value.");
                     return;
@@ -41,6 +41,16 @@
                     }
                 }
             }
+
+            var $prevElement = $(element).prevAll().first()
+            //alert($prevElement)
+            prevElement = $(element).prev()
+            console.log($prevElement)
+
+            $($prevElement).on("blur", function () {
+                console.log(this.id);
+                entity.entityAspect.validateProperty(this.id)
+            });
 
             if (!propName) {
                 $msgElement.text("Could not find this or prev elements binding value.");
