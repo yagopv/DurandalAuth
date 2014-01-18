@@ -51,7 +51,7 @@
             ctor.prototype.canDeactivate = function (close) {
                 
                 if (this.dialogResult === 'Cancel') {
-                    alert('allow cancel')
+
                     this.unitOfWork.respondents.detach(this.respondent())
                     return true;
                 }
