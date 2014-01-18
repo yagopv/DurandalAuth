@@ -57,7 +57,8 @@
                     .done(function() { self.content().dialogResult = null; });
             };
 
-            ctor.prototype.deactivate = function(close) {
+            ctor.prototype.deactivate = function (close) {
+                window.scroll(0, 0);
                 return this.content.deactivate(close);
             };
 
