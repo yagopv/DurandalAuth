@@ -358,7 +358,8 @@ define(['durandal/system', 'durandal/app', 'durandal/composition', 'durandal/act
             if (!dialog.isOpen()) {
                 var html = $("html");
                 var oldScrollTop = html.scrollTop(); // necessary for Firefox.
-                html.css("overflow-y", "").scrollTop(oldScrollTop);
+                //JN changed to scroll to attempt to fix Mac bug
+                html.css("overflow-y", "scroll").scrollTop(oldScrollTop);
 
                 if(theDialog.oldInlineMarginRight) {
                     $("body").css("margin-right", theDialog.oldBodyMarginRight);
