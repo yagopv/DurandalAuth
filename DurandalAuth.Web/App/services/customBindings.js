@@ -58,7 +58,7 @@
 
                if ($btCancel.data("mouseDown") != true) {
                     entity.entityAspect.validateProperty(this.id)
-                }
+            ty    }
                 
             });
 
