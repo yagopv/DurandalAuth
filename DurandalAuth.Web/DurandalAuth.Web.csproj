@@ -293,8 +293,14 @@
     <Content Include="Content\bootstrap\bootswatch.min.css">
       <DependentUpon>bootswatch.less</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap\media.css">
+      <DependentUpon>media.less</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\mixins.css">
       <DependentUpon>mixins.less</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap\normalize.css">
+      <DependentUpon>normalize.less</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap\variables.css">
       <DependentUpon>variables.less</DependentUpon>
