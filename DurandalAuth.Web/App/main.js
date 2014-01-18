@@ -1,5 +1,6 @@
 requirejs.config({
-	baseUrl : "/App",
+	baseUrl: "/App",
+	urlArgs: "bust=" + (new Date()).getTime(),
 	paths: {
 		'text': '../Scripts/text',
 		'durandal': '../Scripts/durandal',
