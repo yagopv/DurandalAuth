@@ -238,6 +238,7 @@
     <Content Include="App\viewmodels\account\manage.js" />
     <Content Include="App\viewmodels\account\register.js" />
     <Content Include="App\viewmodels\admin\panel.js" />
+    <Content Include="App\viewmodels\footer.js" />
     <Content Include="App\viewmodels\header.js" />
     <Content Include="App\viewmodels\home\about.js" />
     <Content Include="App\viewmodels\home\articles.js" />
@@ -256,6 +257,7 @@
     <Content Include="App\views\admin\panel.html" />
     <Content Include="App\viewmodels\dialog.js" />
     <Content Include="App\views\dialog.html" />
+    <Content Include="App\views\footer.html" />
     <Content Include="App\views\header.html" />
     <Content Include="App\views\home\about.html" />
     <Content Include="App\views\home\articles.html" />
@@ -437,6 +439,7 @@
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\orientationBug.js" />
     <Content Include="Scripts\q.js" />
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\Stashy.js" />

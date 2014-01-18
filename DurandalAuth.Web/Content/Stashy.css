@@ -1450,14 +1450,14 @@ body {
 }
 .st-sticky-push,
 .st-sticky-footer {
-  height: 20em;
+  height: 10em;
   /* Change height. Can use px, ems or % */
 
 }
 @media (min-width: 768px) {
   .st-sticky-push,
   .st-sticky-footer {
-    height: 10em;
+    height: 5em;
     /* Change height. Can use px, ems or % */
   
   }

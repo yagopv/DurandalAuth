@@ -24,6 +24,7 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/zen-form.js")
 		  .Include("~/Scripts/highlight.pack.js")
 		  .Include("~/Scripts/jquery.tagsinput.js")
+		  .Include("~/Scripts/orientationBug.js")
 		);
 
 	  // css vendor
@@ -44,7 +45,7 @@ namespace DurandalAuth.Web {
 	  bundles.Add(
 		new StyleBundle("~/Content/custom")
 		  .Include("~/Content/app.css")
-          .Include("~/Content/cuezero.css")
+		  .Include("~/Content/cuezero.css")
 		);
 	}
 

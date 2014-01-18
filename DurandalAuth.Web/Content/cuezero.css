@@ -18,7 +18,7 @@
 
 h3.featureTitle {
     color: #458b9f;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .jumbotron.featureTitle {
@@ -147,7 +147,7 @@ h3.featureTitle {
 
 .infoblock .header {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
     color: #d9d9d9;
 }
 
@@ -157,6 +157,6 @@ h3.featureTitle {
 }
 
 .navbar-nav li a {
-    font-size: 18px;
-    line-height: 60px;
+    font-size: 14px;
+    line-height: 40px;
 }
