@@ -11,7 +11,7 @@
 
         register: function(){
             var reg = registerInterest.create();
-            dialog.show(reg, ['Submit', 'Cancel'])
+            dialog.show(reg, ['Submit', 'Cancel'],"Let's keep in touch")
             .then(function (response) {
                 if (response === 'Submit') {
                 }

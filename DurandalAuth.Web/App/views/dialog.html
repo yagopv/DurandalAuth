@@ -1,4 +1,7 @@
 ﻿<div class="messageBox">
+    <div class="modal-header" data-bind="visible: headerVisible">
+        <div class="modal-title" data-bind="text:title"></div>
+    </div>
     <div class="modal-body">
         <!-- ko compose: { model : content } --><!--/ko-->
     </div>

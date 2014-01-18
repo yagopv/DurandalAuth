@@ -51,6 +51,7 @@
             ctor.prototype.canDeactivate = function (close) {
                 
                 if (this.dialogResult === 'Cancel') {
+                    alert('allow cancel')
                     this.unitOfWork.respondents.detach(this.respondent())
                     return true;
                 }
@@ -59,10 +60,6 @@
                     if (this.dialogResult === 'Submit' && !this.respondent().entityAspect.hasValidationErrors) {
                         
                         var self = this;
-                        alert('allow commit')
-                        console.log(self.respondent)
-                        console.log(self.respondent().emailAddress)
-                        console.log(self.respondent().organisation)
                         this.unitOfWork.commit().fail(
                             self.handleError);
                         return true;

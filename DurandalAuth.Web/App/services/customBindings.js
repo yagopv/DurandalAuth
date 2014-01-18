@@ -47,9 +47,19 @@
             prevElement = $(element).prev()
             console.log($prevElement)
 
+            // force validation of an item as it looses focus (to reflect the fact that the model is not validated on attachement
+
             $($prevElement).on("blur", function () {
-                console.log(this.id);
-                entity.entityAspect.validateProperty(this.id)
+
+
+                // Check whether a cancel button has reacted to a mouse down event, in which case the validation should not take place
+                // See also code in dialog.js that attaches the mousedown/mouseup flags
+                var $btCancel = $("button:contains('Cancel')")
+
+               if ($btCancel.data("mouseDown") != true) {
+                    entity.entityAspect.validateProperty(this.id)
+                }
+                
             });
 
             if (!propName) {
