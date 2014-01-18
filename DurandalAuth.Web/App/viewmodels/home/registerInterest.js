@@ -3,30 +3,13 @@
 
         var RegisterInterest = (function () {
 
-            //ko.validation.configure({
-            //    registerExtenders: true,
-            //    messagesOnModified: true,
-            //    insertMessages: true,
-            //    parseInputAttributes: true,
-            //    messageTemplate: null
-            //});
-
             var ctor = function () {
-
 
                 this.respondent = ko.observable();
                 this.canSave = ko.observable();
-                //this.viewModel = {
-                //fullName: ko.observable().extend({ required: true }),
-                //organisation: ko.observable().extend({ required: true }),
-                //emailAddress: ko.observable().extend({ email: true })
-                //}
+
                 errorHandler.includeIn(this);
                 var self = this;
-                //this.respondent.errors = ko.validation.group(self.respondent);
-
-                
-                //this.canSave = ko.computed(function () { return self.viewModel.isValid(); })
 
                 var ref = unitofwork.get();
                 this.unitOfWork = ref.value();
@@ -53,11 +36,6 @@
                     console.log(self.canSave());
                 })
 
-                //var self = this;
-                //this.canSave = ko.computed(function () {
-                //    alert(self.respondent().entityAspect.hasValidationErrors)
-                //    return self.respondent().entityAspect.hasValidationErrors
-                //})
 
             };
 
@@ -70,10 +48,6 @@
                 // setInterval(flashTitle, 3000);
             }
 
-
-               
-
-
             ctor.prototype.canDeactivate = function (close) {
                 
                 if (this.dialogResult === 'Cancel') {
@@ -81,11 +55,11 @@
                     return true;
                 }
                 else {
-                    console.log(this.respondent().entityAspect.hasValidationErrors)
+                    //when validateonattach is false, make sure breezeValidation and autofocus are on the first field to avoid an invalid entity remaining after the save fails
                     if (this.dialogResult === 'Submit' && !this.respondent().entityAspect.hasValidationErrors) {
                         
                         var self = this;
-                        
+                        alert('allow commit')
                         console.log(self.respondent)
                         console.log(self.respondent().emailAddress)
                         console.log(self.respondent().organisation)
@@ -94,7 +68,6 @@
                         return true;
                     }
                     else {
-                        
                         return false;
                     }
                 }
