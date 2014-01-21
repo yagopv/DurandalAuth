@@ -15,8 +15,13 @@
                         if (router.activeInstruction().config.authorize) {
                             router.navigate("account/login");
                         }
+                        $(".navbar-toggle").click();
                     })
                     .fail(self.handlevalidationerrors);
+            },
+
+            closeMenu: function () {
+                $(".navbar-toggle").click();
             }
         };
 
