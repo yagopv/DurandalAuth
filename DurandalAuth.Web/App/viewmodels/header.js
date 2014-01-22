@@ -1,5 +1,5 @@
-﻿define(['plugins/router', 'services/appsecurity', 'services/errorhandler'],
-    function (router, appsecurity, errorhandler) {        
+﻿define(['plugins/router', 'services/appsecurity', 'services/errorhandler', 'services/utils'],
+    function (router, appsecurity, errorhandler, utils) {        
 
         var viewmodel = {
 
@@ -20,8 +20,10 @@
                     .fail(self.handlevalidationerrors);
             },
 
-            closeMenu: function () {
-                $(".navbar-toggle").click();
+            closeMenu: function (data, event) {                
+                if (["xs", "sm"].indexOf(utils.findBootstrapEnvironment()) != -1) {
+                    $(".navbar-collapse").collapse("hide");
+                }
             }
         };
 
