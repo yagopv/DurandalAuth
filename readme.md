@@ -39,9 +39,9 @@ weyland build
 
 Or you can follow this links:
 
-[Building with weyland](http://durandaljs.com/documentation/Building-with-Weyland/)
+[Building with weyland](https://github.com/BlueSpire/Weyland)
 
-[Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio/)
+[Automating builds with Visual Studio](http://durandaljs.com/documentation/Automating-Builds-with-Visual-Studio.html)
 
 
 ##About SEO Optimization
