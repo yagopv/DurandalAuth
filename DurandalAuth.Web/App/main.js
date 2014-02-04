@@ -26,7 +26,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'services/app
 			router: true,
 			dialog: true,
 			widget: {
-				kinds: ['expander', 'viewBox','interestForm', 'mainGraphic']
+				kinds: ['expander', 'viewBox','iconBox','interestForm', 'mainGraphic']
 			}
 		});
 

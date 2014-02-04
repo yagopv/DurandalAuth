@@ -25,6 +25,9 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/highlight.pack.js")
 		  .Include("~/Scripts/jquery.tagsinput.js")
 		  .Include("~/Scripts/orientationBug.js")
+		  .Include("~/Scripts/modernizr.custom.79639.js")
+		  .Include("~/Scripts/jquery.pfold.js")
+		  
 		);
 
 	  // css vendor
@@ -39,6 +42,7 @@ namespace DurandalAuth.Web {
 		  .Include("~/Content/jquery.tagsinput.css")
 		  .Include("~/Content/zen-form.css")
 		  .Include("~/Content/vs.css")
+		  .Include("~/Content/pfold.css")
 		);
 
 	  // css custom

@@ -52,8 +52,9 @@
 							{ route: ['','home/index'],                       moduleId: 'home/index',                        title: 'Home',                        nav: true, hash : "#home/index"    },
 							{ route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: false, hash: "#home/articles" },
 							{ route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: false, hash : "#home/help" },
-							{ route: 'home/about',                            moduleId: 'home/about',                        title: 'About Us',                       nav: true, hash : "#home/about" },
-							{ route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found',                   nav: false },
+							{ route: 'home/about',                            moduleId: 'home/about',                        title: 'Who is CueZero?',                       nav: true, hash : "#home/about" },
+							{ route: 'home/contact',                          moduleId: 'home/contact',                      title: 'Get involved', nav: true, hash: "#home/contact" },
+							{ route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found', nav: false },
 								
 							// Admin panel url
 							{ route: 'admin/panel',                           moduleId: 'admin/panel',                       title: 'Admin Panel',                 nav: false, hash : "#admin/panel",  authorize: ["Administrator"] } ,

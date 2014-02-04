@@ -17,16 +17,16 @@
 
 // Brand colors
 // -------------------------
-
+@cz-white: white;
 @cz-teal: #458B9F;
-@cz-lightteal:  #83B6C4;
+@cz-lightteal:  #000;
 @cz-palesea: #DBEEF4;
 @cz-aqua:  #9FDBFF;
 @cz-grey: #818181;
 @cz-lightgrey: rgb(217,217,217);
 @cz-gunmetal:  #272727;
 
-@brand-primary:         @cz-gunmetal;
+@brand-primary:         @cz-teal;
 @brand-success:         @cz-aqua;
 @brand-warning:         #F39C12;
 @brand-danger:          #E74C3C;
@@ -40,7 +40,7 @@
 // Scaffolding
 // -------------------------
 
-@body-bg:                @cz-gunmetal;
+@body-bg:                @cz-white;
 @text-color:            @brand-primary;
 
 // Links
@@ -279,8 +279,8 @@
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 4);  // ~15px
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 8);
 
-@navbar-default-color:             #777;
-@navbar-default-bg:                @gray-dark;
+@navbar-default-color:             @cz-white;
+@navbar-default-bg:                @cz-gunmetal;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links

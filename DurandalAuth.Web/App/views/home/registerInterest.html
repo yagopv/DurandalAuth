@@ -1,7 +1,8 @@
 ﻿<div>
+
     <form class="form-horizontal" role="form" data-bind="with: respondent">
         <div class="form-group">
-            <label for="fullName">Hello, what's your name?</label>
+            <label for="fullName">What's your name?</label>
             <input type="text" class="form-control col-sm-12 autofocus" id="fullName" placeholder="Name" data-bind="value: fullName, valueUpdate: 'afterkeydown'">
             <span class="help-block" data-bind="breezeValidation: 'fullName'"></span>
         </div>
@@ -17,4 +18,5 @@
         </div>
         <!--<button type="button" class="btn btn-success" data-bind="enable: $root.canSave">Submit</button>-->
     </form>
+    <p>You’re more than an email address to us! Will you tell us a bit more about your interest in CueZero?</p>
 </div>
