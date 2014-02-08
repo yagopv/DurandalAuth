@@ -15,7 +15,7 @@
 }
 
 h1.splash {
-    font-size: 54px;
+    font-size: 49.5px;
     text-align: right;
     margin-top: 40%;
     padding-right: 10%;
@@ -71,6 +71,14 @@ body {
 
 .mart0 {
     margin-top: 0;
+}
+
+.mart05 {
+    margin-top: .5%;
+}
+
+.mart1 {
+    margin-top: 1%;
 }
 
 .mart2 {

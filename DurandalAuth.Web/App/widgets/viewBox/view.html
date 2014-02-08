@@ -1,8 +1,11 @@
 ﻿<div >
     <div class="infoblock">
         <div id="title" class="col-md-4" data-bind="css: {'col-md-push-8': settings.orient=='right'}">
-            <h4 class="featureTitle" data-bind="text: settings.title"></h4>
-            <div><svg viewBox="0,0,150,50"><g><circle class="circleGrey" cx="75" cy="25" r="25"></circle></g></svg></div>
+            <h4 class="featureTitle"><strong data-bind="text: settings.title"></strong></h4>
+            <div class="block-icon">
+                <i data-bind="css: settings.iconClass" class="fa"></i>
+            </div>
+            <!--<div><svg viewBox="0,0,150,50"><g><circle class="circleGrey" cx="75" cy="25" r="25"></circle></g></svg></div>-->
         </div>
         <div id="copy" class="col-md-8" data-bind="css: {'col-md-pull-4': settings.orient=='right'}">
             <div class="copy" data-bind="html: settings.content">
