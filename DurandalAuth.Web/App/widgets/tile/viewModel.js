@@ -5,7 +5,6 @@
         this.settings = settings;
     };
 
-
     //ctor.prototype.getHeaderText = function (item) {
     //    if (this.settings.headerProperty) {
     //        return item[this.settings.headerProperty];

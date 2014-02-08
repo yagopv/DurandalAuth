@@ -5,13 +5,11 @@
 .cue {
     font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
     font-weight: bold;
-    font-size: 36px;
     color: #ffffff;
 }
 
 .zero {
     font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
-    font-size: 36px;
     font-weight: bold;
     color: #9fdbff;
 }
@@ -20,9 +18,21 @@
     font-style: italic;
 }
 
+h3.wide {
+    line-height: 1.995;
+    padding: 2%,0%,2%,0%;
+    color: #458b9f;
+}
+
 h3.featureTitle {
     color: #ffffff;
     font-weight: normal;
+}
+
+h4.featureTitle {
+    color: #458b9f;
+    font-weight: bold;
+    margin-top: auto;
 }
 
 .jumbotron.featureTitle {
@@ -38,8 +48,18 @@ h3.featureTitle {
     color: #ffffff;
 }
 
+.jumbotron.transparent {
+    background: none;
+    color: #ffffff;
+}
+
 .withBackground {
     background-color: #9fdbff;
+}
+
+.withBackgroundBrand {
+    background-color: #458b9f;
+    color: #ffffff;
 }
 
 .bgTrans {
@@ -148,6 +168,12 @@ h3.featureTitle {
     }
 }
 
+.infoblock {
+    overflow: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
 .infoblock .teal {
     background-color: #458b9f;
     color: #ffffff;
@@ -169,7 +195,7 @@ h3.featureTitle {
 .infoblock .copy {
     text-align: justify;
     line-height: 175%;
-    color: #272727;
+    color: #458b9f;
 }
 
 .block-body .copy {
@@ -195,4 +221,43 @@ h3.featureTitle {
     line-height: 70px;
     margin: 0 auto;
     background: #458b9f;
+}
+
+.circleGrey {
+    fill: #d9d9d9;
+    stroke: none;
+}
+
+.circleTransparent {
+    stroke: none;
+    fill: url(/Content/images/BowlsTealCroppedSmall.jpg);
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    background-position: top, center;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+.row.brand {
+    background-color: #458b9f;
+    color: #ffffff;
+}
+
+.row.transparent {
+    background: none;
+    background-color: transparent;
+    overflow: auto;
+    min-height: 2%;
+}
+
+label.bigWhite {
+    color: #ffffff;
+    font-size: 24px;
 }

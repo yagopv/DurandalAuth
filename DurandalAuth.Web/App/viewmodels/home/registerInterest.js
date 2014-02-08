@@ -45,6 +45,7 @@
             }
 
             ctor.prototype.attached = function () {
+                foldInit();
                 // setInterval(flashTitle, 3000);
             }
 
@@ -76,7 +77,88 @@
 
                 //return true;
 
+            function foldInit() {
 
+                var opened = false;
+
+                $('#foldrow > div > div.uc-container').each(function (i) {
+
+                    var $item = $(this), direction;
+
+                    switch (i) {
+                        case 0: direction = ['right', 'bottom']; break;
+                        case 1: direction = ['left', 'bottom']; break;
+                        case 2: direction = ['right', 'top']; break;
+                        case 3: direction = ['left', 'top']; break;
+                    }
+
+
+                    var pfold = $item.pfold({
+                        folddirection: direction,
+                        speed: 300,
+                        onEndFolding: function () {
+                            opened = false;
+                            $item.data('opened', false)
+                        },
+                    });
+
+
+                    $item.data('opened', false);
+
+                    $item.find('.unfold').on('click', function () {
+                        console.log('monkey')
+                        if (!$item.data('opened')) {
+                            //if (!opened) {
+                            console.log('unfold')
+
+                            //$item.siblings().each(function (i) {
+                            $('#foldrow > div > div.uc-container').each(function (i) {
+
+                                var $newitem = $(this), direction;
+
+                                switch (i) {
+                                    case 0: direction = ['right', 'bottom']; break;
+                                    case 1: direction = ['left', 'bottom']; break;
+                                    case 2: direction = ['right', 'top']; break;
+                                    case 3: direction = ['left', 'top']; break;
+                                }
+
+                                if ($(this).data('opened')) {
+                                    console.log(this);
+
+                                    var thispfold = $newitem.pfold({
+                                        folddirection: ['right', 'bottom'],
+                                        speed: 300,
+                                        onEndFolding: function () {
+                                            opened = false;
+                                            $newitem.data('opened', false)
+                                        },
+                                    })
+
+                                    thispfold.fold();
+                                }
+                            })
+
+
+                            //opened = true;
+                            pfold.unfold();
+                            $item.data('opened', true);
+
+                        }
+                        else {
+                            alert('fold')
+                            pfold.fold();
+                        }
+
+
+                    }).end().find('.fold').on('click', function () {
+
+                        pfold.fold();
+
+                    });
+                })
+
+            };
 
             return ctor;
 

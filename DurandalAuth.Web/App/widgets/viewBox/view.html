@@ -1,10 +1,11 @@
-﻿<div class="infoblock">
-    <div>
-        <div class="col-sm-4">
-            <h4 class="header" data-bind="text: settings.title"></h4>
+﻿<div >
+    <div class="infoblock">
+        <div id="title" class="col-md-4" data-bind="css: {'col-md-push-8': settings.orient=='right'}">
+            <h4 class="featureTitle" data-bind="text: settings.title"></h4>
+            <div><svg viewBox="0,0,150,50"><g><circle class="circleGrey" cx="75" cy="25" r="25"></circle></g></svg></div>
         </div>
-        <div class="col-sm-8">
-            <div class="copy" data-bind="text: settings.content">
+        <div id="copy" class="col-md-8" data-bind="css: {'col-md-pull-4': settings.orient=='right'}">
+            <div class="copy" data-bind="html: settings.content">
             </div>
         </div>
     </div>

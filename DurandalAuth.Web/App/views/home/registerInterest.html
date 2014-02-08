@@ -1,22 +1,90 @@
-﻿<div>
+﻿<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <form class="form-horizontal" role="form" data-bind="with: respondent">
+                <div class="form-group">
+                    <label class="bigWhite" for="emailAddress">How can we get hold of you?</label>
+                    <input type="email" class="form-control col-sm-12" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'">
+                    <span class="help-block" data-bind="breezeValidation: 'emailAddress'"></span>
+                </div>
+                <div class="form-group">
+                    <label class="bigWhite" for="fullName">What's your name?</label>
+                    <input type="text" class="form-control col-sm-12 autofocus" autofocus id="fullName" placeholder="Name" data-bind="value: fullName, valueUpdate: 'afterkeydown'">
+                    <span class="help-block" data-bind="breezeValidation: 'fullName'"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="organisation">Where do you work?</label>
+                    <input type="text" class="form-control col-sm-12" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'">
+                    <span class="help-block" data-bind="breezeValidation: 'organisation'"></span>
+                </div>
+                <!--<button type="button" class="btn btn-success" data-bind="enable: $root.canSave">Submit</button>-->
+            </form>
+            <p>You’re more than an email address to us! Will you tell us a bit more about your interest in CueZero?</p>
+            <div id="foldrow" class="row demo-2">
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">Not sure, just curious</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <p style="color: white">We’re glad to have you here! We’ll keep you informed about CueZero as the launch date approaches and you’ll be the first to get a sneak peek before its official release.</p>
+                            <span class="icon-cancel"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">I’m interested in being part of the private beta group</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <p style="color: white">Welcome, CueHero! We’re glad to have you on board. We’re busy building at the moment, so we may be a little quiet, but when we’re ready to share CueZero you will be the FIRST to know about it. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">I’m interesting in exploring an alternative to our current staff survey</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <p style="color: white">We’re on a mission to make this a reality. We’ll keep you informed about our progress along the way and you’ll be the first to know about CueZero as it nears its release. Your survey’s days are numbered.</p>
+                        </div>
+                    </div>
+                </div>
 
-    <form class="form-horizontal" role="form" data-bind="with: respondent">
-        <div class="form-group">
-            <label for="fullName">What's your name?</label>
-            <input type="text" class="form-control col-sm-12 autofocus" id="fullName" placeholder="Name" data-bind="value: fullName, valueUpdate: 'afterkeydown'">
-            <span class="help-block" data-bind="breezeValidation: 'fullName'"></span>
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">I’m interested in exploring an alternative to our current discussion and collaboration tool</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <p style="color: white">You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">Don’t put me in a box! Leave us a comment or a question:</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <textarea class="form-control" autofocus rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="uc-container" class="uc-container">
+                        <div class="uc-initial-content unfold">
+                            <p style="color: white">Tiddly um pum</p>
+                        </div>
+                        <div class="uc-final-content fold">
+                            <p style="color: white">Ta da!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="emailAddress">How can we get hold of you?</label>
-            <input type="email" class="form-control col-sm-12" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'">
-            <span class="help-block" data-bind="breezeValidation: 'emailAddress'"></span>
-        </div>
-        <div class="form-group">
-            <label for="organisation">Where do you work?</label>
-            <input type="text" class="form-control col-sm-12" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'">
-            <span class="help-block" data-bind="breezeValidation: 'organisation'"></span>
-        </div>
-        <!--<button type="button" class="btn btn-success" data-bind="enable: $root.canSave">Submit</button>-->
-    </form>
-    <p>You’re more than an email address to us! Will you tell us a bit more about your interest in CueZero?</p>
+    </div>
 </div>

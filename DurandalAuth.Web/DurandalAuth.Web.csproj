@@ -276,6 +276,8 @@
     <Content Include="App\widgets\interestForm\viewModel.js" />
     <Content Include="App\widgets\mainGraphic\view.html" />
     <Content Include="App\widgets\mainGraphic\viewModel.js" />
+    <Content Include="App\widgets\tile\view.html" />
+    <Content Include="App\widgets\tile\viewModel.js" />
     <Content Include="App\widgets\viewBox\view.html" />
     <Content Include="App\widgets\viewBox\viewModel.js" />
     <None Include="Content\app.less" />
@@ -342,13 +344,16 @@
     <Content Include="Content\images\arrow.png" />
     <Content Include="Content\images\BowlsTealCropped.jpg" />
     <Content Include="Content\images\BowlsTealCroppedSmall.jpg" />
-    <Content Include="Content\images\CueZeroFrontPageOpt.svg" />
+    <Content Include="Content\images\CueZeroFrontPageOpt.svg">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\images\CueZeroLogoOpt.svg" />
     <Content Include="Content\images\CueZeroLogoSmallOpt.svg" />
     <Content Include="Content\images\CueZeroLogoSmallStd.svg" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\ios-startup-image-landscape.png" />
     <Content Include="Content\images\ios-startup-image-portrait.png" />
+    <Content Include="Content\images\NGVsmallcroppedmasked.jpg" />
     <Content Include="Content\images\spinner.png" />
     <Content Include="Content\images\Stage1Opt.svg" />
     <Content Include="Content\images\Stage2Opt.svg" />
