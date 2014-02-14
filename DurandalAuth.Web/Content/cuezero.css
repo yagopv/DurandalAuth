@@ -201,19 +201,19 @@ h4 .featureTitle {
     color: #272727;
 }
 
-@media only screen and (max-width: 991px), only screen and (max-device-width: 991px) {
+@media only screen and (max-width: 991px) and (max-device-width: 991px) {
     .signupinput {
         min-width: 140px;
     }
 }
 
-@media only screen and (min-width: 992px), only screen and (min-device-width: 992px) {
+@media only screen and (min-width: 992px) and (min-device-width: 992px) {
     .signupinput {
         min-width: 200px;
     }
 }
 
-@media only screen and (min-width: 1200px), only screen and (min-device-width: 1200px) {
+@media only screen and (min-width: 1200px) and (min-device-width: 1200px) {
     .signupinput {
         min-width: 400px;
     }
