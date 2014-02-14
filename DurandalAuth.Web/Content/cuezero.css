@@ -209,7 +209,13 @@ h4 .featureTitle {
 
 @media only screen and (min-width: 992px) and (min-device-width: 992px) {
     .signupinput {
-        min-width: 200px;
+        min-width: 140px;
+    }
+}
+
+@media only screen and (min-device-width: 992px) and (-webkit-min-device-pixel-ratio: 2) {
+    .signupinput {
+        min-width: 100px;
     }
 }
 
