@@ -40,7 +40,7 @@ h4 .featureTitle {
 .jumbotron.featureTitle {
     background-color: #458b9f;
     color: #ffffff;
-    padding-top: 1% ;
+    padding-top: 1%;
     padding-bottom: 1%;
     margin-top: 4%;
 }
@@ -264,4 +264,141 @@ svg {
 label.bigWhite {
     color: #ffffff;
     font-size: 23px;
+}
+
+.splashbgtrans {
+    -moz-animation-name: splashbtrans;
+    -o-animation-name: splashbtrans;
+    -webkit-animation-name: splashbtrans;
+    animation-name: splashbtrans;
+    -moz-animation-iteration-count: 1;
+    -o-animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -moz-animation-direction: normal;
+    -o-animation-direction: normal;
+    -webkit-animation-direction: normal;
+    animation-direction: normal;
+    -moz-animation-duration: 5s;
+    -o-animation-duration: 5s;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -moz-animation-timing-function: ease;
+    -o-animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+}
+
+@keyframes splashbtrans {
+    0% {
+        background-color: #818181;
+    }
+
+    100% {
+        background-color: #458b9f;
+    }
+}
+
+@-webkit-keyframes splashbtrans {
+    0% {
+        background-color: #818181;
+    }
+
+    100% {
+        background-color: #458b9f;
+    }
+}
+
+@-moz-keyframes splashbtrans {
+    0% {
+        background-color: #818181;
+    }
+
+    100% {
+        background-color: #458b9f;
+    }
+}
+
+@keyframes textappear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes textappear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes textappear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.maketextappear {
+    -moz-animation-name: textappear;
+    -o-animation-name: textappear;
+    -webkit-animation-name: textappear;
+    animation-name: textappear;
+    -moz-animation-iteration-count: 2;
+    -o-animation-iteration-count: 2;
+    -webkit-animation-iteration-count: 2;
+    animation-iteration-count: 2;
+    -moz-animation-direction: alternate;
+    -o-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    -moz-animation-duration: 6s;
+    -o-animation-duration: 6s;
+    -webkit-animation-duration: 6s;
+    animation-duration: 6s;
+    -moz-animation-timing-function: ease;
+    -o-animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -moz-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.maketextdisappear {
+    -moz-animation-name: textappear;
+    -o-animation-name: textappear;
+    -webkit-animation-name: textappear;
+    animation-name: textappear;
+    -moz-animation-iteration-count: 1;
+    -o-animation-iteration-count: 1;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -moz-animation-direction: alternate-reverse;
+    -o-animation-direction: alternate-reverse;
+    -webkit-animation-direction: alternate-reverse;
+    animation-direction: alternate-reverse;
+    -moz-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -moz-animation-timing-function: ease;
+    -o-animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -moz-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
 }

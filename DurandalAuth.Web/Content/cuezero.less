@@ -15,16 +15,17 @@
 	font-weight: bold;
 	color: @cz-aqua;
 }
-.italic{
+
+.italic {
 	font-style: italic;
 }
 
 
-h3.wide{
+h3.wide {
 	line-height: @line-height-large*1.5;
 	margin-top: 3%;
 	margin-bottom: 3%;
-	color:@cz-teal;
+	color: @cz-teal;
 }
 
 h3, h4 .featureTitle {
@@ -38,20 +39,20 @@ h3, h4 .featureTitle {
 	margin-top:auto;
 }*/
 
-.jumbotron.featureTitle{
-		background-color: @cz-teal;
+.jumbotron.featureTitle {
+	background-color: @cz-teal;
 	color: @cz-white;
-	padding-top: 1% ;
+	padding-top: 1%;
 	padding-bottom: 1%;
-	margin-top:4%;
+	margin-top: 4%;
 }
 
-.jumbotron.feature{
+.jumbotron.feature {
 	background-color: @cz-teal;
 	color: @cz-white;
 }
 
-.jumbotron.transparent{
+.jumbotron.transparent {
 	background: none;
 	color: @cz-white;
 }
@@ -61,7 +62,7 @@ h3, h4 .featureTitle {
 	background-color: @cz-aqua;
 }
 
-.withBackgroundBrand{
+.withBackgroundBrand {
 	background-color: @cz-teal;
 	color: @cz-white;
 }
@@ -142,71 +143,71 @@ h3, h4 .featureTitle {
 	}
 }
 
-@keyframes interestFormTitle{
-  0% {
+@keyframes interestFormTitle {
+	0% {
 		color: hsl(255,77%,100%);
 	}
 
 	100% {
 		color: #000000;
 	}
-} 
+}
 
-@-webkit-keyframes interestFormTitle{
-  0% {
+@-webkit-keyframes interestFormTitle {
+	0% {
 		color: hsl(255,77%,100%);
 	}
 
 	100% {
 		color: #000000;
 	}
-} 
+}
 
-@-moz-keyframes interestFormTitle{
-  0% {
+@-moz-keyframes interestFormTitle {
+	0% {
 		color: hsl(255,77%,100%);
 	}
 
 	100% {
 		color: #000000;
 	}
-} 
+}
 
-.infoblock{
-	overflow:auto;
-	margin-top:2%;
-	margin-bottom:2%;
+.infoblock {
+	overflow: auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
 
-	.teal{
+	.teal {
 		background-color: @cz-teal;
 		color: @cz-white;
 	}
-	.container{
-	height: 100%;
-	border: solid;
-	border-color: @cz-grey;
+
+	.container {
+		height: 100%;
+		border: solid;
+		border-color: @cz-grey;
 	}
 
-	.header{
+	.header {
 		font-size: @font-size-h4;
-	font-weight: normal;
-	text-align: left;
-	color:@cz-grey;
-
+		font-weight: normal;
+		text-align: left;
+		color: @cz-grey;
 	}
-	.copy{
-	//font-size: @font-size-small;
-	text-align:justify;
-	line-height:175%;
-	color: @cz-teal;
 
-}
+	.copy {
+		//font-size: @font-size-small;
+		text-align: justify;
+		line-height: 175%;
+		color: @cz-teal;
+	}
 }
 
-.block-body{
-	.copy{
-		text-align:justify;
-		line-height:175%;
+.block-body {
+	.copy {
+		text-align: justify;
+		line-height: 175%;
 		color: @cz-gunmetal;
 	}
 }
@@ -221,60 +222,198 @@ h3, h4 .featureTitle {
 	}
 }
 
-.block-icon{
-  width: 70px;
-  height: 70px;
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  text-align: center;
-  font-size: 30px;
-  color: #fff;
-  line-height: 70px;
-  margin: 0 auto;
+.block-icon {
+	width: 70px;
+	height: 70px;
+	border-radius: 40px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	text-align: center;
+	font-size: 30px;
+	color: #fff;
+	line-height: 70px;
+	margin: 0 auto;
 	//background: @cz-teal;
 	background-image: url(images/BowlsTealCroppedSmall.jpg);
 	background-attachment: fixed;
 	background-position: top;
 }
 
-.circleGrey{
+.circleGrey {
 	fill: @cz-lightgrey;
 	stroke: none;
 }
 
-.circleTransparent{
+.circleTransparent {
 	stroke: none;
-		fill: url(/Content/images/BowlsTealCroppedSmall.jpg);
-background-repeat:repeat-y;
-background-attachment:fixed;
-background-position:top, center; 
+	fill: url(/Content/images/BowlsTealCroppedSmall.jpg);
+	background-repeat: repeat-y;
+	background-attachment: fixed;
+	background-position: top, center;
 }
 
 svg {
-  width:100%;
-  height:100%;
+	width: 100%;
+	height: 100%;
 }
 
 
-.white{
+.white {
 	background-color: @cz-white;
 }
 
-.row.brand{
+.row.brand {
 	background-color: @cz-teal;
 	color: @cz-white;
 }
-.row.transparent{
+
+.row.transparent {
 	background: none;
 	background-color: transparent;
 	overflow: auto;
-	min-height:2%;
+	min-height: 2%;
 }
 
-label.bigWhite{
-	color:@cz-white;
+label.bigWhite {
+	color: @cz-white;
 	font-size: @font-size-h3;
+}
+
+.splashbgtrans {
+	-moz-animation-name: splashbtrans;
+	-o-animation-name: splashbtrans;
+	-webkit-animation-name: splashbtrans;
+	animation-name: splashbtrans;
+	-moz-animation-iteration-count: 1;
+	-o-animation-iteration-count: 1;
+	-webkit-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-moz-animation-direction: normal;
+	-o-animation-direction: normal;
+	-webkit-animation-direction: normal;
+	animation-direction: normal;
+	-moz-animation-duration: 5s;
+	-o-animation-duration: 5s;
+	-webkit-animation-duration: 5s;
+	animation-duration: 5s;
+	-moz-animation-timing-function: ease;
+	-o-animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+	animation-timing-function: ease;
+}
+
+@keyframes splashbtrans {
+	0% {
+		background-color: @cz-grey;
+	}
+
+	100% {
+		background-color: @cz-teal;
+	}
+}
+
+@-webkit-keyframes splashbtrans {
+	0% {
+		background-color: @cz-grey;
+	}
+
+	100% {
+		background-color: @cz-teal;
+	}
+}
+
+@-moz-keyframes splashbtrans {
+	0% {
+		background-color: @cz-grey;
+	}
+
+	100% {
+		background-color: @cz-teal;
+	}
+}
+
+@keyframes textappear {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes textappear {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes textappear {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.maketextappear {
+	-moz-animation-name: textappear;
+	-o-animation-name: textappear;
+	-webkit-animation-name: textappear;
+	animation-name: textappear;
+	-moz-animation-iteration-count: 2;
+	-o-animation-iteration-count: 2;
+	-webkit-animation-iteration-count: 2;
+	animation-iteration-count: 2;
+	-moz-animation-direction: alternate;
+	-o-animation-direction: alternate;
+	-webkit-animation-direction: alternate;
+	animation-direction: alternate;
+	-moz-animation-duration: 6s;
+	-o-animation-duration: 6s;
+	-webkit-animation-duration: 6s;
+	animation-duration: 6s;
+	-moz-animation-timing-function: ease;
+	-o-animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+	animation-timing-function: ease;
+	-moz-animation-delay: 0s;
+	-o-animation-delay: 0s;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+}
+
+.maketextdisappear {
+	-moz-animation-name: textappear;
+	-o-animation-name: textappear;
+	-webkit-animation-name: textappear;
+	animation-name: textappear;
+	-moz-animation-iteration-count: 1;
+	-o-animation-iteration-count: 1;
+	-webkit-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-moz-animation-direction: alternate-reverse;
+	-o-animation-direction: alternate-reverse;
+	-webkit-animation-direction: alternate-reverse;
+	animation-direction: alternate-reverse;
+	-moz-animation-duration: 3s;
+	-o-animation-duration: 3s;
+	-webkit-animation-duration: 3s;
+	animation-duration: 3s;
+	-moz-animation-timing-function: ease;
+	-o-animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+	animation-timing-function: ease;
+	-moz-animation-delay: 0s;
+	-o-animation-delay: 0s;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
 }
 
 @import 'bootstrap/variables.less';
