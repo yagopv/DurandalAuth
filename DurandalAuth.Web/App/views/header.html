@@ -9,25 +9,25 @@
             <a data-bind="attr: { href: router.convertRouteToHash('/' + router.navigationModel()[0].hash) }" class="navbar-brand">
                 <object data="../Content/images/CueZeroLogoSmallStd.svg" type="image/svg+xml" height="40em"/>
             </a>
+            <div class="visible-xs" data-bind="template:{name: 'signup-template'}"></div>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
-            <!--<ul class="nav navbar-nav">
-                <li>
-                    <a href="#divWhen">When</a>
-                </li>
-                <li>
-                    <a href="#divWhat">What</a>
-                </li>
-                <li>
-                    <a href="#divHow">How</a>
-                </li>
-            </ul>-->
+            
             <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
                 <li data-bind="css: { active: isActive }">
                     <a class="toggler" data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title"></a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a data-bind="attr: { href: router.convertRouteToHash('/' + '#home/index')}">How it works</a>
+                </li>
+                <li>
+                    <div class="visible-sm visible-md visible-lg clearfix" data-bind="template:{name: 'signup-template'}"></div>
+                </li>
+            </ul>
+            
 
             <!--<ul class="nav navbar-nav navbar-right" data-bind="if: typeof(appsecurity.userInfo()) == 'undefined'">
                 <li>
@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right" data-bind="if: !(typeof(appsecurity.userInfo()) == 'undefined')">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-user"></i>&nbsp; Hi <span data-bind="text: appsecurity.userInfo().name"></span>
+                        <i class="fa fa-user"></i>&nbsp; Hi <span data-bind="text: appsecurity.userInfo().name"></span>x
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -52,6 +52,7 @@
                     </ul>
                 </li>
             </ul>-->
+            <!--<div class="visible-md visible-lg"  data-bind="template:{name: 'signup-template'}"></div>-->
             <ul class="nav navbar-nav navbar-right visible-xs visible-sm">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -108,3 +109,14 @@
         </div>
     </div>
 </header>
+
+<script type="text/html" id="signup-template">
+
+        <div class="input-group input-group-sm" style="padding-top: 0.5em; padding-right: 0.5em; margin-right:0.5em; ">
+            <input type="text" placeholder="Register your email to keep in the loop"  class ="form-control input-sm signupinput">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" data-bind="click: signup" style="padding-right: 0.5em; margin-right:0.5em">Sign up</button>
+            </span>
+        </div>
+
+</script>

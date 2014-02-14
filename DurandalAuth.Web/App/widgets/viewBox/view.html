@@ -1,18 +1,23 @@
 ﻿<div >
     <div class="infoblock">
-        
-        <div class="col-md-5" data-bind="css: {'col-md-pull-2': settings.orient=='right'}">
-            <h4>Clients said...</h4>
-            <div class="copy" data-bind="html: settings.content1">
-            </div>
-        </div>
-        <div id="title" class="col-md-2" data-bind="css: {'col-md-push-10': settings.orient=='right'}">
+        <div class="col-md-2 visible-sm visible-xs" data-bind="css: {'col-md-push-10': settings.orient=='right'}">
             <h4 class="featureTitle"><strong data-bind="text: settings.title"></strong></h4>
             <div class="block-icon">
                 <i data-bind="css: settings.iconClass" class="fa"></i>
             </div>
         </div>
-        <div class="col-md-5" data-bind="css: {'col-md-pull-2': settings.orient=='right'}">
+        <div class="col-md-5 col-sm-6" data-bind="css: {'col-md-pull-2': settings.orient=='right'}">
+            <h4>Decision-makers say...</h4>
+            <div class="copy" data-bind="html: settings.content1">
+            </div>
+        </div>
+        <div class="col-md-2 visible-lg visible-md" data-bind="css: {'col-md-push-10': settings.orient=='right'}">
+            <h4 class="featureTitle"><strong data-bind="text: settings.title"></strong></h4>
+            <div class="block-icon">
+                <i data-bind="css: settings.iconClass" class="fa"></i>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-6" data-bind="css: {'col-md-pull-2': settings.orient=='right'}">
             <h4>Meet CueZero...</h4>
             <div class="copy" data-bind="html: settings.content2">
             </div>

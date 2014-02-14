@@ -49,7 +49,7 @@
 
 						return router.map([
 							// Nav urls
-							{ route: ['','home/index'],                       moduleId: 'home/index',                        title: 'Home',                        nav: true, hash : "#home/index"    },
+							{ route: ['', 'home/index', '/#\/home\/index(#.+)?/'], moduleId: 'home/index', title: 'Home', nav: true, hash: "#home/index" },
 							{ route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: false, hash: "#home/articles" },
 							{ route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: false, hash : "#home/help" },
 							{ route: 'home/about',                            moduleId: 'home/about',                        title: 'About CueZero',                       nav: true, hash : "#home/about" },

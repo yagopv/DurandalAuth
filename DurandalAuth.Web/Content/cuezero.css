@@ -195,9 +195,28 @@ h4 .featureTitle {
 }
 
 .infoblock .copy {
-    text-align: justify;
-    line-height: 175%;
+    font-size: 12px;
+    text-align: left;
+    line-height: 185%;
     color: #272727;
+}
+
+@media only screen and (max-width: 991px) {
+    .signupinput {
+        min-width: 140px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .signupinput {
+        min-width: 200px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .signupinput {
+        min-width: 400px;
+    }
 }
 
 .block-body .copy {
@@ -389,10 +408,10 @@ label.bigWhite {
     -o-animation-direction: alternate-reverse;
     -webkit-animation-direction: alternate-reverse;
     animation-direction: alternate-reverse;
-    -moz-animation-duration: 3s;
-    -o-animation-duration: 3s;
-    -webkit-animation-duration: 3s;
-    animation-duration: 3s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
     -moz-animation-timing-function: ease;
     -o-animation-timing-function: ease;
     -webkit-animation-timing-function: ease;

@@ -23,7 +23,12 @@
                 $('.toggler').on('click', function () {
                     $(".navbar-toggle").click();
                 });
+            },
+
+            signup: function () {
+                alert('signup');
             }
+      
 
 
 
