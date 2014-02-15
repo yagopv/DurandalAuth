@@ -11,6 +11,7 @@
     margin: 0;
     color: #FFF;
     height: 100em;
+    background-color: #458b9f;
 }
 
 h1.splash {
@@ -156,7 +157,7 @@ body {
     margin-top: -30px;
     background-image: url(/Content/images/BowlsTealCroppedSmall.jpg);
     background-repeat: repeat-y;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
     background-position: top, center;
 }
 
