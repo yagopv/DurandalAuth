@@ -201,33 +201,45 @@ h4 .featureTitle {
     color: #272727;
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+/*@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2){
+.signupinput {
+		min-width: 200px;
+	}
+}
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 2){
+	.signupinput {
+		min-width: 140px;
+	}
+}
+*/
+@media only screen and (min-width: 768px) and (min-device-width: 768px) {
     .signupinput {
         min-width: 200px;
-    }
-}
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-    .signupinput {
-        min-width: 140px;
-    }
-}
-
-@media only screen and (max-width: 991px) and (max-device-width: 991px) {
-    .signupinput {
-        min-width: 140px;
+        max-width: 250px;
     }
 }
 
 @media only screen and (min-width: 992px) and (min-device-width: 992px) {
     .signupinput {
-        min-width: 140px;
+        min-width: 200px;
+        max-width: 300px;
     }
 }
 
 @media only screen and (min-width: 1200px) and (min-device-width: 1200px) {
     .signupinput {
-        min-width: 400px;
+        min-width: 300px;
+        max-width: 400px;
     }
 }
 

@@ -205,7 +205,7 @@ h3, h4 .featureTitle {
 }
    
 
-@media only screen 
+/*@media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : landscape)
@@ -223,29 +223,30 @@ and (-webkit-min-device-pixel-ratio: 2){
 	.signupinput {
 		min-width: 140px;
 	}
-}
+}*/
 
 
-   @media only screen and (max-width:@screen-sm-max ) and (max-device-width: @screen-sm-max) {
+   @media only screen and (min-width:@screen-sm-min ) and (min-device-width: @screen-sm-min) {
 	.signupinput {
-		min-width: 140px;
+		min-width: 200px;
+		max-width: 250px;
 	}
 }
 
 	 @media only screen and (min-width:@screen-md-min) and (min-device-width:@screen-md-min){
 	   .signupinput{
- min-width: 140px;
-
+ min-width: 200px;
+ max-width:300px;
 	}
 
    }
-
+	 //770 to 990 reverst to full-sized!
 
 
    @media only screen and (min-width:@screen-lg-min) and (min-device-width:@screen-lg-min){
 	   .signupinput{
- min-width: 400px;
-
+ min-width: 300px;
+ max-width: 400px;
 	}
 
    }
