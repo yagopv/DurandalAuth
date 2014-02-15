@@ -225,20 +225,20 @@ and (-webkit-min-device-pixel-ratio: 2){
 @media only screen and (min-width: 768px) and (min-device-width: 768px) {
     .signupinput {
         min-width: 200px;
-        max-width: 250px;
+        max-width: 350px;
     }
 }
 
 @media only screen and (min-width: 992px) and (min-device-width: 992px) {
     .signupinput {
         min-width: 200px;
-        max-width: 300px;
+        max-width: 400px;
     }
 }
 
 @media only screen and (min-width: 1200px) and (min-device-width: 1200px) {
     .signupinput {
-        min-width: 300px;
+        min-width: 400px;
         max-width: 400px;
     }
 }
