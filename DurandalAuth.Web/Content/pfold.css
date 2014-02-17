@@ -1,5 +1,7 @@
 ﻿/* pfold style */
 .uc-container {
+    /*margin: 3px;
+	padding: 2px;*/
     position: relative;
     width: 100px;
     height: 100px;
@@ -13,6 +15,8 @@
 .uc-back,
 .uc-front {
     background: #ffffff;
+    /*margin:2%;
+	padding:2%;*/
 }
 
 .uc-final,
@@ -23,6 +27,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    /*margin: 3px;
+	padding: 2px;*/
 }
 
 .uc-initial-content,
@@ -31,6 +37,8 @@
     height: 100%;
     position: relative;
     background: #458b9f;
+    /*margin:2%;
+	padding:2%;*/
 }
 
 .uc-final,

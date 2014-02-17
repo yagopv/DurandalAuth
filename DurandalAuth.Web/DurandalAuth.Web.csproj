@@ -359,6 +359,7 @@
     <Content Include="Content\images\Stage2Opt.svg" />
     <Content Include="Content\images\Stage3Opt.svg" />
     <Content Include="Content\jquery.tagsinput.css" />
+    <Content Include="Content\jquery.kwicks.css" />
     <None Include="Content\pfold.less" />
     <Content Include="Content\pfold.css">
       <DependentUpon>pfold.less</DependentUpon>
@@ -460,6 +461,7 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.hammer.js" />
     <Content Include="Scripts\jquery.hammer.min.js" />
+    <Content Include="Scripts\jquery.kwicks.js" />
     <Content Include="Scripts\jquery.pfold.js" />
     <Content Include="Scripts\jquery.tagsinput.js" />
     <Content Include="Scripts\knockout-3.0.0.debug.js" />

@@ -2,8 +2,14 @@
     <div class="jumbotron transparent">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-12">
+                    <div data-bind="visible: messageEmail">
+                        <h3>Thanks for signing up <span data-bind="text: messageEmail"></span></h3>
+                    </div>
+                    <div data-bind="visible: !messageEmail()">
+                        <h3>Hello! </h3>
+                    </div>
+
                     <h2 class="">An <span class="cue">early adopter</span>, or just <span class="zero">curious</span><span>?</span></h2>
 
                     <p>
@@ -19,18 +25,20 @@
             </div>
         </div>
     </div>
-    <div class="row transparent">
+    <div class="jumbotron transparent">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-
                     <div>
-                        <div data-bind="compose:activeScreen"></div>
+                        <div data-bind="compose:'home/registerInterest.html'"></div>
                     </div>
+                    <!--<div>
+                        <div data-bind="compose:activeScreen"></div>
+                    </div>-->
 
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
