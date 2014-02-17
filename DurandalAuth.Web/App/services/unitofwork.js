@@ -100,8 +100,8 @@ define(['services/entitymanagerprovider', 'services/repository','services/privat
 			get: get
 		};
 
-        /**
-    	 * Get a new UnitOfWork instance
+		/**
+		 * Get a new UnitOfWork instance
 		 * @method
 		 * @return {UnitOfWork}
 		*/ 

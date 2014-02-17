@@ -1,17 +1,27 @@
 ﻿define(['jquery', 'durandal/system', 'services/logger', 'services/errorhandler', 'services/unitofwork','durandal/app', 'services/customBindings'],
     function ($, system, logger, errorHandler, unitofwork, app, customBindings) {
 
-        var RegisterInterest = (function () {
+        var RegisterInterest = (function (resid, refid) {
 
-            var ctor = function () {
+            var ctor = function (resid, refid) {
 
                 this.respondent = ko.observable();
                 this.canSave = ko.observable();
 
+                this.messageEmail = ko.observable();
+
+                this.resid = resid;
+
                 errorHandler.includeIn(this);
                 var self = this;
 
-                var ref = unitofwork.get();
+                if (!refid) {
+                    var ref = unitofwork.get();
+                }
+                else {
+                    var ref = unitofwork.get(refid);
+                }
+                
                 this.unitOfWork = ref.value();
             
             };
@@ -23,21 +33,61 @@
             ctor.prototype.activate = function (settings) {
 
                 var self = this;
+                console.log('resid in ri')
+                console.log(self.resid)
 
-                self.respondent(self.unitOfWork.respondents.create());
-                app.on('hasChanges').then(notify);
-                console.log(self.respondent);
+
                 
-                self.respondent().entityAspect.entityManager.validationErrorsChanged.subscribe(function (changeArgs) {
-                    
-                    console.log('vchanges');
-                    self.canSave(!self.respondent().entityAspect.hasValidationErrors);
+                if (!self.resid) {
 
-                    console.log(self.canSave());
-                })
+
+                    self.unitOfWork.respondents.create().then(function (entity) {
+                        self.respondent(entity);
+                    }).then(wireupValidation());
+                }
+                else
+                {
+                    self.unitOfWork.respondents.withId(self.resid).then(
+                        function (data) {
+                            console.log('data from query')
+                            console.log(data)
+                            self.respondent(data);
+                            self.messageEmail(data.emailAddress());
+                        }
+                        ).then(function () {
+                            console.log('wiring up');
+                            console.log(self.respondent())
+                            wireupValidation();
+                        }
+
+                        ).fail(self.handleError);
+                    
+                    console.log('hasfound')
+                }
+                
+                function wireupValidation() {
+
+                    console.log('ri respondent')
+                    console.log(self);
+                    app.on('hasChanges').then(notify);
+
+                    self.respondent().entityAspect.entityManager.validationErrorsChanged.subscribe(function (changeArgs) {
+
+                        console.log('vchanges');
+                        self.canSave(!self.respondent().entityAspect.hasValidationErrors);
+
+                        console.log(self.canSave());
+                    })
+                }
+
+                
+
+                
 
 
             };
+
+            
 
             function notify() {
                 console.log('hasChanges');
@@ -168,7 +218,7 @@
             create: create
         }
 
-        function create() {
-            return new RegisterInterest();
+        function create(resid, refid) {
+            return new RegisterInterest(resid, refid);
         }
 });

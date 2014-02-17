@@ -53,7 +53,8 @@
 							{ route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: false, hash: "#home/articles" },
 							{ route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: false, hash : "#home/help" },
 							{ route: 'home/about',                            moduleId: 'home/about',                        title: 'About CueZero',                       nav: true, hash : "#home/about" },
-							{ route: 'home/contact',                          moduleId: 'home/contact',                      title: 'Get Involved', nav: false, hash: "#home/contact" },
+							{ route: 'home/contact(/:resid)', moduleId: 'home/contact', title: 'Get Involved', nav: true, hash: "#home/contact", disableSignupHeader: true },
+							{route: '', moduleId: 'home/contact', title: 'Get Involved', nav: false },
 							{ route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found', nav: false },
 								
 							// Admin panel url

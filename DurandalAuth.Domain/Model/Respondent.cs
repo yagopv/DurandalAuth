@@ -17,7 +17,7 @@ namespace DurandalAuth.Domain.Model
         public int Id { get; set; }
 
         [StringLength(100)]
-        [Required(ErrorMessage = "Your name is required")]
+        //[Required(ErrorMessage = "Your name is required")]
         [DisplayName("Full Name")]
         [DataMember]
         public string FullName { get; set; }
@@ -33,7 +33,7 @@ namespace DurandalAuth.Domain.Model
         public string EmailAddress { get; set; }
 
         [StringLength(100)]
-        [Required(ErrorMessage = "Your organization is required")]
+       // [Required(ErrorMessage = "Your organization is required")]
 
         [DisplayName("Organization")]
         [DataMember]

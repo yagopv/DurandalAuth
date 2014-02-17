@@ -6,9 +6,9 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
     return {
         convertRouteToHash: router.convertRouteToHash,
         activeScreen: activeScreen,
-        activate: function () {
+        activate: function (resid) {
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
-            var reg = registerInterest.create();
+            var reg = registerInterest.create(resid);
             activeScreen(reg);
 
         },
@@ -16,6 +16,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         }
     };
+
+
 
 
 
