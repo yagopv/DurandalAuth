@@ -133,7 +133,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function tileClick() {
-
+            alert('uaEvent')
             $('.tilect').on('uaEvent', function () {
                 alert('tileclick');
                 $('.tilect').removeClass('tilecthover');
