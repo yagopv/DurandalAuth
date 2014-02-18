@@ -201,7 +201,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             //gets page width to ensure correct animation of tiles
 
             checkResize();
-            alert(uaEvent);
+            //alert(uaEvent);
             //tileHover();
             tileClick();
             tileRefresh();
