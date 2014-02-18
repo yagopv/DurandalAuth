@@ -22,7 +22,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         function setUA() {
             var ua = navigator.userAgent;
-            uaEvent = (ua.match(/iPad/i)) ? "touchstart" : "click";
+            uaEvent = (ua.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) ? "touchstart" : "click";
         }
 
         function uow(refid) {
@@ -133,9 +133,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function tileClick() {
-            alert(uaEvent)
+
             $('.tilect').on(uaEvent, function () {
-                alert('tileclick');
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
 
