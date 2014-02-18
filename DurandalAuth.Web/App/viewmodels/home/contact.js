@@ -133,8 +133,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function tileClick() {
-            alert('uaEvent')
-            $('.tilect').on('uaEvent', function () {
+            alert(uaEvent)
+            $('.tilect').on(uaEvent, function () {
                 alert('tileclick');
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
@@ -143,7 +143,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         }
 
         function tileRefresh() {
-            $('#contact').on('uaEvent', function (e) {
+            $('#contact').on(uaEvent, function (e) {
                 //console.log($(e.target));
                 //console.log($(e.target).hasClass('ti'));
                 if (!$(e.target).hasClass('ti'))
