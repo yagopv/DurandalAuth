@@ -37,31 +37,31 @@
 
 <div class="row">
     <div class="container">
-        <div class="col-md-offset-1"></div>
+        <div class="col-md-1 visible-md visible-lg"></div>
         <!--(div.col-md-2>div.tilect>div.tile + div.tilexp)*5-->
         <div data-bind="foreach: optionArray">
-            <div class="col-md-10 col-lg-2" >
-                <div class="tilect" onclick="" data-bind="css: {chosen: selected}" >
-                    <div class="tile">
-                        <p class="title" data-bind="html: intro"></p>
-                    </div>
-                    <div class="tilexp">
-                        <p class="copy" data-bind="text: spiel"></p>
+   
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="tilect" onclick="" data-bind="css: {chosen: selected}">
+                        <div class="tile">
+                            <p class="title" data-bind="html: intro"></p>
+                        </div>
+                        <div class="tilexp">
+                            <p class="copy" data-bind="text: spiel"></p>
 
-                        <form role="form">
-                            <div class="form-group">
-                                <label class="small" for="exampleInputEmail1">Have anything to add?</label>
-                                <textarea class="form-control" rows="2" data-bind="value: comment" placeholder="Tell us what you most want to see, or want to be least like what you currently do"></textarea>
-                            </div>
-                        </form>
-                        <button class="btn btn-block btn-primary selectedButton">This is me</button>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label class="small" for="exampleInputEmail1">Have anything to add?</label>
+                                    <textarea class="form-control" rows="2" data-bind="value: comment" placeholder="Tell us what you most want to see, or want to be least like what you currently do"></textarea>
+                                </div>
+                            </form>
+                            <button class="btn btn-block btn-primary selectedButton">This is me</button>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
-
 <!--<div class="row">
     <div class="container">
         <ul class="kwicks kwicks-horizontal">
