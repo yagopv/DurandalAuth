@@ -41,7 +41,7 @@
         <!--(div.col-md-2>div.tilect>div.tile + div.tilexp)*5-->
         <div data-bind="foreach: optionArray">
             <div class="col-md-2">
-                <div class="tilect" data-bind="css: {chosen: selected}" >
+                <div class="tilect" onclick="" data-bind="css: {chosen: selected}" >
                     <div class="tile">
                         <p class="title" data-bind="html: intro"></p>
                     </div>
@@ -50,7 +50,7 @@
 
                         <form role="form">
                             <div class="form-group">
-                                <label class="small" for="exampleInputEmail1">Have anything to say?</label>
+                                <label class="small" for="exampleInputEmail1">Have anything to add?</label>
                                 <textarea class="form-control" rows="2" data-bind="value: comment" placeholder="Tell us what you most want to see, or want to be least like what you currently do"></textarea>
                             </div>
                         </form>
