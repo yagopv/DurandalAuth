@@ -125,7 +125,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         function tileClick() {
             $('.tilect').on('click', function () {
-
+                console.log('tileclick');
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
 
