@@ -28,12 +28,46 @@ define(['services/appsecurity', 'services/utils'],
          * param {BreezeManagerMetadataStore} metadataStore - The breeze metadata store
          */
         function extendMetadata(metadataStore) {
+            setupCVFunctions();
+            setupCustomValidation();
             extendArticle(metadataStore);
             extendCategory(metadataStore);
             extendTag(metadataStore);
             extendRespondent(metadataStore);
+            
 
         };
+
+
+        function setupCustomValidation() {
+            var lcEmailValidator =  breeze.Validator.makeRegExpValidator('lcEmailVal',
+                    ///^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/,
+                    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                    'Almost a correct email address...')
+
+                // Register it with the breeze Validator class.
+                breeze.Validator.register(lcEmailValidator);
+        }
+        // Make a zipcode validator
+        
+        
+        function setupCVFunctions() {
+            var emailIsFineValidator = new breeze.Validator(
+       "emailIsFine",              // validator name
+       emailIsFineValidationFn,    // validation function
+       {                           // validator context
+           displayName: "email address",
+           messageTemplate: "Your '%displayName%' is nearly OK..."
+       });
+
+            var emailIsFineValidationFn = function (value) {
+
+                var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                if (value == null) return true; // '== null' matches null and empty string
+                return (re.test(value));
+            };
+        }
+        
 
 
         function extendRespondent(metadataStore) {
@@ -61,7 +95,9 @@ define(['services/appsecurity', 'services/utils'],
                 
                 var validators = emailProperty.validators; // get the property's validator collection
                 //validators.push(Validator.required()); // add a new required validator instance
-                validators.push(breeze.Validator.emailAddress({displayName: "Email Address" })); // add a new email validator instance
+               validators.push(breeze.Validator.emailAddress({ displayName: "email address", message: 'Your email address is nearly valid...' })); // add a new email validator instance
+                //validators.push(breeze.Validator.emailIsFineValidator)
+                
                 //addValidationRules(respondent);
                 //addhasValidationErrorsProperty(respondent);
 

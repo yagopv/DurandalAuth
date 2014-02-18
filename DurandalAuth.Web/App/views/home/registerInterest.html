@@ -26,39 +26,40 @@
         
     </div>
 </div>
-<div class="row">
-    <div class="container">
-        <p class="small">
-            Will you tell us a bit more about your interest in CueZero?  Just hover or select from the tiles below.
-            For each one you can let us know whether <em>This is me</em> and tell us what your most looking for in a feedback tool so we can make it a reality.
-        </p>
+<div data-bind="visible: canSave()">
+    <div class="row">
+        <div class="container">
+            <p class="small">
+                Will you tell us a bit more about your interest in CueZero?  Just hover or select from the tiles below.
+                For each one you can let us know whether <em>This is me</em> and tell us what your most looking for in a feedback tool so we can make it a reality.
+            </p>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="container">
-        <div class="col-md-1 visible-md visible-lg"></div>
-        <!--(div.col-md-2>div.tilect>div.tile + div.tilexp)*5-->
-        <div data-bind="foreach: optionArray">
-   
+    <div class="row">
+        <div class="container">
+            <!--(div.col-md-2>div.tilect>div.tile + div.tilexp)*5-->
+            <div data-bind="foreach: optionArray">
+
                 <div class="col-xs-12 col-sm-12 col-md-2">
-                    <div class="tilect" data-bind="css: {chosen: selected}">
-                        <div class="tile" onclick="">
-                            <p class="title" data-bind="html: intro"></p>
+                    <div class="tilect ti"  data-bind="css: {chosen: selected}">
+                        <div class="tile ti" onclick="">
+                            <p class="title ti" data-bind="html: intro"></p>
                         </div>
-                        <div class="tilexp">
-                            <p class="copy" data-bind="text: spiel"></p>
+                        <div class="tilexp ti">
+                            <p class="copy ti" data-bind="text: spiel"></p>
 
                             <form role="form">
-                                <div class="form-group">
-                                    <label class="small" for="exampleInputEmail1">Have anything to add?</label>
-                                    <textarea class="form-control" rows="2" data-bind="value: comment" placeholder="Tell us what you most want to see, or want to be least like what you currently do"></textarea>
+                                <div class="form-group ti">
+                                    <label class="small ti" for="exampleInputEmail1">Have anything to add?</label>
+                                    <textarea class="form-control ti" rows="2" data-bind="value: comment" placeholder="Tell us what you most want to see, or want to be least like what you currently do"></textarea>
                                 </div>
                             </form>
                             <button class="btn btn-block btn-primary selectedButton">This is me</button>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

@@ -494,7 +494,7 @@ label.bigWhite {
 
 .tilect {
     padding: 5px;
-    margin: 2px;
+    margin: 2px,1px,2px,1px;
     background-color: #272727;
     opacity: 0.7;
     position: relative;
@@ -539,25 +539,49 @@ label.bigWhite {
     font-size: 13px;
 }
 
-.tilect:hover {
+/*.tilect:hover {
+	opacity: 1;
+	z-index: 1000;
+	
+
+}
+*/
+.tilecthover {
     opacity: 1;
     z-index: 1000;
 }
 
 @media only screen and (min-width: 992px) {
-    .tilect:hover {
-        top: -200px;
+    /*.tilect:hover{
+		top: -200px;
+	left: -10px;
+	width: 200%;
+	height: 100%;
+	}
+*/
+    .tilecthover {
+        top: -100px;
         left: -10px;
         width: 200%;
         height: 100%;
     }
 }
 
-.tilect:hover .tilexp {
+/*.tilect:hover .tilexp {
+		display:block;
+		visibility: visible;
+	}
+
+
+	.tilect:hover .tile {
+		position: relative;
+	}
+*/
+.tilecthover .tilexp {
     display: block;
     visibility: visible;
 }
 
-.tilect:hover .tile {
+.tilecthover .tile {
     position: relative;
 }
