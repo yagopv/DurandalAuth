@@ -201,7 +201,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             //gets page width to ensure correct animation of tiles
 
             checkResize();
-
+            alert(uaEvent);
             //tileHover();
             tileClick();
             tileRefresh();
@@ -236,7 +236,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
                 comment: ko.observable()
             }, {
                 option: 2,
-                intro: 'Consider me for the the private beta group',
+                intro: 'Consider me for the private beta group',
                 spiel: 'Welcome, CueHero! We’re glad to have you on board. We’re busy building at the moment, so we may be a little quiet, but when we’re ready to share CueZero you will be the FIRST to know about it. ',
                 selected: ko.observable(false),
                 comment: ko.observable()
