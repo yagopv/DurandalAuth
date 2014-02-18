@@ -8,7 +8,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
     var unitOfWork = '';
     var oldWidth = '';
     var oldHeight = '';
-    var viewportWidth = '';
+    var viewportWidth = ko.observable('');
 
     var self = this;
 
@@ -95,9 +95,9 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
     function checkResize() {
 
-        viewportWidth = $(window).width();
+        viewportWidth($(window).width());
         $(window).resize(function () {
-            viewportWidth = $(window).width();
+            viewportWidth($(window).width());
         });
     }
 
@@ -105,7 +105,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         $('.tilect').hover(function () {
             ko.dataFor(this).oldWidth = $(this).width();
             ko.dataFor(this).oldheight = $(this).height();
-            if (viewportWidth < 3760) {
+            if (viewportWidth() < 3760) {
 
             }
             else {
@@ -123,7 +123,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         },
         function () {
-            if (viewportWidth < 3760) {
+            if (viewportWidth() < 3760) {
 
             }
             else {
@@ -221,7 +221,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         canSave: canSave,
         messageEmail: messageEmail,
         deactivate: deactivate,
-        optionArray: optionArray
+        optionArray: optionArray,
+        viewportWidth: viewportWidth
     }
 
 
