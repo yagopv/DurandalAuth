@@ -10,6 +10,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         var oldHeight = '';
         var viewportWidth = ko.observable('');
         var optionCollectionVisible = ko.observable();
+        var uaEvent = '';
 
         var self = this;
 
@@ -17,6 +18,11 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         var forceLower = function(strInput) {
             strInput.value = strInput.value.toLowerCase();
+        }
+
+        function setUA() {
+            var ua = navigator.userAgent;
+            uaEvent = (ua.match(/iPad/i)) ? "touchstart" : "click";
         }
 
         function uow(refid) {
@@ -103,6 +109,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             unitOfWork = uow(refid);
             console.log('get respondent')
             getRespondent(resid);
+            setUA();
            // respondent().emailAddress().extend({lowerCase: 'ace'})
             //respondent().emailAddress.subscribe(function (newValue) {
             //    console.log(newValue);
@@ -123,8 +130,11 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             });
         }
 
+
+
         function tileClick() {
-            $('.tilect').on('click', function () {
+
+            $('.tilect').on('uaEvent', function () {
                 alert('tileclick');
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
@@ -133,7 +143,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         }
 
         function tileRefresh() {
-            $('#contact').on('click', function (e) {
+            $('#contact').on('uaEvent', function (e) {
                 //console.log($(e.target));
                 //console.log($(e.target).hasClass('ti'));
                 if (!$(e.target).hasClass('ti'))
