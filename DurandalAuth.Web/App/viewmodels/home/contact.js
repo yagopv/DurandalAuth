@@ -21,8 +21,10 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         }
 
         function setUA() {
+ 
             var ua = navigator.userAgent;
-            uaEvent = (ua.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) ? "touchstart" : "click";
+            uaEvent = (ua.match(/iPad/i) || ua.match(/iPhone/i)) ? "touchstart" : "click";
+            alert(uaEvent);
         }
 
         function uow(refid) {
@@ -183,6 +185,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         function updateSelected() {
             $('.selectedButton').on('click', function () {
+                alert('selected');
                 ko.dataFor(this).selected(true);
                 $(this).closest('.tilect').removeClass('tilecthover');
                 // event.stopImmediatePropagation();
