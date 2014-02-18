@@ -8,6 +8,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
     var unitOfWork = '';
     var oldWidth = '';
     var oldHeight = '';
+    var viewportWidth = '';
 
     var self = this;
 
@@ -77,88 +78,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
     }
 
-    function foldInit() {
-
-        var opened = false;
-
-        $('#foldrow > div > div.uc-container').each(function (i) {
-
-            var $item = $(this), direction;
-
-            switch (i) {
-                case 0: direction = ['right', 'bottom']; break;
-                case 1: direction = ['left', 'bottom']; break;
-                case 2: direction = ['right', 'top']; break;
-                case 3: direction = ['left', 'top']; break;
-            }
-
-
-            var pfold = $item.pfold({
-                folddirection: direction,
-                speed: 300,
-                onEndFolding: function () {
-                    opened = false;
-                    $item.data('opened', false)
-                },
-            });
-
-
-            $item.data('opened', false);
-
-            $item.find('.unfold').on('click', function () {
-                console.log('monkey')
-                if (!$item.data('opened')) {
-                    //if (!opened) {
-                    console.log('unfold')
-
-                    //$item.siblings().each(function (i) {
-                    $('#foldrow > div > div.uc-container').each(function (i) {
-
-                        var $newitem = $(this), direction;
-
-                        switch (i) {
-                            case 0: direction = ['right', 'bottom']; break;
-                            case 1: direction = ['left', 'bottom']; break;
-                            case 2: direction = ['right', 'top']; break;
-                            case 3: direction = ['left', 'top']; break;
-                        }
-
-                        if ($(this).data('opened')) {
-                            console.log(this);
-
-                            var thispfold = $newitem.pfold({
-                                folddirection: ['right', 'bottom'],
-                                speed: 300,
-                                onEndFolding: function () {
-                                    opened = false;
-                                    $newitem.data('opened', false)
-                                },
-                            })
-
-                            thispfold.fold();
-                        }
-                    })
-
-
-                    //opened = true;
-                    pfold.unfold();
-                    $item.data('opened', true);
-
-                }
-                else {
-                    alert('fold')
-                    pfold.fold();
-                }
-
-
-            }).end().find('.fold').on('click', function () {
-
-                pfold.fold();
-
-            });
-        })
-
-    };
+    
 
 
     function activate(resid, refid) {
@@ -173,35 +93,75 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
     }
 
+    function checkResize() {
+
+        viewportWidth = $(window).width();
+        $(window).resize(function () {
+            viewportWidth = $(window).width();
+        });
+    }
+
+    function tileHover() {
+        $('.tilect').hover(function () {
+            ko.dataFor(this).oldWidth = $(this).width();
+            ko.dataFor(this).oldheight = $(this).height();
+            if (viewportWidth < 3760) {
+
+            }
+            else {
+                $(this).stop(false,true).animate({
+                    width: 300,
+                    //height: 400,
+                    top: -40,
+                    left: -15
+                }, 25);
+                $(this).css({ zIndex: 1000 });
+                console.log('hover');
+
+            }
+
+
+        },
+        function () {
+            if (viewportWidth < 3760) {
+
+            }
+            else {
+                $(this).stop(false,true).animate({
+                    width: ko.dataFor(this).oldWidth,
+                    height: ko.dataFor(this).oldheight,
+                    top: 0,
+                    left: 0
+                }, 25);
+                $(this).css({ zIndex: 1 });
+                console.log('unhover')
+                console.log($(this).width())
+                console.log($(this).height())
+            }
+        });
+    }
+
+    function updateSelected(){
+        $('.selectedButton').on('click', function () {
+            ko.dataFor(this).selected(true);
+            //console.log(ko.dataFor(this));
+        })
+    }
+
     function attached() {
         //foldInit();
         //$('.kwicks').kwicks({
         //    maxSize: '50%',
         //    behavior: 'menu'
         //})
-        $('.tilect').hover(function () {
 
-            oldwidth = $(this).width();
-            oldheight = $(this).height();
-            $(this).animate({
-                width: 300,
-                height: 400,
-                top: -80,
-                left: -45
-            }, 'fast');
-            $(this).css({ zIndex: 1000 });
-            console.log('hoveron')
-        },
-        function () {
-            $(this).animate({
-                width: oldwidth,
-                height: oldheight,
-                top: 0,
-                left: 0
-            }, 'fast');
-            $(this).css({ zIndex: 1 });
-            console.log('hoveroff')
-        });
+        //gets page width to ensure correct animation of tiles
+
+        checkResize();
+
+        tileHover();
+
+        updateSelected();
 
     }
 
@@ -215,28 +175,39 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         
     }
 
-    var optionArray = [
-        {option: 1,
-        intro: 'Not sure, just curious',
-        spiel: 'We’re glad to have you here! We’ll keep you informed about CueZero as the launch date approaches and you’ll be the first to get a sneak peek before its official release.'
-        },{
+    var optionArray = ko.observableArray([
+        {
+            option: 1,
+            intro: 'Not sure, just curious',
+            spiel: 'We’re glad to have you here! We’ll keep you informed about CueZero as the launch date approaches and you’ll be the first to get a sneak peek before its official release.',
+            selected: ko.observable(false),
+            comment: ko.observable()
+        }, {
             option: 2,
             intro: 'I’m interested in being part of the private beta group',
-            spiel: 'Welcome, CueHero! We’re glad to have you on board. We’re busy building at the moment, so we may be a little quiet, but when we’re ready to share CueZero you will be the FIRST to know about it. '
-        },{
+            spiel: 'Welcome, CueHero! We’re glad to have you on board. We’re busy building at the moment, so we may be a little quiet, but when we’re ready to share CueZero you will be the FIRST to know about it. ',
+            selected: ko.observable(false),
+            comment: ko.observable()
+        }, {
             option: 3,
             intro: 'I’m interested in exploring an alternative to our current staff survey',
-            spiel: 'We’re on a mission to make this a reality. We’ll keep you informed about our progress along the way and you’ll be the first to know about CueZero as it nears its release. Your survey’s days are numbered.'
-        },{
+            spiel: 'We’re on a mission to make this a reality. We’ll keep you informed about our progress along the way and you’ll be the first to know about CueZero as it nears its release. Your survey’s days are numbered.',
+            selected: ko.observable(false),
+            comment: ko.observable()
+        }, {
             option: 4,
             intro: 'I’m interested in a tool that helps us continuously improve',
-            spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.'
-        },{
+            spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.',
+            selected: ko.observable(false),
+            comment: ko.observable()
+        }, {
             option: 5,
             intro: 'I’m interested in a tool for tracking performance or leadership development',
-            spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.'
+            spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.',
+            selected: ko.observable(false),
+            comment: ko.observable()
         }
-    ]
+    ]);
 
 
 

@@ -57,6 +57,12 @@ h3, h4 .featureTitle {
 	color: @cz-white;
 }
 
+.jumbotron.transparent.small {
+	background: none;
+	color: @cz-white;
+    font-size: @font-family-base;
+}
+
 
 .withBackground {
 	background-color: @cz-aqua;
@@ -203,7 +209,7 @@ h3, h4 .featureTitle {
 		color: @cz-gunmetal;
 	}
 }
-   
+
 
 /*@media only screen 
 and (min-device-width : 768px) 
@@ -226,32 +232,30 @@ and (-webkit-min-device-pixel-ratio: 2){
 }*/
 
 
-   @media only screen and (min-width:@screen-sm-min ) and (min-device-width: @screen-sm-min) {
+@media only screen and (min-width:@screen-sm-min ) and (min-device-width: @screen-sm-min) {
 	.signupinput {
 		min-width: 200px;
 		max-width: 350px;
 	}
 }
 
-	 @media only screen and (min-width:@screen-md-min) and (min-device-width:@screen-md-min){
-	   .signupinput{
- min-width: 200px;
- max-width:400px;
+@media only screen and (min-width:@screen-md-min) and (min-device-width:@screen-md-min) {
+	.signupinput {
+		min-width: 200px;
+		max-width: 400px;
 	}
+}
+//770 to 990 reverst to full-sized!
 
-   }
-	 //770 to 990 reverst to full-sized!
 
-
-   @media only screen and (min-width:@screen-lg-min) and (min-device-width:@screen-lg-min){
-	   .signupinput{
- min-width: 400px;
- max-width: 400px;
+@media only screen and (min-width:@screen-lg-min) and (min-device-width:@screen-lg-min) {
+	.signupinput {
+		min-width: 400px;
+		max-width: 400px;
 	}
+}
 
-   }
 
- 
 
 
 
@@ -467,71 +471,127 @@ label.bigWhite {
 	animation-delay: 0s;
 }
 
-.kwicks{
+.kwicks {
 	width: 100%;
 	height: 300px;
 }
 
-.kwicks > li{
-	//height: 40px;
-	//width: 100%;
-	//margin-top: 5px;
-	margin-left: 5px;
-	float: left;
-}
+	.kwicks > li {
+		//height: 40px;
+		//width: 100%;
+		//margin-top: 5px;
+		margin-left: 5px;
+		float: left;
+	}
 
-#panel-1{
-	background-color: @cz-gunmetal;
-}
-#panel-2{
-	background-color: @cz-gunmetal;
-}
-#panel-3{
-	background-color: @cz-gunmetal;
-}
-#panel-4{
-	background-color: @cz-gunmetal;
-}
-#panel-5{
+#panel-1 {
 	background-color: @cz-gunmetal;
 }
 
-.tencolumn .span1 {width: 7.6923076923076925%;
-  *width: 7.628205128205129%;}
-.fivecolumn .span2 {width: 17.94871794871795%;
-  *width: 17.884615384615383%;}
+#panel-2 {
+	background-color: @cz-gunmetal;
+}
+
+#panel-3 {
+	background-color: @cz-gunmetal;
+}
+
+#panel-4 {
+	background-color: @cz-gunmetal;
+}
+
+#panel-5 {
+	background-color: @cz-gunmetal;
+}
+
+.tencolumn .span1 {
+	width: 7.6923076923076925%;
+	*width: 7.628205128205129%;
+}
+
+.fivecolumn .span2 {
+	width: 17.94871794871795%;
+	*width: 17.884615384615383%;
+}
 
 
-.tilect{
+.tilect {
 	padding: 5px;
-	margin: 5px;
+	margin: 2px;
 	background-color: @cz-gunmetal;
-    position: relative;
-}
-.tile{
-    position: relative;
-}
-
-.tilexp{
-	//display: none;
-	visibility: hidden;
-    .copy{
-        font-size: @font-size-base;
-    }
-	
-}
-.tilect:hover{
-
-}
-
-.tilect:hover .tilexp{
-	//display:block;
-	visibility: visible;
-}
-
-.tilect:hover .tile{
+	opacity: 0.7;
 	position: relative;
+	width: 100%;
+	border-radius: 5px;
+   
+   top: 0px;
+   left: 0px;
+   z-index: 1;
+   .chosen{
+       
+   }
 }
+
+@media only screen and (max-width:@screen-sm-max ) and (min-device-width: @screen-sm-max) {
+    .tilect{
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width:@screen-md-min ) and (min-device-width: @screen-md-min) {
+    .tilect{
+        height: 100px;
+    }
+}
+
+
+.chosen{
+    background-color: @cz-aqua;
+}
+
+
+.tile {
+	position: relative;
+
+	.title {
+		font-size: @font-size-base;
+		font-weight: bold;
+	}
+}
+
+.tilexp {
+	display: none;
+	visibility: hidden;
+
+	.copy {
+		font-size: @font-size-base;
+	}
+}
+
+.tilect:hover {
+	opacity: 1;
+    z-index: 1000;
+    
+
+}
+
+@media only screen and (min-width:@screen-md-min ) and (min-device-width: @screen-md-min) {
+    .tilect:hover{
+        top: -200px;
+    left: -10px;
+    width: 150%;
+    height: 100%;
+    }
+}
+
+	.tilect:hover .tilexp {
+		display:block;
+		visibility: visible;
+	}
+
+	.tilect:hover .tile {
+		position: relative;
+	}
 
 
 

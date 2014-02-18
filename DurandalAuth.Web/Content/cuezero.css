@@ -55,6 +55,12 @@ h4 .featureTitle {
     color: #ffffff;
 }
 
+.jumbotron.transparent.small {
+    background: none;
+    color: #ffffff;
+    font-size: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+}
+
 .withBackground {
     background-color: #9fdbff;
 }
@@ -488,16 +494,44 @@ label.bigWhite {
 
 .tilect {
     padding: 5px;
-    margin: 5px;
+    margin: 2px;
     background-color: #272727;
+    opacity: 0.7;
     position: relative;
+    width: 100%;
+    border-radius: 5px;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 991px) and (min-device-width: 991px) {
+    .tilect {
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (min-device-width: 992px) {
+    .tilect {
+        height: 100px;
+    }
+}
+
+.chosen {
+    background-color: #9fdbff;
 }
 
 .tile {
     position: relative;
 }
 
+.tile .title {
+    font-size: 13px;
+    font-weight: bold;
+}
+
 .tilexp {
+    display: none;
     visibility: hidden;
 }
 
@@ -505,7 +539,22 @@ label.bigWhite {
     font-size: 13px;
 }
 
+.tilect:hover {
+    opacity: 1;
+    z-index: 1000;
+}
+
+@media only screen and (min-width: 992px) and (min-device-width: 992px) {
+    .tilect:hover {
+        top: -200px;
+        left: -10px;
+        width: 150%;
+        height: 100%;
+    }
+}
+
 .tilect:hover .tilexp {
+    display: block;
     visibility: visible;
 }
 
