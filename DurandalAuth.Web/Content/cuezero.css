@@ -505,13 +505,13 @@ label.bigWhite {
     z-index: 1;
 }
 
-@media only screen and (max-width: 991px) and (min-device-width: 991px) {
+@media only screen and (max-width: 1199px) and (min-device-width: 1199px) {
     .tilect {
         height: 100%;
     }
 }
 
-@media only screen and (min-width: 992px) and (min-device-width: 992px) {
+@media only screen and (min-width: 1200px) and (min-device-width: 1200px) {
     .tilect {
         height: 100px;
     }
@@ -544,7 +544,7 @@ label.bigWhite {
     z-index: 1000;
 }
 
-@media only screen and (min-width: 992px) and (min-device-width: 992px) {
+@media only screen and (min-width: 1200px) and (min-device-width: 1200px) {
     .tilect:hover {
         top: -200px;
         left: -10px;
