@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../Scripts/jquery.pfold.js" />
-define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhandler', 'services/unitofwork', 'services/customBindings', 'durandal/app'],
-    function (router, registerInterest, errorHandler, unitofwork, customBindings, app) {
+define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header','services/errorhandler', 'services/unitofwork', 'services/customBindings', 'durandal/app'],
+    function (router, registerInterest, header, errorHandler, unitofwork, customBindings, app) {
         //var activeScreen = ko.observable();
         var respondent = ko.observable();
         var canSave = ko.observable();
@@ -16,9 +16,9 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         errorHandler.includeIn(this);
 
-        var forceLower = function(strInput) {
-            strInput.value = strInput.value.toLowerCase();
-        }
+        //var forceLower = function(strInput) {
+        //    strInput.value = strInput.value.toLowerCase();
+        //}
 
         function setUA() {
  
@@ -40,36 +40,42 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         }
 
-        function getRespondent(resid) {
-            if (!resid) {
+        function getRespondent(emailAddress) {
+            if (!emailAddress) {
 
                 respondent(unitOfWork.respondents.create());
                 wireupValidation();
+                canSave(false);
 
             }
             else {
-                unitOfWork.respondents.withId(resid).then(
-                    function (data) {
-                        console.log('data from query')
-                        console.log(data)
-                        respondent(data);
-                        messageEmail(data.emailAddress());
-                    }
-                    ).then(function () {
-                        console.log('wiring up');
-                        console.log(respondent())
-                        wireupValidation();
-                    }
+                respondent(unitOfWork.respondents.create());
+                respondent().emailAddress(emailAddress);
+                wireupValidation();
 
-                    ).fail(
-                    function () {
-                        respondent(unitOfWork.respondents.create());
-                        wireupValidation();
-                    }
-                    );
+                //unitOfWork.respondents.withId(resid).then(
+                //    function (data) {
+                //        console.log('data from query')
+                //        console.log(data)
+                //        respondent(data);
+                //        messageEmail(data.emailAddress());
+                //    }
+                //    ).then(function () {
+                //        console.log('wiring up');
+                //        console.log(respondent())
+                //        wireupValidation();
+                //    }
 
-                console.log('hasfound')
+                //    ).fail(
+                //    function () {
+                //        respondent(unitOfWork.respondents.create());
+                //        wireupValidation();
+                //    }
+                //    );
+
+                //console.log('hasfound')
             }
+            console.log(respondent())
         }
 
         function wireupValidation() {
@@ -77,6 +83,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             console.log('ri respondent')
             console.log(respondent())
             app.on('hasChanges').then(notify);
+            canSave(!respondent().entityAspect.hasValidationErrors);
 
             respondent().entityAspect.entityManager.validationErrorsChanged.subscribe(function (changeArgs) {
 
@@ -102,15 +109,30 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
 
-        function activate(resid, refid) {
+        function activate(emailAddress) {
 
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
             //var reg = registerInterest.create(resid);
             //activeScreen(reg);
             console.log('get unitofwork')
-            unitOfWork = uow(refid);
+            unitOfWork = uow();
             console.log('get respondent')
-            getRespondent(resid);
+
+            if (!respondent()) {
+                getRespondent(emailAddress);
+            }
+            else
+            {
+                if (respondent() && !respondent().emailAddress() && emailAddress) {
+                    respondent().emailAddress(emailAddress);
+                }
+                else
+                {
+                    
+                }
+
+            }
+            
             setUA();
            // respondent().emailAddress().extend({lowerCase: 'ace'})
             //respondent().emailAddress.subscribe(function (newValue) {
@@ -159,28 +181,12 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             })
         }
 
-        function tileHover() {
-            $('.tilect').hover(function () {
-                ko.dataFor(this).oldWidth = $(this).width();
-                ko.dataFor(this).oldheight = $(this).height();
-                if (viewportWidth() < 12) {
-
-                }
-                else {
-                    $(this).toggleClass('tilecthover');
-
-                }
-
-
-            },
-            function () {
-                if (viewportWidth() < 12) {
-
-                }
-                else {
-                    $(this).toggleClass('tilecthover');
-                }
-            });
+        function signUp() {
+            unitOfWork.commit().then(
+                function () {
+                    header.signupOff(true);
+                })
+            .fail(self.handleError).done(router.navigateBack)
         }
 
         function updateSelected() {
@@ -210,11 +216,6 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function attached() {
-            //foldInit();
-            //$('.kwicks').kwicks({
-            //    maxSize: '50%',
-            //    behavior: 'menu'
-            //})
 
             //gets page width to ensure correct animation of tiles
 
@@ -227,8 +228,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         }
 
-        function deactivate() {
-
+        function canDeactivate() {
             unitOfWork.commit().then(
                 function () {
                     console.log('saved')
@@ -236,12 +236,19 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
                 )
             .fail(
                 function () {
-                    unitOfWork.respondents.detach(respondent());
-                    respondent();
+                    unitOfWork.respondents.delete(respondent());
+                    respondent(null);
+                    console.log('failed to save')
                     self.handleError;
                 }
 
                 )
+            return true;
+        }
+
+        function deactivate() {
+
+            
 
         }
 
@@ -300,7 +307,9 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
             deactivate: deactivate,
             optionArray: optionArray,
             viewportWidth: viewportWidth,
-            optionCollectionVisible: optionCollectionVisible
+            optionCollectionVisible: optionCollectionVisible,
+            canDeactivate: canDeactivate,
+            signUp: signUp
         }
 
 

@@ -53,7 +53,7 @@
 							{ route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: false, hash: "#home/articles" },
 							{ route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: false, hash : "#home/help" },
 							
-							{ route: 'home/contact(/:resid)', moduleId: 'home/contact', title: 'Get Involved', nav: true, hash: "#home/contact", disableSignupHeader: true },
+							{ route: 'home/contact(/:emailAddress)', moduleId: 'home/contact', title: 'Get Involved', nav: true, hash: "#home/contact", disableSignupHeader: true },
 							{ route: 'home/about', moduleId: 'home/about', title: 'About CueZero', nav: true, hash: "#home/about" },
 							{route: '', moduleId: 'home/contact', title: 'Get Involved', nav: false },
 							{ route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found', nav: false },
