@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DurandalAuth.Domain.Model
 {
     [DataContract(IsReference = true)]
-    public class Respondent
+    public class Respondent : AuditInfoComplete
     {
         [Key]
         [DataMember]

@@ -34,7 +34,7 @@ define(['services/appsecurity', 'services/utils'],
             extendCategory(metadataStore);
             extendTag(metadataStore);
             extendRespondent(metadataStore);
-            
+            extendRespondentComment(metadataStore);
 
         };
 
@@ -67,6 +67,26 @@ define(['services/appsecurity', 'services/utils'],
                 return (re.test(value));
             };
         }
+
+        function extendRespondentComment(metadataStore) {
+            var respondentCommentCtor = function () {
+
+            }
+            respondentCommentCtor.prototype.addRespondentComment = function (iRespondentId, iOption, iComment) {
+                var respondentComment = this.entityAspect.entityManager.createEntity('Respondent',
+                    { option: iOption, comment: iComment, respondentId: iRespondentId });
+                return respondentComment;
+            }
+
+            respondentCommentCtor.prototype.deleteRespondentComment = function (respondentComment) {
+                ensureEntityType(respondentComment, 'RespondentComment');
+                this.throwIfNotOwnerOf(respondentComment);
+
+                respondentComment.entityAspect.setDeleted();
+            };
+
+            metadataStore.registerEntityTypeCtor('RespondentComment', respondentCommentCtor, null);
+        }
         
 
 
@@ -77,6 +97,12 @@ define(['services/appsecurity', 'services/utils'],
             respondentCtor.prototype.addRespondent = function (ifullName, iemailAddress, iorganisation) {
                 var respondent = this.entityAspect.entityManager.createEntity('Respondent', { fullName: ifullName, emailAddress: iemailAddress, organisation: iOrganisation });
                 return respondent;
+            }
+
+            respondentCtor.prototype.addRespondentComment = function (iRespondent, iOption, iComment) {
+                var respondentComment = this.entityAspect.entityManager.createEntity('RespondentComment',
+                    { option: iOption, comment: iComment, respondent: iRespondent });
+                return respondentComment;
             }
 
             respondentCtor.prototype.deleteRespondent = function (respondent) {

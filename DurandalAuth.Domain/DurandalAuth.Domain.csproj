@@ -68,6 +68,7 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Extensions.cs" />
     <Compile Include="Model\Respondent.cs" />
+    <Compile Include="Model\RespondentComment.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,6 +55,7 @@ define(['services/entitymanagerprovider', 'services/repository','services/privat
 				this.publicarticles = publicarticlerepository.create(provider, "Article", routeconfig.publicArticlesUrl);
 				this.categories = repository.create(provider, "Category", routeconfig.categoriesUrl, breeze.FetchStrategy.FromLocalCache);
 				this.respondents = repository.create(provider, "Respondent", routeconfig.respondentsUrl);
+				this.respondentComments = repository.create(provider, "RespondentComment", routeconfig.respondentCommentsUrl);
 
 			};
 

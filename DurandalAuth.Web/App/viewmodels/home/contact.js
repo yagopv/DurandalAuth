@@ -11,6 +11,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
         var viewportWidth = ko.observable('');
         var optionCollectionVisible = ko.observable();
         var uaEvent = '';
+        var signUpButtonMessage = ko.observable('Sign Up');
 
         var self = this;
 
@@ -105,10 +106,6 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
 
         }
 
-
-
-
-
         function activate(emailAddress) {
 
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
@@ -134,6 +131,10 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             }
             
             setUA();
+
+
+          
+
            // respondent().emailAddress().extend({lowerCase: 'ace'})
             //respondent().emailAddress.subscribe(function (newValue) {
             //    console.log(newValue);
@@ -154,15 +155,26 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             });
         }
 
-
-
         function tileClick() {
-           
-            $('.tilect').on(uaEvent, function () {
+            console.log('tileeventhandlerloaded')
+
+            //$('.tilect').each(
+            //    function (index) {
+            //        console.log(index + ": " + $(this).text());
+            //    })
+            //$('.tilect').on(uaEvent, '.tilect', function () {
+            //    $('.tilect').removeClass('tilecthover');
+            //    $(this).addClass('tilecthover');
+            //    console.log('tilect' + uaEvent)
+            //})
+
+            $('#optionTiles').on(uaEvent, '.tilect', function () {
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
                 console.log('tilect' + uaEvent)
             })
+
+
         }
 
         function tileRefresh() {
@@ -181,12 +193,31 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             })
         }
 
+        function clearOutRespondent() {
+            if(unitOfWork && respondent())
+            {
+                unitOfWork.respondents.detach(respondent());
+                respondent(null);
+                clearOptions();
+            }
+        }
+
         function signUp() {
             unitOfWork.commit().then(
                 function () {
                     header.signupOff(true);
+                    signUpButtonMessage('You\'ve signed up');
                 })
-            .fail(self.handleError).done(router.navigateBack)
+            .fail(
+            function () {
+                clearOutRespondent()
+                //console.log('failed to save')
+                self.handleError;
+            }
+
+            ).done(
+            //router.navigate('#home/index')
+            )
         }
 
         function updateSelected() {
@@ -195,7 +226,12 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 var el = this;
                 var $el = $(el);
 
-                ko.dataFor(el).selected(true);
+                var elData = ko.dataFor(el)
+
+                elData.selected(true);
+
+                console.log(respondent().addRespondentComment(respondent(), elData.option, elData.comment()));
+
                 $el.closest('.tilect').removeClass('tilecthover');
                 // event.stopImmediatePropagation
                 e.stopImmediatePropagation();
@@ -214,18 +250,21 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             })
         }
 
-
         function attached() {
-
+           // console.log('contacts attached')
             //gets page width to ensure correct animation of tiles
-
             checkResize();
             //alert(uaEvent);
             //tileHover();
+            
+
+        }
+
+        function compositionComplete() {
+           // console.log('compcomplete')
             tileClick();
             tileRefresh();
             updateSelected();
-
         }
 
         function canDeactivate() {
@@ -236,9 +275,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 )
             .fail(
                 function () {
-                    unitOfWork.respondents.delete(respondent());
-                    respondent(null);
-                    console.log('failed to save')
+                    clearOutRespondent()
+                    //console.log('failed to save')
                     self.handleError;
                 }
 
@@ -246,9 +284,10 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             return true;
         }
 
-        function deactivate() {
-
-            
+        function clearOptions() {
+            ko.utils.arrayForEach(optionArray(), function (item) {
+                item.selected(false);
+            });
 
         }
 
@@ -293,9 +332,6 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             }
         ]);
 
-
-
-
         var vm = {
             convertRouteToHash: router.convertRouteToHash,
             //activeScreen: activeScreen,
@@ -304,17 +340,15 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             respondent: respondent,
             canSave: canSave,
             messageEmail: messageEmail,
-            deactivate: deactivate,
             optionArray: optionArray,
             viewportWidth: viewportWidth,
             optionCollectionVisible: optionCollectionVisible,
             canDeactivate: canDeactivate,
-            signUp: signUp
+            signUp: signUp,
+            compositionComplete: compositionComplete,
+            signUpButtonMessage: signUpButtonMessage
         }
 
-
-
         return vm;
-
 
     });

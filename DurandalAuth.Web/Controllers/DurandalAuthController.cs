@@ -64,6 +64,17 @@ namespace DurandalAuth.Web.Controllers
             throw new HttpResponseException(System.Net.HttpStatusCode.Unauthorized);  
         }
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IQueryable<RespondentComment> RespondentComments()
+        {
+            if (User.IsInRole("User"))
+            {
+                return UnitOfWork.RespondentCommentRepository.All();
+            }
+            throw new HttpResponseException(System.Net.HttpStatusCode.Unauthorized);
+        }
+
         /// <summary>
         /// Save changes to data store
         /// </summary>
