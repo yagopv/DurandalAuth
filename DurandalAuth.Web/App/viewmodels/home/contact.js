@@ -24,7 +24,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
  
             var ua = navigator.userAgent;
             uaEvent = (ua.match(/iPad/i) || ua.match(/iPhone/i)) ? "touchstart" : "click";
-            alert(uaEvent);
+            console.log(uaEvent);
         }
 
         function uow(refid) {
@@ -135,7 +135,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function tileClick() {
-
+            console.log('tilect' + uaEvent)
             $('.tilect').on(uaEvent, function () {
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
@@ -185,7 +185,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
         function updateSelected() {
             $('.selectedButton').on('click', function () {
-                alert('selected');
+                console.log('selected');
                 ko.dataFor(this).selected(true);
                 $(this).closest('.tilect').removeClass('tilecthover');
                 // event.stopImmediatePropagation();
