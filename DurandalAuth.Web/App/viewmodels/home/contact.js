@@ -135,11 +135,11 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
 
 
         function tileClick() {
-            console.log('tilect' + uaEvent)
+           
             $('.tilect').on(uaEvent, function () {
                 $('.tilect').removeClass('tilecthover');
                 $(this).addClass('tilecthover');
-
+                console.log('tilect' + uaEvent)
             })
         }
 
@@ -184,12 +184,27 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'services/errorhan
         }
 
         function updateSelected() {
-            $('.selectedButton').on('click', function () {
+            $('.selectedButton').on('click', function (e) {
                 console.log('selected');
-                ko.dataFor(this).selected(true);
-                $(this).closest('.tilect').removeClass('tilecthover');
-                // event.stopImmediatePropagation();
-                //console.log(ko.dataFor(this));
+                var el = this;
+                var $el = $(el);
+
+                ko.dataFor(el).selected(true);
+                $el.closest('.tilect').removeClass('tilecthover');
+                // event.stopImmediatePropagation
+                e.stopImmediatePropagation();
+
+            })
+            $('.unselectedButton').on('click', function (e) {
+                var el = this;
+                var $el = $(el);
+                console.log('unselected');
+                ko.dataFor(el).selected(false);
+                $el.closest('.tilect').removeClass('tilecthover');
+                // 
+                //console.log($el.closest('.tilect'));
+                //console.log($el.closest('.tilect').attr("class"));
+                e.stopImmediatePropagation();
             })
         }
 
