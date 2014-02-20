@@ -11,7 +11,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
         var viewportWidth = ko.observable('');
         var optionCollectionVisible = ko.observable();
         var uaEvent = '';
-        var signUpButtonMessage = ko.observable('Sign Up');
+        var signUpButtonMessage = ko.observable('Connect with CueZero');
 
         var self = this;
 
@@ -169,8 +169,24 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             //})
 
             $('#optionTiles').on(uaEvent, '.tilect', function () {
-                $('.tilect').removeClass('tilecthover');
-                $(this).addClass('tilecthover');
+                var el = this;
+                var $allTiles = $('.tilect');
+                var $el = $(el);
+                var data = ko.dataFor(el);
+                console.log('data');
+                console.log(data);
+                $allTiles.removeClass('tilecthoverleft');
+                $allTiles.removeClass('tilecthoverright');
+                $allTiles.removeClass('tilecthover');
+                $el.addClass('tilecthover');
+
+                if (data.orient == 'left') {
+                    $el.addClass('tilecthoverleft');
+                }
+                else {
+                    $allTiles.removeClass('tilecthoverright');
+                }
+                
                 console.log('tilect' + uaEvent)
             })
 
@@ -184,6 +200,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 if (!$(e.target).hasClass('ti'))
                 {
                     $('.tilect').removeClass('tilecthover');
+                    $('.tilect').removeClass('tilecthoverleft');
+                    $('.tilect').removeClass('tilecthoverright');
                 }
                 else {
 
@@ -199,6 +217,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 unitOfWork.respondents.detach(respondent());
                 respondent(null);
                 clearOptions();
+                signUpButtonMessage('Connect')
             }
         }
 
@@ -206,7 +225,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             unitOfWork.commit().then(
                 function () {
                     header.signupOff(true);
-                    signUpButtonMessage('You\'ve signed up');
+                    signUpButtonMessage('Your connected, thanks');
                 })
             .fail(
             function () {
@@ -225,27 +244,34 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 console.log('selected');
                 var el = this;
                 var $el = $(el);
+                var $closest = $el.closest('.tilect')
 
                 var elData = ko.dataFor(el)
 
                 elData.selected(true);
+                
 
                 console.log(respondent().addRespondentComment(respondent(), elData.option, elData.comment()));
 
-                $el.closest('.tilect').removeClass('tilecthover');
-                // event.stopImmediatePropagation
+                unitOfWork.commit();
+
+                $closest.removeClass('tilecthover');
+                $closest.removeClass('tilecthoverleft');
+                $closest.removeClass('tilecthoverright');
+                // this stops the handler for ti-class objects from running
                 e.stopImmediatePropagation();
 
             })
             $('.unselectedButton').on('click', function (e) {
                 var el = this;
                 var $el = $(el);
+                var $closest = $el.closest('.tilect')
                 console.log('unselected');
                 ko.dataFor(el).selected(false);
-                $el.closest('.tilect').removeClass('tilecthover');
-                // 
-                //console.log($el.closest('.tilect'));
-                //console.log($el.closest('.tilect').attr("class"));
+                $closest.removeClass('tilecthover');
+                $closest.removeClass('tilecthoverleft');
+                $closest.removeClass('tilecthoverright');
+                //at the moment the tiles aren't wired into breeze, so unselecting them does not update the entity.
                 e.stopImmediatePropagation();
             })
         }
@@ -270,6 +296,8 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
         function canDeactivate() {
             unitOfWork.commit().then(
                 function () {
+                    header.signupOff(true);
+                    signUpButtonMessage('Your connected, thanks');
                     console.log('saved')
                 }
                 )
@@ -300,7 +328,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 comment: ko.observable()
             }, {
                 option: 2,
-                intro: 'Consider me for the private beta group',
+                intro: 'Let me use it.  Consider me for the private beta',
                 spiel: 'Welcome, CueHero! We’re glad to have you on board. We’re busy building at the moment, so we may be a little quiet, but when we’re ready to share CueZero you will be the FIRST to know about it. ',
                 selected: ko.observable(false),
                 comment: ko.observable()
@@ -312,23 +340,25 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 comment: ko.observable()
             }, {
                 option: 4,
-                intro: 'I’m interested in a tool that helps us continously improve through regular feedback',
+                intro: 'I’m interested in a tool that helps us drive productivity or innovation through continous improvement',
                 spiel: 'You’ve come to the right place. CueZero will be perfect for monitoring, organising and building on feedback for practical improvement.  We can’t wait to share more about CueZero with you as it nears its release.',
                 selected: ko.observable(false),
                 comment: ko.observable()
             }, {
                 option: 5,
-                intro: 'I’m interested in a continous feedback tool to support individual and team development',
+                intro: 'I’m interested in a tool that supports continuous individual and team development',
                 spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.',
                 selected: ko.observable(false),
                 comment: ko.observable()
             }
             , {
                 option: 6,
-                intro: 'I’m got something else I think CueZero could help with',
+                intro: 'I’ve got something else I think CueZero could help with',
                 spiel: 'Excellent! Please tell us how you\'d apply CueZero, and we\'ll look into it.  We may even have questions for you...',
                 selected: ko.observable(false),
-                comment: ko.observable()
+                comment: ko.observable(),
+                //This flag signals for a different class to be pulled in for horizontals not to go to far right
+                orient: 'left'
             }
         ]);
 

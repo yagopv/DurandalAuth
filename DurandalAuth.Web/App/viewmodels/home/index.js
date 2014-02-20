@@ -1,5 +1,11 @@
 ﻿define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/dialog', 'services/errorhandler'],
     function (router, registerInterest, dialog, errorHandler) {
+        var myTimer = setInterval(function () { timerFn() }, 1000);
+        function timerFn() {
+
+
+            clearInterval(myTimer);
+        }
 
     return {
 

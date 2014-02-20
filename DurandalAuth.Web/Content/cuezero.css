@@ -512,6 +512,7 @@ label.bigWhite {
     position: relative;
     width: 100%;
     border-radius: 5px;
+    cursor: pointer;
     top: 0px;
     left: 0px;
     z-index: 1;
@@ -574,9 +575,16 @@ label.bigWhite {
 */
     .tilecthover {
         top: -100px;
-        left: -10px;
         width: 200%;
         height: 100%;
+    }
+
+    .tilecthoverright {
+        left: -10px;
+    }
+
+    .tilecthoverleft {
+        left: -110px;
     }
 }
 

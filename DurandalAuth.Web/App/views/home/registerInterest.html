@@ -3,8 +3,8 @@
         <div class="col-sm-offset-3 col-sm-6 col-xs-12">
             <form role="form" data-bind="with: respondent">
                 <div class="form-group">
-                    <label class="bigWhite" for="emailAddress" data-bind="visible: !$root.messageEmail()">How can we get hold of you?</label>
-                    <label class="bigWhite" for="emailAddress" data-bind="visible: $root.messageEmail()">Thanks for giving us your email address</label>
+                    <label class="bigWhite" for="emailAddress" data-bind="visible: !$root.canSave()">How can we get hold of you?</label>
+                    <label class="bigWhite" for="emailAddress" data-bind="visible: $root.canSave()">Thanks for giving us your email address</label>
                     <input type="email" class="form-control" id="emailAddress" placeholder="Email" data-bind="value: emailAddress, valueUpdate: 'afterkeydown'">
                     <span class="help-block copy" data-bind="breezeValidation: 'emailAddress'"></span>
                 </div>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="bigWhite" for="organisation">Tell us where you work (optional but useful to understand how you might use CueZero...)</label>
+                    <label class="bigWhite" for="organisation">Tell us where you work (also optional but much appreciated...)</label>
                     <input type="text" class="form-control" id="organisation" placeholder="Your organization" data-bind="value: organisation, valueUpdate: 'afterkeydown'">
                     <span class="help-block" data-bind="breezeValidation: 'organisation'"></span>
                 </div>
@@ -30,8 +30,7 @@
     <div class="row mart2" data-bind="visible: canSave()">
         <div class="container">
             <p class="small">
-                Will you tell us a bit more about your interest in CueZero?  Just hover or select from the tiles below.
-                For each one you can let us know whether <em>This is me</em> and tell us what your most looking for in a feedback tool so we can make it a reality.
+                Will you tell us a bit about how a real-time, continuous feedback tool could help your organization?  Select one or more of the tiles below, and let us know what's most important to you.
             </p>
         </div>
     </div>
@@ -44,7 +43,7 @@
                         <div class="tilect ti">
                             <div class="tile ti">
                                 <p class="title ti" data-bind="html: intro"></p>
-                                <span class="tick ti" data-bind="visible: selected"><i class="fa fa-check"></i></span>
+                                <span class="tick ti" data-bind="visible: selected"><i class="fa fa-check ti"></i></span>
                             </div>
                             <div class="tilexp ti">
                                 <p class="copy ti" data-bind="text: spiel"></p>
@@ -56,11 +55,11 @@
                                     </div>
                                 </form>
                                 <div class="row">
-                                    <div class="col-xs-6">
-                                        <button class="btn btn-block btn-primary selectedButton ti">This is me</button>
+                                    <div class="col-xs-10">
+                                        <button class="btn btn-block btn-primary selectedButton ti">Submit</button>
                                     </div>
-                                    <div class="col-xs-6">
-                                        <button class="btn btn-block btn-primary unselectedButton ti">Just checking</button>
+                                    <div class="col-xs-2">
+                                        <span class="glyphicon glyphicon-remove" style="opacity: 0.7; cursor: pointer" onclick=""></span>
                                     </div>
                                 </div>
 
@@ -73,11 +72,11 @@
     </div>
     <div class="row mart2" data-bind="visible: canSave()">
         <div class="container">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4">
+            <div class="col-xs-2 col-sm-3 col-md-4"></div>
+            <div class="col-xs-8 col-sm-6 col-md-4"  >
                 <button type="button" class="btn btn-primary btn-block" data-bind="click: signUp, text: signUpButtonMessage"></button>
             </div>
-            <div class="col-xs-4"></div>
+            <div class="col-xs-2 col-sm-3 col-md-4"></div>
         </div>
     </div>
 </div>
