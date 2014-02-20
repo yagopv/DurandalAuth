@@ -2,17 +2,7 @@
 	background-color: @cz-white;
 }
 
-.tick{
-	position: absolute;
-	top: -5px;
-	right: 5px;
-	font-size: @font-size-h3;
-	line-height: @line-height-base;
-	width: 18px;
-	color: @cz-aqua;
-	opacity: .8;
-	background-color: @cz-gunmetal;
-}
+
 
 .cue {
 	font-family: 'Century Gothic',futura,'URW Gothic L',Verdana,sans-serif;
@@ -535,7 +525,7 @@ label.bigWhite {
 	position: relative;
 	width: 100%;
 	border-radius: 5px;
-    cursor: pointer;
+	cursor: pointer;
    
    top: 0px;
    left: 0px;
@@ -604,9 +594,9 @@ label.bigWhite {
 	height: 100%;
 	}
 
-    .tilecthoverright{
-        	left: -10px;
-    }
+	.tilecthoverright{
+			left: -10px;
+	}
 
 	.tilecthoverleft {
 	left: -110px;
@@ -632,7 +622,33 @@ label.bigWhite {
 		position: relative;
 	}
 
+	.tileclose{
+		position: absolute;
+		top: 10px;
+		right: 30px;
+		width: 18px;
+		opacity: 0.8;
+		cursor: pointer;
+		line-height: @line-height-large;
+		font-size: @font-size-h4;
+	}
 
+	.tick{
+	position: absolute;
+	top: -5px;
+	right: 5px;
+	font-size: @font-size-h3;
+	line-height: @line-height-base;
+	width: 18px;
+	color: @cz-aqua;
+	opacity: .8;
+	background-color: @cz-gunmetal;
+}
+
+
+.btn-wrap{
+	white-space: normal;
+}
 
 @import 'bootstrap/variables.less';
 @import 'bootstrap/mixins.less';
