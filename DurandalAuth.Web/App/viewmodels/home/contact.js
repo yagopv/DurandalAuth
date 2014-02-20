@@ -340,13 +340,13 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
                 comment: ko.observable()
             }, {
                 option: 4,
-                intro: 'I’m interested in a tool that helps us drive productivity or innovation through continous improvement',
+                intro: 'I’m interested in a tool that helps drive continous improvement',
                 spiel: 'You’ve come to the right place. CueZero will be perfect for monitoring, organising and building on feedback for practical improvement.  We can’t wait to share more about CueZero with you as it nears its release.',
                 selected: ko.observable(false),
                 comment: ko.observable()
             }, {
                 option: 5,
-                intro: 'I’m interested in a tool that supports continuous individual and team development',
+                intro: 'I’m interested in a tool that supports individual and team development',
                 spiel: 'You’ve come to the right place. We can’t wait to share more about CueZero with you as it nears its release.',
                 selected: ko.observable(false),
                 comment: ko.observable()
