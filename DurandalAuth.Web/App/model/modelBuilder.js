@@ -9,6 +9,8 @@ define(['services/appsecurity', 'services/utils'],
 
         var foreignKeyInvalidValue = 0;
 
+        var lcEmailValidator;
+
         var self = {
             extendMetadata: extendMetadata
         };
@@ -40,11 +42,11 @@ define(['services/appsecurity', 'services/utils'],
 
 
         function setupCustomValidation() {
-            var lcEmailValidator =  breeze.Validator.makeRegExpValidator('lcEmailVal',
+            lcEmailValidator =  breeze.Validator.makeRegExpValidator('lcEmailVal',
                     ///^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/,
                     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                     'Almost a correct email address...')
-
+            
                 // Register it with the breeze Validator class.
                 breeze.Validator.register(lcEmailValidator);
         }
@@ -121,9 +123,10 @@ define(['services/appsecurity', 'services/utils'],
                 
                 var validators = emailProperty.validators; // get the property's validator collection
                 //validators.push(Validator.required()); // add a new required validator instance
-               validators.push(breeze.Validator.emailAddress({ displayName: "email address", message: 'Your email address is nearly valid...' })); // add a new email validator instance
-                //validators.push(breeze.Validator.emailIsFineValidator)
-                
+               //validators.push(breeze.Validator.emailAddress({ displayName: "email address", message: 'Your email address is nearly valid...' })); // add a new email validator instance
+                validators.push(lcEmailValidator)
+                //console.log('validator added')
+                //console.log(lcEmailValidator);
                 //addValidationRules(respondent);
                 //addhasValidationErrorsProperty(respondent);
 
