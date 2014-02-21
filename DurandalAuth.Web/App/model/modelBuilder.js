@@ -52,22 +52,22 @@ define(['services/appsecurity', 'services/utils'],
         }
         
        // // full function version of the custom validator
-       // function setupCVFunctions() {
-       //     var emailIsFineValidator = new breeze.Validator(
-       //"emailIsFine",              // validator name
-       //emailIsFineValidationFn,    // validation function
-       //{                           // validator context
-       //    displayName: "email address",
-       //    messageTemplate: "Your '%displayName%' is nearly OK..."
-       //});
+        function setupCVFunctions() {
+            var emailIsFineValidator = new breeze.Validator(
+       "emailIsFine",              // validator name
+       emailIsFineValidationFn,    // validation function
+       {                           // validator context
+           displayName: "email address",
+           messageTemplate: "Your '%displayName%' is nearly OK..."
+       });
 
-       //     var emailIsFineValidationFn = function (value) {
+            var emailIsFineValidationFn = function (value) {
 
-       //         var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-       //         if (value == null) return true; // '== null' matches null and empty string
-       //         return (re.test(value));
-       //     };
-       // }
+                var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                if (value == null) return true; // '== null' matches null and empty string
+                return (re.test(value));
+            };
+        }
 
         function extendRespondentComment(metadataStore) {
             var respondentCommentCtor = function () {
