@@ -3,7 +3,7 @@
 
         //var respondent = ko.observable();
 
-        var emailAddress = ko.observable();
+        var emailAddress = ko.observable('');
 
         var signupOff = ko.observable();
 

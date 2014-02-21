@@ -5,7 +5,7 @@
 .cue {
     font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
     font-weight: bold;
-    color: #ffffff;
+    color: #818181;
 }
 
 .zero {
@@ -53,6 +53,7 @@ h4 .featureTitle {
 .jumbotron.transparent {
     background: none;
     color: #ffffff;
+    margin-bottom: 0px;
 }
 
 .jumbotron.transparent.small {

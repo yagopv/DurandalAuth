@@ -26,8 +26,8 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/jquery.tagsinput.js")
 		  .Include("~/Scripts/orientationBug.js")
 		  .Include("~/Scripts/modernizr.custom.79639.js")
-		  .Include("~/Scripts/jquery.pfold.js")
-		   .Include("~/Scripts/jquery.kwicks.js")
+		  //.Include("~/Scripts/jquery.pfold.js")
+		  // .Include("~/Scripts/jquery.kwicks.js")
 		  
 		);
 
