@@ -524,6 +524,7 @@
     <Content Include="Scripts\rs-plugin\images\decor_testimonial.png" />
     <Content Include="Scripts\rs-plugin\images\gradient\g30.png" />
     <Content Include="Scripts\rs-plugin\images\gradient\g40.png" />
+    <Content Include="Scripts\rs-plugin\images\transparent.png" />
     <Content Include="Scripts\rs-plugin\js\jquery.themepunch.plugins.min.js" />
     <Content Include="Scripts\rs-plugin\js\jquery.themepunch.revolution.js" />
     <Content Include="Scripts\rs-plugin\js\jquery.themepunch.revolution.min.js" />

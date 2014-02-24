@@ -26,6 +26,8 @@ namespace DurandalAuth.Web {
 		  .Include("~/Scripts/jquery.tagsinput.js")
 		  .Include("~/Scripts/orientationBug.js")
 		  .Include("~/Scripts/modernizr.custom.79639.js")
+		  .Include("~/Scripts/rs-plugin/js/jquery.themepunch.plugins.min.js")
+				.Include("~/Scripts/rs-plugin/js/jquery.themepunch.revolution.min.js")
 		  //.Include("~/Scripts/jquery.pfold.js")
 		  // .Include("~/Scripts/jquery.kwicks.js")
 		  
@@ -43,13 +45,13 @@ namespace DurandalAuth.Web {
 		  .Include("~/Content/jquery.tagsinput.css")
 		  .Include("~/Content/zen-form.css")
 		  .Include("~/Content/vs.css")
-		  .Include("~/Content/pfold.css")
-		  .Include("~/Content/jquery.kwicks.css")
+
 		);
 
 	  // css custom
 	  bundles.Add(
 		new StyleBundle("~/Content/custom")
+		.Include("~/Scripts/rs-plugin/css/settings.css")
 		  .Include("~/Content/app.css")
 		  .Include("~/Content/cuezero.css")
 		);

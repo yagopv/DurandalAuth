@@ -637,3 +637,12 @@ label.bigWhite {
 .btn-wrap {
     white-space: normal;
 }
+
+.tp-caption.basic-white {
+    color: #fff;
+    text-decoration: none;
+}
+
+#topheader-to-offset {
+    margin-top: 40px;
+}

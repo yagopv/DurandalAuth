@@ -15,7 +15,7 @@
 		
 		@Styles.Render("~/Content/css")
 		@Styles.Render("~/Content/custom")
-
+		@Scripts.Render("~/scripts/vendor")
 		<script type="text/javascript">
 			if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
 				var msViewportStyle = document.createElement("style");
@@ -55,7 +55,7 @@
 		
 		
 		
-		@Scripts.Render("~/scripts/vendor")
+		@*@Scripts.Render("~/scripts/vendor")*@
 		
 		@*@if(HttpContext.Current.IsDebuggingEnabled) {
 			<script type="text/javascript" src="/Scripts/require.js" data-main="/App/main"></script>

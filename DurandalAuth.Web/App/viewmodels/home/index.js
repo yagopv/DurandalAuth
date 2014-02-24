@@ -7,6 +7,67 @@
             clearInterval(myTimer);
         }
 
+        function setupRS() {
+            $('.bannercontainer').revolution({
+                delay: 1000,
+                startwidth: 1200,
+                startheight: 400,
+                autoHeight: "on",
+                fullScreenAlignForce: "off",
+
+                onHoverStop: "on",
+
+                thumbWidth: 0,
+                thumbHeight: 0,
+                thumbAmount: 0,
+
+                hideThumbsOnMobile: "on",
+                hideBulletsOnMobile: "on",
+                hideArrowsOnMobile: "on",
+                hideThumbsUnderResolution: 2000,
+
+                hideThumbs: 1000,
+
+                navigationType: "none",
+                navigationArrows: "solo",
+                navigationStyle: "round",
+
+                navigationHAlign: "center",
+                navigationVAlign: "bottom",
+                navigationHOffset: 30,
+                navigationVOffset: 30,
+
+                soloArrowLeftHalign: "left",
+                soloArrowLeftValign: "center",
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: "right",
+                soloArrowRightValign: "center",
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+
+                touchenabled: "on",
+
+                stopAtSlide: -1,
+                stopAfterLoops: -1,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                hideSliderAtLimit: 0,
+
+                dottedOverlay: "none",
+
+                fullWidth: "off",
+                forceFullWidth: "off",
+                fullScreen: "off",
+                fullScreenOffsetContainer: "#topheader-to-offset",
+
+                shadow: 0
+
+            });
+        }
+
     return {
 
         convertRouteToHash: router.convertRouteToHash,
@@ -23,6 +84,10 @@
                 }
             })
             .done();
-    }
+        },
+
+        attached: function () {
+            setupRS();
+        }
     };
 });
