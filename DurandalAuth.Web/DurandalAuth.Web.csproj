@@ -435,6 +435,10 @@
     <None Include="Properties\PublishProfiles\cuezero - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cuezero - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -566,6 +570,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BreezeValidator.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Results\SitemapResult.cs" />
     <Compile Include="SEO\ISnapshot.cs" />
     <Compile Include="Helpers\LookupBundle.cs" />
@@ -580,6 +589,7 @@
     <Compile Include="SEO\SitemapChangeFrequency.cs" />
     <Compile Include="SEO\SitemapGenerator.cs" />
     <Compile Include="SEO\SitemapItem.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
