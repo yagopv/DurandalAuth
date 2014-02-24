@@ -320,10 +320,9 @@ svg {
 }
 
 .row.transparent {
-    background: none;
-    background-color: transparent;
+    background-color: #458b9f;
     overflow: auto;
-    min-height: 2%;
+    padding-top: 1%;
 }
 
 label.bigWhite {
