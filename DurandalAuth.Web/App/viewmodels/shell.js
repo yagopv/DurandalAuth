@@ -63,7 +63,10 @@
                             { route: 'account/externalloginconfirmation',     moduleId: 'account/externalloginconfirmation', title: 'External login confirmation', nav: false, hash : "#account/externalloginconfirmation" },
                             { route: 'account/externalloginfailure',          moduleId: 'account/externalloginfailure',      title: 'External login failure',      nav: false, hash : "#account/externalloginfailure" },
                             { route: 'account/register',                      moduleId: 'account/register',                  title: 'Register',                    nav: false, hash : "#account/register" },
-                            { route: 'account/manage',                        moduleId: 'account/manage',                    title: 'Manage account',              nav: false, hash : "#account/manage",  authorize: ["User", "Administrator"] },
+                            { route: 'account/manage',                        moduleId: 'account/manage',                    title: 'Manage account',              nav: false, hash:  "#account/manage", authorize: ["User", "Administrator"] },
+                            { route: 'account/registrationcomplete',          moduleId: 'account/registrationcomplete',      title: 'Registration complete',       nav: false, hash:  "#account/registrationcomplete" },
+                            { route: 'account/forgotpassword',                moduleId: 'account/forgotpassword',            title: 'Forgot password',             nav: false, hash:  "#account/forgotpassword" },
+                            { route: 'account/resetpassword',                 moduleId: 'account/resetpassword',             title: 'Reset password',              nav: false, hash:  "#account/resetpassword" },
 
                             // User articles urls
                             { route: 'user/dashboard',                        moduleId: 'user/dashboard',                    title: 'Dashboard',                   nav: false, hash : "#user/dashboard",  authorize: ["User"]  },

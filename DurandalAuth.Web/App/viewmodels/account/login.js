@@ -107,7 +107,7 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                     password: self.password()
                 }).done(function (data) {
                     if (data.userName && data.access_token) {
-                        appsecurity.setAuthInfo(data.userName, data.roles, data.access_token, self.rememberMe());
+                        appsecurity.setAuthInfo(data.userName, data.roles, data.emailConfirmed == "true" ? true : false, data.access_token, self.rememberMe());
 
                         // get the current default Breeze AJAX adapter
                         var ajaxAdapter = breeze.config.getAdapterInstance("ajax");

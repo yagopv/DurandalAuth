@@ -1,0 +1,29 @@
+﻿@model DurandalAuth.Web.Models.AccountNotificationModel
+@{
+    Layout = "OneColumn_Layout.cshtml";
+}
+<repeater>
+    <layout label="Text only">
+        <table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td class="w580" width="580">
+                        <p align="left" class="article-title"><singleline label="Title">Account verification</singleline></p>
+                        <div align="left" class="article-content">
+                            <multiline label="Description">
+                                <p>
+                                    Hello <b>@Model.DisplayName</b>,
+                                </p>
+                                <p>
+                                    Your account has been successfully created, but you still need one more step.<br />
+                                    Click <a href="@Model.Url"> here </a>to verify your account.
+                                </p>
+                            </multiline>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td class="w580" width="580" height="10"></td></tr>
+            </tbody>
+        </table>
+    </layout>
+</repeater>

@@ -22,7 +22,11 @@ define(function () {
         setPasswordUrl: "/api/account/setpassword",
         siteUrl : "/",
         userInfoUrl: "/api/account/userinfo",
-        getUsersUrl : "/api/account/getusers"
+        getUsersUrl: "/api/account/getusers",
+        forgotPassword: "/api/account/forgotpassword",
+        resendMailRoute: "/api/account/resendconfirmationemail",
+        resetPassword: "/api/account/resetpassword",
+        deleteaccount: "/api/account/deleteaccount"
     };
 
     return routes;

@@ -20,12 +20,9 @@ namespace DurandalAuth.Web.Controllers
     {
         IUnitOfWork UnitOfWork;
 
-        private UserManager<UserProfile> UserManager { get; set; }
-
-        public DurandalAuthController(IUnitOfWork uow, UserManager<UserProfile> usermanager)
+        public DurandalAuthController(IUnitOfWork uow)
         {
             UnitOfWork = uow;
-            UserManager = usermanager;
         }
 
         /// <summary>

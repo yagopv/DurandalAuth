@@ -8,7 +8,8 @@ define(['durandal/system'],
         var logger = {
             log: log,
             logError: logError,
-            logSuccess: logSuccess
+            logSuccess: logSuccess,
+            showAccountWarning: showAccountWarning
         };
 
         return logger;
@@ -103,5 +104,23 @@ define(['durandal/system'],
                     }
                 }
             }
+        }
+
+        /**
+         * If the account is not confirmed shows the account warning
+         * @method
+         * @private
+         * @param {string} message
+        */
+        function showAccountWarning() {
+            Stashy.Notify({
+                title: "<i class='fa fa-warning'></i>   Your account is not confirmed",
+                content: "We sent you a message for confirm your account. If you didn't receive it <a id='sendConfirmationMail' class='btn btn-danger'>click here</a> in order to resend it",
+                titleSize: 4,
+                style: "error",
+                contentType: "inline",
+                animDuration: "fast",
+                closeArea: "element"
+            }).bar("bottom");
         }
     });

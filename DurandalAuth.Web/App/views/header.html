@@ -10,12 +10,12 @@
     <div class="collapse navbar-collapse navbar-main-collapse" style="height: 0px;">
         <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
             <li data-bind="css: { active: isActive }">
-                <a data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title, click : $parent.closeMenu"></a>
+                <a data-bind="attr: { href: $parent.router.convertRouteToHash('/' + hash) }, text: title"></a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-bind="if: typeof(appsecurity.userInfo()) == 'undefined'">
             <li>
-                <a data-bind="attr: { href: router.convertRouteToHash('/account/login') }, click : closeMenu"><i class="fa fa-lock"></i>&nbsp; Login</a>
+                <a data-bind="attr: { href: router.convertRouteToHash('/account/login') }"><i class="fa fa-lock"></i>&nbsp; Login</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-bind="if: !(typeof(appsecurity.userInfo()) == 'undefined')">
@@ -26,11 +26,11 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li role="presentation" class="dropdown-header">Options</li>
-                    <li><a data-bind="attr: { href: router.convertRouteToHash('/account/manage') }, click : closeMenu"><i class="fa fa-user-md"></i>  Manage your account</a></li>
-                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a data-bind="    attr: { href: router.convertRouteToHash('/user/dashboard') }, click : closeMenu"><i class="fa fa-dashboard"></i>  Dashboard</a></li>
+                    <li><a data-bind="attr: { href: router.convertRouteToHash('/account/manage') }"><i class="fa fa-user-md"></i>  Manage your account</a></li>
+                    <li data-bind="visible: appsecurity.isUserInRole(['User'])"><a data-bind="    attr: { href: router.convertRouteToHash('/user/dashboard') }"><i class="fa fa-dashboard"></i>  Dashboard</a></li>
                     <li data-bind="visible: appsecurity.isUserInRole(['Administrator'])" class="divider"></li>
                     <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"  role="presentation" class="dropdown-header">Administration</li>
-                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a data-bind="    attr: { href: router.convertRouteToHash('/admin/panel') }, click : closeMenu"><i class="fa fa-users"></i>  Admin Panel</a></li>
+                    <li data-bind="if: appsecurity.isUserInRole(['Administrator'])"><a data-bind="    attr: { href: router.convertRouteToHash('/admin/panel') }"><i class="fa fa-users"></i>  Admin Panel</a></li>
                     <li class="divider"></li>
                     <li><a href="#" data-bind="click: logout"><i class="fa fa-lock"></i>   Logout</a></li>
                 </ul>

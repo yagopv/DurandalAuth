@@ -34,7 +34,7 @@ namespace DurandalAuth.Data.Migrations
 
             if (UserManager.FindByName("admin") == null)
             {
-                var user = new UserProfile() { UserName = "admin",  Email = "admin@mydomain.com" };
+                var user = new UserProfile() { UserName = "admin",  Email = "admin@mydomain.com", EmailConfirmed = true };
                 var result = UserManager.Create(user, "admin1234");
                 if (result.Succeeded)
                 {

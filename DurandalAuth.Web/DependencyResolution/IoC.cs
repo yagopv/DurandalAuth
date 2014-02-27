@@ -46,7 +46,7 @@ namespace DurandalAuth.Web.DependencyResolution {
 
                             x.For<IUnitOfWork>().HttpContextScoped().Use(
                                 () => new UnitOfWork(new BreezeValidator
-                                                        (new UserManager<UserProfile>
+                                                        (new ApplicationUserManager
                                                             (new UserStore<UserProfile>
                                                                 (new DurandalAuthDbContext()))))
                             );
@@ -56,8 +56,6 @@ namespace DurandalAuth.Web.DependencyResolution {
                             x.For<ISitemapGenerator>().HttpContextScoped().Use<SitemapGenerator>();
 
                             x.For<ISitemapItem>().HttpContextScoped().Use<SitemapItem>();
-
-                            x.For<UserManager<UserProfile>>().HttpContextScoped().Use(() => new UserManager<UserProfile>(new UserStore<UserProfile>(new DurandalAuthDbContext())));
 
                             x.For<ISecureDataFormat<AuthenticationTicket>>().HttpContextScoped().Use(() => Startup.OAuthOptions.AccessTokenFormat);
                             

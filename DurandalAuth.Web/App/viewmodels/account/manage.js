@@ -6,8 +6,8 @@
  * @requires logger
 */
 
-define(['durandal/system','services/appsecurity', 'services/errorhandler', 'services/logger', 'services/utils'], 
-function (system,appsecurity, errorhandler, logger, utils) {
+define(['durandal/system','services/appsecurity', 'services/errorhandler', 'services/logger', 'services/utils', 'durandal/app', 'plugins/router'], 
+function (system,appsecurity, errorhandler, logger, utils, app, router) {
     
     var self = this,
         externalAccessToken,
@@ -302,7 +302,31 @@ function (system,appsecurity, errorhandler, logger, utils) {
 	        } else {
 	            return self.initialize();
 	        }	    
-	    }
+	    },
+
+	    /**
+         * Delete the user account
+         * @method         
+        */
+	    deleteAccount: function () {
+	        var self = this;
+
+	        return app.showMessage("The account will be removed permanently", "Are you sure?", ['Yes', 'No'])
+                        .then(function (option) {
+                            if (option === 'Yes') {
+                                appsecurity.deleteAccount()
+                                    .done(function () {
+                                        appsecurity.logout()
+                                            .done(function () {
+                                                appsecurity.clearAuthInfo();
+                                                window.location = "/account/login";                                         
+                                            })
+                                            .fail(self.handlevalidationerrors);
+                                    })
+                                    .fail(self.handlevalidationerrors);
+                            }
+                        });
+        }
 	};
 
 	errorhandler.includeIn(viewmodel);

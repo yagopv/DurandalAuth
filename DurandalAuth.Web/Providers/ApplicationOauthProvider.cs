@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+
 using DurandalAuth.Domain.Model;
+using DurandalAuth.Web.Helpers;
 
 namespace DurandalAuth.Web.Providers
 {
@@ -18,12 +21,12 @@ namespace DurandalAuth.Web.Providers
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
-        private readonly Func<UserManager<UserProfile>> _userManagerFactory;
+        private readonly Func<ApplicationUserManager> _userManagerFactory;
 
         /// <summary>
         /// ctor
         /// </summary>		
-        public ApplicationOAuthProvider(string publicClientId, Func<UserManager<UserProfile>> userManagerFactory)
+        public ApplicationOAuthProvider(string publicClientId, Func<ApplicationUserManager> userManagerFactory)
         {
             if (publicClientId == null)
             {
@@ -51,7 +54,7 @@ namespace DurandalAuth.Web.Providers
 		/// <returns>Task</returns>		
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            using (UserManager<UserProfile> userManager = _userManagerFactory())
+            using (ApplicationUserManager userManager = _userManagerFactory())
             {
                 UserProfile user = await userManager.FindAsync(context.UserName, context.Password);
                 
@@ -69,7 +72,7 @@ namespace DurandalAuth.Web.Providers
                 var justCreatedIdentity = await userManager.FindByNameAsync(user.UserName);
                 var roles = await userManager.GetRolesAsync(justCreatedIdentity.Id);
 
-                AuthenticationProperties properties = CreateProperties(user.UserName, roles.ToArray());
+                AuthenticationProperties properties = CreateProperties(user.UserName, roles.ToArray(), user.EmailConfirmed);
                 AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
                                 
                 context.Validated(ticket);
@@ -129,17 +132,18 @@ namespace DurandalAuth.Web.Providers
 
         /// <summary>
         /// Create the authentication properties
-		/// Create the requires properties that would be converted into Claims
+		/// Create the required properties that would be converted into Claims
         /// </summary>
         /// <param name="userName">The user name</param>
 		/// <param name="roles">The user roles</param>
         /// <returns>The properties</returns>
-        public static AuthenticationProperties CreateProperties(string userName,  string[] roles)
+        public static AuthenticationProperties CreateProperties(string userName,  string[] roles, bool emailConfirmed)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "userName", userName },
-                { "roles", String.Join("," , roles) }
+                { "roles", String.Join("," , roles) },
+                { "emailConfirmed", emailConfirmed.ToString().ToLower()}
             };
             return new AuthenticationProperties(data);
         }

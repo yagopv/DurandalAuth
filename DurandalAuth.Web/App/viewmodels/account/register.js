@@ -34,8 +34,8 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                     return;
                 }
 
-				appsecurity.register({
-					userName: self.username(),
+                appsecurity.register({
+                    userName : self.username(),
 					eMail : self.email(),
 					password: self.password(),
 					confirmPassword: self.confirmpassword()
@@ -48,7 +48,8 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
 						if (data.userName && data.access_token) {
 							appsecurity.setAuthInfo(
 								data.userName, 
-								data.roles, 
+								data.roles,
+                                false,
 								data.access_token, 
 								self.rememberMe);
 							self.username("");

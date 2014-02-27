@@ -19,7 +19,7 @@ namespace DurandalAuth.Data
     {
         public DurandalAuthDbContext()
                     : base("DurandalAuthConnection")
-        {
+        {            
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DurandalAuthDbContext, Migrations.Configuration>());
         }
 

@@ -12,9 +12,9 @@ namespace DurandalAuth.Web.Helpers
 {
     public class BreezeValidator : IBreezeValidator
     {
-        UserManager<UserProfile> UserManager { get; set; }
+        ApplicationUserManager UserManager { get; set; }
 
-        public BreezeValidator(UserManager<UserProfile> usermanager)
+        public BreezeValidator(ApplicationUserManager usermanager)
         {
             this.UserManager = usermanager;
         }

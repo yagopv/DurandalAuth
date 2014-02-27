@@ -28,6 +28,8 @@ namespace DurandalAuth.Web.Models
     {
         public string UserName { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }
+
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
@@ -45,5 +47,20 @@ namespace DurandalAuth.Web.Models
     public class UserProfileViewModel
     {
         public string UserName { get; set;}
+    }
+
+    public class AccountNotificationModel
+    {
+        public string UserId { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public string Code { get; set; }
+
+        public string Url { get; set; }
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
     }
 }

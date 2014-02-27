@@ -61,7 +61,8 @@ function (appsecurity,router,errorhandler,utils) {
                 sessionStorage["state"] = state;
                 // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage
                 // temporarily to localStorage to work around this problem.
-                appsecurity.archiveSessionStorageToLocalStorage();
+                sessionStorage["redirectTo"] = "account/manage";
+                appsecurity.archiveSessionStorageToLocalStorage();                
                 window.location = loginUrl;
             }).fail(self.handlevalidationerrors);
         }

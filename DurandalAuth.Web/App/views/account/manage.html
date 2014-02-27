@@ -50,6 +50,13 @@
                         </form>
                     </div>
                 </div>
+                <div>
+                    <h2>Danger Area</h2>
+                    <hr />
+                    <p>Click the following button if you want to delete your account. Be careful because this action is permanent.</p>
+                    <a href="#" class="btn btn-danger" data-bind="click:deleteAccount">Delete the account</a>
+                </div>
+                <hr />
           </section>
             <section class="col-md-5 col-md-offset-1">
                 <div data-bind="if: userLogins().length > 0">
@@ -87,7 +94,7 @@
                             <span data-bind="text: name"></span>
                         </a>
                     </div>
-                </div>
+                </div>                
             </section>
         </div>
     </div>

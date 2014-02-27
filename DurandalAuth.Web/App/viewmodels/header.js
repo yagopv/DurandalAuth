@@ -13,17 +13,12 @@
                     .done(function () {
                         appsecurity.clearAuthInfo();
                         if (router.activeInstruction().config.authorize) {
-                            router.navigate("account/login");
+                            window.location = "/account/login";
+                        } else {
+                            window.location = "/home/index";
                         }
-                        $(".navbar-toggle").click();
                     })
                     .fail(self.handlevalidationerrors);
-            },
-
-            closeMenu: function (data, event) {                
-                if (["xs", "sm"].indexOf(utils.findBootstrapEnvironment()) != -1) {
-                    $(".navbar-collapse").collapse("hide");
-                }
             }
         };
 

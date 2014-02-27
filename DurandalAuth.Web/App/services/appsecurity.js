@@ -7,8 +7,8 @@
  * @requires utils
  */
 
-define(["durandal/system","durandal/app","plugins/router","services/routeconfig", "services/utils"]
-	,function (system, app, router, routeconfig, utils, history) {
+define(["durandal/system", "durandal/app", "plugins/router", "services/routeconfig", "services/utils", "services/logger"]
+	,function (system, app, router, routeconfig, utils, logger) {
 
 	var self = this;
 
@@ -143,9 +143,32 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 	};	
 	
 	// Class representing user information
-	function UserInfoViewModel(name, roles) {
+	function UserInfoViewModel(name, roles, isEmailConfirmed) {
 		this.name = ko.observable(name);
 		this.roles = ko.observableArray(roles);
+		this.isEmailConfirmed = ko.observable(isEmailConfirmed);
+	};
+
+	// Show the account warning
+	function bindResendEmail() {
+
+		$(document).off("click", "#sendConfirmationMail");
+		$(document).on("click", "#sendConfirmationMail", function (event) {
+			sendConfirmationMail()
+			  .then(function (jqXHR, data) {
+				logger.logSuccess("Email sent. Please check your inbox and confirm your account", data, null, true);
+			}).fail(function (jqXHR, error, statusText) {
+				logger.logError(statusText, error, null, true);
+			});
+		})
+	}
+
+	// Send confirmation mail
+	function sendConfirmationMail() {
+		return $.ajax(routeconfig.resendMailRoute, {
+			type : "POST",
+			headers: getSecurityHeaders()
+		});
 	};
 
 	return {
@@ -160,7 +183,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 		 * param {string} accessToken
 		 * param {bool} persistent
 		 */
-		setAuthInfo: function (userName, roles, accessToken, persistent) {
+		setAuthInfo: function (userName, roles, isEmailConfirmed, accessToken, persistent) {
 			var self = this;
 
 			if (accessToken) {
@@ -170,7 +193,12 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			if (typeof (roles) == "string") {
 				roles = roles.split(",");
 			}
-			self.userInfo(new UserInfoViewModel(userName, roles));
+			self.userInfo(new UserInfoViewModel(userName, roles, isEmailConfirmed));
+
+			if (isEmailConfirmed == false) {
+				logger.showAccountWarning();
+				bindResendEmail();
+			}
 		},
 		
 		/**
@@ -365,6 +393,41 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 			});
 		},
 
+	    /**
+		 * Forgot your password
+		 */
+		forgotPassword: function (data) {
+		    return $.ajax(routeconfig.forgotPassword, {
+		        type: "POST",
+                data : data,
+		        cache: false,
+		        headers: getSecurityHeaders()
+		    });
+		},
+
+	    /**
+		 * Reset your password
+		 */
+		resetPassword: function (data) {
+		    return $.ajax(routeconfig.resetPassword, {
+		        type: "POST",
+                data : data,
+		        cache: false,
+		        headers: getSecurityHeaders()
+		    });
+		},
+
+	    /**
+		 * Delete te user account
+		 */
+		deleteAccount: function () {
+		    return $.ajax(routeconfig.deleteaccount, {
+                type : "POST",
+		        cache: false,
+		        headers: getSecurityHeaders()
+		    });
+		},
+
 		/**
 		 * Always call this method when initializating the application for getting authenticated user info (from storage)
 		 * or redirect when returning from a provider or associating another login
@@ -399,7 +462,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 					self.getUserInfo()
 						.done(function (data) {
 							if (data.userName) {
-								self.setAuthInfo(data.userName, data.roles);
+								self.setAuthInfo(data.userName, data.roles, data.iEmailConfirmed);
 								sessionStorage["redirectTo"] = "account/manage?externalAccessToken=" + externalAccessToken + "&externalError=" + externalError;
 							}
 							dfd.resolve(true);
@@ -420,7 +483,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 								if (data.hasRegistered) {
 									// Change persistent to true for storing the authentication token in local storage when
 									// login with external services
-									self.setAuthInfo(data.userName, data.roles, fragment.access_token, false);
+									self.setAuthInfo(data.userName, data.roles, data.isEmailConfirmed, fragment.access_token, false);
 									dfd.resolve(true);
 								}
 								else if (typeof (sessionStorage["loginUrl"]) !== "undefined") {
@@ -449,7 +512,7 @@ define(["durandal/system","durandal/app","plugins/router","services/routeconfig"
 					self.getUserInfo()
 						.done(function (data) {
 							if (data.userName) {
-								self.setAuthInfo(data.userName, data.roles);
+								self.setAuthInfo(data.userName, data.roles, data.isEmailConfirmed);
 							}
 							dfd.resolve(true);
 						})
