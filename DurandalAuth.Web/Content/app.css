@@ -252,6 +252,7 @@ footer {
 	background-color:#3d288e;
 	color : #FFF;    
 	display:none;
+    overflow : hidden;
 }
 
 .footer-content {
