@@ -32,10 +32,10 @@
                                 if (typeof (appsecurity.userInfo()) !== 'undefined') {
                                     if (appsecurity.isUserInRole(instruction.config.authorize)) {
                                         if (instruction.config.confirmed) {
-                                            if (appsecurity.isUserConfirmed()) {
+                                            if (appsecurity.userInfo().isEmailConfirmed()) {
                                                 return true;
                                             } else {
-                                                appsecurity.showConfirmationWarning();
+                                                appsecurity.showConfirmationWarning(true);
                                                 return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
                                             }
                                         } else {
@@ -60,7 +60,7 @@
                         return router.map([
                             // Nav urls
                             { route: ['','home/index'],                       moduleId: 'home/index',                        title: 'Home',                        nav: true, hash : "#home/index"    },
-                            { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash: "#home/articles" },
+                            { route: 'home/articles',                         moduleId: 'home/articles',                     title: 'Articles',                    nav: true, hash : "#home/articles" },
                             { route: 'home/help',                             moduleId: 'home/help',                         title: 'Help',                        nav: true, hash : "#home/help" },
                             { route: 'home/about',                            moduleId: 'home/about',                        title: 'About',                       nav: true, hash : "#home/about" },
                             { route: 'notfound',                              moduleId: 'notfound',                          title: 'Not found',                   nav: false },
@@ -79,7 +79,7 @@
                             { route: 'account/resetpassword',                 moduleId: 'account/resetpassword',             title: 'Reset password',              nav: false, hash:  "#account/resetpassword" },
 
                             // User articles urls
-                            { route: 'user/dashboard',                        moduleId: 'user/dashboard',                    title: 'Dashboard',                   nav: false, hash : "#user/dashboard",  authorize: ["User"]  },
+                            { route: 'user/dashboard',                        moduleId: 'user/dashboard',                    title: 'Dashboard',                   nav: false, hash : "#user/dashboard",  authorize: ["User"], confirmed : true  },
                             { route: ':createdby/:categorycode/:articlecode', moduleId: 'user/article',                      title: 'Article',                     nav: false },
                         ])
                         .buildNavigationModel()

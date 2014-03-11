@@ -196,16 +196,15 @@ define(["durandal/system", "durandal/app", "plugins/router", "services/routeconf
 			self.userInfo(new UserInfoViewModel(userName, roles, isEmailConfirmed));
 
 			if (isEmailConfirmed == false) {
-				logger.showAccountWarning();
-				bindResendEmail();
+			    self.showConfirmationWarning(false);
 			}
 		},
 		
         /**
          * Displays account confirmation message to user
          */
-        showConfirmationWarning: function() {
-            logger.showAccountWarning();
+		showConfirmationWarning: function (restrictedRoute) {
+		    logger.showAccountWarning(restrictedRoute);
             bindResendEmail();
         },
 

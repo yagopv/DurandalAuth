@@ -112,10 +112,13 @@ define(['durandal/system'],
          * @private
          * @param {string} message
         */
-        function showAccountWarning() {
+        function showAccountWarning(restrictedRoute) {
+            var text1 = "We sent you a message for confirm your account. If you didn't receive it check your spam folder or <a id='sendConfirmationMail' class='btn btn-danger'>click here</a> in order to resend it",
+                text2 = "The route you are trying to access is restricted to confirmed accounts. Check you email account to find a mail we sent you and confirm it. If you didn't receive it check your spam folder or <a id='sendConfirmationMail' class='btn btn-danger'>click here</a> in order to resend it"
+
             Stashy.Notify({
                 title: "<i class='fa fa-warning'></i>   Your account is not confirmed",
-                content: "We sent you a message for confirm your account. If you didn't receive it <a id='sendConfirmationMail' class='btn btn-danger'>click here</a> in order to resend it",
+                content: restrictedRoute ? text2 : text1,
                 titleSize: 4,
                 style: "error",
                 contentType: "inline",
