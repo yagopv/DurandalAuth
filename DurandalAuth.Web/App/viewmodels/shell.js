@@ -19,7 +19,8 @@
                         //configure routing
                         router.makeRelative({ moduleId: 'viewmodels' });
 
-                        // If the route has the authorize flag and the user is not logged in => navigate to login view                                
+                        // If the route has the authorize flag and the user is not logged in => navigate to login view      
+                        // If the route has the confirmed flag and the user's email is not confirmed => navigate to login view and display confirmation warning
                         router.guardRoute = function (instance, instruction) {
                             if (sessionStorage["redirectTo"]) {
                                 var redirectTo = sessionStorage["redirectTo"]
@@ -30,11 +31,20 @@
                             if (instruction.config.authorize) {
                                 if (typeof (appsecurity.userInfo()) !== 'undefined') {
                                     if (appsecurity.isUserInRole(instruction.config.authorize)) {
-                                        return true;
-                                    } else {                                        
+                                        if (instruction.config.confirmed) {
+                                            if (appsecurity.isUserConfirmed()) {
+                                                return true;
+                                            } else {
+                                                appsecurity.showConfirmationWarning();
+                                                return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
+                                            }
+                                        } else {
+                                            return true;
+                                        }
+                                    } else {
                                         return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
                                     }
-                                } else {                                    
+                                } else {
                                     return "/account/login?returnUrl=" + encodeURIComponent(instruction.fragment);
                                 }
                             } else {

@@ -201,6 +201,14 @@ define(["durandal/system", "durandal/app", "plugins/router", "services/routeconf
 			}
 		},
 		
+        /**
+         * Displays account confirmation message to user
+         */
+        showConfirmationWarning: function() {
+            logger.showAccountWarning();
+            bindResendEmail();
+        },
+
 		/**
 		 * Remove authentication info
 		 */
@@ -462,7 +470,7 @@ define(["durandal/system", "durandal/app", "plugins/router", "services/routeconf
 					self.getUserInfo()
 						.done(function (data) {
 							if (data.userName) {
-								self.setAuthInfo(data.userName, data.roles, data.iEmailConfirmed);
+								self.setAuthInfo(data.userName, data.roles, data.isEmailConfirmed);
 								sessionStorage["redirectTo"] = "account/manage?externalAccessToken=" + externalAccessToken + "&externalError=" + externalError;
 							}
 							dfd.resolve(true);
