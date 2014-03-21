@@ -38,6 +38,9 @@ namespace DurandalAuth.Web.Helpers
                 RequireLowercase = false,
                 RequireUppercase = false                
             };
+
+            manager.UserLockoutEnabledByDefault = true;
+
             manager.EmailService = new EmailService();
 
             var dataProtectionProvider = options.DataProtectionProvider;

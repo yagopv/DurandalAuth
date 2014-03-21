@@ -54,15 +54,47 @@ namespace DurandalAuth.Web.Providers
 		/// <returns>Task</returns>		
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            using (ApplicationUserManager userManager = _userManagerFactory())
+            using (ApplicationUserManager userManager = _userManagerFactory()) 
             {
-                UserProfile user = await userManager.FindAsync(context.UserName, context.Password);
-                
+                userManager.MaxFailedAccessAttemptsBeforeLockout = 5;
+                userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+                UserProfile user = await userManager.FindByNameAsync(context.UserName);
+
                 if (user == null)
                 {
-                    context.SetError("invalid_grant", "Invalid user or password");
+                    context.SetError("invalid_grant", "Invalid username");
                     return;
                 }
+
+                if (await userManager.IsLockedOutAsync(user.Id))
+                {
+                    var timeleft = user.LockoutEndDateUtc.GetValueOrDefault().Subtract(DateTime.UtcNow);
+
+                    var timetype = timeleft.Minutes == 0 ? "seconds" : "minute(s)";
+                    var timevalue = timeleft.Minutes == 0 ? timeleft.Seconds : timeleft.Minutes;
+
+                    context.SetError("invalid_grant", string.Format("Your account is locked for {0} more {1}", timevalue, timetype));
+                    return;
+                }
+
+                if (!(await userManager.CheckPasswordAsync(user, context.Password)))
+                {
+                    await userManager.AccessFailedAsync(user.Id);
+
+                    if (await userManager.IsLockedOutAsync(user.Id))
+                    {
+                        context.SetError("invalid_grant", string.Format("Your account has been locked for {0} minutes", userManager.DefaultAccountLockoutTimeSpan.Minutes));
+                        return;
+                    }
+
+                    var possibleAttempts = userManager.MaxFailedAccessAttemptsBeforeLockout;
+                    var currentcount = await userManager.GetAccessFailedCountAsync(user.Id);
+
+                    context.SetError("invalid_grant", string.Format("Invalid password. Your account will be locked after {0} more failed attempts.", possibleAttempts - currentcount));
+                    return;
+                }
+
 
                 ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user,
                     context.Options.AuthenticationType);
@@ -74,7 +106,7 @@ namespace DurandalAuth.Web.Providers
 
                 AuthenticationProperties properties = CreateProperties(user.UserName, roles.ToArray(), user.EmailConfirmed);
                 AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-                                
+
                 context.Validated(ticket);
                 context.Request.Context.Authentication.SignIn(cookiesIdentity);
             }
