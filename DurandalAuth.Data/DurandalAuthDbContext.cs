@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity.ModelConfiguration.Conventions;
-
+﻿using DurandalAuth.Domain.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
-
-using DurandalAuth.Domain.Model;
-using DurandalAuth.Domain.UnitOfWork;
-using DurandalAuth.Data.Repositories;
-using DurandalAuth.Domain.Repositories;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DurandalAuth.Data
 {
     public class DurandalAuthDbContext : IdentityDbContext<UserProfile>
     {
         public DurandalAuthDbContext()
-                    : base("DurandalAuthConnection")
+                    : base("DurandalAuthConnection", throwIfV1Schema:false)
         {            
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DurandalAuthDbContext, Migrations.Configuration>());
         }
@@ -37,4 +27,5 @@ namespace DurandalAuth.Data
             base.OnModelCreating(modelBuilder);
         }
     }
+
 }

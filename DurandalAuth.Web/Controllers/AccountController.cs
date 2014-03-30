@@ -117,7 +117,7 @@ namespace DurandalAuth.Web.Controllers
 		public async Task<IHttpActionResult> ResendConfirmationEmail()
 		{
 			UserProfile user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-			string code = await UserManager.GetEmailConfirmationTokenAsync(user.Id);
+			string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 			var callbackUrl = Url.Link("ConfirmEmail", new { userId = user.Id, code = code });
 
 			var notification = new AccountNotificationModel
@@ -182,7 +182,7 @@ namespace DurandalAuth.Web.Controllers
 					return BadRequest(ModelState);
 				}
 
-				string code = await UserManager.GetPasswordResetTokenAsync(user.Id);
+				string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 				var callbackUrl = Url.Content("~/account/resetpassword?email=") + HttpUtility.UrlEncode(model.Email) + "&code=" + HttpUtility.UrlEncode(code);
 
 				var notification = new AccountNotificationModel
@@ -576,7 +576,7 @@ namespace DurandalAuth.Web.Controllers
 				return addRoleResult;
 			}
 
-			string code = await UserManager.GetEmailConfirmationTokenAsync(user.Id);
+			string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 			var callbackUrl = Url.Link("ConfirmEmail", new { userId = user.Id, code = code });
 
 			var notification = new AccountNotificationModel
