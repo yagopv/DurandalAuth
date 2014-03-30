@@ -5,8 +5,8 @@
  * @requires errorHandler
  */
 
-define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
-    function (appsecurity, router, errorhandler) {
+define(['services/appsecurity', 'plugins/router', 'services/errorhandler', 'services/utils', 'services/logger'],
+    function (appsecurity, router, errorhandler, utils, logger) {
 
         var username = ko.observable().extend({ required: true }),
             password = ko.observable().extend({ required: true, minLength: 6 }),
@@ -121,6 +121,12 @@ define(['services/appsecurity', 'plugins/router', 'services/errorhandler'],
                         self.rememberMe(false);
 
                         self.errors.showAllMessages(false);
+
+                        // Avoid redirect attacks
+                        if (self.returnUrl() && utils.isExternal(self.returnUrl())) {
+                            logger.logError("Can´t redirect to external urls", self.returnUrl(), null, true);
+                            return false;
+                        }
 
                         if (self.returnUrl()) {
                             router.navigate(self.returnUrl());
