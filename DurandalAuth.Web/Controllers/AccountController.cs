@@ -22,6 +22,7 @@ using DurandalAuth.Web.Providers;
 using DurandalAuth.Domain.Model;
 using DurandalAuth.Domain.UnitOfWork;
 using DurandalAuth.Web.Helpers;
+using System.Net;
 
 namespace DurandalAuth.Web.Controllers
 {
@@ -256,6 +257,12 @@ namespace DurandalAuth.Web.Controllers
 		[Route("ManageInfo")]
 		public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
 		{
+            if (!IsLocalUrl(returnUrl)) 
+            {
+                ModelState.AddModelError("returnUrl", "Can´t redirect to external urls");
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState));
+            }
+
 			IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
 			if (user == null)
@@ -503,6 +510,12 @@ namespace DurandalAuth.Web.Controllers
 		[Route("ExternalLogins")]
 		public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
 		{
+            if (!IsLocalUrl(returnUrl))
+            {
+                ModelState.AddModelError("returnUrl", "Can´t redirect to external urls");
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState));
+            }
+
 			IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
 			List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
 
@@ -774,6 +787,28 @@ namespace DurandalAuth.Web.Controllers
 				return HttpServerUtility.UrlTokenEncode(data);
 			}
 		}
+
+        private bool IsLocalUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return false;
+            }
+
+            Uri absoluteUri;
+            if (Uri.TryCreate(url, UriKind.Absolute, out absoluteUri))
+            {
+                return String.Equals(Request.RequestUri.Host, absoluteUri.Host,
+                            StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                bool isLocal = !url.StartsWith("http:", StringComparison.OrdinalIgnoreCase)
+                    && !url.StartsWith("https:", StringComparison.OrdinalIgnoreCase)
+                    && Uri.IsWellFormedUriString(url, UriKind.Relative);
+                return isLocal;
+            }
+        }
 
 		#endregion
 	}
