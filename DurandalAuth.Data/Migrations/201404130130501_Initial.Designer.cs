@@ -6,14 +6,14 @@ namespace DurandalAuth.Data.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.0-beta1-30206")]
+    [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
     public sealed partial class Initial : IMigrationMetadata
     {
         private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201402231158497_Initial"; }
+            get { return "201404130130501_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -57,8 +57,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -71,9 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DurandalAuthDbContext.cs" />
-    <Compile Include="Migrations\201402231158497_Initial.cs" />
-    <Compile Include="Migrations\201402231158497_Initial.Designer.cs">
-      <DependentUpon>201402231158497_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201404130130501_Initial.cs" />
+    <Compile Include="Migrations\201404130130501_Initial.Designer.cs">
+      <DependentUpon>201404130130501_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,8 +93,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201402231158497_Initial.resx">
-      <DependentUpon>201402231158497_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404130130501_Initial.resx">
+      <DependentUpon>201404130130501_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

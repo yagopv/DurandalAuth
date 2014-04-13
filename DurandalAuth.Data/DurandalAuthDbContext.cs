@@ -8,7 +8,7 @@ namespace DurandalAuth.Data
     public class DurandalAuthDbContext : IdentityDbContext<UserProfile>
     {
         public DurandalAuthDbContext()
-                    : base("DurandalAuthConnection", throwIfV1Schema:false)
+                    : base("DurandalAuthConnection")
         {            
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DurandalAuthDbContext, Migrations.Configuration>());
         }

@@ -19,7 +19,7 @@ namespace DurandalAuth.Data.Migrations
         {
             UserManager<UserProfile> UserManager = new UserManager<UserProfile>(new UserStore<UserProfile>(context));
             RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-                        
+
             if (!RoleManager.RoleExists("Administrator"))
             {
                 RoleManager.Create(new IdentityRole("Administrator"));
@@ -34,16 +34,16 @@ namespace DurandalAuth.Data.Migrations
 
             if (UserManager.FindByName("admin") == null)
             {
-                var user = new UserProfile() { UserName = "admin",  Email = "admin@mydomain.com", EmailConfirmed = true };
+                var user = new UserProfile() { UserName = "admin", Email = "admin@mydomain.com", EmailConfirmed = true };
                 var result = UserManager.Create(user, "admin1234");
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id,"Administrator" );
-                }                
+                    UserManager.AddToRole(user.Id, "Administrator");
+                }
             }
 
             DurandalAuthDbContext uow = new DurandalAuthDbContext();
-            
+
             if (!uow.Categories.Any())
             {
 
