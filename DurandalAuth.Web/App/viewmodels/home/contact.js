@@ -225,7 +225,7 @@ define(['plugins/router', 'viewmodels/home/registerInterest', 'viewmodels/header
             unitOfWork.commit().then(
                 function () {
                     header.signupOff(true);
-                    signUpButtonMessage('Your connected, thanks');
+                    signUpButtonMessage('You\'re connected, thanks');
                 })
             .fail(
             function () {
