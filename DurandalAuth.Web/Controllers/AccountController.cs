@@ -465,11 +465,13 @@ namespace DurandalAuth.Web.Controllers
 				return InternalServerError();
 			}
 
-			if (externalLogin.LoginProvider != provider)
-			{
-				Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-				return new ChallengeResult(provider, this);
-			}
+            // LX hat to do this hack for OWIN as the loginProvider is always a URL starting with https://sts.windows.net instead of OpenIdConnect!
+            if (provider == "OpenIdConnect" && !externalLogin.LoginProvider.StartsWith("https://sts.windows.net/")
+                || (provider != "OpenIdConnect" && externalLogin.LoginProvider != provider))
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(provider, this);
+            }
 
 			UserProfile user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
 				externalLogin.ProviderKey));

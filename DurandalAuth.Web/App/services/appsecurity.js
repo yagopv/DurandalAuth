@@ -497,7 +497,9 @@ define(["durandal/system", "durandal/app", "plugins/router", "services/routeconf
 									loginUrl = sessionStorage["loginUrl"];
 									sessionStorage.removeItem("loginUrl");
 									sessionStorage["redirectTo"] = "account/externalloginconfirmation?userName=" + data.userName +
-														"&loginProvider=" + data.loginProvider +
+														//"&loginProvider=" + data.loginProvider +
+                                                        // as OpenIdConnects provider is a url, we need to encode it
+                                                        "&loginProvider=" + encodeURIComponent(data.loginProvider) +
 														"&access_token=" + fragment.access_token +
 														"&loginUrl=" + encodeURIComponent(loginUrl) +
 														"&state=" + fragment.state;
