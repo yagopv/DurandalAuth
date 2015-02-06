@@ -1,5 +1,5 @@
-﻿define(['plugins/router', 'services/appsecurity', 'services/errorhandler', 'services/entitymanagerprovider', 'model/modelBuilder', 'services/appsecurity'],
-    function (router, appsecurity, errorhandler, entitymanagerprovider, modelBuilder, appsecurity) {
+﻿define(['plugins/router', 'services/appsecurity', 'services/errorhandler', 'services/entitymanagerprovider', 'model/modelBuilder'],
+    function (router, appsecurity, errorhandler, entitymanagerprovider, modelBuilder) {
 
     entitymanagerprovider.modelBuilder = modelBuilder.extendMetadata;
 
