@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
-
+using System.Globalization;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-
+using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
@@ -17,7 +17,7 @@ using Microsoft.AspNet.Identity.Owin;
 namespace DurandalAuth.Web
 {
     public partial class Startup
-    {	
+    {
         //Enable OWIN Bearer Token Middleware	
         static Startup()
         {			
@@ -69,7 +69,27 @@ namespace DurandalAuth.Web
 
             app.UseFacebookAuthentication(ConfigurationManager.AppSettings["FacebookKey"], ConfigurationManager.AppSettings["FacebookSecret"]);
 
-            app.UseGoogleAuthentication();       
+            app.UseGoogleAuthentication();
+
+            // The Client ID is used by the application to uniquely identify itself to Azure AD.
+            // The Metadata Address is used by the application to retrieve the signing keys used by Azure AD.
+            // The AAD Instance is the instance of Azure, for example public Azure or Azure China.
+            // The Authority is the sign-in URL of the tenant.
+            // The Post Logout Redirect Uri is the URL where the user will be redirected after they sign out.
+            //
+            string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+            string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
+            string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
+            string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
+            string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
+
+            app.UseOpenIdConnectAuthentication(
+                new OpenIdConnectAuthenticationOptions
+                {
+                    ClientId = clientId,
+                    Authority = authority,
+                    //PostLogoutRedirectUri = postLogoutRedirectUri
+                });
         }
 
         private static bool IsAjaxRequest(IOwinRequest request)

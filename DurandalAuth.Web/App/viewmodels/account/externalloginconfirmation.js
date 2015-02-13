@@ -33,7 +33,9 @@ function (appsecurity,router,errorhandler,utils) {
             var self = this;
             ga('send', 'pageview', { 'page': window.location.href, 'title': document.title });
 
-            self.loginProvider(utils.getUrlParameter("loginProvider"));
+            //self.loginProvider(utils.getUrlParameter("loginProvider"));
+            // as of OpenIdConnect, the provider is sent urlencoded, we need to decode it
+            self.loginProvider(decodeURIComponent(utils.getUrlParameter("loginProvider")));
             self.userName(utils.getUrlParameter("userName"));
             externalAccessToken = utils.getUrlParameter("access_token");
             loginUrl = decodeURIComponent(utils.getUrlParameter("loginUrl"));
