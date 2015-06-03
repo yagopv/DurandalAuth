@@ -1,5 +1,5 @@
 /** vim: et:ts=4:sw=4:sts=4
- * @license RequireJS 2.1.11 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
+ * @license RequireJS 2.1.18 Copyright (c) 2010-2015, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/requirejs for details
  */
@@ -12,7 +12,7 @@ var requirejs, require, define;
 (function (global) {
     var req, s, head, baseElement, dataMain, src,
         interactiveScript, currentlyAddingScript, mainScript, subPath,
-        version = '2.1.11',
+        version = '2.1.18',
         commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg,
         cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,
         jsSuffixRegExp = /\.js$/,
@@ -180,7 +180,7 @@ var requirejs, require, define;
 
     if (typeof requirejs !== 'undefined') {
         if (isFunction(requirejs)) {
-            //Do not overwrite and existing requirejs instance.
+            //Do not overwrite an existing requirejs instance.
             return;
         }
         cfg = requirejs;
@@ -232,21 +232,20 @@ var requirejs, require, define;
          * @param {Array} ary the array of path segments.
          */
         function trimDots(ary) {
-            var i, part, length = ary.length;
-            for (i = 0; i < length; i++) {
+            var i, part;
+            for (i = 0; i < ary.length; i++) {
                 part = ary[i];
                 if (part === '.') {
                     ary.splice(i, 1);
                     i -= 1;
                 } else if (part === '..') {
-                    if (i === 1 && (ary[2] === '..' || ary[0] === '..')) {
-                        //End of the line. Keep at least one non-dot
-                        //path segment at the front so it can be mapped
-                        //correctly to disk. Otherwise, there is likely
-                        //no path mapping for a path starting with '..'.
-                        //This can still fail, but catches the most reasonable
-                        //uses of ..
-                        break;
+                    // If at the start, or previous value is still ..,
+                    // keep them so that when converted to a path it may
+                    // still work when converted to a path, even though
+                    // as an ID it is less than ideal. In larger point
+                    // releases, may be better to just kick out an error.
+                    if (i === 0 || (i === 1 && ary[2] === '..') || ary[i - 1] === '..') {
+                        continue;
                     } else if (i > 0) {
                         ary.splice(i - 1, 2);
                         i -= 2;
@@ -267,43 +266,37 @@ var requirejs, require, define;
          */
         function normalize(name, baseName, applyMap) {
             var pkgMain, mapValue, nameParts, i, j, nameSegment, lastIndex,
-                foundMap, foundI, foundStarMap, starI,
-                baseParts = baseName && baseName.split('/'),
-                normalizedBaseParts = baseParts,
+                foundMap, foundI, foundStarMap, starI, normalizedBaseParts,
+                baseParts = (baseName && baseName.split('/')),
                 map = config.map,
                 starMap = map && map['*'];
 
             //Adjust any relative paths.
-            if (name && name.charAt(0) === '.') {
-                //If have a base name, try to normalize against it,
-                //otherwise, assume it is a top-level require that will
-                //be relative to baseUrl in the end.
-                if (baseName) {
+            if (name) {
+                name = name.split('/');
+                lastIndex = name.length - 1;
+
+                // If wanting node ID compatibility, strip .js from end
+                // of IDs. Have to do this here, and not in nameToUrl
+                // because node allows either .js or non .js to map
+                // to same file.
+                if (config.nodeIdCompat && jsSuffixRegExp.test(name[lastIndex])) {
+                    name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
+                }
+
+                // Starts with a '.' so need the baseName
+                if (name[0].charAt(0) === '.' && baseParts) {
                     //Convert baseName to array, and lop off the last part,
                     //so that . matches that 'directory' and not name of the baseName's
                     //module. For instance, baseName of 'one/two/three', maps to
                     //'one/two/three.js', but we want the directory, 'one/two' for
                     //this normalization.
                     normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
-                    name = name.split('/');
-                    lastIndex = name.length - 1;
-
-                    // If wanting node ID compatibility, strip .js from end
-                    // of IDs. Have to do this here, and not in nameToUrl
-                    // because node allows either .js or non .js to map
-                    // to same file.
-                    if (config.nodeIdCompat && jsSuffixRegExp.test(name[lastIndex])) {
-                        name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
-                    }
-
                     name = normalizedBaseParts.concat(name);
-                    trimDots(name);
-                    name = name.join('/');
-                } else if (name.indexOf('./') === 0) {
-                    // No baseName, so this is ID is resolved relative
-                    // to baseUrl, pull off the leading dot.
-                    name = name.substring(2);
                 }
+
+                trimDots(name);
+                name = name.join('/');
             }
 
             //Apply map config if available.
@@ -379,7 +372,13 @@ var requirejs, require, define;
                 //retry
                 pathConfig.shift();
                 context.require.undef(id);
-                context.require([id]);
+
+                //Custom require that does not do map translation, since
+                //ID is "absolute", already mapped/resolved.
+                context.makeRequire(null, {
+                    skipMap: true
+                })([id]);
+
                 return true;
             }
         }
@@ -445,7 +444,16 @@ var requirejs, require, define;
                             return normalize(name, parentName, applyMap);
                         });
                     } else {
-                        normalizedName = normalize(name, parentName, applyMap);
+                        // If nested plugin references, then do not try to
+                        // normalize, as it will not normalize correctly. This
+                        // places a restriction on resourceIds, and the longer
+                        // term solution is not to normalize until plugins are
+                        // loaded and all normalizations to allow for async
+                        // loading of a loader plugin. But for now, fixes the
+                        // common uses. Details in #1131
+                        normalizedName = name.indexOf('!') === -1 ?
+                                         normalize(name, parentName, applyMap) :
+                                         name;
                     }
                 } else {
                     //A regular module.
@@ -581,7 +589,7 @@ var requirejs, require, define;
                         id: mod.map.id,
                         uri: mod.map.url,
                         config: function () {
-                            return  getOwn(config.config, mod.map.id) || {};
+                            return getOwn(config.config, mod.map.id) || {};
                         },
                         exports: mod.exports || (mod.exports = {})
                     });
@@ -1109,12 +1117,22 @@ var requirejs, require, define;
                         this.depCount += 1;
 
                         on(depMap, 'defined', bind(this, function (depExports) {
+                            if (this.undefed) {
+                                return;
+                            }
                             this.defineDep(i, depExports);
                             this.check();
                         }));
 
                         if (this.errback) {
                             on(depMap, 'error', bind(this, this.errback));
+                        } else if (this.events.error) {
+                            // No direct errback on this module, but something
+                            // else is listening for errors, so be sure to
+                            // propagate the error correctly.
+                            on(depMap, 'error', bind(this, function(err) {
+                                this.emit('error', err);
+                            }));
                         }
                     }
 
@@ -1218,7 +1236,8 @@ var requirejs, require, define;
             while (defQueue.length) {
                 args = defQueue.shift();
                 if (args[0] === null) {
-                    return onError(makeError('mismatch', 'Mismatched anonymous define() module: ' + args[args.length - 1]));
+                    return onError(makeError('mismatch', 'Mismatched anonymous define() module: ' +
+                        args[args.length - 1]));
                 } else {
                     //args are id, deps, factory. Should be normalized by the
                     //define() function.
@@ -1305,7 +1324,7 @@ var requirejs, require, define;
                     each(cfg.packages, function (pkgObj) {
                         var location, name;
 
-                        pkgObj = typeof pkgObj === 'string' ? { name: pkgObj } : pkgObj;
+                        pkgObj = typeof pkgObj === 'string' ? {name: pkgObj} : pkgObj;
 
                         name = pkgObj.name;
                         location = pkgObj.location;
@@ -1332,7 +1351,7 @@ var requirejs, require, define;
                     //late to modify them, and ignore unnormalized ones
                     //since they are transient.
                     if (!mod.inited && !mod.map.unnormalized) {
-                        mod.map = makeModuleMap(id);
+                        mod.map = makeModuleMap(id, null, true);
                     }
                 });
 
@@ -1468,6 +1487,7 @@ var requirejs, require, define;
                         var map = makeModuleMap(id, relMap, true),
                             mod = getOwn(registry, id);
 
+                        mod.undefed = true;
                         removeScript(id);
 
                         delete defined[id];
@@ -1478,7 +1498,7 @@ var requirejs, require, define;
                         //in array so that the splices do not
                         //mess up the iteration.
                         eachReverse(defQueue, function(args, i) {
-                            if(args[0] === id) {
+                            if (args[0] === id) {
                                 defQueue.splice(i, 1);
                             }
                         });
@@ -1965,7 +1985,7 @@ var requirejs, require, define;
                 //like a module name.
                 mainScript = mainScript.replace(jsSuffixRegExp, '');
 
-                 //If mainScript is still a path, fall back to dataMain
+                //If mainScript is still a path, fall back to dataMain
                 if (req.jsExtRegExp.test(mainScript)) {
                     mainScript = dataMain;
                 }
@@ -2050,7 +2070,6 @@ var requirejs, require, define;
     define.amd = {
         jQuery: true
     };
-
 
     /**
      * Executes the text. Normally just uses eval, but can be modified

@@ -84,7 +84,7 @@
                         ])
                         .buildNavigationModel()
                         .mapUnknownRoutes("notfound","notfound")
-                        .activate({ pushState : true });
+                        .activate({ pushState : true, root: "/" });
                     })
                     .fail(self.handlevalidationerrors);
         }

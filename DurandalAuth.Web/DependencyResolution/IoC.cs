@@ -23,6 +23,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 
 using StructureMap;
+using StructureMap.Graph;
+using StructureMap.Web.Pipeline;
 
 using DurandalAuth.Data;
 using DurandalAuth.Data.UnitOfWork;
@@ -44,20 +46,20 @@ namespace DurandalAuth.Web.DependencyResolution {
                                         scan.WithDefaultConventions();
                                     });                            
 
-                            x.For<IUnitOfWork>().HttpContextScoped().Use(
+                            x.For<IUnitOfWork>().Use(
                                 () => new UnitOfWork(new BreezeValidator
                                                         (new ApplicationUserManager
                                                             (new UserStore<UserProfile>
                                                                 (new DurandalAuthDbContext()))))
-                            );
+                            ).LifecycleIs<HttpContextLifecycle>();
 
-                            x.For<ISnapshot>().HttpContextScoped().Use<Snapshot>();
+                            x.For<ISnapshot>().Use<Snapshot>().LifecycleIs<HttpContextLifecycle>();
 
-                            x.For<ISitemapGenerator>().HttpContextScoped().Use<SitemapGenerator>();
+                            x.For<ISitemapGenerator>().Use<SitemapGenerator>().LifecycleIs<HttpContextLifecycle>();
 
-                            x.For<ISitemapItem>().HttpContextScoped().Use<SitemapItem>();
+                            x.For<ISitemapItem>().Use<SitemapItem>().LifecycleIs<HttpContextLifecycle>();
 
-                            x.For<ISecureDataFormat<AuthenticationTicket>>().HttpContextScoped().Use(() => Startup.OAuthOptions.AccessTokenFormat);
+                            x.For<ISecureDataFormat<AuthenticationTicket>>().Use(() => Startup.OAuthOptions.AccessTokenFormat).LifecycleIs<HttpContextLifecycle>();
                             
                         });
 
