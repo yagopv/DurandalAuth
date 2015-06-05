@@ -37,7 +37,7 @@ using DurandalAuth.Domain.Validators;
 
 namespace DurandalAuth.Web.DependencyResolution {
     public static class IoC {
-        public static IContainer Initialize() {
+        public static IContainer Initialize() {            
             ObjectFactory.Initialize(x =>
                         {
                             x.Scan(scan =>
