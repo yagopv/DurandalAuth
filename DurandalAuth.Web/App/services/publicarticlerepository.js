@@ -24,7 +24,7 @@ define(['services/repository'], function (repository) {
 					.from(resourceName)
 			        .where(predicate)
                     .orderBy("createdDate desc")
-					.expand("Category,Tags")
+					.expand("category,tags")
 					.skip(page * count)
 					.take(count);
 

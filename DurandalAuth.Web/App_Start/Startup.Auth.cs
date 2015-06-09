@@ -69,7 +69,7 @@ namespace DurandalAuth.Web
 
             app.UseFacebookAuthentication(ConfigurationManager.AppSettings["FacebookKey"], ConfigurationManager.AppSettings["FacebookSecret"]);
 
-            app.UseGoogleAuthentication();       
+            app.UseGoogleAuthentication(ConfigurationManager.AppSettings["GoogleKey"], ConfigurationManager.AppSettings["GoogleSecret"]);
         }
 
         private static bool IsAjaxRequest(IOwinRequest request)

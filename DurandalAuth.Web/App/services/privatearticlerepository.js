@@ -22,7 +22,7 @@ define(['services/repository'], function (repository) {
 				var query = breeze.EntityQuery
 					.from(resourceName)
 					.orderBy("createdDate desc")
-					.expand("Tags");
+					.expand("tags");
 
 				return executeQuery(query);
 			};
