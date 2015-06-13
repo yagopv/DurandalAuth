@@ -26,7 +26,7 @@
             $("#dashboard #edited-article").on("hide.bs.modal", function () {
                 if (self.selectedArticle().entityAspect.hasValidationErrors) {
                     var validationErrors = ko.validation.group(self.selectedArticle());
-                    self.selectedArticle().errors.showAllMessages();                    
+                    validationErrors.showAllMessages();                    
                 }
                 self.selectedArticle().unsavedChanges(self.selectedArticle().entityAspect.entityState.isAddedModifiedOrDeleted());
             });
